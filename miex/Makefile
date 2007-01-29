@@ -51,4 +51,4 @@ cleandoc:
 	rm -rf javadoc
 
 cleanbin:
-	rm -rf classes
+	rm -rf classes lib/miex.jar

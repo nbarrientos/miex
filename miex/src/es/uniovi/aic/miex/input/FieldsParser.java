@@ -2,8 +2,12 @@ package es.uniovi.aic.miex.input;
 
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.lang.Exception;
 
 public class FieldsParser
 {
@@ -12,10 +16,10 @@ public class FieldsParser
    {
 		fileHandler = file;
 		categories = new ArrayList<String>();
-		body = new String();
+		parsingTargets = new HashMap<String,String>();
    }
 
-	public void run()
+	public void run(String catTag, String[] usefulTags)
 	{
     try
     {
@@ -27,7 +31,9 @@ public class FieldsParser
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document tree = builder.parse(fileHandler);
 
-    getFieldsFromDOMTree(tree);
+		expectedFields = usefulTags.length;
+
+    getFieldsFromDOMTree(tree,catTag,usefulTags);
     }
     catch(Exception e)
     {
@@ -36,33 +42,46 @@ public class FieldsParser
 
 	}
 
-	private void getFieldsFromDOMTree(Node node)
+	private void getFieldsFromDOMTree(Node node, String catTag, String[] usefulTags)
 	{
 
 		if(node != null)
 		{
-			// d -> #text -> cat_name
-      if(node.getNodeName() == "d")
+
+			// catTag -> #text -> cat_name
+      if(node.getNodeName().equals(catTag))
         categories.add(node.getChildNodes().item(0).getNodeValue());
 
-      if(node.getNodeName() == "body")
-				body = node.getChildNodes().item(0).getNodeValue();
+			// usefulTag -> #text -> field
+			// Adding to HashMap sth like: [body,blah blah]
+			for(int j=0; j < usefulTags.length; j++)
+				if(node.getNodeName().equals(usefulTags[j]))
+				parsingTargets.put(usefulTags[j],node.getChildNodes().item(0).getNodeValue());
 
 			// Iterate
       NodeList children = node.getChildNodes();
       for(int i=0; i < children.getLength(); i++)
       {
         Node child = children.item(i);
-        getFieldsFromDOMTree(child);
+        getFieldsFromDOMTree(child,catTag,usefulTags);
       }
 
 		}
 
 	}
 
-	public String getBody()
+	public void coherenceChecks() throws Exception
 	{
-		return body;
+		if(categories.isEmpty())
+			throw new Exception("Error: No categories were found, check your config file (CategoryTag). Exiting...");
+
+		if(parsingTargets.size() < expectedFields)
+			throw new Exception("Error: Some fields expecified in UsefulFields were not found. Exiting...");	
+	}
+
+	public HashMap getUsefulFields()
+	{
+		return parsingTargets;
 	}
 
 	public ArrayList getCategories()
@@ -72,6 +91,7 @@ public class FieldsParser
 
 	private File fileHandler;
 	private ArrayList<String> categories;
-	private String body;
+	private HashMap<String,String> parsingTargets;
+	private int expectedFields;
 
 }
