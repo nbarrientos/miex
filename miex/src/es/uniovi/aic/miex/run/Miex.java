@@ -38,6 +38,7 @@ public class Miex
 		{
 
 				/* STEP 1: Parsing CMDLine arguments */
+
 				CMDLineParser theCMDParser = new CMDLineParser(args);
 
 				if(!theCMDParser.parse())
@@ -80,37 +81,15 @@ public class Miex
 
 				/* STEP 4: Getting metadata from input files */
 
-				String[] files = theCMDParser.getFiles();				
+				String[] files = theCMDParser.getFiles();
 
-				for(int j=0; j < files.length; j++)
-				{
-	
-					System.out.println("Parsing file " + files[j] + "\n");
-
-					File theFile = new File(files[j]);
-
-					FieldsParser iParser = new FieldsParser(theFile);
-
-					iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
-
-					// Final checks after final parsing.
-					// - User mistyped CategoryTag or UsefulFields in conf file (but XML file agrees the schema).
-					// - XML wasn't validated with Schema (-n) and the expected fields are not found.
-					try
-					{
-						iParser.coherenceChecks();
-					}
-					catch(Exception e)
-					{
-						System.err.println(e.getMessage());
-						System.exit(-1);
-					}
-	
-					System.out.println("Fields: " + iParser.getUsefulFields().toString());
-					System.out.println("Categories: " + iParser.getCategories().toString() + "\n");
-				}
+				processFiles(theCMDParser.getFiles(),config);				
 				
     }
+
+	/*
+   * Begin of a set of auxiliar methods called from main
+	 */
 
 	private static boolean validateXMLInputFiles(String[] files, Config config) throws SAXException, IOException
 	{
@@ -134,6 +113,39 @@ public class Miex
 		}
 
 		return true;
+	}
+
+	private static void processFiles(String[] files, Config config)
+	{
+		for(int j=0; j < files.length; j++)
+		{
+
+			System.out.println("Parsing file " + files[j] + "\n");
+
+			File theFile = new File(files[j]);
+
+			FieldsParser iParser = new FieldsParser(theFile);
+
+			iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
+
+			// Final checks after final parsing.
+			// - User mistyped CategoryTag or UsefulFields in conf file (but XML file agrees the schema).
+			// - XML wasn't validated with Schema (-n) and the expected fields are not found.
+			try
+			{
+				iParser.coherenceChecks();
+			}
+				catch(Exception e)
+			{
+				System.err.println(e.getMessage());
+				System.exit(-1);
+			}
+
+				System.out.println("Fields: " + iParser.getUsefulFields().toString());
+				System.out.println("Categories: " + iParser.getCategories().toString() + "\n");
+	}
+
+
 	}
 
 }
