@@ -81,8 +81,6 @@ public class Miex
 
 				/* STEP 4: Getting metadata from input files */
 
-				String[] files = theCMDParser.getFiles();
-
 				processFiles(theCMDParser.getFiles(),config);				
 				
     }
