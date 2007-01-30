@@ -101,11 +101,22 @@
         </div>
 
 				<div class="noteContent">
-          <div class="title"><a name="news">NEWS</a></div>
-					<p>
-						See <a href="http://sourceforge.net/news/?group_id=187602">SF project news</a> or 
-						<a href="http://sourceforge.net/export/rss2_projnews.php?group_id=187602">subscribe to RSS</a>.
-					</p>
+          <div class="title">
+						<a name="news">NEWS</a> 
+						<a href="http://sourceforge.net/export/rss2_projnews.php?group_id=187602">
+							<img class="title" src="images/rss.jpg" alt="rss available"/>
+						</a>
+					</div>
+					<ul>
+					<?php
+							require 'NewsAgent.php';
+
+							$na = new NewsAgent();
+
+							echo $na->printNews();
+
+					?>
+					</ul>
         </div>
 
         <div class="noteContent">

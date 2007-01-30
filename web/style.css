@@ -31,6 +31,10 @@ div.title {
         font-weight: bold;
 }
 
+img.title {
+				float: right;
+}
+
 div.code {
 				display: block;
 				padding: 10px 5px 10px 5px;
