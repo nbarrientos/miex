@@ -29,7 +29,6 @@ public boolean parse() throws Exception
                                 .setDefault(JSAP.NO_DEFAULT) 
                                 .setRequired(true) 
                                 .setShortFlag('c') 
-                                .setLongFlag(JSAP.NO_LONGFLAG)
 																.setAllowMultipleDeclarations(false)
 																.setLongFlag("config")
 																.setUsageName("confFile.conf");
@@ -37,14 +36,31 @@ public boolean parse() throws Exception
 		opt1.setHelp("URI to config file.");
 		jsap.registerParameter(opt1);
 
-		UnflaggedOption opt2 = new UnflaggedOption("files")
+		/*
+		 * -dump-dir foodir
+		 */
+
+    FlaggedOption opt2 = new FlaggedOption("dumpDestDir")
+                                .setStringParser(JSAP.STRING_PARSER)
+                                .setDefault(".")
+                                .setRequired(false)
+                                .setShortFlag('x')
+                                .setAllowMultipleDeclarations(false)
+                                .setLongFlag("dump-dir")
+                                .setUsageName("fooDir");
+
+    opt2.setHelp("Directory where dump files will be saved.");
+    jsap.registerParameter(opt2);
+
+
+		UnflaggedOption opt3 = new UnflaggedOption("files")
                                 .setStringParser(JSAP.STRING_PARSER)
                                 .setDefault(JSAP.NO_DEFAULT)
                                 .setRequired(true)
                                 .setGreedy(true);
         
-		opt2.setHelp("URIs to files(s) to parse.");
-		jsap.registerParameter(opt2);
+		opt3.setHelp("URIs to files(s) to parse.");
+		jsap.registerParameter(opt3);
 
 		/*
   	 * Flags:
@@ -94,6 +110,11 @@ public boolean parse() throws Exception
 	{
 		return config.getString("configFileURI");
 	}
+
+	public String getDumpDir()
+	{
+		return config.getString("dumpDestDir");
+	}	
 
 	public Boolean getNoValidateFlag()
 	{

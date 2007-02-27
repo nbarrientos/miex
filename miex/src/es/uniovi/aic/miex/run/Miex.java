@@ -146,7 +146,7 @@ public class Miex
 				if(theCMDParser.getDumpFlag())
 				{
 					// Creating data files
-					injectDataToFiles(doc.getCategories().toArray(), sentences, "/tmp");
+					injectDataToFiles(doc.getCategories().toArray(), sentences, theCMDParser.getDumpDir());
 				}
 
 			}
@@ -172,15 +172,35 @@ public class Miex
 	// For each category injects document's sentences to category.txt
 	private static void injectDataToFiles(ArrayList<String> categories, 
 																				List<List<? extends HasWord>> sentences,
-																				String filesDestination)
+																				String destination)
 	{
+			String newline = System.getProperty( "line.separator" );
+	
 			for(int i=0; i < categories.size(); i++)
 			{
-				System.out.println("Creating file " + categories.get(i).toString());
-				System.out.println("And injecting the following sentences: ");
+				try
+				{
+					String catName = categories.get(i).toString().replace(" ","");
 
-				for (List sentence : sentences)
-					System.out.println(sentence.toString());
+					System.out.println("Creating file " + destination + catName + "...");
+
+					FileWriter fw = new FileWriter(destination + catName + ".txt",true);
+
+					System.out.println("Injecting the sentences...");
+
+					for (List sentence : sentences)
+					{
+						fw.write(sentence.toString());
+						fw.write(newline);
+					}
+
+					fw.close();
+				}
+				catch(IOException e)
+				{
+          System.err.println(e.toString());
+          System.exit(-1);
+				}
 	
 			}
 	}
