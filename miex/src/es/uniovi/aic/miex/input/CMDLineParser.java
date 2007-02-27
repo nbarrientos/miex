@@ -56,8 +56,14 @@ public boolean parse() throws Exception
     
 		sw1.setHelp("Do not validate input XML files (using XML Schema).");    
 		jsap.registerParameter(sw1);
-		
 
+    Switch sw2 = new Switch("dump")
+                        .setShortFlag('d')
+                        .setLongFlag("dump");
+
+    sw2.setHelp("Dump sentences to category files.");
+    jsap.registerParameter(sw2);
+		
 		config = jsap.parse(args);
 
 		if (!config.success()) 
@@ -92,6 +98,11 @@ public boolean parse() throws Exception
 	public Boolean getNoValidateFlag()
 	{
 		return config.getBoolean("noValidate");
+	}
+
+	public Boolean getDumpFlag()
+	{
+		return config.getBoolean("dump");
 	}
 
 	private String[] args;

@@ -7,7 +7,7 @@
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
 # General options
-CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar'
+CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar:../../../stanford-parser/stanford-parser-2006-06-11/stanford-parser.jar'
 PATHTOMIEX = src/es/uniovi/aic/miex
 
 PACKAGES= es.uniovi.aic.miex.input es.uniovi.aic.miex.run \

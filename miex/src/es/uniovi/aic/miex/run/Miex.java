@@ -23,8 +23,13 @@ import java.lang.System;
 import java.lang.Exception;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.xml.sax.SAXException;
+
+import edu.stanford.nlp.process.DocumentPreprocessor;
+import edu.stanford.nlp.ling.HasWord;
 
 import es.uniovi.aic.miex.input.XMLValidator;
 import es.uniovi.aic.miex.input.FieldsParser;
@@ -34,7 +39,7 @@ import es.uniovi.aic.miex.exceptions.*;
 
 import es.uniovi.aic.miex.config.Config;
 
-import es.uniovi.aic.miex.datastr.MyCollection;
+import es.uniovi.aic.miex.datastr.*;
 
 public class Miex 
 {
@@ -85,7 +90,7 @@ public class Miex
 
 				/* STEP 4: Getting metadata from input files */
 
-				processFiles(theCMDParser.getFiles(),config);				
+				processFiles(theCMDParser.getFiles(),config, theCMDParser);				
 				
     }
 
@@ -117,7 +122,7 @@ public class Miex
 		return true;
 	}
 
-	private static void processFiles(String[] files, Config config)
+	private static void processFiles(String[] files, Config config, CMDLineParser theCMDParser)
 	{
 		for(int j=0; j < files.length; j++)
 		{
@@ -128,33 +133,56 @@ public class Miex
 
 			FieldsParser iParser = new FieldsParser(theFile);
 
-//			iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
 			MyCollection collection = iParser.run();
 
 			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
 				// it.next() is a MyDoc
-     		System.out.println(it.next().toString());
-
-			// Final checks after final parsing.
-			// - User mistyped CategoryTag or UsefulFields in conf file (but XML file agrees the schema).
-			// - XML wasn't validated with Schema (-n) and the expected fields are not found.
-			/*
-			try
 			{
-				iParser.coherenceChecks();
-			}
-				catch(Exception e)
-			{
-				System.err.println(e.getMessage());
-				System.exit(-1);
-			}
-			*/
+				MyDoc doc = (MyDoc)it.next();
 
-		//		System.out.println("Fields: " + iParser.getUsefulFields().toString());
-			//	System.out.println("Categories: " + iParser.getCategories().toString() + "\n");
+				// Splitting body in sentences
+				List<List<? extends HasWord>> sentences = chopSentences(doc.getBody());
+
+				if(theCMDParser.getDumpFlag())
+				{
+					// Creating data files
+					injectDataToFiles(doc.getCategories().toArray(), sentences, "/tmp");
+				}
+
+			}
+
+		}
+
 	}
 
+	// Picks up a chunk of text and splits it in sentences.
+	private static List<List<? extends HasWord>> chopSentences(String text)
+	{
+		DocumentPreprocessor documentPreprocessor = new DocumentPreprocessor();
 
+		List<List<? extends HasWord>> sentences = null;
+
+		StringReader theReader = new StringReader(text);
+
+		sentences = documentPreprocessor.getSentencesFromText(theReader, null, null, -1);
+
+		return sentences;	
+	}
+
+	// For each category injects document's sentences to category.txt
+	private static void injectDataToFiles(ArrayList<String> categories, 
+																				List<List<? extends HasWord>> sentences,
+																				String filesDestination)
+	{
+			for(int i=0; i < categories.size(); i++)
+			{
+				System.out.println("Creating file " + categories.get(i).toString());
+				System.out.println("And injecting the following sentences: ");
+
+				for (List sentence : sentences)
+					System.out.println(sentence.toString());
+	
+			}
 	}
 
 }
