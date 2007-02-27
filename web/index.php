@@ -58,23 +58,43 @@
 						documents and navigates through Stanford Parser's output trees to store all the extracted semantic 
 						information into a <a href="http://www.mysql.org">MySQL database</a>.</p>
 						
-						<p>This project was mainly developed to process small articles with a structure like this:</p>
+						<p>This project was mainly developed to process small collections with this structure:</p>
 
 						<div class="code">
+						&lt;collection&gt;<br/>
+
+            &lt;doctrain&gt;<br/>
+            &lt;topic&gt;
+            &lt;d&gt;debian&lt;/d&gt;
+            &lt;d&gt;linux&lt;/d&gt;
+            &lt;d&gt;OS&lt;/d&gt;
+            &lt;/topic&gt;<br/>
+            &lt;title&gt;Debian project&lt;/title&gt;<br/>
+            &lt;body&gt;
+            Debian is a free operating system (OS) for your computer. An operating system is the set of basic
+            programs and utilities that make your computer run. Debian uses the Linux kernel
+            (the core of an operating system), but most of the basic OS tools come from the GNU project;
+            hence the name GNU/Linux
+            &lt;/body&gt;<br/>
+            &lt;/doctrain&gt;<br/>
+
+
 						&lt;doctrain&gt;<br/>
 						&lt;topic&gt;
-						&lt;d&gt;debian&lt;/d&gt;
-						&lt;d&gt;linux&lt;/d&gt;
-						&lt;d&gt;OS&lt;/d&gt;
+						&lt;d&gt;computing&lt;/d&gt;
+						&lt;d&gt;search&lt;/d&gt;
+						&lt;d&gt;engine&lt;/d&gt;
 						&lt;/topic&gt;<br/>
-						&lt;title&gt;Debian project&lt;/title&gt;<br/>
+						&lt;title&gt;Google&lt;/title&gt;<br/>
 						&lt;body&gt;
-						Debian is a free operating system (OS) for your computer. An operating system is the set of basic 
-						programs and utilities that make your computer run. Debian uses the Linux kernel 
-						(the core of an operating system), but most of the basic OS tools come from the GNU project; 
-						hence the name GNU/Linux
+						Google Inc. (NASDAQ: GOOG and LSE: GGEA) is an American public corporation, specializing 
+						in Internet search and online advertising. The company had 10,674 full-time employees
+						as of December 31, 2006, and is based in Mountain View, California.
 						&lt;/body&gt;<br/>
-						&lt;/doctrain&gt;
+						&lt;/doctrain&gt;<br/>
+
+						&lt;/collection&gt;
+						
 						</div>
 
 						<p>It's planned to provide a configuration mechanism to point <b>MIEX</b> what fields are suitable
@@ -140,6 +160,9 @@
           <ul>
 						<li>Lexical parser: <a href="http://nlp.stanford.edu/software/lex-parser.shtml">Stanford Parser</a> (GPL).</li>
 						<li>Command line argument parser: <a href="http://www.martiansoftware.com/jsap/">JSAP</a> (LGPL - <a href="http://www.martiansoftware.com/jsap/license.html">see JSAP license notes</a>).</li>
+			
+						<li>XML parser: <a href="http://www.saxproject.org/">Simple API for XML (SAX)</a> (Public Domain).</li>
+
           </ul>
         </div>
 
@@ -153,7 +176,7 @@
   </div> <!-- content -->
   
   <div id="bottom">
-    &copy;&nbsp;Copyleft 2007 Nacho Barrientos Arias. Last update: 2007/01/20 15:00.
+    &copy;&nbsp;Copyleft 2007 Nacho Barrientos Arias. Last update: 2007/02/28 23:00.
 	</div>
 
 <!-- Meta logos -->

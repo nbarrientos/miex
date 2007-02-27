@@ -151,5 +151,6 @@ div#bottom {
 				font-size: 9pt;
 }
 
-
-
+img {
+	border: 0px;
+}
