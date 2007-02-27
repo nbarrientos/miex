@@ -15,6 +15,11 @@ public class MyCategories
 		categories.add(rhs);
 	}
 
+	public ArrayList<String> toArray()
+	{
+		return categories;
+	}
+
 	public String toString()
 	{
   	String newline = System.getProperty( "line.separator" );

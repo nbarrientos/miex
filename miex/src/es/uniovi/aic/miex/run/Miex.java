@@ -22,6 +22,8 @@ import java.io.*;
 import java.lang.System;
 import java.lang.Exception;
 
+import java.util.Iterator;
+
 import org.xml.sax.SAXException;
 
 import es.uniovi.aic.miex.input.XMLValidator;
@@ -31,6 +33,8 @@ import es.uniovi.aic.miex.input.CMDLineParser;
 import es.uniovi.aic.miex.exceptions.*;
 
 import es.uniovi.aic.miex.config.Config;
+
+import es.uniovi.aic.miex.datastr.MyCollection;
 
 public class Miex 
 {
@@ -125,7 +129,11 @@ public class Miex
 			FieldsParser iParser = new FieldsParser(theFile);
 
 //			iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
-			iParser.run();
+			MyCollection collection = iParser.run();
+
+			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
+				// it.next() is a MyDoc
+     		System.out.println(it.next().toString());
 
 			// Final checks after final parsing.
 			// - User mistyped CategoryTag or UsefulFields in conf file (but XML file agrees the schema).

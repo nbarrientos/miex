@@ -1,6 +1,7 @@
 package es.uniovi.aic.miex.datastr;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MyCollection
 {
@@ -13,6 +14,11 @@ public class MyCollection
 	public void addDoc(MyDoc rhs)
 	{
 		docs.add(rhs);
+	}
+
+	public Iterator getDocsIterator()
+	{
+		return docs.iterator();
 	}
 
 	public String toString()

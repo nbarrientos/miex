@@ -23,7 +23,22 @@ public class MyDoc
   {
     title = rhs;
   }
-	
+
+	public String getBody()
+	{
+		return body;
+	}
+
+  public String getTitle()
+  {
+    return title;
+  }
+
+  public MyCategories getCategories()
+  {
+    return categories;
+  }
+
 	public String toString()
 	{
   	String newline = System.getProperty( "line.separator" );
