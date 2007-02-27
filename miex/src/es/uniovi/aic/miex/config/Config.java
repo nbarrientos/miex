@@ -39,8 +39,7 @@ public class Config
 	static
 	{
 		configFileFields = new String[]{"XMLschemaURI", "BDHostname", "BDUser", 
-																		"BDPassword", "BDName", "UsefulFields",
-																		"CategoryTag"};
+																		"BDPassword", "BDName"};
 	}
 
 }
