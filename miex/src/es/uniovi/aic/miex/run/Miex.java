@@ -124,11 +124,13 @@ public class Miex
 
 			FieldsParser iParser = new FieldsParser(theFile);
 
-			iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
+//			iParser.run(config.getFieldValue("CategoryTag"),config.getFieldValue("UsefulFields").split(" "));
+			iParser.run();
 
 			// Final checks after final parsing.
 			// - User mistyped CategoryTag or UsefulFields in conf file (but XML file agrees the schema).
 			// - XML wasn't validated with Schema (-n) and the expected fields are not found.
+			/*
 			try
 			{
 				iParser.coherenceChecks();
@@ -138,9 +140,10 @@ public class Miex
 				System.err.println(e.getMessage());
 				System.exit(-1);
 			}
+			*/
 
-				System.out.println("Fields: " + iParser.getUsefulFields().toString());
-				System.out.println("Categories: " + iParser.getCategories().toString() + "\n");
+		//		System.out.println("Fields: " + iParser.getUsefulFields().toString());
+			//	System.out.println("Categories: " + iParser.getCategories().toString() + "\n");
 	}
 
 

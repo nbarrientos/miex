@@ -1,11 +1,16 @@
 package es.uniovi.aic.miex.input;
 
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
+import es.uniovi.aic.miex.input.SAXCollectionUnmarshaller;
+
+import es.uniovi.aic.miex.datastr.MyCollection;
+
+//import javax.xml.parsers.*;
+//import org.w3c.dom.*;
+
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import java.lang.Exception;
 
@@ -14,84 +19,35 @@ public class FieldsParser
 
 	public FieldsParser(File file)
    {
-		fileHandler = file;
-		categories = new ArrayList<String>();
-		parsingTargets = new HashMap<String,String>();
+		fileHandler = file;	
+		collection = new MyCollection();
    }
 
-	public void run(String catTag, String[] usefulTags)
+	public void run()
 	{
     try
     {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			InputSource src = new InputSource(new FileInputStream(fileHandler));
 
-		// Previosly checked by main() and XMLValidator class.
-		factory.setValidating(false);
+			SAXCollectionUnmarshaller saxUms = new SAXCollectionUnmarshaller();
 
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    Document tree = builder.parse(fileHandler);
+//			XMLReader rdr = XMLReaderFactory.createXMLReader("org.apache.xerces.parsers.SAXParser");
+			XMLReader rdr = XMLReaderFactory.createXMLReader();
+			rdr.setContentHandler(saxUms);
 
-		expectedFields = usefulTags.length;
+			rdr.parse(src);
 
-    getFieldsFromDOMTree(tree,catTag,usefulTags);
-    }
-    catch(Exception e)
-    {
-      e.printStackTrace();
-    }
+			collection = saxUms.getCollection();
 
-	}
-
-	private void getFieldsFromDOMTree(Node node, String catTag, String[] usefulTags)
-	{
-
-		if(node != null)
-		{
-
-			// catTag -> #text -> cat_name
-      if(node.getNodeName().equals(catTag))
-        categories.add(node.getChildNodes().item(0).getNodeValue());
-
-			// usefulTag -> #text -> field
-			// Adding to HashMap sth like: [body,blah blah]
-			for(int j=0; j < usefulTags.length; j++)
-				if(node.getNodeName().equals(usefulTags[j]))
-				parsingTargets.put(usefulTags[j],node.getChildNodes().item(0).getNodeValue());
-
-			// Iterate
-      NodeList children = node.getChildNodes();
-      for(int i=0; i < children.getLength(); i++)
-      {
-        Node child = children.item(i);
-        getFieldsFromDOMTree(child,catTag,usefulTags);
-      }
-
+			// TEST
+			System.out.println(collection.toString());
 		}
-
+		catch(Exception e)
+		{
+			System.err.println("Exception: " + e);
+		}
 	}
-
-	public void coherenceChecks() throws Exception
-	{
-		if(categories.isEmpty())
-			throw new Exception("Error: No categories were found, check your config file (CategoryTag). Exiting...");
-
-		if(parsingTargets.size() < expectedFields)
-			throw new Exception("Error: Some fields expecified in UsefulFields were not found. Exiting...");	
-	}
-
-	public HashMap getUsefulFields()
-	{
-		return parsingTargets;
-	}
-
-	public ArrayList getCategories()
-	{
-		return categories;
-	}	
-
+						
 	private File fileHandler;
-	private ArrayList<String> categories;
-	private HashMap<String,String> parsingTargets;
-	private int expectedFields;
-
+	private MyCollection collection;
 }
