@@ -15,7 +15,7 @@ extends DefaultHandler
 	
 	public SAXCollectionUnmarshaller()
 	{
-		stack = new Stack();
+		stack = new Stack<Object>();
 		isStackReadyForText = false;
 	}
 
@@ -112,7 +112,7 @@ extends DefaultHandler
 	}
 
 	// Members
-	private Stack stack;
+	private Stack<Object> stack;
 	private boolean isStackReadyForText;
 	
 	private Locator locator;
