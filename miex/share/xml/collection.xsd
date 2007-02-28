@@ -17,6 +17,10 @@
   <xs:element name="BODY" type="xs:string" minOccurs="1" maxOccurs="1"/>
 
   </xs:all> 
+
+	<xs:attribute use="optional" name="TRAIN" type="xs:boolean" />
+	<xs:attribute use="optional" name="TEST" type="xs:boolean" />
+
 </xs:complexType>
 
 <xs:element name="COLLECTION">
