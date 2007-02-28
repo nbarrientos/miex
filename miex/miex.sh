@@ -3,7 +3,7 @@
 #
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
-JAVA=/usr/bin/java
+JAVA=java
 CLASSPATH='lib/miex.jar:lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-06-11.jar'
 
 if [ ! -x $JAVA ]; then
