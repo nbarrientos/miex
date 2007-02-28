@@ -7,6 +7,7 @@ public class MyDoc
 
 	public MyDoc()
 	{
+		isTrain = false;
 	}
 
 	public void addCategories(MyCategories rhs)
@@ -24,6 +25,11 @@ public class MyDoc
     title = rhs;
   }
 
+	public void setIsTrain()
+	{
+		isTrain = true;
+	}
+
 	public String getBody()
 	{
 		return body;
@@ -38,6 +44,11 @@ public class MyDoc
   {
     return categories;
   }
+	
+	public boolean isTrain()
+	{
+		return isTrain;
+	}
 
 	public String toString()
 	{
@@ -51,6 +62,11 @@ public class MyDoc
     buf.append( "--- Body ---" ).append( newline );
     buf.append(body).append(newline);
 
+		if(isTrain)
+			buf.append( "Is a TRAIN document" ).append( newline );
+		else
+			buf.append( "Is a TEST document" ).append( newline );
+
 		buf.append(categories).append(newline);
         
 		return buf.toString();
@@ -60,5 +76,7 @@ public class MyDoc
 	private MyCategories categories;
 	private String body;
 	private String title;
+
+	private boolean isTrain;
 
 }

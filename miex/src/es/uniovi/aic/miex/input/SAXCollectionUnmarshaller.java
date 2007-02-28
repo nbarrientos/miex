@@ -41,6 +41,11 @@ extends DefaultHandler
 		else if(localName.equals("DOC"))
 		{
 			stack.push(new MyDoc());
+
+			String tmp = resolveAttrib( uri, "TRAIN", attribs, "unknown" );
+			if( tmp.equals("1") )
+				((MyDoc)stack.peek()).setIsTrain();
+
 		}
 		else if(localName.equals("TOPIC"))
 		{
@@ -109,6 +114,15 @@ extends DefaultHandler
 		{
 				// read data which is not part of recognized element
 		}
+	}
+
+	private String resolveAttrib(String uri, String localName, Attributes attribs, String defaultValue)
+	{
+		String tmp = attribs.getValue(uri, localName);
+		if(tmp != null)
+			return tmp;
+		else
+			return defaultValue;
 	}
 
 	// Members
