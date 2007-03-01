@@ -114,7 +114,7 @@ public class Miex
 
 			if(!(validator.validate()))
 			{
-				System.err.println("Input file's XML " + files[j] + " is not well-formed.");
+				System.err.println("Input file's XML " + files[j] + " does not match this Schema.");
 				return false;
 			 }
 		}

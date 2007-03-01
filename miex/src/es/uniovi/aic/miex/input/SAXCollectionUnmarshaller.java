@@ -38,15 +38,14 @@ extends DefaultHandler
 		{
 			stack.push(new MyCollection());
 		}
-		else if(localName.equals("DOC"))
+		else if(localName.equals("DOCTRAIN"))
 		{
-			stack.push(new MyDoc());
-
-			String tmp = resolveAttrib( uri, "TRAIN", attribs, "unknown" );
-			if( tmp.equals("1") )
-				((MyDoc)stack.peek()).setIsTrain();
-
+			stack.push(new MyDoc(true));
 		}
+    else if(localName.equals("DOCTEST"))
+    {
+      stack.push(new MyDoc(false));
+    }
 		else if(localName.equals("TOPIC"))
 		{
 			stack.push(new MyCategories());
@@ -75,7 +74,7 @@ extends DefaultHandler
 		{
 			collection = (MyCollection)tmp;
 		}
-		else if(localName.equals("DOC"))
+		else if(localName.equals("DOCTRAIN") || localName.equals("DOCTEST"))
 		{
 			((MyCollection)stack.peek()).addDoc((MyDoc)tmp);
 		}
@@ -116,6 +115,7 @@ extends DefaultHandler
 		}
 	}
 
+	/* DEPRECATED
 	private String resolveAttrib(String uri, String localName, Attributes attribs, String defaultValue)
 	{
 		String tmp = attribs.getValue(uri, localName);
@@ -124,6 +124,7 @@ extends DefaultHandler
 		else
 			return defaultValue;
 	}
+	*/
 
 	// Members
 	private Stack<Object> stack;

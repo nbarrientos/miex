@@ -9,6 +9,11 @@ public class MyDoc
 	{
 		isTrain = false;
 	}
+	
+	public MyDoc(boolean isTrainRHS)
+	{
+		isTrain = isTrainRHS;
+	}
 
 	public void addCategories(MyCategories rhs)
 	{
