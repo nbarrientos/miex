@@ -1,3 +1,7 @@
+<!--
+	1b) <doctrain>, </doctrain> y <doctest>, </doctest>
+-->
+
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
@@ -18,18 +22,17 @@
 
   </xs:all> 
 
-	<xs:attribute use="optional" name="TRAIN" type="xs:boolean" />
-	<xs:attribute use="optional" name="TEST" type="xs:boolean" />
-
 </xs:complexType>
 
 <xs:element name="COLLECTION">
 <xs:complexType>
-	<xs:sequence>
+	<xs:all>
 
-		<xs:element name="DOC" type="doctype" minOccurs="1" maxOccurs="unbounded"/>
+		<xs:element name="DOCTRAIN" type="doctype" minOccurs="1" maxOccurs="unbounded"/>
 
-	</xs:sequence>
+		<xs:element name="DOCTEST" type="doctype" minOccurs="1" maxOccurs="unbounded"/>
+
+	</xs:all>
 
 </xs:complexType>
 
