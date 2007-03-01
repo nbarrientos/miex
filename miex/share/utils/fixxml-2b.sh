@@ -2,6 +2,11 @@
 #
 # This scripts creates a valid XML file from non-well-formed
 # XML documents (provided by IR group).
+#
+# 2b) <doc train="1">, </doc> y <doc test="1">, </doc>
+#
+# DEPRECATED DEPRECATED DEPRECATED DEPRECATED
+# DEPRECATED DEPRECATED DEPRECATED DEPRECATED
 
 if [ ! $# -eq 1 ]; then
 	echo "Usage: $0 inputFile";
