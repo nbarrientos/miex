@@ -163,6 +163,8 @@
 			
 						<li>XML parser: <a href="http://www.saxproject.org/">Simple API for XML (SAX)</a> (Public Domain).</li>
 
+						<li>MySQL Java driver: <a href="http://www.mysql.com/products/connector/j/">MySQL Connector/J</a> (GPL).</li>
+
           </ul>
         </div>
 
