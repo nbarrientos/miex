@@ -17,7 +17,7 @@ public class XMLValidator
 			XMLSchemaURI = new String(SchemaURI);
 		}
 
-    public boolean validate() throws SAXException, IOException 
+    public boolean validate()
 		{
         // 1. Lookup a factory for the W3C XML Schema language
         SchemaFactory factory =  SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -26,8 +26,17 @@ public class XMLValidator
         // Here the schema is loaded from a java.io.File, but you could use 
         // a java.net.URL or a javax.xml.transform.Source instead.
 				File schemaLocation = new File(XMLSchemaURI);
+				Schema schema = null;
 
-        Schema schema = factory.newSchema(schemaLocation);
+				try
+				{
+        	schema = factory.newSchema(schemaLocation);
+				}
+				catch(SAXException e)
+				{
+					System.err.println(e.toString());
+					return false;
+				}
     
         // 3. Get a validator from the schema.
         Validator validator = schema.newValidator();
@@ -41,14 +50,14 @@ public class XMLValidator
             validator.validate(source);
             return true;
         }
-        catch (SAXException ex) 
+        catch (SAXException e) 
 				{
-						//System.err.println(ex.toString());
+						System.err.println(e.toString());
 						return false;
         }
-				catch (IOException ex)
+				catch (IOException e)
 				{
-						//System.err.println(ex.toString());
+						System.err.println(e.toString());
 						return false;
 				}
         

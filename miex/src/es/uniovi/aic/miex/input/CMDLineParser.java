@@ -10,7 +10,7 @@ public CMDLineParser(String[] arguments)
 	args = arguments;
 }
 
-public boolean parse() throws Exception
+public boolean parse() throws JSAPException
   {
 		JSAP jsap = new JSAP();
 
@@ -52,6 +52,9 @@ public boolean parse() throws Exception
     opt2.setHelp("Directory where dump files will be saved.");
     jsap.registerParameter(opt2);
 
+		/*
+		 * file1, file2, ... , filen
+		 */
 
 		UnflaggedOption opt3 = new UnflaggedOption("files")
                                 .setStringParser(JSAP.STRING_PARSER)

@@ -18,6 +18,7 @@
 
 package es.uniovi.aic.miex.run;
 
+/* JDK */
 import java.io.*;
 import java.lang.System;
 import java.lang.Exception;
@@ -26,16 +27,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
+/* Exceptions */
 import org.xml.sax.SAXException;
+import com.martiansoftware.jsap.JSAPException;
+import es.uniovi.aic.miex.exceptions.*;
 
+/* Stanford */
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 
+/* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
 import es.uniovi.aic.miex.input.FieldsParser;
 import es.uniovi.aic.miex.input.CMDLineParser;
-
-import es.uniovi.aic.miex.exceptions.*;
 
 import es.uniovi.aic.miex.config.Config;
 
@@ -43,15 +47,23 @@ import es.uniovi.aic.miex.datastr.*;
 
 public class Miex 
 {
-    public static void main(String[] args) throws SAXException, IOException, Exception
+    public static void main(String[] args)
 		{
 
 				/* STEP 1: Parsing CMDLine arguments */
 
 				CMDLineParser theCMDParser = new CMDLineParser(args);
-
+				
+				try
+				{
 				if(!theCMDParser.parse())
 					System.exit(-1);
+				}
+				catch(JSAPException e)
+				{
+					System.err.println(e.toString());
+					System.exit(-1);
+				}
 
 				System.out.println("Cmdline syntax is OK, continuing...\n");
 
@@ -81,7 +93,10 @@ public class Miex
 				if(!theCMDParser.getNoValidateFlag())
 				{
 					if(!validateXMLInputFiles(theCMDParser.getFiles(), config))
+					{
+						System.err.println("ERROR: Internal error validating XML input files");
 						System.exit(-1);
+					}
 
 					System.out.println("Input file's XML syntax is sane, parsing files...\n");
 				}
@@ -98,7 +113,7 @@ public class Miex
    * Begin of a set of auxiliar methods called from main
 	 */
 
-	private static boolean validateXMLInputFiles(String[] files, Config config) throws SAXException, IOException
+	private static boolean validateXMLInputFiles(String[] files, Config config)
 	{
 		for(int j=0; j < files.length; j++)
 		{
