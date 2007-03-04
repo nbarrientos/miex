@@ -21,14 +21,12 @@ package es.uniovi.aic.miex.run;
 /* JDK */
 import java.io.*;
 import java.lang.System;
-import java.lang.Exception;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
 /* Exceptions */
-import org.xml.sax.SAXException;
 import com.martiansoftware.jsap.JSAPException;
 import es.uniovi.aic.miex.exceptions.*;
 
