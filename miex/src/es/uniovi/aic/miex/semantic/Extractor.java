@@ -1,42 +1,45 @@
-package es.uniovi.aic.miex.sematic;
+package es.uniovi.aic.miex.semantic;
 
 import java.util.ArrayList;
-//import java.io.*;
+import java.util.List;
+
 import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.MapLabel;
 
-class Extractor
+public class Extractor
 {
-	Extractor()
+	public Extractor()
 	{
 		lp = null;
-		grammarName = new String("englishPCFG.ser.gz");
+		grammarName = "lib/grammars/englishPCFG.ser.gz";
 	}
 
-	Extractor(String grammar)
+	public Extractor(String grammar)
 	{
 		lp = null;
 		grammarName = grammar;
 	}
 
-	void load()
+	public void load()
 	{
 		lp = new LexicalizedParser(grammarName);
 	}
 
-	ArrayList<TypedDependency> getDependencies(String sentence)
+	public ArrayList<TypedDependency> getDependencies(List sentence)
+	throws Exception
 	{
+
 		if(lp == null)
 		{
-			throw new UnInitializedParserException();
+			throw new Exception("UnInitializedParser");
 		}
 
-		Tree parse = (Tree) lp.getBestPCFGParse();
-
 		lp.parse(sentence);
+
+		Tree parse = (Tree) lp.getBestPCFGParse();
 
 		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();

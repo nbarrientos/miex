@@ -33,6 +33,7 @@ import es.uniovi.aic.miex.exceptions.*;
 /* Stanford */
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.trees.TypedDependency;
 
 /* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
@@ -42,6 +43,7 @@ import es.uniovi.aic.miex.input.CMDLineParser;
 import es.uniovi.aic.miex.config.Config;
 
 import es.uniovi.aic.miex.datastr.*;
+import es.uniovi.aic.miex.semantic.*;
 
 public class Miex 
 {
@@ -147,6 +149,9 @@ public class Miex
 			FieldsParser iParser = new FieldsParser(theFile);
 
 			MyCollection collection = iParser.run();
+	
+			Extractor ex = new Extractor();
+			ex.load();
 
 			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
 				// it.next() is a MyDoc
@@ -161,6 +166,8 @@ public class Miex
 					// Creating data files
 					injectDataToFiles(doc.getCategories().toArray(), sentences, theCMDParser.getDumpDir());
 				}
+			
+				processDoc(sentences,ex);
 
 			}
 
@@ -216,6 +223,25 @@ public class Miex
 				}
 	
 			}
+	}
+
+	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex)
+	{
+			for (List sentence : sentences)
+			{
+				try
+				{
+					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
+					System.out.println(deps);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.err.println(e.toString());
+					System.exit(-1);
+				}
+			}		
+
 	}
 
 }

@@ -11,4 +11,4 @@ CLASSPATH='lib/miex.jar:lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-0
 #	exit -1
 #fi
 
-$JAVA -cp $CLASSPATH es.uniovi.aic.miex.run.Miex $@
+$JAVA -Xmx512M -cp $CLASSPATH es.uniovi.aic.miex.run.Miex $@
