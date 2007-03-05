@@ -101,7 +101,7 @@ public class Miex
 						System.exit(-1);
 					}
 
-					System.out.println("Input file's XML syntax is sane, parsing files...\n");
+					System.out.println("Input file's XML syntax is sane (matches XML Schema), parsing files...\n");
 				}
 				else
 					System.out.println("Warning: continuing without validate XML input...\n");
@@ -167,9 +167,11 @@ public class Miex
 				if(theCMDParser.getDumpFlag())
 				{
 					// Creating data files
+					System.out.println("\tCreating category files for document titled: " + doc.getTitle());
 					injectDataToFiles(doc.getCategories().toArray(), sentences, theCMDParser.getDumpDir());
 				}
-			
+					
+				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
 				processDoc(sentences,ex);
 
 			}
@@ -205,11 +207,11 @@ public class Miex
 				{
 					String catName = categories.get(i).toString().replace(" ","");
 
-					System.out.println("Creating file " + destination + catName + "...");
+					System.out.println("\tCreating file " + destination + catName + "...");
 
 					FileWriter fw = new FileWriter(destination + catName + ".txt",true);
 
-					System.out.println("Injecting the sentences...");
+					System.out.println("\tInjecting the sentences...");
 
 					for (List sentence : sentences)
 					{
@@ -218,6 +220,9 @@ public class Miex
 					}
 
 					fw.close();
+
+					System.out.println("\tDone");
+
 				}
 				catch(IOException e)
 				{
@@ -230,15 +235,24 @@ public class Miex
 
 	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex)
 	{
+			int numSentences = 1;
+		
 			for (List sentence : sentences)
 			{
 				try
 				{
+					System.out.println("\t\tProcessing sentence #" + numSentences);
+
+					System.out.print("\t\t\tDependencies... ");
 					// TODO: SQL injection HERE.
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
+					System.out.print("Done\n");
+
+					System.out.print("\t\t\tProperties... ");					
 					MultiValueMap props = ex.getProperties(sentence);
-			
-					System.out.println(props);
+					System.out.print("Done\n");
+
+					numSentences++;
 				}
 				catch(Exception e)
 				{
