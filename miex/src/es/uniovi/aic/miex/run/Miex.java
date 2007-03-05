@@ -35,6 +35,9 @@ import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.trees.TypedDependency;
 
+/* Jakarta (Apache) */
+import org.apache.commons.collections.map.MultiValueMap;
+
 /* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
 import es.uniovi.aic.miex.input.FieldsParser;
@@ -231,8 +234,11 @@ public class Miex
 			{
 				try
 				{
+					// TODO: SQL injection HERE.
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
-					System.out.println(deps);
+					MultiValueMap props = ex.getProperties(sentence);
+			
+					System.out.println(props);
 				}
 				catch(Exception e)
 				{
