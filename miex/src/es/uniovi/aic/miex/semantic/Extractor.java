@@ -18,12 +18,15 @@ public class Extractor
 	public Extractor()
 	{
 		lp = null;
+		lastParsedSentence = null;
+		parse = null;
 		grammarName = "lib/grammars/englishPCFG.ser.gz";
 	}
 
 	public Extractor(String grammar)
 	{
 		lp = null;
+		parse = null;
 		grammarName = grammar;
 	}
 
@@ -32,18 +35,27 @@ public class Extractor
 		lp = new LexicalizedParser(grammarName);
 	}
 
+  private void letsGetParseReady(List sentence)
+  throws Exception
+  {
+    if(lp == null)
+    {
+      throw new Exception("UnInitializedParser");
+    }
+
+    if(!(lastParsedSentence == sentence))
+    {
+      lp.parse(sentence);
+      parse = (Tree) lp.getBestPCFGParse();
+      lastParsedSentence = sentence;
+    }
+  }
+
 	public ArrayList<TypedDependency> getDependencies(List sentence)
 	throws Exception
 	{
 
-		if(lp == null)
-		{
-			throw new Exception("UnInitializedParser");
-		}
-
-		lp.parse(sentence);
-
-		Tree parse = (Tree) lp.getBestPCFGParse();
+		letsGetParseReady(sentence);
 
 		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
@@ -56,14 +68,8 @@ public class Extractor
 	public MultiValueMap getProperties(List sentence)
 	throws Exception
 	{
-		if(lp == null)
-		{
-			throw new Exception("UnInitializedParser");
-		}
 
-		lp.parse(sentence);
-
-		Tree parse = (Tree) lp.getBestPCFGParse();
+		letsGetParseReady(sentence);
 
 	  List sent = parse.taggedYield();
 
@@ -78,8 +84,12 @@ public class Extractor
 		return wordAndTag;
 	}
 
-	LexicalizedParser lp;
+	private LexicalizedParser lp;
 
-	String grammarName;
+	private Tree parse;
+
+	private String grammarName;
+
+	private List lastParsedSentence;
 
 }
