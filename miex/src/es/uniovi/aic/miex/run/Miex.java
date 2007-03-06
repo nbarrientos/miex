@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 /* Exceptions */
 import com.martiansoftware.jsap.JSAPException;
-import es.uniovi.aic.miex.exceptions.*;
 
 /* Stanford */
 import edu.stanford.nlp.process.DocumentPreprocessor;
@@ -80,12 +79,12 @@ public class Miex
 					config.parseOptionsFromFile(confFileName);
 					System.out.println("Config file is OK, continuing...\n");
 				}
-				catch(IOException e)
-				{
-					System.err.println(e.toString());
-					System.exit(-1);
-				}
-				catch(MissingFieldInConfigFileException e)
+//				catch(IOException e)
+//				{
+//					System.err.println(e.toString());
+//					System.exit(-1);
+//				}
+				catch(Exception e)
         {
           System.err.println(e.toString());
           System.exit(-1);

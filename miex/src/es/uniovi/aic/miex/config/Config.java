@@ -1,9 +1,8 @@
 package es.uniovi.aic.miex.config;
 
-import es.uniovi.aic.miex.exceptions.MissingFieldInConfigFileException;
-
 import java.util.Properties;
 import java.io.*;
+import java.lang.Exception;
 
 public class Config
 {
@@ -13,18 +12,18 @@ public class Config
 		properties = new Properties();
 	}
 
-	public void parseOptionsFromFile(String fileName) throws IOException, MissingFieldInConfigFileException
+	public void parseOptionsFromFile(String fileName) throws IOException, Exception
 	{
 		properties.load(new FileInputStream(fileName));
 		this.checkFile();
 	}
 
-	private void checkFile() throws MissingFieldInConfigFileException
+	private void checkFile() throws Exception
 	{
 		for(int i=0; i < configFileFields.length; i++)
 			if("".equals(properties.getProperty(configFileFields[i]))
 					|| properties.getProperty(configFileFields[i]) == null)
-				throw new MissingFieldInConfigFileException(configFileFields[i]); 
+				throw new Exception("Missing field " + configFileFields[i] + " in config file.");
 	}
 
 	public String getFieldValue(String field)
