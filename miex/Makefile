@@ -11,8 +11,8 @@ CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-06-11.jar:li
 PATHTOMIEX = src/es/uniovi/aic/miex
 
 PACKAGES= es.uniovi.aic.miex.input es.uniovi.aic.miex.run \
-					es.uniovi.aic.miex.exceptions es.uniovi.aic.miex.config \
-					es.uniovi.aic.miex.datastr es.uniovi.aic.miex.semantic
+					es.uniovi.aic.miex.config es.uniovi.aic.miex.datastr \
+					es.uniovi.aic.miex.semantic
 
 # Javac options
 JAVAC = javac
