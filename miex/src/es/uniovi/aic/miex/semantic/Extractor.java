@@ -35,6 +35,14 @@ public class Extractor
 		lp = new LexicalizedParser(grammarName);
 	}
 
+	public boolean isLoaded()
+	{
+		if(lp == null)
+			return false;
+		else
+			return true; 
+	}
+
   private void letsGetParseReady(List sentence)
   throws Exception
   {
@@ -49,6 +57,8 @@ public class Extractor
       parse = (Tree) lp.getBestPCFGParse();
       lastParsedSentence = sentence;
     }
+		else
+			System.out.print(" (cached!) ");
   }
 
 	public ArrayList<TypedDependency> getDependencies(List sentence)

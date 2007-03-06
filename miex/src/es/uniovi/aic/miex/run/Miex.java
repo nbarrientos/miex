@@ -139,8 +139,13 @@ public class Miex
 		return true;
 	}
 
+	/* Before this function is called validation using Schema has been completed 
+		 then we only need to process the files with the SP */
+
 	private static void processFiles(String[] files, Config config, CMDLineParser theCMDParser)
 	{
+		Extractor ex = new Extractor();
+
 		for(int j=0; j < files.length; j++)
 		{
 
@@ -148,12 +153,11 @@ public class Miex
 
 			File theFile = new File(files[j]);
 
-			FieldsParser iParser = new FieldsParser(theFile);
+			FieldsParser unMarshaller = new FieldsParser(theFile);
 
-			MyCollection collection = iParser.run();
+			MyCollection collection = unMarshaller.run();
 	
-			Extractor ex = new Extractor();
-			ex.load();
+			if(!ex.isLoaded()) ex.load();
 
 			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
 				// it.next() is a MyDoc
