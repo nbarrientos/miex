@@ -1,5 +1,11 @@
+--[ Title ][ Base MySQL 4.1 database for MIEX ]--
+--[ Desc ][ Creates a clean database from scratch ]---
+--[ Author ][ Nacho Barrientos Arias <chipi@criptonita.com> ]--
+--[ Date ][ March 2007 ]--
+--[ License ][ GPL (see LICENSE) ]--
+
 ---
----> Cleaning DB
+---> Here we go!, cleaning old DB...
 ---
 
 DROP TABLE IF EXISTS wordwordpropdoc;
@@ -16,7 +22,7 @@ DROP TABLE IF EXISTS proptype;
 DROP TABLE IF EXISTS category;
 
 ---
----> Single tables
+---> Creating 'single' tables
 ---
 
 --- word = (@word_id, string)
@@ -24,7 +30,7 @@ DROP TABLE IF EXISTS category;
 CREATE TABLE word 
 (
     word_id int NOT NULL AUTO_INCREMENT,
-    string varchar(30),
+    string varchar(20) NOT NULL,
     PRIMARY KEY (word_id)
 ) TYPE = INNODB;
 
@@ -33,7 +39,7 @@ CREATE TABLE word
 CREATE TABLE collection
 (
     collection_id int NOT NULL AUTO_INCREMENT,
-    name varchar(30),
+    name varchar(30) NOT NULL,
     PRIMARY KEY (collection_id)
 ) TYPE = INNODB;
 
@@ -42,7 +48,7 @@ CREATE TABLE collection
 CREATE TABLE doctype
 (
 		doctype_id int NOT NULL,
-		string varchar(30),
+		string varchar(10) NOT NULL,
 		PRIMARY KEY (doctype_id)
 ) TYPE = INNODB;
 
@@ -51,7 +57,7 @@ CREATE TABLE doctype
 CREATE TABLE proptype
 (
     proptype_id int NOT NULL,
-    string varchar(30),
+    string varchar(30) NOT NULL,
     PRIMARY KEY (proptype_id)
 ) TYPE = INNODB;
 
@@ -60,33 +66,33 @@ CREATE TABLE proptype
 CREATE TABLE category
 (
     category_id int NOT NULL AUTO_INCREMENT,
-    string varchar(30) NOT NULL,
+    string varchar(20) NOT NULL,
     PRIMARY KEY (category_id)
 ) TYPE = INNODB;
-
---- document = (@document_id, @_collection_id_, title, doctype)
 
 ---
 ---> Relationship tables (1:M)
 ---
 
+--- document = (@document_id, @_collection_id_, title, doctype)
+
 CREATE TABLE document
 (
     document_id int NOT NULL,
     collection_id int NOT NULL,
-    title varchar(30),
+    title varchar(150),
 		doctype_id int NOT NULL,
     PRIMARY KEY (document_id,collection_id),
 		FOREIGN KEY (collection_id) REFERENCES collection (collection_id),
 		FOREIGN KEY (doctype_id) REFERENCES doctype (doctype_id) 
 ) TYPE = INNODB;
 
----- property = (@property_id, string, _type_id_)
+---- property = (@property_id, string, description, _type_id_)
 
 CREATE TABLE property
 (
     property_id int NOT NULL AUTO_INCREMENT,
-    string varchar(30) NOT NULL,
+    string varchar(15) NOT NULL,
 		type_id int NOT NULL,
 		description tinytext,
     PRIMARY KEY (property_id),
@@ -142,7 +148,7 @@ CREATE TABLE wordwordpropdoc
 ) TYPE = INNODB;
 
 ---
----> Static inserts
+---> Inserting static data
 ---
 
 --- Document types
@@ -155,7 +161,7 @@ INSERT INTO doctype (doctype_id,string) VALUES ('2',"DOCTEST");
 ---		Word relationship (e.g.: nn(Project,Debian)
 
 INSERT INTO proptype (proptype_id,string) VALUES ('1',"GRAMMATICAL");
-INSERT INTO proptype (proptype_id,string) VALUES ('2',"RELATION");
+INSERT INTO proptype (proptype_id,string) VALUES ('2',"RELATIONSHIP");
 
 --- Grammatical categories, extracted from:
 --- http://bulba.sdsu.edu/jeanette/thesis/PennTags.html
@@ -224,3 +230,5 @@ INSERT INTO property (property_id,type_id,string,description) VALUES ('','1','WP
 INSERT INTO property (property_id,type_id,string,description) VALUES ('','1','WP-S','Prolog version of WP$');  
 INSERT INTO property (property_id,type_id,string,description) VALUES ('','1','WRB','Wh-adverb');  
 INSERT INTO property (property_id,type_id,string,description) VALUES ('','1','X','Unknown, uncertain, or unbracketable. X is often used for bracketing typos and in bracketing the...the-constructions.');
+
+-- EOF ;)
