@@ -123,26 +123,26 @@ CREATE TABLE wordpropdoc
 		prop_id int NOT NULL,
     doc_id int NOT NULL,
     col_id int NOT NULL,
-		times int,
+		times int NOT NULL DEFAULT '1',
     PRIMARY KEY (word_id,prop_id,doc_id,col_id),
     FOREIGN KEY (word_id) REFERENCES word (word_id),
 		FOREIGN KEY (prop_id) REFERENCES property (property_id),
     FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id)
 ) TYPE = INNODB;
 
---- wordwordpropdoc = (@_word1_id_, @_word2_id_, @_property_id_, @_document_id, @collection_id_, times)
+--- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, times)
 
 CREATE TABLE wordwordpropdoc
 (
-    word1_id int NOT NULL,
-		word2_id int NOT NULL,
+    masterWord_id int NOT NULL,
+		slaveWord_id int NOT NULL,
     prop_id int NOT NULL,
     doc_id int NOT NULL,
     col_id int NOT NULL,
-    times int,
-    PRIMARY KEY (word1_id,word2_id,prop_id,doc_id,col_id),
-    FOREIGN KEY (word1_id) REFERENCES word (word_id),
-		FOREIGN KEY (word2_id) REFERENCES word (word_id),
+    times int NOT NULL DEFAULT '1',
+    PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id),
+    FOREIGN KEY (masterWord_id) REFERENCES word (word_id),
+		FOREIGN KEY (slaveWord_id) REFERENCES word (word_id),
     FOREIGN KEY (prop_id) REFERENCES property (property_id),
     FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id)
 ) TYPE = INNODB;
