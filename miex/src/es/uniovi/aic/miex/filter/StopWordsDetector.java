@@ -119,18 +119,12 @@ public class StopWordsDetector
 		String governorWord = governorLabel.toString("value");
 		String depWord = depLabel.toString("value");
 
-		if(!is(governorWord) && !is(depWord))
-			return true;
-		else
-			return false;
+		return (!is(governorWord) && !is(depWord));
 	}
 
 	public boolean isCleanProp(TaggedWord wordAndProp)
   {
-		if(!is(wordAndProp.word()))
-			return true;
-		else
-			return false;
+		return !(is(wordAndProp.word()));
 	}
 
 	HashSet<String> stopWords;

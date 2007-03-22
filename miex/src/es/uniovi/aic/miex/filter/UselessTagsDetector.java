@@ -46,19 +46,13 @@ public class UselessTagsDetector
 		String governorWord = governorLabel.toString("value");
 		String depWord = depLabel.toString("value");
 
-		if(!is(governorWord) && !is(depWord))
-			return true;
-		else
-			return false;
+		return (!is(governorWord) && !is(depWord));
 	}
 */
 
 	public boolean isCleanProp(TaggedWord wordAndProp)
   {
-		if(!is(wordAndProp.tag()))
-			return true;
-		else
-			return false;
+		return !(is(wordAndProp.tag()));
 	}
 
 	HashSet<String> otherWords;
