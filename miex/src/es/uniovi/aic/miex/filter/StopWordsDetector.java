@@ -6,9 +6,9 @@ package es.uniovi.aic.miex.filter;
 
 import java.util.HashSet;
 
-public class StopWordsChecker 
+public class StopWordsDetector 
 {
-  public StopWordsChecker()
+  public StopWordsDetector()
 	{
 		
 		String[] stopWordsLocal = new String[]{"a", "about", "above",
