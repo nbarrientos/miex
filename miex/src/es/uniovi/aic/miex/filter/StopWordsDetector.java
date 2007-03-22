@@ -111,43 +111,26 @@ public class StopWordsDetector
 					
 	}
 
-	public ArrayList<TypedDependency> cleanRelationships(ArrayList<TypedDependency> rs)
+	public boolean isCleanDep(TypedDependency dep)
 	{
+		MapLabel governorLabel = (MapLabel)dep.gov().label();
+		MapLabel depLabel = (MapLabel)dep.dep().label();
 
-		ArrayList<TypedDependency> cleanDeps = new ArrayList<TypedDependency>();
+		String governorWord = governorLabel.toString("value");
+		String depWord = depLabel.toString("value");
 
-		for(TypedDependency dep: rs)
-		{
-			MapLabel governorLabel = (MapLabel)dep.gov().label();
-			MapLabel depLabel = (MapLabel)dep.dep().label();
-
-			String governorWord = governorLabel.toString("value");
-			String depWord = depLabel.toString("value");
-
-			if(!is(governorWord) && !is(depWord))
-				cleanDeps.add(dep);
-
-		}
-
-		System.out.print("(Removed " + (rs.size()-cleanDeps.size()) + ") ");
-
-		return cleanDeps;
+		if(!is(governorWord) && !is(depWord))
+			return true;
+		else
+			return false;
 	}
 
-  public ArrayList<TaggedWord> cleanProperties(ArrayList<TaggedWord> words)
+	public boolean isCleanProp(TaggedWord wordAndProp)
   {
-
-    ArrayList<TaggedWord> cleanProps = new ArrayList<TaggedWord>();
-
-    for(TaggedWord wordAndProp: words)
-    {
-      if(!is(wordAndProp.word()))
-        cleanProps.add(wordAndProp);
-    }
-		
-		System.out.print("(Removed " + (words.size()-cleanProps.size()) + ") ");
-		
-    return cleanProps;
+		if(!is(wordAndProp.word()))
+			return true;
+		else
+			return false;
 	}
 
 	HashSet<String> stopWords;

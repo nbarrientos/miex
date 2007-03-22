@@ -44,7 +44,7 @@ import es.uniovi.aic.miex.config.*;
 import es.uniovi.aic.miex.datastr.*;
 import es.uniovi.aic.miex.semantic.*;
 
-import es.uniovi.aic.miex.filter.StopWordsDetector;
+import es.uniovi.aic.miex.filter.GlobalFilter;
 
 public class Miex 
 {
@@ -119,7 +119,7 @@ public class Miex
 	{
 		Extractor ex = new Extractor();
 
-		StopWordsDetector swfilter = new StopWordsDetector();
+		GlobalFilter filter = new GlobalFilter();
 
 		for(int j=0; j < files.length; j++)
 		{
@@ -150,7 +150,7 @@ public class Miex
 				}
 					
 				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
-				processDoc(sentences,ex,swfilter);
+				processDoc(sentences,ex,filter);
 
 			}
 
@@ -211,7 +211,7 @@ public class Miex
 			}
 	}
 
-	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex, StopWordsDetector swf)
+	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter)
 	{
 			int sentencesNum = 1;
 		
@@ -224,9 +224,14 @@ public class Miex
 					/* Dependences among words */
 
 					System.out.print("\t\t\tDependencies... ");
+	
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
 
-					deps = swf.cleanRelationships(deps);
+//					System.out.println(deps);
+
+					deps = filter.cleanDependencies(deps);
+
+//					System.out.println(deps);
 
 					// TODO: SQL injection HERE.
 
@@ -237,7 +242,12 @@ public class Miex
 					System.out.print("\t\t\tProperties... ");
 
 					ArrayList<TaggedWord> props = ex.getProperties(sentence);
-					props = swf.cleanProperties(props);
+
+//					System.out.println(props);
+
+					props = filter.cleanProperties(props);
+
+//					System.out.println(props);
 
 					// TODO: SQL injection HERE.
 
