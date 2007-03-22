@@ -12,7 +12,7 @@ PATHTOMIEX = src/es/uniovi/aic/miex
 
 PACKAGES= es.uniovi.aic.miex.input es.uniovi.aic.miex.run \
 					es.uniovi.aic.miex.config es.uniovi.aic.miex.datastr \
-					es.uniovi.aic.miex.semantic
+					es.uniovi.aic.miex.semantic es.uniovi.aic.miex.filter
 
 # Javac options
 JAVAC = javac
