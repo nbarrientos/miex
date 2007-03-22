@@ -1,5 +1,6 @@
 /* 
-	 Stop words extrated from porter.c by Al Popescul <popescul@unagi.cis.upenn.edu>
+	Stop words extrated from porter.c by Al Popescul <popescul@unagi.cis.upenn.edu>
+	anyway, this list is Public Domain.
 */ 
 
 package es.uniovi.aic.miex.filter;
