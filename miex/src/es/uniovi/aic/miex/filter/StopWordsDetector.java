@@ -5,6 +5,12 @@
 package es.uniovi.aic.miex.filter;
 
 import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.stanford.nlp.trees.*;
+import edu.stanford.nlp.ling.MapLabel;
+import edu.stanford.nlp.ling.TaggedWord;
 
 public class StopWordsDetector 
 {
@@ -89,9 +95,58 @@ public class StopWordsDetector
 
 	} // constructor
 
-	public boolean is(String word)
+	private boolean is(String word)
 	{
 		return stopWords.contains(word.toLowerCase());
+/*
+		if(stopWords.contains(word.toLowerCase()))
+		{
+			System.out.println("Found stop word: " + word);
+			return true;
+		}
+		else
+			return false;
+*/
+					
+	}
+
+	public ArrayList<TypedDependency> cleanRelationships(ArrayList<TypedDependency> rs)
+	{
+
+		ArrayList<TypedDependency> cleanDeps = new ArrayList<TypedDependency>();
+
+		for(TypedDependency dep: rs)
+		{
+			MapLabel governorLabel = (MapLabel)dep.gov().label();
+			MapLabel depLabel = (MapLabel)dep.dep().label();
+
+			String governorWord = governorLabel.toString("value");
+			String depWord = depLabel.toString("value");
+
+			if(!is(governorWord) && !is(depWord))
+				cleanDeps.add(dep);
+
+		}
+
+		System.out.print("(Removed " + (rs.size()-cleanDeps.size()) + ") ");
+
+		return cleanDeps;
+	}
+
+  public ArrayList<TaggedWord> cleanProperties(ArrayList<TaggedWord> words)
+  {
+
+    ArrayList<TaggedWord> cleanProps = new ArrayList<TaggedWord>();
+
+    for(TaggedWord wordAndProp: words)
+    {
+      if(!is(wordAndProp.word()))
+        cleanProps.add(wordAndProp);
+    }
+		
+		System.out.print("(Removed " + (words.size()-cleanProps.size()) + ") ");
+		
+    return cleanProps;
 	}
 
 	HashSet<String> stopWords;

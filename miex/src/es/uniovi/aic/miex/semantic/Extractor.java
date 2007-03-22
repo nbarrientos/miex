@@ -11,8 +11,6 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.ling.TaggedWord;
 
-import org.apache.commons.collections.map.MultiValueMap;
-
 public class Extractor
 {
 	public Extractor()
@@ -75,23 +73,14 @@ public class Extractor
 
 	}
 
-	public MultiValueMap getProperties(List sentence)
+	public ArrayList<TaggedWord> getProperties(List sentence)
 	throws Exception
 	{
-
 		letsGetParseReady(sentence);
 
 	  List sent = parse.taggedYield();
-
-		MultiValueMap wordAndTag = new MultiValueMap();
-
-		for(Iterator it = sent.iterator(); it.hasNext();)
-		{
-			TaggedWord tw = (TaggedWord) it.next();
-			wordAndTag.put(tw.word(),tw.tag());
-		}
-		
-		return wordAndTag;
+	
+		return new ArrayList<TaggedWord>(sent);
 	}
 
 	private LexicalizedParser lp;

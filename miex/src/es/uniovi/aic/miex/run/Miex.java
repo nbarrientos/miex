@@ -33,9 +33,7 @@ import com.martiansoftware.jsap.JSAPException;
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.trees.TypedDependency;
-
-/* Jakarta (Apache) */
-import org.apache.commons.collections.map.MultiValueMap;
+import edu.stanford.nlp.ling.TaggedWord;
 
 /* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
@@ -45,6 +43,8 @@ import es.uniovi.aic.miex.config.*;
 
 import es.uniovi.aic.miex.datastr.*;
 import es.uniovi.aic.miex.semantic.*;
+
+import es.uniovi.aic.miex.filter.StopWordsDetector;
 
 public class Miex 
 {
@@ -119,6 +119,8 @@ public class Miex
 	{
 		Extractor ex = new Extractor();
 
+		StopWordsDetector swfilter = new StopWordsDetector();
+
 		for(int j=0; j < files.length; j++)
 		{
 
@@ -148,7 +150,7 @@ public class Miex
 				}
 					
 				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
-				processDoc(sentences,ex);
+				processDoc(sentences,ex,swfilter);
 
 			}
 
@@ -209,26 +211,39 @@ public class Miex
 			}
 	}
 
-	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex)
+	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex, StopWordsDetector swf)
 	{
-			int numSentences = 1;
+			int sentencesNum = 1;
 		
 			for (List sentence : sentences)
 			{
 				try
 				{
-					System.out.println("\t\tProcessing sentence #" + numSentences);
+					System.out.println("\t\tProcessing sentence #" + sentencesNum);
+
+					/* Dependences among words */
 
 					System.out.print("\t\t\tDependencies... ");
-					// TODO: SQL injection HERE.
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
+
+					deps = swf.cleanRelationships(deps);
+
+					// TODO: SQL injection HERE.
+
 					System.out.print("Done\n");
 
-					System.out.print("\t\t\tProperties... ");					
-					MultiValueMap props = ex.getProperties(sentence);
+					/* Grammatical categories */
+
+					System.out.print("\t\t\tProperties... ");
+
+					ArrayList<TaggedWord> props = ex.getProperties(sentence);
+					props = swf.cleanProperties(props);
+
+					// TODO: SQL injection HERE.
+
 					System.out.print("Done\n");
 
-					numSentences++;
+					sentencesNum++;
 				}
 				catch(Exception e)
 				{
