@@ -6,8 +6,6 @@
 package es.uniovi.aic.miex.filter;
 
 import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.ling.MapLabel;
