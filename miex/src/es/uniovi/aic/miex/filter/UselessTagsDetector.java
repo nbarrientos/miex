@@ -13,21 +13,21 @@ public class UselessTagsDetector
   public UselessTagsDetector()
 	{
 		
-		String[] otherWordsLocal = new String[]{"``", "''", "-LRB-", "-RRB-",
+		String[] uselessTagsLocal = new String[]{"``", "''", "-LRB-", "-RRB-",
 		"-LCB-", "-RCB-", "--", "...", "*CR*", ",", ":", "."};
 	
-		otherWords = new HashSet<String>();
+		uselessTags = new HashSet<String>();
 
-		for(String word: otherWordsLocal)
-			otherWords.add(word);
+		for(String word: uselessTagsLocal)
+			uselessTags.add(word);
 
 	} // constructor
 
 	private boolean is(String tag)
 	{
-		return otherWords.contains(tag);
+		return uselessTags.contains(tag);
 /*
-		if(otherWords.contains(word.toLowerCase()))
+		if(uselessTags.contains(word.toLowerCase()))
 		{
 			System.out.println("Found stop word: " + word);
 			return true;
@@ -55,7 +55,7 @@ public class UselessTagsDetector
 		return !(is(wordAndProp.tag()));
 	}
 
-	HashSet<String> otherWords;
+	HashSet<String> uselessTags;
 
 } //class
 
