@@ -40,9 +40,8 @@ import org.apache.commons.collections.map.MultiValueMap;
 /* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
 import es.uniovi.aic.miex.input.FieldsParser;
-import es.uniovi.aic.miex.input.CMDLineParser;
 
-import es.uniovi.aic.miex.config.Config;
+import es.uniovi.aic.miex.config.*;
 
 import es.uniovi.aic.miex.datastr.*;
 import es.uniovi.aic.miex.semantic.*;
@@ -54,47 +53,21 @@ public class Miex
 
 				/* STEP 1: Parsing CMDLine arguments */
 
-				CMDLineParser theCMDParser = new CMDLineParser(args);
-				
-				try
-				{
-				if(!theCMDParser.parse())
-					System.exit(-1);
-				}
-				catch(JSAPException e)
-				{
-					System.err.println(e.toString());
-					System.exit(-1);
-				}
+				ConfigCMDLine theCMDConfig = new ConfigCMDLine(args);
 
 				System.out.println("Cmdline syntax is OK, continuing...\n");
 
 				/* STEP 2: Reading configuration file */
 
-				String confFileName = theCMDParser.getConfigFileURI();
-				Config config = new Config();
-			
-				try
-				{
-					config.parseOptionsFromFile(confFileName);
-					System.out.println("Config file is OK, continuing...\n");
-				}
-//				catch(IOException e)
-//				{
-//					System.err.println(e.toString());
-//					System.exit(-1);
-//				}
-				catch(Exception e)
-        {
-          System.err.println(e.toString());
-          System.exit(-1);
-        }
+				ConfigFile theFileConfig = new ConfigFile(theCMDConfig.getConfigFileURI());
+
+				System.out.println("Config file is OK, continuing...\n");
 
 				/* STEP 3: Validating input XML files (if required) */
 
-				if(!theCMDParser.getNoValidateFlag())
+				if(theFileConfig.getBooleanSetting("Validate"))
 				{
-					if(!validateXMLInputFiles(theCMDParser.getFiles(), config))
+					if(!validateXMLInputFiles(theCMDConfig.getFiles(), theFileConfig))
 					{
 						System.err.println("ERROR: Internal error validating XML input files");
 						System.exit(-1);
@@ -107,7 +80,7 @@ public class Miex
 
 				/* STEP 4: Getting metadata from input files */
 
-				processFiles(theCMDParser.getFiles(),config, theCMDParser);				
+				processFiles(theCMDConfig.getFiles(), theFileConfig);
 				
     }
 
@@ -115,7 +88,7 @@ public class Miex
    * Begin of a set of auxiliar methods called from main
 	 */
 
-	private static boolean validateXMLInputFiles(String[] files, Config config)
+	private static boolean validateXMLInputFiles(String[] files, ConfigFile config)
 	{
 		for(int j=0; j < files.length; j++)
 		{
@@ -127,7 +100,7 @@ public class Miex
 				return false;
 			}
 
-			XMLValidator validator = new XMLValidator(theFile,config.getFieldValue("XMLschemaURI"));
+			XMLValidator validator = new XMLValidator(theFile,config.getStringSetting("XMLschemaURI"));
 
 			if(!(validator.validate()))
 			{
@@ -142,7 +115,7 @@ public class Miex
 	/* Before this function is called validation using Schema has been completed 
 		 then we only need to process the files with the SP */
 
-	private static void processFiles(String[] files, Config config, CMDLineParser theCMDParser)
+	private static void processFiles(String[] files, ConfigFile config)
 	{
 		Extractor ex = new Extractor();
 
@@ -167,11 +140,11 @@ public class Miex
 				// Splitting body in sentences
 				List<List<? extends HasWord>> sentences = chopSentences(doc.getBody());
 
-				if(theCMDParser.getDumpFlag())
+				if(config.getBooleanSetting("Dump"))
 				{
 					// Creating data files
 					System.out.println("\tCreating category files for document titled: " + doc.getTitle());
-					injectDataToFiles(doc.getCategories().toArray(), sentences, theCMDParser.getDumpDir());
+					injectDataToFiles(doc.getCategories().toArray(), sentences, config.getStringSetting("DumpDir"));
 				}
 					
 				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
