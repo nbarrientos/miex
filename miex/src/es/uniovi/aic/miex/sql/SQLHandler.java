@@ -3,6 +3,7 @@ package es.uniovi.aic.miex.sql;
 import java.sql.*;
 
 import es.uniovi.aic.miex.config.ConfigFile;
+import es.uniovi.aic.miex.datastr.MyCategories;
 
 public class SQLHandler
 {
@@ -124,6 +125,89 @@ public class SQLHandler
       e.printStackTrace();
 		}
 
+	}
+
+	/// ----
+	/// -- addCategory
+	///	----
+
+	private int addCategory(String catName)
+	{
+		Statement stmt;
+		ResultSet rs;
+		String query;
+
+		int out = 0;
+
+    try
+    {
+      stmt = this.createStatement();
+
+      query = "SELECT category_id " + "FROM category WHERE string = '" + catName.trim().toLowerCase() + "'";
+
+      rs = stmt.executeQuery(query);
+
+      rs.last();
+
+      if(rs.getRow() > 0) // 1
+        return rs.getInt("category_id");
+      else
+      {
+        query = "INSERT INTO category (string) VALUES ('" + catName.trim().toLowerCase() + "')";
+        stmt.executeUpdate(query);
+      }
+
+      rs.close();
+
+      rs = stmt.getGeneratedKeys();
+
+      if (rs.next())
+      {
+        out = rs.getInt(1);
+      }
+
+      rs.close();
+
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+		return out;
+
+	}
+
+	/// ---
+	/// ---- addCategories
+	/// ---
+	
+  public void addCategories(int docNumber, int collectionNumber, MyCategories categories)
+  {
+
+    Statement stmt;
+    String query;
+
+		int cat_ID;
+
+		for(String cat: categories.toArray())
+		{
+			cat_ID = addCategory(cat);
+
+    	try
+	    {
+  	    stmt = this.createStatement();
+
+	      query = "INSERT INTO doccat (doc_id,col_id,cat_id) VALUES ('" +
+               docNumber + "','" + collectionNumber + "','" + cat_ID + "')";
+
+	      stmt.executeUpdate(query);
+	    }
+	    catch (Exception e)
+	    {
+		     e.printStackTrace();
+    	}
+  	}
 	}
 
 	private Statement createStatement() throws SQLException

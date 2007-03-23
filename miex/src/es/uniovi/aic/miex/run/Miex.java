@@ -132,7 +132,7 @@ public class Miex
 			File theFile = new File(files[j]);
 
 			// Registering collection into the database
-			collectionID = sql.getNewCollectionID(theFile.getName());
+			collectionID = sql.getNewCollectionID((theFile.getName().split("\\."))[0]);
 
 			if(collectionID < 0)
 			{
@@ -158,6 +158,9 @@ public class Miex
 
 				// Registering document into the database
 				sql.addDocument(docID, collectionID, doc.getTitle(), doc.isTrain());
+
+				// And its categories
+				sql.addCategories(docID, collectionID, doc.getCategories());
 
 				// Splitting body in sentences
 				List<List<? extends HasWord>> sentences = chopSentences(doc.getBody());
