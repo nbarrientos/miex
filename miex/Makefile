@@ -7,12 +7,13 @@
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
 # General options
-CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-06-11.jar'
+CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-06-11.jar:lib/mysql-connector-java-5.0.5-bin.jar'
 PATHTOMIEX = src/es/uniovi/aic/miex
 
 PACKAGES= es.uniovi.aic.miex.input es.uniovi.aic.miex.run \
 					es.uniovi.aic.miex.config es.uniovi.aic.miex.datastr \
-					es.uniovi.aic.miex.semantic es.uniovi.aic.miex.filter
+					es.uniovi.aic.miex.semantic es.uniovi.aic.miex.filter \
+					es.uniovi.aic.miex.sql
 
 # Javac options
 JAVAC = javac

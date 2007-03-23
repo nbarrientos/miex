@@ -39,7 +39,7 @@ CREATE TABLE word
 CREATE TABLE collection
 (
     collection_id int NOT NULL AUTO_INCREMENT,
-    name varchar(30) NOT NULL,
+    name varchar(70) NOT NULL,
     PRIMARY KEY (collection_id)
 ) TYPE = INNODB;
 

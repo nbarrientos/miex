@@ -46,6 +46,8 @@ import es.uniovi.aic.miex.semantic.*;
 
 import es.uniovi.aic.miex.filter.GlobalFilter;
 
+import es.uniovi.aic.miex.sql.SQLHandler;
+
 public class Miex 
 {
     public static void main(String[] args)
@@ -121,23 +123,41 @@ public class Miex
 
 		GlobalFilter filter = new GlobalFilter();
 
+		SQLHandler sql = new SQLHandler(config);
+
+		int collectionID;
+
 		for(int j=0; j < files.length; j++)
 		{
+			File theFile = new File(files[j]);
+
+			// Registering collection into the database
+			collectionID = sql.getNewCollectionID(theFile.getName());
+
+			if(collectionID < 0)
+			{
+				System.out.println("Collection already parsed");
+				continue;
+			}
 
 			System.out.println("Parsing file " + files[j] + "\n");
 
-			File theFile = new File(files[j]);
-
 			FieldsParser unMarshaller = new FieldsParser(theFile);
 
+			// Dumping XML to memory
 			MyCollection collection = unMarshaller.run();
 	
 			if(!ex.isLoaded()) ex.load();
+
+			int docID = 1;
 
 			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
 				// it.next() is a MyDoc
 			{
 				MyDoc doc = (MyDoc)it.next();
+
+				// Registering document into the database
+				sql.addDocument(docID, collectionID, doc.getTitle(), doc.isTrain());
 
 				// Splitting body in sentences
 				List<List<? extends HasWord>> sentences = chopSentences(doc.getBody());
@@ -151,6 +171,8 @@ public class Miex
 					
 				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
 				processDoc(sentences,ex,filter);
+	
+				docID++;
 
 			}
 
