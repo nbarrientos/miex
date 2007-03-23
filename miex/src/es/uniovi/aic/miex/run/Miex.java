@@ -274,9 +274,8 @@ public class Miex
 
 					props = filter.cleanProperties(props);
 
-					System.out.println(props);
+//					System.out.println(props);
 
-					// TODO: SQL injection HERE.
 					sql.addWordsAndTags(docNumber,colNumber,props);
 
 					System.out.print("Done\n");

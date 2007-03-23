@@ -324,7 +324,7 @@ public class SQLHandler
   }
 
   /// ---
-  /// ---- addCategories
+  /// ---- addWordsAndTags
   /// ---
 
   public void addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props)
@@ -339,7 +339,7 @@ public class SQLHandler
     for(TaggedWord wordAndTag: props)
     {
 
-      prop_ID = addCategory(wordAndTag.tag());
+      prop_ID = addProperty(true,wordAndTag.tag());
 			word_ID = addWord(wordAndTag.word());
 			
       try
@@ -356,28 +356,22 @@ public class SQLHandler
 	      if(rs.getRow() > 0) // 1
 				{ 
 	        times = rs.getInt("times"); times++;
-					System.out.println("Tupla repetida");
-					// UPDATE
 					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
 									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "'";
-					stmt.executeUpdate(query);
 				}
 	      else
 	      { 
-					// INSERT
 //					System.out.println("insertando tupla: (" + word_ID + "," + prop_ID + "," + docNumber + "," + collectionNumber + ")");
 					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times) VALUES ('" +
 									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1')";
-					stmt.executeUpdate(query); // TEMP	
   	    }
 
 				rs.close();
 
-//        stmt.executeUpdate(query);
+        stmt.executeUpdate(query);
       }
       catch (Exception e)
       {
-				 System.out.println(e.getMessage());
          e.printStackTrace();
       }
     }
