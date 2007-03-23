@@ -173,7 +173,7 @@ public class Miex
 				}
 					
 				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
-				processDoc(sentences,ex,filter);
+				processDoc(sentences, ex, filter, sql, docID, collectionID);
 	
 				docID++;
 
@@ -236,7 +236,9 @@ public class Miex
 			}
 	}
 
-	private static void processDoc(List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter)
+	private static void processDoc
+				(List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter, SQLHandler sql,
+				int docNumber, int colNumber)
 	{
 			int sentencesNum = 1;
 		
@@ -272,9 +274,10 @@ public class Miex
 
 					props = filter.cleanProperties(props);
 
-//					System.out.println(props);
+					System.out.println(props);
 
 					// TODO: SQL injection HERE.
+					sql.addWordsAndTags(docNumber,colNumber,props);
 
 					System.out.print("Done\n");
 

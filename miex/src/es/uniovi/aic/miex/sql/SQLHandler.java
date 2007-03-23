@@ -5,6 +5,10 @@ import java.sql.*;
 import es.uniovi.aic.miex.config.ConfigFile;
 import es.uniovi.aic.miex.datastr.MyCategories;
 
+import java.util.ArrayList;
+
+import edu.stanford.nlp.ling.TaggedWord;
+
 public class SQLHandler
 {
 
@@ -209,6 +213,175 @@ public class SQLHandler
     	}
   	}
 	}
+
+  /// ----
+  /// -- addWord
+  /// ----
+
+  private int addWord(String wordName)
+  {
+    Statement stmt;
+    ResultSet rs;
+    String query;
+
+    int out = 0;
+
+    try
+    {
+      stmt = this.createStatement();
+
+      query = "SELECT word_id " + "FROM word WHERE string = '" + wordName.trim().toLowerCase() + "'";
+
+      rs = stmt.executeQuery(query);
+
+      rs.last();
+
+      if(rs.getRow() > 0) // 1
+        return rs.getInt("word_id");
+      else
+      {
+        query = "INSERT INTO word (string) VALUES ('" + wordName.trim().toLowerCase() + "')";
+        stmt.executeUpdate(query);
+      }
+
+      rs.close();
+
+      rs = stmt.getGeneratedKeys();
+
+      if (rs.next())
+      {
+        out = rs.getInt(1);
+      }
+
+      rs.close();
+
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+    return out;
+  }
+
+  /// ----
+  /// -- addProperty
+  /// ----
+
+  private int addProperty(boolean isGrammatical, String propName)
+  {
+    Statement stmt;
+    ResultSet rs;
+    String query;
+
+    int out = 0;
+
+    try
+    {
+      stmt = this.createStatement();
+
+			// Id 1 (proptype) = GRAMMATICAL
+			// Id 2 (proptype) = RELATIONSHIP
+
+			if(isGrammatical)
+      	query = "SELECT property_id " + "FROM property WHERE type_id='1' AND string = '" + propName.trim().toUpperCase() + "'";
+			else
+				query = "SELECT property_id " + "FROM property WHERE type_id='2' AND string = '" + propName.trim().toUpperCase() + "'";
+
+      rs = stmt.executeQuery(query);
+
+      rs.last();
+
+      if(rs.getRow() > 0) // 1
+        return rs.getInt("property_id");
+      else
+      {
+				if(isGrammatical)
+	        query = "INSERT INTO property (type_id,string) VALUES ('1','" + propName.trim().toUpperCase() + "')";
+				else
+					query = "INSERT INTO property (type_id,string) VALUES ('2','" + propName.trim().toUpperCase() + "')";
+        stmt.executeUpdate(query);
+      }
+
+      rs.close();
+
+      rs = stmt.getGeneratedKeys();
+
+      if (rs.next())
+      {
+        out = rs.getInt(1);
+      }
+
+      rs.close();
+
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+    return out;
+  }
+
+  /// ---
+  /// ---- addCategories
+  /// ---
+
+  public void addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props)
+  {
+
+    Statement stmt;
+		ResultSet rs;
+    String query;
+
+    int prop_ID, word_ID, times;
+
+    for(TaggedWord wordAndTag: props)
+    {
+
+      prop_ID = addCategory(wordAndTag.tag());
+			word_ID = addWord(wordAndTag.word());
+			
+      try
+      {
+        stmt = this.createStatement();
+
+				query = "SELECT times " + "FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
+								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "'";
+
+	      rs = stmt.executeQuery(query);
+
+	      rs.last();
+
+	      if(rs.getRow() > 0) // 1
+				{ 
+	        times = rs.getInt("times"); times++;
+					System.out.println("Tupla repetida");
+					// UPDATE
+					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
+									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "'";
+					stmt.executeUpdate(query);
+				}
+	      else
+	      { 
+					// INSERT
+//					System.out.println("insertando tupla: (" + word_ID + "," + prop_ID + "," + docNumber + "," + collectionNumber + ")");
+					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times) VALUES ('" +
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1')";
+					stmt.executeUpdate(query); // TEMP	
+  	    }
+
+				rs.close();
+
+//        stmt.executeUpdate(query);
+      }
+      catch (Exception e)
+      {
+				 System.out.println(e.getMessage());
+         e.printStackTrace();
+      }
+    }
+  }
 
 	private Statement createStatement() throws SQLException
 	{
