@@ -27,48 +27,23 @@ DROP TABLE IF EXISTS category;
 
 --- word = (@word_id, string)
 
-CREATE TABLE word 
-(
-    word_id int NOT NULL AUTO_INCREMENT,
-    string varchar(20) NOT NULL,
-    PRIMARY KEY (word_id)
-) TYPE = INNODB;
+CREATE TABLE word( word_id int NOT NULL AUTO_INCREMENT, string varchar(20) NOT NULL, PRIMARY KEY (word_id) ) TYPE = INNODB;
 
 --- collection = (@collection_id, name)
 
-CREATE TABLE collection
-(
-    collection_id int NOT NULL AUTO_INCREMENT,
-    name varchar(70) NOT NULL,
-    PRIMARY KEY (collection_id)
-) TYPE = INNODB;
+CREATE TABLE collection( collection_id int NOT NULL AUTO_INCREMENT, name varchar(70) NOT NULL, PRIMARY KEY (collection_id) ) TYPE = INNODB;
 
 --- doctype = (@doctype_id, string)
 
-CREATE TABLE doctype
-(
-		doctype_id int NOT NULL,
-		string varchar(10) NOT NULL,
-		PRIMARY KEY (doctype_id)
-) TYPE = INNODB;
+CREATE TABLE doctype( doctype_id int NOT NULL, string varchar(10) NOT NULL, PRIMARY KEY (doctype_id) ) TYPE = INNODB;
 
 --- proptype = (@proptype_id, string)
 
-CREATE TABLE proptype
-(
-    proptype_id int NOT NULL,
-    string varchar(30) NOT NULL,
-    PRIMARY KEY (proptype_id)
-) TYPE = INNODB;
+CREATE TABLE proptype( proptype_id int NOT NULL, string varchar(30) NOT NULL, PRIMARY KEY (proptype_id) )TYPE = INNODB;
 
 --- category = (@category_id, string)
 
-CREATE TABLE category
-(
-    category_id int NOT NULL AUTO_INCREMENT,
-    string varchar(20) NOT NULL,
-    PRIMARY KEY (category_id)
-) TYPE = INNODB;
+CREATE TABLE category( category_id int NOT NULL AUTO_INCREMENT, string varchar(20) NOT NULL, PRIMARY KEY (category_id) ) TYPE = INNODB;
 
 ---
 ---> Relationship tables (1:M)
@@ -76,28 +51,11 @@ CREATE TABLE category
 
 --- document = (@document_id, @_collection_id_, title, doctype)
 
-CREATE TABLE document
-(
-    document_id int NOT NULL,
-    collection_id int NOT NULL,
-    title varchar(150),
-		doctype_id int NOT NULL,
-    PRIMARY KEY (document_id,collection_id),
-		FOREIGN KEY (collection_id) REFERENCES collection (collection_id),
-		FOREIGN KEY (doctype_id) REFERENCES doctype (doctype_id) 
-) TYPE = INNODB;
+CREATE TABLE document( document_id int NOT NULL, collection_id int NOT NULL, title varchar(150), doctype_id int NOT NULL, PRIMARY KEY (document_id,collection_id), FOREIGN KEY (collection_id) REFERENCES collection (collection_id), FOREIGN KEY (doctype_id) REFERENCES doctype (doctype_id) ) TYPE = INNODB;
 
 ---- property = (@property_id, string, description, _type_id_)
 
-CREATE TABLE property
-(
-    property_id int NOT NULL AUTO_INCREMENT,
-    string varchar(15) NOT NULL,
-		type_id int NOT NULL,
-		description tinytext,
-    PRIMARY KEY (property_id),
-    FOREIGN KEY (type_id) REFERENCES proptype (proptype_id)
-) TYPE = INNODB;
+CREATE TABLE property( property_id int NOT NULL AUTO_INCREMENT, string varchar(15) NOT NULL, type_id int NOT NULL, description tinytext, PRIMARY KEY (property_id), FOREIGN KEY (type_id) REFERENCES proptype (proptype_id) ) TYPE = INNODB;
 
 ---
 ---> Relationship tables (N:M)
@@ -105,47 +63,15 @@ CREATE TABLE property
 
 --- doccat = (@_category_id_, @_document_id, @collection_id_)
 
-CREATE TABLE doccat
-(
-		cat_id int NOT NULL,
-		doc_id int NOT NULL,
-		col_id int NOT NULL,
-    PRIMARY KEY (cat_id,doc_id,col_id),
-		FOREIGN KEY (cat_id) REFERENCES category (category_id),
-    FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id)
-) TYPE = INNODB;
+CREATE TABLE doccat( cat_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, PRIMARY KEY (cat_id,doc_id,col_id), FOREIGN KEY (cat_id) REFERENCES category (category_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 --- wordpropdoc = (@_word_id_, @_property_id_, @_document_id, @collection_id_, times)
 
-CREATE TABLE wordpropdoc
-(
-		word_id int NOT NULL,
-		prop_id int NOT NULL,
-    doc_id int NOT NULL,
-    col_id int NOT NULL,
-		times int NOT NULL DEFAULT '1',
-    PRIMARY KEY (word_id,prop_id,doc_id,col_id),
-    FOREIGN KEY (word_id) REFERENCES word (word_id),
-		FOREIGN KEY (prop_id) REFERENCES property (property_id),
-    FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id)
-) TYPE = INNODB;
+CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', PRIMARY KEY (word_id,prop_id,doc_id,col_id), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 --- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, times)
 
-CREATE TABLE wordwordpropdoc
-(
-    masterWord_id int NOT NULL,
-		slaveWord_id int NOT NULL,
-    prop_id int NOT NULL,
-    doc_id int NOT NULL,
-    col_id int NOT NULL,
-    times int NOT NULL DEFAULT '1',
-    PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id),
-    FOREIGN KEY (masterWord_id) REFERENCES word (word_id),
-		FOREIGN KEY (slaveWord_id) REFERENCES word (word_id),
-    FOREIGN KEY (prop_id) REFERENCES property (property_id),
-    FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id)
-) TYPE = INNODB;
+CREATE TABLE wordwordpropdoc( masterWord_id int NOT NULL, slaveWord_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id), FOREIGN KEY (masterWord_id) REFERENCES word (word_id), FOREIGN KEY (slaveWord_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id),FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 ---
 ---> Inserting static data
