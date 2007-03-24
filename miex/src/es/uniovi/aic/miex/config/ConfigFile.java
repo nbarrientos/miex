@@ -1,6 +1,7 @@
 package es.uniovi.aic.miex.config;
 
 import java.util.Properties;
+import java.util.HashMap;
 import java.io.*;
 import java.lang.Exception;
 
@@ -26,49 +27,66 @@ public class ConfigFile
 
 	private void checkFile() throws Exception
 	{
+		
 		for(int i=0; i < configFileFields.length; i++)
 			if("".equals(properties.getProperty(configFileFields[i]))
 					|| properties.getProperty(configFileFields[i]) == null)
 				throw new Exception("Missing field " + configFileFields[i] + " in config file.");
-
+		
+		
 		for(int i=0; i < configFileBooleanFields.length; i++)
-			if( !(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("yes"))
-					&&
-					!(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("no")))
+			if(properties.getProperty(configFileBooleanFields[i]) != null)
+			{
+				if( !(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("yes"))
+						&&
+						!(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("no")))
 			throw new Exception("Boolean keys must only contain \"Yes\" or \"No\" values");
-
+			}
 	}
 
 	public String getStringSetting(String stt)
 	{
-		return properties.getProperty(stt);
+		if(properties.getProperty(stt) == null)
+			return defaultValuesString.get(stt.toLowerCase());
+		else
+			return properties.getProperty(stt);
 	}
 
 	public boolean getBooleanSetting(String stt)
 	{
-		if(properties.getProperty(stt).toLowerCase().equals("yes"))
-			return true;
+		if(properties.getProperty(stt) == null)
+			return defaultValuesBoolean.get(stt.toLowerCase()).booleanValue();
 		else
-			return false;
+			if(properties.getProperty(stt).toLowerCase().equals("yes"))
+				return true;
+			else
+				return false;
 	}
 
 	private Properties properties;
 
-	private static String[] configFileFields, configFileBooleanFields;
+	private static String[] configFileFields, configFileBooleanFields; 
+	private static HashMap<String,String> defaultValuesString;
+	private static HashMap<String,Boolean> defaultValuesBoolean;
 
   static
   {
-    configFileFields = new String[]{"XMLschemaURI",
-                                    "BDHostname",
-                                    "BDUser",
-                                    "BDPassword",
-                                    "BDName",
-                                    "CreateDB",
-                                    "DumpDir",
-                                    "Validate",
-                                    "Dump" };
+    configFileFields = new String[]{"BDHostname", "BDUser", "BDPassword", "BDName"};
 
-		configFileBooleanFields = new String[]{ "Validate", "CreateDB", "Dump" };
+		configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump"};
+		
+		defaultValuesString = new HashMap<String,String>();
+		defaultValuesBoolean = new HashMap<String,Boolean>();
+
+		// Loading default values to boolean settings
+		defaultValuesBoolean.put("validate", new Boolean(false));
+		defaultValuesBoolean.put("dump", new Boolean(false));
+		defaultValuesBoolean.put("createdb", new Boolean(false));
+
+		// Loading default values to string settings
+		defaultValuesString.put("xmlschemauri", "/usr/share/miex/schemas/default.xsd");
+    defaultValuesString.put("dumpdir", "/tmp");
+    defaultValuesString.put("sqlskeleton", "/usr/share/miex/sql/skeleton.sql");
 
   }
 
