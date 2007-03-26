@@ -172,17 +172,23 @@ public class Miex
 				sql.addCategories(docID, collectionID, doc.getCategories());
 
 				// Splitting body in sentences
-				List<List<? extends HasWord>> sentences = chopSentences(doc.getBody());
+				List<List<? extends HasWord>> titleSentences = chopSentences(doc.getTitle());
+
+				// Splitting body in sentences
+				List<List<? extends HasWord>> bodySentences = chopSentences(doc.getBody());
 
 				if(config.getBooleanSetting("Dump"))
 				{
 					// Creating data files
 					System.out.println("\tCreating category files for document titled: " + doc.getTitle());
-					injectDataToFiles(doc.getCategories().toArray(), sentences, config.getStringSetting("DumpDir"));
+					injectDataToFiles(doc.getCategories().toArray(), bodySentences, config.getStringSetting("DumpDir"));
 				}
 					
-				System.out.println("\n\tProcessing document titled: " + doc.getTitle().trim());		
-				processDoc(sentences, ex, filter, sql, docID, collectionID);
+				System.out.println("\n\tProcessing title of the document titled: " + doc.getTitle().trim());		
+				processSentences(titleSentences, ex, filter, sql, docID, collectionID, true);
+
+				System.out.println("\n\tProcessing body of the document titled: " + doc.getTitle().trim());
+				processSentences(bodySentences, ex, filter, sql, docID, collectionID, false);
 	
 				docID++;
 
@@ -245,9 +251,9 @@ public class Miex
 			}
 	}
 
-	private static void processDoc
+	private static void processSentences
 				(List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter, SQLHandler sql,
-				int docNumber, int colNumber)
+				int docNumber, int colNumber, boolean isFromTitle)
 	{
 			int sentencesNum = 1;
 		
@@ -285,7 +291,7 @@ public class Miex
 
 //					System.out.println(props);
 
-					sql.addWordsAndTags(docNumber,colNumber,props);
+					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle);
 
 					System.out.print("Done\n");
 
