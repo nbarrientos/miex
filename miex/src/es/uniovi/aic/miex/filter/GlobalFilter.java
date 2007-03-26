@@ -12,6 +12,7 @@ public class GlobalFilter
 	{
 		swd = new StopWordsDetector();
 		utd = new UselessTagsDetector();
+		nd = new NumbersDetector();
 	}
 
   public ArrayList<TypedDependency> cleanDependencies(ArrayList<TypedDependency> rs)
@@ -21,7 +22,7 @@ public class GlobalFilter
 
     for(TypedDependency dep: rs)
     {
-			if(swd.isCleanDep(dep))
+			if(swd.isCleanDep(dep) && nd.isCleanDep(dep))
 				cleanDeps.add(dep);
     }
 
@@ -37,7 +38,9 @@ public class GlobalFilter
 
     for(TaggedWord wordAndProp: words)
     {
-      if(swd.isCleanProp(wordAndProp) && utd.isCleanProp(wordAndProp))
+      if(swd.isCleanProp(wordAndProp) && 
+				 utd.isCleanProp(wordAndProp) &&
+				 nd.isCleanProp(wordAndProp))
         cleanProps.add(wordAndProp);
     }
 
@@ -48,4 +51,5 @@ public class GlobalFilter
 
 	StopWordsDetector swd;
 	UselessTagsDetector utd;
+	NumbersDetector nd;
 }

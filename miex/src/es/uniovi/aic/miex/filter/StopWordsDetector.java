@@ -11,7 +11,8 @@ import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.ling.TaggedWord;
 
-public class StopWordsDetector 
+// Package class
+class StopWordsDetector 
 {
   public StopWordsDetector()
 	{
