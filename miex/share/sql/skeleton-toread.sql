@@ -67,11 +67,11 @@ CREATE TABLE doccat( cat_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NU
 
 --- wordpropdoc = (@_word_id_, @_property_id_, @_document_id, @collection_id_, times)
 
-CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', PRIMARY KEY (word_id,prop_id,doc_id,col_id), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
+CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT 'false', normalized bool NOT NULL DEFAULT 'false', PRIMARY KEY (word_id,prop_id,doc_id,col_id), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 --- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, times)
 
-CREATE TABLE wordwordpropdoc( masterWord_id int NOT NULL, slaveWord_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id), FOREIGN KEY (masterWord_id) REFERENCES word (word_id), FOREIGN KEY (slaveWord_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id),FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
+CREATE TABLE wordwordpropdoc( masterWord_id int NOT NULL, slaveWord_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT 'false', normalized bool NOT NULL DEFAULT 'false', PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id), FOREIGN KEY (masterWord_id) REFERENCES word (word_id), FOREIGN KEY (slaveWord_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id),FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 ---
 ---> Inserting static data

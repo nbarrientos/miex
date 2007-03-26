@@ -1,6 +1,7 @@
 package es.uniovi.aic.miex.sql;
 
 import java.sql.*;
+import java.io.*;
 
 import es.uniovi.aic.miex.config.ConfigFile;
 import es.uniovi.aic.miex.datastr.MyCategories;
@@ -46,6 +47,40 @@ public class SQLHandler
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void executeSQLFile(String path)
+	{
+		/* BE CAREFUL WITH SQL FILE FORMAT, ONE SQL STATEMENT PER LINE!! */
+		Statement stmt;
+		String line;
+
+		try
+		{
+			stmt = this.createStatement();
+
+			FileReader input = new FileReader(path);
+			BufferedReader bufRead = new BufferedReader(input);
+
+			line = bufRead.readLine();
+
+			while(line != null)
+			{
+				if(line.length() > 0 && !(line.matches("^-+.*")))
+					stmt.addBatch(line);
+				
+				line = bufRead.readLine();
+			}
+
+			bufRead.close();
+
+			stmt.executeBatch();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	// ---

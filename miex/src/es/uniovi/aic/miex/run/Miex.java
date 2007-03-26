@@ -65,7 +65,18 @@ public class Miex
 
 				System.out.println("Config file is OK, continuing...\n");
 
-				/* STEP 3: Validating input XML files (if required) */
+				/* STEP 3: Creating database structure (if required) */
+
+				SQLHandler sql = new SQLHandler(theFileConfig);
+
+				if(theFileConfig.getBooleanSetting("CreateDB"))
+				{
+					stopWhileUserPressesEnter("WARNING: Existing database will be completely deleted. [Y/N]: ");
+					System.out.println("Creating DB...\n");
+					sql.executeSQLFile(theFileConfig.getStringSetting("SQLSkeleton"));
+				}
+
+				/* STEP 4: Validating input XML files (if required) */
 
 				if(theFileConfig.getBooleanSetting("Validate"))
 				{
@@ -80,9 +91,9 @@ public class Miex
 				else
 					System.out.println("Warning: continuing without validate XML input...\n");
 
-				/* STEP 4: Getting metadata from input files */
+				/* STEP 5: Getting metadata from input files */
 
-				processFiles(theCMDConfig.getFiles(), theFileConfig);
+				processFiles(theCMDConfig.getFiles(), theFileConfig, sql);
 				
     }
 
@@ -117,13 +128,11 @@ public class Miex
 	/* Before this function is called validation using Schema has been completed 
 		 then we only need to process the files with the SP */
 
-	private static void processFiles(String[] files, ConfigFile config)
+	private static void processFiles(String[] files, ConfigFile config, SQLHandler sql)
 	{
 		Extractor ex = new Extractor();
 
 		GlobalFilter filter = new GlobalFilter();
-
-		SQLHandler sql = new SQLHandler(config);
 
 		int collectionID;
 
@@ -290,6 +299,43 @@ public class Miex
 				}
 			}		
 
+	}
+
+	private static void stopWhileUserPressesEnter(String msg)	
+	{
+		BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
+
+		try
+		{
+			System.out.print(msg);
+
+			String line = userIn.readLine();
+
+			boolean out = false;
+
+			while(!out)
+			{
+				if(line.equals("Y") || line.equals("y"))
+				{
+					System.out.print("\n");
+					out = true;
+				}
+				else
+					if(line.equals("N") || line.equals("n"))
+						System.exit(0);
+					else
+					{
+						System.out.print("\n" + msg);
+						line = userIn.readLine();
+					}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return;
 	}
 
 }
