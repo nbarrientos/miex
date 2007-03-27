@@ -171,25 +171,29 @@ public class Miex
 				// And its categories
 				sql.addCategories(docID, collectionID, doc.getCategories());
 
-				// Splitting body in sentences
+				// Splitting title in sentences
 				List<List<? extends HasWord>> titleSentences = chopSentences(doc.getTitle());
 
 				// Splitting body in sentences
 				List<List<? extends HasWord>> bodySentences = chopSentences(doc.getBody());
 
+				// Dumping to category files (if required)
 				if(config.getBooleanSetting("Dump"))
 				{
 					// Creating data files
 					System.out.println("\tCreating category files for document titled: " + doc.getTitle());
 					injectDataToFiles(doc.getCategories().toArray(), bodySentences, config.getStringSetting("DumpDir"));
 				}
-					
+
+				// Really processing document title					
 				System.out.println("\n\tProcessing title of the document titled: " + doc.getTitle().trim());		
 				processSentences(titleSentences, ex, filter, sql, docID, collectionID, true);
 
+				// Really processing document body
 				System.out.println("\n\tProcessing body of the document titled: " + doc.getTitle().trim());
 				processSentences(bodySentences, ex, filter, sql, docID, collectionID, false);
 	
+				// Next document
 				docID++;
 
 			}
@@ -212,7 +216,7 @@ public class Miex
 		return sentences;	
 	}
 
-	// For each category injects document's sentences to category.txt
+	// For each $category injects document's sentences to $category.txt
 	private static void injectDataToFiles(ArrayList<String> categories, 
 																				List<List<? extends HasWord>> sentences,
 																				String destination)
@@ -283,18 +287,22 @@ public class Miex
 
 					System.out.print("\t\t\tProperties... ");
 
+					// Stanford, let me know the properties! :)
 					ArrayList<TaggedWord> props = ex.getProperties(sentence);
 
 //					System.out.println(props);
 
+					// Removing useless stuff
 					props = filter.cleanProperties(props);
 
 //					System.out.println(props);
 
+				 	// Injecting the results into the database	
 					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle);
 
 					System.out.print("Done\n");
 
+					// Next sentence
 					sentencesNum++;
 				}
 				catch(Exception e)
