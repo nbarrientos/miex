@@ -186,12 +186,14 @@ public class Miex
 				}
 
 				// Really processing document title					
-				System.out.println("\n\tProcessing title of the document titled: " + doc.getTitle().trim());		
+				System.out.println("\n\tProcessing TITLE of the document titled: " + doc.getTitle().trim());		
 				processSentences(titleSentences, ex, filter, sql, docID, collectionID, true);
+																																							// ^ (isFromTitle)
 
 				// Really processing document body
-				System.out.println("\n\tProcessing body of the document titled: " + doc.getTitle().trim());
+				System.out.println("\n\tProcessing BODY of the document titled: " + doc.getTitle().trim());
 				processSentences(bodySentences, ex, filter, sql, docID, collectionID, false);
+																																							// ^ (isFromTitle)
 	
 				// Next document
 				docID++;
@@ -255,9 +257,9 @@ public class Miex
 			}
 	}
 
-	private static void processSentences
-				(List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter, SQLHandler sql,
-				int docNumber, int colNumber, boolean isFromTitle)
+	private static void 
+	processSentences (List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter, SQLHandler sql,
+										int docNumber, int colNumber, boolean isFromTitle)
 	{
 			int sentencesNum = 1;
 		
@@ -267,35 +269,34 @@ public class Miex
 				{
 					System.out.println("\t\tProcessing sentence #" + sentencesNum);
 
-					/* Dependences among words */
+					/* ************************ */
+					/* Dependencies among words */
+					/* ************************ */
 
 					System.out.print("\t\t\tDependencies... ");
 	
+					// Stanford, let me know the dependencies! :)
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
 
-//					System.out.println(deps);
-
+					// Removing useless stuff
 					deps = filter.cleanDependencies(deps);
 
-//					System.out.println(deps);
-
-					// TODO: SQL injection HERE.
+					// Injecting the results into the database
+					sql.addDependencies(docNumber,colNumber,deps,isFromTitle);
 
 					System.out.print("Done\n");
 
+					/* ********************** */
 					/* Grammatical categories */
+					/* ********************** */
 
 					System.out.print("\t\t\tProperties... ");
 
 					// Stanford, let me know the properties! :)
 					ArrayList<TaggedWord> props = ex.getProperties(sentence);
 
-//					System.out.println(props);
-
 					// Removing useless stuff
 					props = filter.cleanProperties(props);
-
-//					System.out.println(props);
 
 				 	// Injecting the results into the database	
 					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,false);

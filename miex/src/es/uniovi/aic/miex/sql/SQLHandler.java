@@ -9,6 +9,8 @@ import es.uniovi.aic.miex.datastr.MyCategories;
 import java.util.ArrayList;
 
 import edu.stanford.nlp.ling.TaggedWord;
+import edu.stanford.nlp.ling.MapLabel;
+import edu.stanford.nlp.trees.TypedDependency;
 
 public class SQLHandler
 {
@@ -319,9 +321,11 @@ public class SQLHandler
 			// Id 2 (proptype) = RELATIONSHIP
 
 			if(isGrammatical)
-      	query = "SELECT property_id " + "FROM property WHERE type_id='1' AND string = '" + propName.trim().toUpperCase() + "'";
+      	query = "SELECT property_id " + "FROM property WHERE type_id='1' AND string = '" + 
+								propName.trim().toUpperCase() + "'";
 			else
-				query = "SELECT property_id " + "FROM property WHERE type_id='2' AND string = '" + propName.trim().toUpperCase() + "'";
+				query = "SELECT property_id " + "FROM property WHERE type_id='2' AND string = '" + 
+								propName.trim().toUpperCase() + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -363,7 +367,8 @@ public class SQLHandler
   /// ---
 
   public void 
-	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, boolean isFromTitle, boolean normalized)
+	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, 
+									boolean isFromTitle, boolean normalized)
   {
 
     Statement stmt;
@@ -385,7 +390,7 @@ public class SQLHandler
       {
         stmt = this.createStatement();
 
-				query = "SELECT times " + "FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
+				query = "SELECT times FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
 								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + 
 								ft + "' AND normalized='" + nd + "'";
 
@@ -402,9 +407,9 @@ public class SQLHandler
 				}
 	      else
 	      { 
-//					System.out.println("insertando tupla: (" + word_ID + "," + prop_ID + "," + docNumber + "," + collectionNumber + "," + ft + ")");
 					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + "','" + nd + "')";
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + 
+									"','" + nd + "')";
   	    }
 
 				rs.close();
@@ -417,6 +422,74 @@ public class SQLHandler
       }
     }
   }
+
+  /// ---
+  /// ---- addDependencies
+  /// ---
+
+  public void
+  addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, boolean isFromTitle)
+  {
+
+    Statement stmt;
+    ResultSet rs;
+    String query;
+
+    int prop_ID, master_ID, slave_ID, times, ft=0;
+
+    if(isFromTitle) ft = 1;
+
+    for(TypedDependency dep: deps)
+    {
+
+			MapLabel masterLabel = (MapLabel)dep.gov().label();
+			MapLabel slaveLabel = (MapLabel)dep.dep().label();
+			
+			String masterWord = masterLabel.toString("value");
+			String slaveWord = slaveLabel.toString("value");
+			String prop = dep.reln().toString();
+			
+      prop_ID = addProperty(false,prop);
+														// ^ (~grammatical)
+
+      master_ID = addWord(masterWord);
+			slave_ID = addWord(slaveWord);
+
+      try
+      {
+        stmt = this.createStatement();
+
+        query = "SELECT times FROM wordwordpropdoc WHERE masterWord_id='" + master_ID + "' AND slaveWord_id='" + slave_ID + 
+								"' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + 
+								"' AND fromTitle='" + ft + "'";
+
+        rs = stmt.executeQuery(query);
+
+        rs.last();
+
+        if(rs.getRow() > 0) // 1
+        {
+          times = rs.getInt("times"); times++;
+          query = "UPDATE wordwordpropdoc SET times='" + times + "' WHERE masterWord_id='" + master_ID + 
+									"' AND slaveWord_id='" + slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + 
+									"' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "'";
+        }
+        else
+        {
+          query = "INSERT INTO wordwordpropdoc (masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle) VALUES ('" +
+                  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + "')";
+        }
+        rs.close();
+
+        stmt.executeUpdate(query);
+      }
+      catch (Exception e)
+      {
+         e.printStackTrace();
+      }
+    }
+  }
+
 
 	private Statement createStatement() throws SQLException
 	{
