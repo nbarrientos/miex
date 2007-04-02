@@ -56,7 +56,7 @@ public class Extractor
       lastParsedSentence = sentence;
     }
 		else
-			System.out.print(" (cached!) ");
+			System.out.print(" C ");
   }
 
 	public ArrayList<TypedDependency> getDependencies(List sentence)

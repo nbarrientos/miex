@@ -27,7 +27,7 @@ public class GlobalFilter
 				cleanDeps.add(dep);
     }
 
-    System.out.print("(Removed " + (rs.size()-cleanDeps.size()) + ") ");
+    System.out.print(" R(" + (rs.size()-cleanDeps.size()) + ") ");
 
     return cleanDeps;
   }
@@ -45,10 +45,12 @@ public class GlobalFilter
         cleanProps.add(wordAndProp);
     }
 
-    System.out.print("(Removed " + (words.size()-cleanProps.size()) + ") ");
+    System.out.print(" R(" + (words.size()-cleanProps.size()) + ") ");
 
     return cleanProps;
   }
+
+	/* Normalization utils */
 
 	public ArrayList<TaggedWord> normalizeProperties(ArrayList<TaggedWord> words)
 	{
@@ -58,10 +60,20 @@ public class GlobalFilter
 		{
 			String nword = pt.stripAffixes(wordAndProp.word());
 
-			normalizedProps.add(new TaggedWord(nword, "X")); 
+			String ncat = normalizeCat(wordAndProp.tag());
+
+			normalizedProps.add(new TaggedWord(nword, ncat)); 
 		}
 
 		return normalizedProps;
+	}
+
+	private String normalizeCat(String cat)
+	{
+		if(cat.matches("VB.*"))
+			return "VB";	
+		else
+			return "X";
 	}
 
 	Porter pt;

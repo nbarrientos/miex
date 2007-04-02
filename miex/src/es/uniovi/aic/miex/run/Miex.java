@@ -273,41 +273,49 @@ public class Miex
 					/* Dependencies among words */
 					/* ************************ */
 
-					System.out.print("\t\t\tDependencies... ");
+					System.out.print("\t\t\tDependencies... [");
 	
 					// Stanford, let me know the dependencies! :)
 					ArrayList<TypedDependency> deps = ex.getDependencies(sentence);
 
 					// Removing useless stuff
 					deps = filter.cleanDependencies(deps);
+					System.out.print(" F ");
 
 					// Injecting the results into the database
 					sql.addDependencies(docNumber,colNumber,deps,isFromTitle);
+					System.out.print(" S ");
 
-					System.out.print("Done\n");
+					System.out.print("]\n");
 
 					/* ********************** */
 					/* Grammatical categories */
 					/* ********************** */
 
-					System.out.print("\t\t\tProperties... ");
+					System.out.print("\t\t\tProperties...  [");
 
 					// Stanford, let me know the properties! :)
 					ArrayList<TaggedWord> props = ex.getProperties(sentence);
 
 					// Removing useless stuff
 					props = filter.cleanProperties(props);
+					System.out.print(" F ");
 
 				 	// Injecting the results into the database	
 					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,false);
+																																	// ^ (normalized)
+					System.out.print(" S ");
 
 					// Getting normalized pairs
 					props = filter.normalizeProperties(props);
+					System.out.print(" N ");
 
 					// Injecting the normalized results into the database
 					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,true);
+																																	// ^ (normalized)
+					System.out.print(" S ");
 
-					System.out.print("Done\n");
+					System.out.print("]\n");
 
 					// Next sentence
 					sentencesNum++;
