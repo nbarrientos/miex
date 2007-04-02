@@ -20,7 +20,7 @@ class NewString {
   }
 }
 
-public class Porter {
+class Porter {
 
   private String Clean( String str ) {
      int last = str.length();

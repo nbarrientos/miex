@@ -13,6 +13,7 @@ public class GlobalFilter
 		swd = new StopWordsDetector();
 		utd = new UselessTagsDetector();
 		nd = new NumbersDetector();
+		pt = new Porter();
 	}
 
   public ArrayList<TypedDependency> cleanDependencies(ArrayList<TypedDependency> rs)
@@ -49,6 +50,21 @@ public class GlobalFilter
     return cleanProps;
   }
 
+	public ArrayList<TaggedWord> normalizeProperties(ArrayList<TaggedWord> words)
+	{
+		ArrayList<TaggedWord> normalizedProps = new ArrayList<TaggedWord>();
+
+		for(TaggedWord wordAndProp: words)
+		{
+			String nword = pt.stripAffixes(wordAndProp.word());
+
+			normalizedProps.add(new TaggedWord(nword, "X")); 
+		}
+
+		return normalizedProps;
+	}
+
+	Porter pt;
 	StopWordsDetector swd;
 	UselessTagsDetector utd;
 	NumbersDetector nd;

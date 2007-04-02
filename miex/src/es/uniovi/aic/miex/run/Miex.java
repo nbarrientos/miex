@@ -298,7 +298,13 @@ public class Miex
 //					System.out.println(props);
 
 				 	// Injecting the results into the database	
-					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle);
+					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,false);
+
+					// Getting normalized pairs
+					props = filter.normalizeProperties(props);
+
+					// Injecting the normalized results into the database
+					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,true);
 
 					System.out.print("Done\n");
 

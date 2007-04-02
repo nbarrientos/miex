@@ -362,16 +362,18 @@ public class SQLHandler
   /// ---- addWordsAndTags
   /// ---
 
-  public void addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, boolean isFromTitle)
+  public void 
+	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, boolean isFromTitle, boolean normalized)
   {
 
     Statement stmt;
 		ResultSet rs;
     String query;
 
-    int prop_ID, word_ID, times, ft=0;
+    int prop_ID, word_ID, times, ft=0, nd=0;
 
 		if(isFromTitle) ft = 1;
+		if(normalized) nd = 1;
 
     for(TaggedWord wordAndTag: props)
     {
@@ -384,7 +386,8 @@ public class SQLHandler
         stmt = this.createStatement();
 
 				query = "SELECT times " + "FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "'";
+								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + 
+								ft + "' AND normalized='" + nd + "'";
 
 	      rs = stmt.executeQuery(query);
 
@@ -394,13 +397,14 @@ public class SQLHandler
 				{ 
 	        times = rs.getInt("times"); times++;
 					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "'";
+									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + 
+									ft + "' AND normalized='" + nd + "'";
 				}
 	      else
 	      { 
 //					System.out.println("insertando tupla: (" + word_ID + "," + prop_ID + "," + docNumber + "," + collectionNumber + "," + ft + ")");
-					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times,fromTitle) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + "')";
+					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + "','" + nd + "')";
   	    }
 
 				rs.close();
