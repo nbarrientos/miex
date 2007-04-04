@@ -1,3 +1,11 @@
+/* file name  : miex/sql/SQLHandler.java
+ * authors    : Nacho Barrientos Arias <chipi@criptonita.com>
+ * created    : 
+ * copyright  : GPL
+ *
+ * modifications:
+ *
+ */
 package es.uniovi.aic.miex.sql;
 
 import java.sql.*;
@@ -12,9 +20,20 @@ import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.trees.TypedDependency;
 
+/** 
+ * Manages all SQL related stuff 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class SQLHandler
 {
 
+	/** 
+	 * Creates a new handler and establishes the connection
+	 * 
+	 * @param cf A configfile storing database settings 
+	 */
 	public SQLHandler(ConfigFile cf)
 	{
 		String url = "jdbc:mysql://" + cf.getStringSetting("BDHostname") 
@@ -32,10 +51,15 @@ public class SQLHandler
 		}
 	}
 
-	public SQLHandler(String BDHostname,
-										String BDUser,
-										String BDPassword,
-										String BDName)
+	/** 
+	 * Creates a new handler and establishes the connection 
+	 * 
+	 * @param BDHostname FQDN for the database server
+	 * @param BDUser User to log in with
+	 * @param BDPassword This well-known secret string ;)
+	 * @param BDName Database name
+	 */
+	public SQLHandler(String BDHostname, String BDUser, String BDPassword, String BDName)
 	{
 		String url = "jdbc:mysql://" + BDHostname + ":3306/" + BDName;
 
@@ -51,6 +75,12 @@ public class SQLHandler
 		}
 	}
 
+	/** 
+	 * Injects a SQL script into the database (useful for fill
+	 * the database with blank tables) 
+   *
+	 * @param path The path to the script.
+	 */
 	public void executeSQLFile(String path)
 	{
 		/* BE CAREFUL WITH SQL FILE FORMAT, ONE SQL STATEMENT PER LINE!! */
@@ -85,10 +115,12 @@ public class SQLHandler
 
 	}
 
-	// ---
-	// ---- getNewCollectionID
-  // ---
-	
+	/** 
+	 * Queries the database for an existing collection
+	 * 
+	 * @param fileName The name of the file containing the collection
+	 * @return -1 if it already exists, a new ID otherwise.
+	 */
 	public int getNewCollectionID(String fileName)
 	{
 		ResultSet rs;
@@ -135,10 +167,14 @@ public class SQLHandler
 	
 	}
 
-	// ----
-	// --- addDocument
-	// ----
-
+	/** 
+	 * Adds a document into the database. 
+	 * 
+	 * @param docNumber The document ID (0...n)
+	 * @param collectionNumber The collection ID (0....n) (UNIQUE)
+	 * @param title The document's title
+	 * @param isTrain True if it is DOCTRAIN, false otherwise
+	 */
 	public void addDocument(int docNumber, int collectionNumber, String title, boolean isTrain)
 	{
 
@@ -168,10 +204,12 @@ public class SQLHandler
 
 	}
 
-	/// ----
-	/// -- addCategory
-	///	----
-
+	/** 
+	 * Checks if exists and/or adds a single category to the database 
+	 * 
+	 * @param catName Category's name 
+	 * @return The (new) ID for this category
+	 */
 	private int addCategory(String catName)
 	{
 		Statement stmt;
@@ -219,10 +257,13 @@ public class SQLHandler
 
 	}
 
-	/// ---
-	/// ---- addCategories
-	/// ---
-	
+  /** 
+   * Adds a bunch of categories in a batch and register that into document table 
+   * 
+   * @param docNumber as usual 
+   * @param collectionNumber as usual
+   * @param categories a MyCategories object containing the categories for this document
+   */
   public void addCategories(int docNumber, int collectionNumber, MyCategories categories)
   {
 
@@ -251,10 +292,12 @@ public class SQLHandler
   	}
 	}
 
-  /// ----
-  /// -- addWord
-  /// ----
-
+  /** 
+   * Checks if exists and/or adds a single word to the database  
+   * 
+   * @param wordName the word itself
+   * @return The (new) ID for this word.
+   */
   private int addWord(String wordName)
   {
     Statement stmt;
@@ -301,10 +344,13 @@ public class SQLHandler
     return out;
   }
 
-  /// ----
-  /// -- addProperty
-  /// ----
-
+  /** 
+   * Checks if exists and/or adds a single property to the database
+   * 
+   * @param isGrammatical True if it's a gram property, false otherwise
+   * @param propName The property itself
+   * @return The (new) ID for this property 
+   */
   private int addProperty(boolean isGrammatical, String propName)
   {
     Statement stmt;
@@ -362,11 +408,16 @@ public class SQLHandler
     return out;
   }
 
-  /// ---
-  /// ---- addWordsAndTags
-  /// ---
-
-  public void 
+  /** 
+   * Adds grammatical information for a single sentece to the database 
+   * 
+   * @param docNumber As usual
+   * @param collectionNumber As usual
+   * @param props A list of word-tag pairs
+   * @param isFromTitle True if this sentence comes from document title, false if it comes from the body
+   * @param normalized True if the list has been normalized with Porter, false otherwise
+   */
+  public void	
 	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, 
 									boolean isFromTitle, boolean normalized)
   {
@@ -423,11 +474,15 @@ public class SQLHandler
     }
   }
 
-  /// ---
-  /// ---- addDependencies
-  /// ---
-
-  public void
+  /** 
+   * Adds information about the relationships among words of a single sentece to the database 
+   * 
+   * @param docNumber As usual 
+   * @param collectionNumber As usual
+   * @param deps A list of 3-uples with the desired information
+   * @param isFromTitle True if this sentence comes from document title, false if it comes from the body
+   */
+  public void 
   addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, boolean isFromTitle)
   {
 
@@ -491,12 +546,22 @@ public class SQLHandler
   }
 
 
+	/** 
+	 * A helper method to easy create a SQL statement object 
+	 * 
+	 * @return The Created statement
+	 * @throws SQLException 
+	 */
 	private Statement createStatement() throws SQLException
 	{
 		return theConn.createStatement();
 	}
 
 	// Members
+	
+	/** 
+	 * A reference to a Connection object  
+	 */
 	Connection theConn;
 
 }	

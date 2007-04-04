@@ -71,7 +71,7 @@ public class Miex
 
 				if(theFileConfig.getBooleanSetting("CreateDB"))
 				{
-					stopWhileUserPressesEnter("WARNING: Existing database will be completely deleted. [Y/N]: ");
+					stopUntilUserPressesEnter("WARNING: Existing database will be completely deleted. [Y/N]: ");
 					System.out.println("Creating DB...\n");
 					sql.executeSQLFile(theFileConfig.getStringSetting("SQLSkeleton"));
 				}
@@ -330,7 +330,7 @@ public class Miex
 
 	}
 
-	private static void stopWhileUserPressesEnter(String msg)	
+	private static void stopUntilUserPressesEnter(String msg)	
 	{
 		BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
 
