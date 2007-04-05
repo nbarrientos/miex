@@ -1,0 +1,135 @@
+<!--
+
+ Build system for MIEX (requires Apache Ant)
+
+ Copyright (c) 2006-2007 Nacho Barrientos Arias
+
+ Inspired in JGraph's build system by Gaudenz Alder
+
+-->
+
+<!-- ===================== Project Properties =========================== -->
+
+<project name="jgraph" default="all" basedir=".">
+
+	<property name="app.name"       value="MIEX"/>
+	<property name="app.jar"       	value="miex.jar"/>
+	<property name="app.version"    value="0.1"/>
+	<property name="longversion"    value="0.1"/>
+
+<!-- ===================== Project Environment =========================== -->
+
+	<property name="source.home"    value="${basedir}/src"/>
+
+<!--  ==================== Compilation Options ==================== -->
+
+	<property name="compile.debug"       value="false"/>
+	<property name="compile.deprecation" value="false"/>
+	<property name="compile.optimize"    value="true"/>
+
+<!-- ===================== Build Environment =========================== -->
+
+	<property name="build.home"    value="${basedir}/build"/>
+
+<!--  ==================== All ==================== -->
+
+	<target name="all" depends="jar,doc"
+		description="Clean up and produce JAR and documentation"/>
+
+<!--  ==================== Clean ==================== -->
+
+	<target name="clean" description="Delete all generated files and directories">
+		<delete dir="${build.home}/"/>
+	</target>
+
+<!--  ==================== Init ==================== -->
+
+	<target name="init" description="Initialize the build directory">
+		<tstamp/>
+		<mkdir dir="${build.home}"/>
+		<mkdir dir="${build.home}/classes"/>
+		<mkdir dir="${build.home}/doc"/>
+		<mkdir dir="${build.home}/doc/api"/>
+		<mkdir dir="${build.home}/lib"/>
+	</target>
+
+<!--  ==================== Generate ==================== -->
+
+	<target name="generate" depends="init" description="Generate the build tree">
+		<copy todir="${build.home}/src">
+			<fileset dir="${source.home}" includes="**/*.java,**/*.html"/>
+		</copy>
+	</target>
+
+<!--  ==================== Compile ==================== -->
+
+	<target name="compile" depends="generate" description="Compile the build tree">
+		<javac srcdir="${build.home}/src"
+			     debug="${compile.debug}"
+			     deprecation="${compile.deprecation}"
+			     optimize="${compile.optimize}"
+			     destdir="${build.home}/classes">
+			<classpath>
+			  <fileset dir="${basedir}/lib">
+				  <include name="*.jar"/>
+			  </fileset>
+			</classpath>
+		</javac>
+	</target>
+
+<!--  ==================== Apidoc ==================== -->
+
+	<target name="apidoc" depends="generate" description="Generate the api specification (javadoc)">
+		<javadoc packagenames="es.uniovi.aic.miex.*"
+				     sourcepath="${build.home}/src"
+				     classpath="${build.home}/classes" 
+				     destdir="${build.home}/doc/api"
+				     use="true"
+				     author="false"
+				     version="false"
+             private="true"
+				     windowtitle="${app.name} v${app.version} API Specification"
+				     doctitle="${app.name} v${app.version} API Specification">
+
+			<header><![CDATA[<p><b>${app.name}</b><br>v${app.version}</p>]]></header>
+
+			<bottom><![CDATA[<font size=1>Copyright (C) 2006-2007 
+              <a href="http://miex.sf.net"Nacho Barrientos Arias</a>. All rights reserved.</font>]]>
+      </bottom>
+		    
+			<link href="http://java.sun.com/j2se/${java.specification.version}/docs/api"/>
+
+			<classpath>
+        <fileset dir="${basedir}/lib">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+
+		</javadoc>
+	</target>
+
+<!--  ==================== Doc ==================== -->
+
+	<target name="doc" depends="apidoc" description="Generate all documentation"/> 
+
+<!--  ==================== Jar ==================== -->
+
+	<target name="jar" depends="compile" description="Build all Java archives (JARs)">
+		<jar jarfile="${build.home}/lib/${app.jar}" basedir="${build.home}/classes"/>
+	</target>
+
+<!--  ================ Diagnostics ================ -->
+
+  <target name="diagnostics">
+    <echo message="Java Runtime Environment version: ${java.version}"/>
+    <echo message="Java installation directory: ${java.home}"/>
+    <echo message="Java Virtual Machine implementation version: ${java.vm.version}"/>
+    <echo message="Java Virtual Machine implementation vendor: ${java.vm.vendor}"/>
+    <echo message="Java Virtual Machine implementation name: ${java.vm.name}"/>
+    <echo message="Java Runtime Environment specification version: ${java.specification.version}"/>
+    <echo message="Operating system name: ${os.name}"/>
+    <echo message="Operating system architecture: ${os.arch}"/>
+    <echo message="Operating system version: ${os.version}"/>
+  </target>
+
+</project>
