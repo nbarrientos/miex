@@ -73,6 +73,10 @@ public class Extractor
 
 	}
 
+	/* taggedYield() returns a Sentence object, which inheritates from
+	   java.util.ArrayList<HasWord> so I'm sure it is an 
+     ArrayList<TaggedWord> */
+	@SuppressWarnings("unchecked")
 	public ArrayList<TaggedWord> getProperties(List sentence)
 	throws Exception
 	{
@@ -80,7 +84,7 @@ public class Extractor
 
 	  List sent = parse.taggedYield();
 	
-		return new ArrayList<TaggedWord>(sent);
+		return (ArrayList<TaggedWord>)sent;
 	}
 
 	private LexicalizedParser lp;
