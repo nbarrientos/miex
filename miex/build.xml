@@ -8,9 +8,9 @@
 
 -->
 
-<!-- ===================== Project Properties =========================== -->
+<project name="miex" default="all" basedir=".">
 
-<project name="jgraph" default="all" basedir=".">
+<!-- ===================== Project Properties =========================== -->
 
 	<property name="app.name"       value="MIEX"/>
 	<property name="app.jar"       	value="miex.jar"/>
@@ -42,7 +42,7 @@
 <!--  ==================== All ==================== -->
 
 	<target name="all" depends="jar,doc"
-		description="Clean up and produce JAR and documentation"/>
+		description="Clean up and produce JARs and documentation"/>
 
 <!--  ==================== Clean ==================== -->
 
@@ -65,7 +65,7 @@
 
 	<target name="generate" depends="init" description="Generate the build tree">
 		<copy todir="${build.home}/src">
-			<fileset dir="${source.home}" includes="**/*.java,**/*.html"/>
+			<fileset dir="${source.home}" includes="**/*.java"/>
 		</copy>
 	</target>
 
@@ -78,13 +78,13 @@
 			     optimize="${compile.optimize}"
 			     destdir="${build.home}/classes">
 			<classpath refid="default.classpath"/>
-			<compilerarg value="-Xlint:unchecked"/>
+			<compilerarg value="-Xlint:unchecked"/> <!-- FIXME: Could be removed... -->
 		</javac>
 	</target>
 
 <!--  ==================== Apidoc ==================== -->
 
-	<target name="apidoc" depends="generate" description="Generate the api specification (javadoc)">
+	<target name="apidoc" depends="generate" description="Generate the API specification (javadoc)">
 		<javadoc packagenames="es.uniovi.aic.miex.*"
 				     sourcepath="${build.home}/src"
 				     classpath="${build.home}/classes" 
@@ -99,7 +99,7 @@
 			<header><![CDATA[<p><b>${app.name}</b><br>v${app.version}</p>]]></header>
 
 			<bottom><![CDATA[<font size=1>Copyright (C) 2006-2007 
-              <a href="http://miex.sf.net"Nacho Barrientos Arias</a>. All rights reserved.</font>]]>
+              <a href="http://miex.sf.net">Nacho Barrientos Arias</a>. All rights reserved.</font>]]>
       </bottom>
 		  
 			<!-- FIXME - This shouldn't be static (${java.specification.version}) -->  
