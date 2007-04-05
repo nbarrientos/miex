@@ -1,3 +1,12 @@
+/* file name  : StopWordsDetector.java
+ * authors    : Nacho Barrientos Arias <chipi@criptonita.com>
+ * created    : 
+ * copyright  : GPL
+ *
+ * modifications:
+ *
+ */
+
 /* 
 	Stop words extrated from porter.c by Al Popescul <popescul@unagi.cis.upenn.edu>
 	anyway, this list is Public Domain.

@@ -1,3 +1,11 @@
+/* file name  : Extractor.java
+ * authors    : Nacho Barrientos Arias <chipi@criptonita.com>
+ * created    : 
+ * copyright  : GPL
+ *
+ * modifications:
+ *
+ */
 package es.uniovi.aic.miex.semantic;
 
 import java.util.ArrayList;
@@ -11,8 +19,19 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.ling.TaggedWord;
 
+/** 
+ * A handler for all sematic issues 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class Extractor
 {
+	
+	/** 
+	 * Creates an Extractor using the default grammar file
+   * (lib/grammars/englishPCFG.ser.gz)
+	 */
 	public Extractor()
 	{
 		lp = null;
@@ -21,6 +40,11 @@ public class Extractor
 		grammarName = "lib/grammars/englishPCFG.ser.gz";
 	}
 
+	/** 
+	 * Creates an Extractor using the specified grammar file 
+	 * 
+	 * @param grammar Path to a grammar file 
+	 */
 	public Extractor(String grammar)
 	{
 		lp = null;
@@ -28,11 +52,19 @@ public class Extractor
 		grammarName = grammar;
 	}
 
+	/** 
+	 * Initializes the parser 
+	 */
 	public void load()
 	{
 		lp = new LexicalizedParser(grammarName);
 	}
 
+	/** 
+	 * Checks if the Extrator is ready 
+	 * 
+	 * @return True if it's ready, false otherwise 
+	 */
 	public boolean isLoaded()
 	{
 		if(lp == null)
@@ -41,6 +73,11 @@ public class Extractor
 			return true; 
 	}
 
+  /** 
+   * Stores into an internal tree the parse results for 
+   * a sentence
+   * @param sentence The sentence to parse 
+   */
   private void letsGetParseReady(List sentence)
   throws Exception
   {
@@ -59,6 +96,12 @@ public class Extractor
 			System.out.print(" C ");
   }
 
+	/** 
+	 * Processes the dependencies among words for a sentence 
+	 * 
+	 * @param sentence The sentence to process 
+	 * @return The result of this process
+	 */
 	public ArrayList<TypedDependency> getDependencies(List sentence)
 	throws Exception
 	{
@@ -77,6 +120,13 @@ public class Extractor
 	   java.util.ArrayList<HasWord> so I'm sure it is an 
      ArrayList<TaggedWord> */
 	@SuppressWarnings("unchecked")
+	
+	/** 
+	 * Gets the grammatical property of each word in the sentence 
+	 * 
+	 * @param sentence The sentence to process
+	 * @return The result of this process 
+	 */
 	public ArrayList<TaggedWord> getProperties(List sentence)
 	throws Exception
 	{
@@ -87,12 +137,24 @@ public class Extractor
 		return (ArrayList<TaggedWord>)sent;
 	}
 
+	/** 
+	 * A reference to the parser 
+	 */
 	private LexicalizedParser lp;
 
+	/** 
+	 * A tree to store whole parse 
+	 */
 	private Tree parse;
 
+	/** 
+	 * The path to the grammar file. 
+	 */
 	private String grammarName;
 
+	/** 
+	 * A reference to last parsed sentence, used as cache. 
+	 */
 	private List lastParsedSentence;
 
 }

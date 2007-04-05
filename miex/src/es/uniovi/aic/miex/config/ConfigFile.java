@@ -1,3 +1,11 @@
+/* file name  : ConfigFile.java
+ * authors    : Nacho Barrientos Arias <chipi@criptonita.com>
+ * created    : 
+ * copyright  : GPL
+ *
+ * modifications:
+ *
+ */
 package es.uniovi.aic.miex.config;
 
 import java.util.Properties;
@@ -5,9 +13,21 @@ import java.util.HashMap;
 import java.io.*;
 import java.lang.Exception;
 
+/** 
+ * Configuration files handler 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class ConfigFile
 {
 
+	/** 
+	 * Creates the object, reads the configuration file and checks
+	 * if it's in a good shape. 
+	 * 
+	 * @param fileName Path to the configuration file to read 
+	 */
 	public ConfigFile(String fileName)
 	{
 		properties = new Properties();
@@ -25,6 +45,13 @@ public class ConfigFile
 
 	}
 
+	/** 
+	 * Checks configuration file consistency 
+	 * 
+	 * @throws Exception If something weird happens, i.e.:
+   *				    - Missing mandatory fields
+   *            - Boolean fields set as non-boolean 
+	 */
 	private void checkFile() throws Exception
 	{
 		
@@ -44,6 +71,12 @@ public class ConfigFile
 			}
 	}
 
+	/** 
+	 * Observer method for non-boolean settings
+	 * 
+	 * @param stt The property to fetch
+	 * @return The value 
+	 */
 	public String getStringSetting(String stt)
 	{
 		if(properties.getProperty(stt) == null)
@@ -52,6 +85,12 @@ public class ConfigFile
 			return properties.getProperty(stt);
 	}
 
+	/** 
+	 * Observer method for boolean settings 
+	 * 
+	 * @param stt The property to fetch 
+	 * @return The value
+	 */
 	public boolean getBooleanSetting(String stt)
 	{
 		if(properties.getProperty(stt) == null)
@@ -63,10 +102,24 @@ public class ConfigFile
 				return false;
 	}
 
+	/** 
+	 * Storage for all settings after reading the configuration file 
+	 */
 	private Properties properties;
 
+	/** 
+	 * Self-explaining 
+	 */
 	private static String[] configFileFields, configFileBooleanFields; 
+	
+	/** 
+	 * Self-explaining 
+	 */
 	private static HashMap<String,String> defaultValuesString;
+	
+	/** 
+	 * Self-explaining 
+	 */
 	private static HashMap<String,Boolean> defaultValuesBoolean;
 
   static

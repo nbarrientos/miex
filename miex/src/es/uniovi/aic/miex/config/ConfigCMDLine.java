@@ -1,26 +1,53 @@
+/* file name  : ConfigCMDLine.java
+ * authors    : Nacho Barrientos Arias <chipi@criptonita.com>
+ * created    : 
+ * copyright  : GPL
+ *
+ * modifications:
+ *
+ */
 package es.uniovi.aic.miex.config;
 
 import com.martiansoftware.jsap.*;
 
+/** 
+ * Command line treatment tool 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class ConfigCMDLine
 {
 
-public ConfigCMDLine(String[] arguments)
-{
-	try
+	/** 
+	 * Builds a ConfigCMDLine object and runs the parser over
+	 * the list of arguments. 
+	 * 
+	 * @param arguments The list of arguments to parse
+	 */
+	public ConfigCMDLine(String[] arguments)
 	{
-		if(!(this.parse(arguments)))
-		 System.exit(-1);
-	}
-	catch(JSAPException e)
-	{
-		e.printStackTrace();
-		System.exit(-1);
+		try
+		{
+			if(!(this.parse(arguments)))
+			 System.exit(-1);
+		}
+		catch(JSAPException e)
+		{
+			e.printStackTrace();
+			System.exit(-1);
+		}
+
 	}
 
-}
-
-private boolean parse(String[] arguments) throws JSAPException
+	/** 
+	 * The parse itself 
+	 * 
+	 * @param arguments The line of arguments 
+	 * @return False If any argument is missing or a weird argument is found 
+	 * @throws JSAPException If something weird happens with in the parse process 
+	 */
+	private boolean parse(String[] arguments) throws JSAPException
   {
 		JSAP jsap = new JSAP();
 
@@ -80,11 +107,21 @@ private boolean parse(String[] arguments) throws JSAPException
 
 	}
 
+	/** 
+	 * Observer method 
+	 * 
+	 * @return Collections to parse (input files)
+	 */
 	public String[] getFiles()
 	{
 		return config.getStringArray("files");
 	}
 
+	/** 
+	 * Observer method 
+	 * 
+	 * @return Path to the configuration file
+	 */
 	public String getConfigFileURI()
 	{
 		return config.getString("configFileURI");
