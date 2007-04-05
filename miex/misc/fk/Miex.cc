@@ -20,11 +20,11 @@ class Miex : public FkMainPluggableClass
 
 };
 
-std::string Miex::classPath = string("\'../../lib/miex.jar:../../lib/JSAP-2.1.jar\'");
+//std::string Miex::classPath = string("\'../../lib/miex.jar:../../lib/JSAP-2.1.jar\'");
 
 int Miex::Main()
 {
-		string exec = "/usr/bin/java -cp " + classPath + " es.uniovi.aic.miex.run.Miex " + params;
+		string exec = "../../miex.sh " + params;
 		system(exec.c_str());
 		return 0;
 }

@@ -1,2 +1,2 @@
 #!/bin/bash
-./fk -M Miex -params ' -c example.conf ../../share/input/ok.xml'
+./fk -M Miex -params ' -c ../../etc/example.conf ../../share/input/collection-well-formed-easy.xml'
