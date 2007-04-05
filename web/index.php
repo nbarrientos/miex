@@ -165,6 +165,8 @@
 
 						<li>MySQL Java driver: <a href="http://www.mysql.com/products/connector/j/">MySQL Connector/J</a> (GPL).</li>
 
+						<li>Project building tools: <a href="http://ant.apache.org/">Apache Ant</a> (Apache) or <a href="http://www.gnu.org/software/make/">GNU Make</a> (GPL).</li>
+
           </ul>
         </div>
 
