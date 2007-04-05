@@ -21,11 +21,19 @@
 
 	<property name="source.home"    value="${basedir}/src"/>
 
-<!--  ==================== Compilation Options ==================== -->
+<!--  ==================== Compilation Options ======================== -->
 
 	<property name="compile.debug"       value="false"/>
 	<property name="compile.deprecation" value="false"/>
 	<property name="compile.optimize"    value="true"/>
+
+<!-- ===================== Default Classpath ========================== -->
+
+	<path id="default.classpath">
+		<fileset dir="${basedir}/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
 
 <!-- ===================== Build Environment =========================== -->
 
@@ -69,12 +77,8 @@
 			     deprecation="${compile.deprecation}"
 			     optimize="${compile.optimize}"
 			     destdir="${build.home}/classes">
-			<classpath>
-			  <fileset dir="${basedir}/lib">
-				  <include name="*.jar"/>
-			  </fileset>
-			</classpath>
-			 <compilerarg value="-Xlint:unchecked"/>
+			<classpath refid="default.classpath"/>
+			<compilerarg value="-Xlint:unchecked"/>
 		</javac>
 	</target>
 
@@ -97,14 +101,11 @@
 			<bottom><![CDATA[<font size=1>Copyright (C) 2006-2007 
               <a href="http://miex.sf.net"Nacho Barrientos Arias</a>. All rights reserved.</font>]]>
       </bottom>
-		    
-			<link href="http://java.sun.com/j2se/${java.specification.version}/docs/api"/>
+		  
+			<!-- FIXME - This shouldn't be static (${java.specification.version}) -->  
+			<link href="http://java.sun.com/javase/6/docs/api"/>
 
-			<classpath>
-        <fileset dir="${basedir}/lib">
-          <include name="*.jar"/>
-        </fileset>
-      </classpath>
+			<classpath refid="default.classpath"/>
 
 		</javadoc>
 	</target>
