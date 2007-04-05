@@ -180,7 +180,7 @@
   </div> <!-- content -->
   
   <div id="bottom">
-    &copy;&nbsp;Copyleft 2007 Nacho Barrientos Arias. Last update: 2007/02/28 23:00.
+    &copy;&nbsp;Copyleft 2006-2007 Nacho Barrientos Arias. Last update: 2007/04/05 15:00.
 	</div>
 
 <!-- Meta logos -->
