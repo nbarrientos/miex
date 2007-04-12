@@ -16,7 +16,7 @@ extends DefaultHandler
 	public SAXCollectionUnmarshaller()
 	{
 		stack = new Stack<Object>();
-		isStackReadyForText = false;
+		textPlease = false;
 	}
 
 	public MyCollection getCollection()
@@ -31,7 +31,7 @@ extends DefaultHandler
 
 	public void startElement(String uri, String localName, String qName, Attributes attribs)
 	{
-		isStackReadyForText = false;
+		textPlease = false;
 
 		// Complex members
 		if(localName.equals("COLLECTION"))
@@ -54,7 +54,7 @@ extends DefaultHandler
 		else if(localName.equals("TITLE") || localName.equals("BODY") || localName.equals("D"))
 		{
 			stack.push( new StringBuffer() );
-			isStackReadyForText = true;
+			textPlease = true;
 		}
 		else
 		{
@@ -65,7 +65,7 @@ extends DefaultHandler
 
 	public void endElement(String uri, String localName, String qName)
 	{
-		isStackReadyForText = false;
+		textPlease = false;
 
 		Object tmp = stack.pop();
 
@@ -78,7 +78,7 @@ extends DefaultHandler
 		{
 			((MyCollection)stack.peek()).addDoc((MyDoc)tmp);
 		}
-		else if(localName.equals("TOPIC")) // Doc apilado en espera de title, body o categories.
+		else if(localName.equals("TOPIC"))
 		{
 			((MyDoc)stack.peek()).addCategories((MyCategories)tmp);
 		}
@@ -104,14 +104,13 @@ extends DefaultHandler
 
 	public void characters(char[] data, int start, int length)
 	{
-			// if stack is not ready, data is not content of recognized element
-		if(isStackReadyForText == true)
+		if(textPlease)
 		{
 			((StringBuffer)stack.peek()).append(data, start, length);
 		}
 		else
 		{
-				// read data which is not part of recognized element
+				// Impossible, XML files were validated before -> EXCEPTION?
 		}
 	}
 
@@ -126,9 +125,8 @@ extends DefaultHandler
 	}
 	*/
 
-	// Members
 	private Stack<Object> stack;
-	private boolean isStackReadyForText;
+	private boolean textPlease;
 	
 	private Locator locator;
 

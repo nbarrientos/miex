@@ -25,7 +25,6 @@ public class FieldsParser
 			rdr.setContentHandler(saxUms);
 
 			rdr.parse(src);
-
 		}
 		catch(Exception e)
 		{
