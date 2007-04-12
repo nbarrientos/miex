@@ -7,17 +7,14 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
 import javax.xml.XMLConstants;
 
-import org.xml.sax.SAXException;
-
 public class XMLValidator 
 {
-		public XMLValidator(File file, String SchemaURI)
+		public XMLValidator(String SchemaURI)
 		{
-			fileHandler = file;
 			XMLSchemaURI = new String(SchemaURI);
 		}
 
-    public boolean validate()
+    public boolean validate(File targetFileURI)
 		{
         // 1. Lookup a factory for the W3C XML Schema language
         SchemaFactory factory =  SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -32,7 +29,7 @@ public class XMLValidator
 				{
         	schema = factory.newSchema(schemaLocation);
 				}
-				catch(SAXException e)
+				catch(Exception e)
 				{
 					System.err.println(e.toString());
 					return false;
@@ -42,7 +39,7 @@ public class XMLValidator
         Validator validator = schema.newValidator();
 
         // 4. Parse the document you want to check.
-        Source source = new StreamSource(fileHandler);
+        Source source = new StreamSource(targetFileURI);
 
         // 5. Check the document
         try 
@@ -50,20 +47,14 @@ public class XMLValidator
             validator.validate(source);
             return true;
         }
-        catch (SAXException e) 
+        catch (Exception e) 
 				{
 						System.err.println(e.toString());
 						return false;
         }
-				catch (IOException e)
-				{
-						System.err.println(e.toString());
-						return false;
-				}
         
     }
 
-		private File fileHandler;
 		private String XMLSchemaURI;
 
 }

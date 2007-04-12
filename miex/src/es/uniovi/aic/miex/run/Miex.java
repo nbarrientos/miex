@@ -26,9 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-/* Exceptions */
-import com.martiansoftware.jsap.JSAPException;
-
 /* Stanford */
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
@@ -103,6 +100,8 @@ public class Miex
 
 	private static boolean validateXMLInputFiles(String[] files, ConfigFile config)
 	{
+		XMLValidator validator = new XMLValidator(config.getStringSetting("XMLschemaURI"));
+
 		for(int j=0; j < files.length; j++)
 		{
 			File theFile = new File(files[j]);
@@ -113,9 +112,7 @@ public class Miex
 				return false;
 			}
 
-			XMLValidator validator = new XMLValidator(theFile,config.getStringSetting("XMLschemaURI"));
-
-			if(!(validator.validate()))
+			if(!(validator.validate(theFile)))
 			{
 				System.err.println("Input file's XML " + files[j] + " does not match this Schema.");
 				return false;
