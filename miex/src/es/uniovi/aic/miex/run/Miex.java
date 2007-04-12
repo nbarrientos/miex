@@ -131,8 +131,11 @@ public class Miex
 
 		GlobalFilter filter = new GlobalFilter();
 
-		int collectionID;
+		FieldsParser unMarshaller = new FieldsParser();
 
+		int collectionID;
+		
+		// Iterating through all collections
 		for(int j=0; j < files.length; j++)
 		{
 			File theFile = new File(files[j]);
@@ -148,15 +151,15 @@ public class Miex
 
 			System.out.println("Parsing file " + files[j] + "\n");
 
-			FieldsParser unMarshaller = new FieldsParser(theFile);
-
 			// Dumping XML to memory
-			MyCollection collection = unMarshaller.run();
-	
+			MyCollection collection = unMarshaller.run(theFile);
+
+			// Checkin' if the extractor is ready (loadin' needed only once)	
 			if(!ex.isLoaded()) ex.load();
 
 			int docID = 1;
 
+			// Iterating through all documents
 			for(Iterator it = collection.getDocsIterator(); it.hasNext(); )
 				// it.next() is a MyDoc
 			{
