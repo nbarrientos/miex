@@ -126,7 +126,7 @@ public class ConfigFile
   {
     configFileFields = new String[]{"BDHostname", "BDUser", "BDPassword", "BDName"};
 
-		configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump"};
+		configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump", "Normalize"};
 		
 		defaultValuesString = new HashMap<String,String>();
 		defaultValuesBoolean = new HashMap<String,Boolean>();
@@ -135,6 +135,7 @@ public class ConfigFile
 		defaultValuesBoolean.put("validate", new Boolean(false));
 		defaultValuesBoolean.put("dump", new Boolean(false));
 		defaultValuesBoolean.put("createdb", new Boolean(false));
+		defaultValuesBoolean.put("normalize", new Boolean(false));
 
 		// Loading default values to string settings
 		defaultValuesString.put("xmlschemauri", "/usr/share/miex/schemas/default.xsd");

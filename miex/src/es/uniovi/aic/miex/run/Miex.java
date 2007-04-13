@@ -187,12 +187,12 @@ public class Miex
 
 				// Really processing document title					
 				System.out.println("\n\tProcessing TITLE of the document titled: " + doc.getTitle().trim());		
-				processSentences(titleSentences, ex, filter, sql, docID, collectionID, true);
+				processSentences(titleSentences, config, ex, filter, sql, docID, collectionID, true);
 																																							// ^ (isFromTitle)
 
 				// Really processing document body
 				System.out.println("\n\tProcessing BODY of the document titled: " + doc.getTitle().trim());
-				processSentences(bodySentences, ex, filter, sql, docID, collectionID, false);
+				processSentences(bodySentences, config, ex, filter, sql, docID, collectionID, false);
 																																							// ^ (isFromTitle)
 	
 				// Next document
@@ -258,8 +258,8 @@ public class Miex
 	}
 
 	private static void 
-	processSentences (List<List<? extends HasWord>> sentences, Extractor ex, GlobalFilter filter, SQLHandler sql,
-										int docNumber, int colNumber, boolean isFromTitle)
+	processSentences (List<List<? extends HasWord>> sentences, ConfigFile config, Extractor ex, GlobalFilter filter, 
+										SQLHandler sql, int docNumber, int colNumber, boolean isFromTitle)
 	{
 			int sentencesNum = 1;
 		
@@ -306,14 +306,17 @@ public class Miex
 																																	// ^ (normalized)
 					System.out.print(" S ");
 
-					// Getting normalized pairs
-					props = filter.normalizeProperties(props);
-					System.out.print(" N ");
+					if(config.getBooleanSetting("Normalize"))
+					{
+						// Getting normalized pairs
+						props = filter.normalizeProperties(props);
+						System.out.print(" N ");
 
-					// Injecting the normalized results into the database
-					sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,true);
+						// Injecting the normalized results into the database
+						sql.addWordsAndTags(docNumber,colNumber,props,isFromTitle,true);
 																																	// ^ (normalized)
-					System.out.print(" S ");
+						System.out.print(" S ");
+					}
 
 					System.out.print("]\n");
 

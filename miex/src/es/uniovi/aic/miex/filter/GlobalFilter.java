@@ -62,7 +62,10 @@ public class GlobalFilter
 
 			String ncat = normalizeCat(wordAndProp.tag());
 
-			normalizedProps.add(new TaggedWord(nword, ncat)); 
+			if(nword.equals("")) System.out.println("UNA BLANCA ERA: " + wordAndProp.word());
+
+			if(!(nword.equals("")))
+				normalizedProps.add(new TaggedWord(nword, ncat)); 
 		}
 
 		return normalizedProps;
@@ -73,6 +76,15 @@ public class GlobalFilter
 		if(cat.matches("VB.*"))
 			return "VB";	
 		else
+    if(cat.matches("RB.*"))
+      return "RB";
+    else
+    if(cat.matches("NN.*"))
+      return "NN";
+    else
+    if(cat.matches("JJ.*"))
+      return "JJ";
+    else
 			return "X";
 	}
 
