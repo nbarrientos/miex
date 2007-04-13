@@ -55,29 +55,35 @@ public class ConfigFile
 	 */
 	private void checkFile() throws Exception
 	{
-		
+	
+		// Looking for missing required config fields	
 		for(int i=0; i < configFileFields.length; i++)
-			if("".equals(properties.getProperty(getRealName(configFileFields[i])))
-					|| properties.getProperty(getRealName(configFileFields[i])) == null)
-				throw new Exception("Missing field " + configFileFields[i] + " in config file.");
-		
-		
-		for(int i=0; i < configFileBooleanFields.length; i++)
-		try
-		{
-			if(properties.getProperty(getRealName(configFileBooleanFields[i])) != null)
+			try
 			{
-				if( !(properties.getProperty(getRealName(configFileBooleanFields[i])).toLowerCase().equals("yes"))
-						&&
-						!(properties.getProperty(getRealName(configFileBooleanFields[i])).toLowerCase().equals("no")))
-			throw new Exception("Boolean keys must only contain \"Yes\" or \"No\" values");
+				getRealName(configFileFields[i]);
 			}
-		}
-		// If a realname couldn't be found it means that it's commented out, so don't checkin' default value.
-		catch(Exception e)
-		{
-			continue;
-		}
+			catch(Exception e)
+			{
+				System.err.println("Missing required field " + configFileFields[i] + " in config file.");
+				System.exit(-1);
+			}
+		
+		// Looking for wrong set boolean fields
+		for(int i=0; i < configFileBooleanFields.length; i++)
+			try
+			{
+				String real = getRealName(configFileBooleanFields[i]);
+
+				if( !(properties.getProperty(real).toLowerCase().equals("yes"))
+						&&
+						!(properties.getProperty(real).toLowerCase().equals("no")))
+				throw new Exception("Boolean keys must only contain \"Yes\" or \"No\" values");
+			}
+			// If a realname couldn't be found it means that it's commented out, so don't checkin' its value.
+			catch(Exception e)
+			{
+				continue;
+			}
 
 	}
 
@@ -144,7 +150,7 @@ public class ConfigFile
 			if(str.toString().toLowerCase().equals(dumbprop.toLowerCase()))
 				return str;
 		}
-		throw new Exception();
+		throw new Exception("\'" + dumbprop + " not found.");
 	}
 
 	/** 
