@@ -135,7 +135,7 @@ class StopWordsDetector
 		return !(is(wordAndProp.word()));
 	}
 
-	HashSet<String> stopWords;
+	private HashSet<String> stopWords;
 
 } //class
 

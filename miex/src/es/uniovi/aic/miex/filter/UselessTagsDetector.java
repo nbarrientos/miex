@@ -40,7 +40,7 @@ class UselessTagsDetector
 		return !(is(wordAndProp.tag()));
 	}
 
-	HashSet<String> uselessTags;
+	private HashSet<String> uselessTags;
 
 } //class
 

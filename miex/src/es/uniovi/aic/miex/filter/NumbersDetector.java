@@ -60,6 +60,6 @@ class NumbersDetector
 	/** 
 	 * The magic regular expression
 	 */
-	String regexp;
+	private String regexp;
 
 } //class

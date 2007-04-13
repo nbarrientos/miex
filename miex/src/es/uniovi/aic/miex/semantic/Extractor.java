@@ -48,6 +48,7 @@ public class Extractor
 	public Extractor(String grammar)
 	{
 		lp = null;
+		lastParsedSentence = null;
 		parse = null;
 		grammarName = grammar;
 	}
@@ -57,7 +58,7 @@ public class Extractor
 	 */
 	public void load()
 	{
-		lp = new LexicalizedParser(grammarName);
+		lp = new LexicalizedParser(grammarName); // TODO: Check now if lp is null
 	}
 
 	/** 

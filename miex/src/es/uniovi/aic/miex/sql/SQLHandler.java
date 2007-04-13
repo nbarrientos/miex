@@ -562,6 +562,6 @@ public class SQLHandler
 	/** 
 	 * A reference to a Connection object  
 	 */
-	Connection theConn;
+	private Connection theConn;
 
 }	

@@ -76,8 +76,8 @@ public class GlobalFilter
 			return "X";
 	}
 
-	Porter pt;
-	StopWordsDetector swd;
-	UselessTagsDetector utd;
-	NumbersDetector nd;
+	private Porter pt;
+	private StopWordsDetector swd;
+	private UselessTagsDetector utd;
+	private NumbersDetector nd;
 }
