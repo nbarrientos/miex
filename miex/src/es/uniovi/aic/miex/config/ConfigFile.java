@@ -11,6 +11,7 @@ package es.uniovi.aic.miex.config;
 import java.util.Properties;
 import java.util.HashMap;
 import java.io.*;
+import java.util.*;
 import java.lang.Exception;
 
 /** 
@@ -56,19 +57,28 @@ public class ConfigFile
 	{
 		
 		for(int i=0; i < configFileFields.length; i++)
-			if("".equals(properties.getProperty(configFileFields[i]))
-					|| properties.getProperty(configFileFields[i]) == null)
+			if("".equals(properties.getProperty(getRealName(configFileFields[i])))
+					|| properties.getProperty(getRealName(configFileFields[i])) == null)
 				throw new Exception("Missing field " + configFileFields[i] + " in config file.");
 		
 		
 		for(int i=0; i < configFileBooleanFields.length; i++)
-			if(properties.getProperty(configFileBooleanFields[i]) != null)
+		try
+		{
+			if(properties.getProperty(getRealName(configFileBooleanFields[i])) != null)
 			{
-				if( !(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("yes"))
+				if( !(properties.getProperty(getRealName(configFileBooleanFields[i])).toLowerCase().equals("yes"))
 						&&
-						!(properties.getProperty(configFileBooleanFields[i]).toLowerCase().equals("no")))
+						!(properties.getProperty(getRealName(configFileBooleanFields[i])).toLowerCase().equals("no")))
 			throw new Exception("Boolean keys must only contain \"Yes\" or \"No\" values");
 			}
+		}
+		// If a realname couldn't be found it means that it's commented out, so don't checkin' default value.
+		catch(Exception e)
+		{
+			continue;
+		}
+
 	}
 
 	/** 
@@ -79,10 +89,19 @@ public class ConfigFile
 	 */
 	public String getStringSetting(String stt)
 	{
-		if(properties.getProperty(stt) == null)
-			return defaultValuesString.get(stt.toLowerCase());
-		else
-			return properties.getProperty(stt);
+		String real = null;
+
+		try
+		{
+			real = getRealName(stt);
+		}
+		catch(Exception e)
+		{
+			//System.err.println("\n\tW: Using default bahaviour for field" + stt);
+			defaultValuesString.get(stt.toLowerCase());
+		}
+
+		return properties.getProperty(real);
 	}
 
 	/** 
@@ -93,13 +112,39 @@ public class ConfigFile
 	 */
 	public boolean getBooleanSetting(String stt)
 	{
-		if(properties.getProperty(stt) == null)
+    String real = null;
+
+    try
+    {
+      real = getRealName(stt);
+      //System.out.println("Real name for " + stt + " is " + real);
+    }
+    catch(Exception e) // If real field name is requested and not found, using default value
+    {
+      //System.err.println("\n\tW: Using default bahaviour for field" + stt);
 			return defaultValuesBoolean.get(stt.toLowerCase()).booleanValue();
-		else
-			if(properties.getProperty(stt).toLowerCase().equals("yes"))
+    }
+		
+		// Exists
+		if(properties.getProperty(real).toLowerCase().equals("yes"))
 				return true;
 			else
 				return false;
+	}
+
+	private String getRealName(String dumbprop) throws Exception
+	{
+		String str;
+
+		// Searching among all the fields the realname of dumpprop
+		for(Enumeration e = properties.propertyNames(); e.hasMoreElements(); )
+		{
+			str = (String)e.nextElement(); 
+
+			if(str.toString().toLowerCase().equals(dumbprop.toLowerCase()))
+				return str;
+		}
+		throw new Exception();
 	}
 
 	/** 
