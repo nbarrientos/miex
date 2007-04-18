@@ -12,7 +12,8 @@ import java.util.HashSet;
 
 import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.ling.MapLabel;
-import edu.stanford.nlp.ling.TaggedWord;
+
+import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 // Package class
 
@@ -52,7 +53,7 @@ class NumbersDetector
 	 * @param wordAndProp 
 	 * @return True if the word is not a number, false otherwise
 	 */
-	public boolean isCleanProp(TaggedWord wordAndProp)
+	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
 		return !(wordAndProp.word().matches(regexp));
 	}

@@ -67,7 +67,7 @@ CREATE TABLE doccat( cat_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NU
 
 --- wordpropdoc = (@_word_id_, @_property_id_, @_document_id, @collection_id_, @fromTitle, @normalized, times)
 
-CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT '0', normalized bool NOT NULL DEFAULT '0', PRIMARY KEY (word_id,prop_id,doc_id,col_id,fromTitle,normalized), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
+CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, zone_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT '0', normalized bool NOT NULL DEFAULT '0', PRIMARY KEY (word_id,prop_id,doc_id,col_id,zone_id,fromTitle,normalized), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (zone_id) REFERENCES property (property_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 --- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, @fromTitle, times)
 

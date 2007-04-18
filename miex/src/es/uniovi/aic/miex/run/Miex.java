@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.trees.TypedDependency;
-import edu.stanford.nlp.ling.TaggedWord;
 
 /* Miex */
 import es.uniovi.aic.miex.input.XMLValidator;
@@ -295,7 +294,7 @@ public class Miex
 					System.out.print("\t\t\tProperties...  [");
 
 					// Stanford, let me know the properties! :)
-					ArrayList<TaggedWord> props = ex.getProperties(sentence);
+					ArrayList<ExtendedTaggedWord> props = ex.getProperties(sentence);
 
 					// Removing useless stuff
 					props = filter.cleanProperties(props);

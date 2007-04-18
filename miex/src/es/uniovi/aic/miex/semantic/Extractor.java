@@ -18,6 +18,9 @@ import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.ling.TaggedWord;
+import edu.stanford.nlp.ling.Sentence;
+
+import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 /** 
  * A handler for all sematic issues 
@@ -128,14 +131,60 @@ public class Extractor
 	 * @param sentence The sentence to process
 	 * @return The result of this process 
 	 */
-	public ArrayList<TaggedWord> getProperties(List sentence)
+	public ArrayList<ExtendedTaggedWord> getProperties(List sentence)
 	throws Exception
 	{
 		letsGetParseReady(sentence);
 
-	  List sent = parse.taggedYield();
+	  List sent = myTaggedYield(parse);
 	
-		return (ArrayList<TaggedWord>)sent;
+		return (ArrayList<ExtendedTaggedWord>)sent;
+	}
+
+	/** 
+	 * 
+	 * 
+	 * @param t 
+	 * @param ty 
+	 * @param zone 
+	 * @return 
+	 */
+	private List myTaggedYield(Tree t, List ty, String zone)
+	{
+		Tree[] kids = t.children();
+
+    if (kids.length == 1 && kids[0].isLeaf())
+    {
+			if(zone == null)
+				zone = "X";
+
+      ExtendedTaggedWord stw = new ExtendedTaggedWord(kids[0].label().value(), t.label().value(), zone);
+
+      ty.add(stw);
+    }
+    else
+    {
+      for (int i = 0; i < kids.length; i++)
+      {
+        if(kids[i].isPhrasal() && t.label().toString().equals("S"))
+        {
+            zone = kids[i].label().value();
+        }
+        myTaggedYield(kids[i],ty,zone);
+      }
+    }
+    return ty;
+  }
+
+	/** 
+	 * 
+	 * 
+	 * @param t 
+	 * @return 
+	 */
+	private Sentence myTaggedYield(Tree t)
+	{
+		return (Sentence) myTaggedYield(t,new Sentence(),null);
 	}
 
 	/** 

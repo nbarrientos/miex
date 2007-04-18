@@ -16,9 +16,10 @@ import es.uniovi.aic.miex.datastr.MyCategories;
 
 import java.util.ArrayList;
 
-import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.MapLabel;
 import edu.stanford.nlp.trees.TypedDependency;
+
+import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 /** 
  * Manages all SQL related stuff 
@@ -418,7 +419,7 @@ public class SQLHandler
    * @param normalized True if the list has been normalized with Porter, false otherwise
    */
   public void	
-	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<TaggedWord> props, 
+	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<ExtendedTaggedWord> props, 
 									boolean isFromTitle, boolean normalized)
   {
 
@@ -426,24 +427,25 @@ public class SQLHandler
 		ResultSet rs;
     String query;
 
-    int prop_ID, word_ID, times, ft=0, nd=0;
+    int prop_ID, word_ID, zone_ID, times, ft=0, nd=0;
 
 		if(isFromTitle) ft = 1;
 		if(normalized) nd = 1;
 
-    for(TaggedWord wordAndTag: props)
+    for(ExtendedTaggedWord wordAndTag: props)
     {
 
       prop_ID = addProperty(true,wordAndTag.tag());
 			word_ID = addWord(wordAndTag.word());
-			
+			zone_ID = addProperty(true,wordAndTag.zone());
+
       try
       {
         stmt = this.createStatement();
 
 				query = "SELECT times FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + 
-								ft + "' AND normalized='" + nd + "'";
+								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND zone_id='" + 
+								zone_ID + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 
 	      rs = stmt.executeQuery(query);
 
@@ -453,13 +455,13 @@ public class SQLHandler
 				{ 
 	        times = rs.getInt("times"); times++;
 					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND fromTitle='" + 
-									ft + "' AND normalized='" + nd + "'";
+									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND zone_id='" + zone_ID + 
+									"' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 				}
 	      else
 	      { 
-					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + 
+					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,zone_id,times,fromTitle,normalized) VALUES ('" +
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + zone_ID + "','1','" + ft + 
 									"','" + nd + "')";
   	    }
 

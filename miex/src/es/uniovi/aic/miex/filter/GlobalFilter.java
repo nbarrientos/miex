@@ -1,9 +1,10 @@
 package es.uniovi.aic.miex.filter;
 
 import edu.stanford.nlp.trees.*;
-import edu.stanford.nlp.ling.TaggedWord;
 
 import java.util.ArrayList;
+
+import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 public class GlobalFilter
 {
@@ -32,12 +33,12 @@ public class GlobalFilter
     return cleanDeps;
   }
 
-  public ArrayList<TaggedWord> cleanProperties(ArrayList<TaggedWord> words)
+  public ArrayList<ExtendedTaggedWord> cleanProperties(ArrayList<ExtendedTaggedWord> words)
   {
 
-    ArrayList<TaggedWord> cleanProps = new ArrayList<TaggedWord>();
+    ArrayList<ExtendedTaggedWord> cleanProps = new ArrayList<ExtendedTaggedWord>();
 
-    for(TaggedWord wordAndProp: words)
+    for(ExtendedTaggedWord wordAndProp: words)
     {
       if(swd.isCleanProp(wordAndProp) && 
 				 utd.isCleanProp(wordAndProp) &&
@@ -52,11 +53,11 @@ public class GlobalFilter
 
 	/* Normalization utils */
 
-	public ArrayList<TaggedWord> normalizeProperties(ArrayList<TaggedWord> words)
+	public ArrayList<ExtendedTaggedWord> normalizeProperties(ArrayList<ExtendedTaggedWord> words)
 	{
-		ArrayList<TaggedWord> normalizedProps = new ArrayList<TaggedWord>();
+		ArrayList<ExtendedTaggedWord> normalizedProps = new ArrayList<ExtendedTaggedWord>();
 
-		for(TaggedWord wordAndProp: words)
+		for(ExtendedTaggedWord wordAndProp: words)
 		{
 			String nword = pt.stripAffixes(wordAndProp.word());
 
@@ -65,7 +66,7 @@ public class GlobalFilter
 			if(nword.equals("")) System.out.println("UNA BLANCA ERA: " + wordAndProp.word());
 
 			if(!(nword.equals("")))
-				normalizedProps.add(new TaggedWord(nword, ncat)); 
+				normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.zone())); 
 		}
 
 		return normalizedProps;

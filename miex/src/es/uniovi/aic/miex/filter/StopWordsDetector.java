@@ -18,7 +18,8 @@ import java.util.HashSet;
 
 import edu.stanford.nlp.trees.*;
 import edu.stanford.nlp.ling.MapLabel;
-import edu.stanford.nlp.ling.TaggedWord;
+
+import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 // Package class
 class StopWordsDetector 
@@ -130,7 +131,7 @@ class StopWordsDetector
 		return (!is(governorWord) && !is(depWord));
 	}
 
-	public boolean isCleanProp(TaggedWord wordAndProp)
+	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
 		return !(is(wordAndProp.word()));
 	}
