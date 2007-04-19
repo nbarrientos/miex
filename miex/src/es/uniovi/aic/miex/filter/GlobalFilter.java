@@ -1,6 +1,9 @@
 package es.uniovi.aic.miex.filter;
 
 import edu.stanford.nlp.trees.*;
+import edu.stanford.nlp.ling.MapLabel;
+
+import edu.stanford.nlp.ling.Word;
 
 import java.util.ArrayList;
 
@@ -63,13 +66,34 @@ public class GlobalFilter
 
 			String ncat = normalizeCat(wordAndProp.tag());
 
-			if(nword.equals("")) System.out.println("UNA BLANCA ERA: " + wordAndProp.word());
-
 			if(!(nword.equals("")))
 				normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.zone())); 
 		}
 
 		return normalizedProps;
+	}
+
+	public ArrayList<TypedDependency> normalizeDependencies(ArrayList<TypedDependency> rs)
+	{
+		ArrayList<TypedDependency> normalizedDeps = new ArrayList<TypedDependency>();
+
+		for(TypedDependency dep: rs)
+		{
+			MapLabel governorLabel = (MapLabel)dep.gov().label();
+			MapLabel depLabel = (MapLabel)dep.dep().label();
+
+			String governorWord = governorLabel.toString("value");
+			String depWord = depLabel.toString("value");
+
+			String nmword = pt.stripAffixes(governorWord);
+			String nsword = pt.stripAffixes(depWord);
+
+			if( !(nmword.equals("")) && !(nsword.equals("")) )
+				normalizedDeps.add(new TypedDependency(dep.reln(), new TreeGraphNode(new Word(nmword)), new TreeGraphNode(new Word(nsword)))); 
+		}
+
+		return normalizedDeps;
+
 	}
 
 	private String normalizeCat(String cat)

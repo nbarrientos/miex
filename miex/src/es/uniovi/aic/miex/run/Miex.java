@@ -282,8 +282,21 @@ public class Miex
 					System.out.print(" F ");
 
 					// Injecting the results into the database
-					sql.addDependencies(docNumber,colNumber,deps,isFromTitle);
+					sql.addDependencies(docNumber,colNumber,deps,isFromTitle,false);
+																																// ^ (normalized)
 					System.out.print(" S ");
+
+          if(config.getBooleanSetting("Normalize"))
+          {
+            // Getting normalized pairs
+            deps = filter.normalizeDependencies(deps);
+            System.out.print(" N ");
+
+            // Injecting the normalized results into the database
+            sql.addDependencies(docNumber,colNumber,deps,isFromTitle,true);
+                                                                  // ^ (normalized)
+            System.out.print(" S ");
+          }
 
 					System.out.print("]\n");
 

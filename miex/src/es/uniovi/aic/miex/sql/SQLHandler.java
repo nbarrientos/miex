@@ -483,18 +483,21 @@ public class SQLHandler
    * @param collectionNumber As usual
    * @param deps A list of 3-uples with the desired information
    * @param isFromTitle True if this sentence comes from document title, false if it comes from the body
+   * @param normalized True if the list has been normalized with Porter, false otherwise 
    */
   public void 
-  addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, boolean isFromTitle)
+	addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, 
+									boolean isFromTitle, boolean normalized)
   {
 
     Statement stmt;
     ResultSet rs;
     String query;
 
-    int prop_ID, master_ID, slave_ID, times, ft=0;
+    int prop_ID, master_ID, slave_ID, times, ft=0, nd=0;
 
     if(isFromTitle) ft = 1;
+		if(normalized) nd = 1;
 
     for(TypedDependency dep: deps)
     {
@@ -518,7 +521,7 @@ public class SQLHandler
 
         query = "SELECT times FROM wordwordpropdoc WHERE masterWord_id='" + master_ID + "' AND slaveWord_id='" + slave_ID + 
 								"' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + 
-								"' AND fromTitle='" + ft + "'";
+								"' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 
         rs = stmt.executeQuery(query);
 
@@ -529,12 +532,13 @@ public class SQLHandler
           times = rs.getInt("times"); times++;
           query = "UPDATE wordwordpropdoc SET times='" + times + "' WHERE masterWord_id='" + master_ID + 
 									"' AND slaveWord_id='" + slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + 
-									"' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "'";
+									"' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
         }
         else
         {
-          query = "INSERT INTO wordwordpropdoc (masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle) VALUES ('" +
-                  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + "')";
+          query = "INSERT INTO wordwordpropdoc (masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
+                  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + 
+									"','" + nd + "')";
         }
         rs.close();
 
