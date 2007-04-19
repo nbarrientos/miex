@@ -62,6 +62,7 @@ public class Extractor
 	public void load()
 	{
 		lp = new LexicalizedParser(grammarName); // TODO: Check now if lp is null
+//		lp.setOptionFlags(new String[]{"-noRecoveryTagging"});
 	}
 
 	/** 

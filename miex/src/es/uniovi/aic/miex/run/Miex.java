@@ -266,6 +266,7 @@ public class Miex
 			{
 				try
 				{
+					//System.out.println("\t\tProcessing sentence #" + sentencesNum + " " + sentence.toString().trim());
 					System.out.println("\t\tProcessing sentence #" + sentencesNum);
 
 					/* ************************ */

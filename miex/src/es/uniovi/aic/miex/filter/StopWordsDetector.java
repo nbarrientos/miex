@@ -107,17 +107,10 @@ class StopWordsDetector
 
 	private boolean is(String word)
 	{
-		return stopWords.contains(word.toLowerCase());
-/*
-		if(stopWords.contains(word.toLowerCase()))
-		{
-			System.out.println("Found stop word: " + word);
+		if(word.toLowerCase().equals("-lrb-") || word.toLowerCase().equals("-rrb-"))
 			return true;
-		}
-		else
-			return false;
-*/
-					
+
+		return stopWords.contains(word.toLowerCase());
 	}
 
 	public boolean isCleanDep(TypedDependency dep)
@@ -139,4 +132,3 @@ class StopWordsDetector
 	private HashSet<String> stopWords;
 
 } //class
-
