@@ -352,7 +352,7 @@ public class SQLHandler
    * @param propName The property itself
    * @return The (new) ID for this property 
    */
-  private int addProperty(boolean isGrammatical, String propName)
+  private int addProperty(int type, String propName)
   {
     Statement stmt;
     ResultSet rs;
@@ -364,15 +364,12 @@ public class SQLHandler
     {
       stmt = this.createStatement();
 
-			// Id 1 (proptype) = GRAMMATICAL
-			// Id 2 (proptype) = RELATIONSHIP
+			// Id 1 (proptype) = PHRASE
+			// Id 2 (proptype) = WORD
+			// Id 3 (proptype) = RELATIONSHIP
 
-			if(isGrammatical)
-      	query = "SELECT property_id " + "FROM property WHERE type_id='1' AND string = '" + 
-								propName.trim().toUpperCase() + "'";
-			else
-				query = "SELECT property_id " + "FROM property WHERE type_id='2' AND string = '" + 
-								propName.trim().toUpperCase() + "'";
+     	query = "SELECT property_id " + "FROM property WHERE type_id='" + type + "' AND string = '" + 
+							propName.trim().toUpperCase() + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -382,10 +379,7 @@ public class SQLHandler
         return rs.getInt("property_id");
       else
       {
-				if(isGrammatical)
-	        query = "INSERT INTO property (type_id,string) VALUES ('1','" + propName.trim().toUpperCase() + "')";
-				else
-					query = "INSERT INTO property (type_id,string) VALUES ('2','" + propName.trim().toUpperCase() + "')";
+				query = "INSERT INTO property (type_id,string) VALUES ('" + type + "','" + propName.trim().toUpperCase() + "')";
         stmt.executeUpdate(query);
       }
 
@@ -435,9 +429,11 @@ public class SQLHandler
     for(ExtendedTaggedWord wordAndTag: props)
     {
 
-      prop_ID = addProperty(true,wordAndTag.tag());
+      prop_ID = addProperty(2,wordAndTag.tag());
+													//^ (word)
 			word_ID = addWord(wordAndTag.word());
-			zone_ID = addProperty(true,wordAndTag.zone());
+			zone_ID = addProperty(1,wordAndTag.zone());
+													//^ (phrase)
 
       try
       {
@@ -509,8 +505,8 @@ public class SQLHandler
 			String slaveWord = slaveLabel.toString("value");
 			String prop = dep.reln().toString();
 			
-      prop_ID = addProperty(false,prop);
-														// ^ (~grammatical)
+      prop_ID = addProperty(3,prop);
+	 											 // ^ (relationship)
 
       master_ID = addWord(masterWord);
 			slave_ID = addWord(slaveWord);
