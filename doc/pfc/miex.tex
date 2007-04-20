@@ -21,7 +21,9 @@
 \pagestyle{headings}
 
 \input{config.tex}
-%\input{portadas.tex}
+
+% Definición de macros para las portadas
+\input{portadas.tex}
 
 \title{\TituloPFCnorm}
 \author{\AutorPFC}
@@ -29,15 +31,17 @@
 
 \begin{document}
 
+% Arabic page numbers after the main content starts
 \frontmatter
 
+% Crear portadas
 \maketitle
 
 %\bibliographystyle{plain}
 
 \chapter*{Resumen}
 
-Documentacion del proyecto titulado \emph{\TituloPFCnorm}, 
+Documentacion del proyecto titulado \emph{\TituloPFC}, 
 
 \section*{Palabras clave}
 
@@ -50,11 +54,12 @@ proyecto XDD
 
 \chapter*{Licencia}
 
-\section*{Documento y código fuente}
+El código fuente del programa (disponible en el anexo \ref{sec:source}) se
+encuentra licenciado bajo la licencia \emph{GNU General Public License (GPL)}, 
+versión 2 (anexo \ref{sec:license.gpl}). \\
 
-El código fuente (disponible en el anexo \ref{sec:source}) se encuentra 
-licenciado bajo la licencia \emph{GNU General Public License (GPL)}, 
-versión 2 (anexo \ref{sec:license.gpl}).
+La documentación se libera bajo la misma licencia que el código fuente del
+programa.
 
 \chapter*{Historial de este documento}
 
@@ -76,6 +81,7 @@ versión 2 (anexo \ref{sec:license.gpl}).
 
 \newpage
 
+% Main stuff
 \mainmatter
 
 \input{memoria.tex}

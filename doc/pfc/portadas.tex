@@ -1,24 +1,17 @@
+% redefinir la construccion del titulo para hacer una portada acorde a las
+% espeficiaciones de la escuela
 
-%t√≠tulo seg√∫n la portada oficial de PFC's de la EUITIO
-\newcommand{\TituloPFC}{\uppercase{SWAML, publicaci\'on de listas de correo\\en Web Sem\'antica}}
-\newcommand{\AutorPFC}{Sergio Fern\'andez L\'opez}
-\newcommand{\DirectorPFC}{Jos\'e Emilio Labra Gayo}
-\newcommand{\CoDirectorPFC}{Diego Berrueta Mu\~noz}
-
-% redefinir la construccion del titulo para hacer una portada bonita
-\renewcommand{\maketitle}{
+\renewcommand{\maketitle}
+{
     \begin{titlepage}
 
 	%portada del tomo
 	\begin{center}
                 {%
-                    \includegraphics[width=3.5cm]{images/uniovi.png}\\
-                }
-                {%
                     \Large\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
                 }
                 {%
-                    \Large\textrm{Escuela Universitaria de Ingenier√≠a\\T√©cnica en Inform√°tica de Oviedo}\\
+                    \Large\textrm{Escuela Universitaria de IngenierÌa TÈcnica Inform·tica de GijÛn}\\
                     \vspace{4cm}
                 }
                 {%
@@ -26,14 +19,16 @@
                     \vspace{5cm}
                 }
                 {%
-                    \Large\textrm{\TituloPFC}\\
+                    \Large\textrm{``\TituloPFC''}\\
                     \vspace{5cm}
                 }
 	\end{center}
 	\begin{flushright}
-		\Large\textrm{\AutorPFC}
+		\Large\textrm{\AutorPFC}\\
+		\Large\textrm{Junio 2007}
 	\end{flushright}
 	\pagestyle{empty}
+	
 	\cleardoublepage
 
 	%portada de dentro
@@ -43,13 +38,10 @@
                     \vspace{2cm}
                 }
                 {%
-                    \includegraphics[width=3.5cm]{images/uniovi.png}
-                    \hspace{5cm}
-                    \includegraphics[width=3cm]{images/euitio.png}\\
-                    \vspace{1cm}
+                    \includegraphics[width=3.5cm]{images/uniovi.png} \\
                 }
                 {%
-                    \Large\textrm{ESCUELA UNIVERSITARIA DE INGENIER√çA T√âCNICA EN INFORM√ÅTICA DE OVIEDO}\\
+                    \Large\textrm{ESCUELA UNIVERSITARIA DE INGENIERÕA T…CNICA EN INFORM¡TICA DE GIJ”N}\\
                     \vspace{3cm}
                 }
                 {%
@@ -57,34 +49,26 @@
                     \vspace{3cm}
                 }
                 {%
-                    \Large\textrm{\TituloPFC}\\
+                    \Large\textrm{\uppercase{''\TituloPFC``}}\\
                     \vspace{3cm}
                 }
+		{
+		    \Large\textrm{DIRECTORAS}\\
+		    \Large\textrm{\DirectorPFC}\\
+		    \Large\textrm{\CoDirectorPFC}\\
+		    \vspace{2cm}
+		}
+		{
+		    \Large\textrm{AUTOR \\ \AutorPFC}\\
+		}
+	
 	\end{center}
-            {
-                \bfseries
-                \begin{tabular}{cp{2cm}l}
-                \begin{tabular}{|p{5cm}|}
-                    \hline
-                    \\
-                    \\
-                    \\
-                    {\scriptsize \textbf{V¬∫B¬∫ del Director del Proyecto}}\\
-                    \hline
-                \end{tabular}
-		&
-		&
-                \begin{tabular}{ll}
-                        {\footnotesize\textrm\textbf{DIRECTORES:}} &
-                        {\textrm\textbf{\DirectorPFC}} \\ &
-                        {\textrm\textbf{\CoDirectorPFC}} 
-                        \vspace{0.5cm}\\
-                        {\footnotesize\textrm\textbf{AUTOR:}} &
-                        {\textrm\textbf{\AutorPFC}}
-                \end{tabular}
-                \end{tabular}
-            }
-	\pagestyle{empty}
+	\begin{flushright}
+		\Large\textrm{Junio 2007}
+	\end{flushright}
+        \pagestyle{empty}
+	
 	\cleardoublepage
+    
     \end{titlepage}
 }
