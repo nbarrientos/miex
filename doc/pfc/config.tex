@@ -1,0 +1,45 @@
+%macros de texto
+\newcommand{\TituloPFCnorm}{MIEX, extracci�n de informaci�n de documentos XML mediante Stanford Parser}
+\newcommand{\AutorPFC}{Ignacio Barrientos Arias}
+
+%cabeceras (con el paquete "fancyhdr")
+\headheight 15pt
+
+%macro que me ha chivado Frade, extraido del libro «LaTeX, una imprenta en sus manos», para añadir la bibliografía al indice
+%\let\OLDthebibliography=\thebibliography
+%\def\thebibliography#1{\OLDthebibliography{#1}%
+%	\addcontentsline{toc}{chapter}{\bibname}}
+
+%renombrar las tablas (no funciona)
+%\renewcommand{\tablename}{Tabla}
+%\renewcommand{\listtablename}{Indice de tablas}
+
+%colores
+\definecolor{darkred}{rgb}{0.5, 0, 0}
+\definecolor{violet}{rgb}{1, 0, 1}
+\definecolor{green}{rgb}{0.3, 0.95, 0.3}
+\definecolor{listinggray}{gray}{0.97}
+
+%listings
+\lstset{
+	basewidth=0.50em,
+	backgroundcolor=\color{listinggray},
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bfseries,
+	stringstyle=\itshape,
+	commentstyle=\itshape,
+	showspaces=false,
+	showtabs=false,
+	showstringspaces=false,
+	frame=trbl,
+	extendedchars=true,
+	numbers=none,
+	aboveskip=0.5cm,
+	belowskip=0.5cm,
+	xleftmargin=0cm,
+	xrightmargin=0cm
+}
+
+%\lstdefinelanguage{PeliculasXML}[]{XML}{%
+%	morekeywords = {peliculas, pelicula, titulo, autor, url }
+%}

@@ -1,0 +1,96 @@
+\documentclass[spanish,a4paper,12pt,twosides]{book}
+
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{times}
+\usepackage{babel}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+%\usepackage{eurosym}
+\usepackage[strict]{chngpage}
+
+\pagestyle{headings}
+
+\input{config.tex}
+%\input{portadas.tex}
+
+\title{\TituloPFCnorm}
+\author{\AutorPFC}
+\date{Junio de 2007}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+%\bibliographystyle{plain}
+
+\chapter*{Resumen}
+
+Documentacion del proyecto titulado \emph{\TituloPFCnorm}, 
+
+\section*{Palabras clave}
+
+Recuperación de información, semántica, Java, analizador sintáctico
+
+\chapter*{Agradecimientos}
+
+A todas las mujere que han hecho posible la realización de este
+proyecto XDD
+
+\chapter*{Licencia}
+
+\section*{Documento y código fuente}
+
+El código fuente (disponible en el anexo \ref{sec:source}) se encuentra 
+licenciado bajo la licencia \emph{GNU General Public License (GPL)}, 
+versión 2 (anexo \ref{sec:license.gpl}).
+
+\chapter*{Historial de este documento}
+
+\begin{tabular}{|l|l|l|}
+ \hline
+ \textbf{Fecha} & \textbf{Versión} & \textbf{Comentarios} \\\hline
+ Apr/2007 & 0.1 & Primer borrador \\\hline
+\end{tabular}
+
+\tableofcontents
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+\listoftables
+
+\newpage
+
+\mainmatter
+
+\input{memoria.tex}
+
+\input{metodologia.tex}
+
+\input{manuales.tex}
+
+\input{conclusiones.tex}
+
+\appendix
+
+\input{anexos.tex}
+
+%\bibliography{bibliografia}
+
+\end{document}
+

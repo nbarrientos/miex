@@ -1,0 +1,90 @@
+
+%título según la portada oficial de PFC's de la EUITIO
+\newcommand{\TituloPFC}{\uppercase{SWAML, publicaci\'on de listas de correo\\en Web Sem\'antica}}
+\newcommand{\AutorPFC}{Sergio Fern\'andez L\'opez}
+\newcommand{\DirectorPFC}{Jos\'e Emilio Labra Gayo}
+\newcommand{\CoDirectorPFC}{Diego Berrueta Mu\~noz}
+
+% redefinir la construccion del titulo para hacer una portada bonita
+\renewcommand{\maketitle}{
+    \begin{titlepage}
+
+	%portada del tomo
+	\begin{center}
+                {%
+                    \includegraphics[width=3.5cm]{images/uniovi.png}\\
+                }
+                {%
+                    \Large\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
+                }
+                {%
+                    \Large\textrm{Escuela Universitaria de Ingeniería\\Técnica en Informática de Oviedo}\\
+                    \vspace{4cm}
+                }
+                {%
+                    \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
+                    \vspace{5cm}
+                }
+                {%
+                    \Large\textrm{\TituloPFC}\\
+                    \vspace{5cm}
+                }
+	\end{center}
+	\begin{flushright}
+		\Large\textrm{\AutorPFC}
+	\end{flushright}
+	\pagestyle{empty}
+	\cleardoublepage
+
+	%portada de dentro
+	\begin{center}
+                {%
+                    \Large\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
+                    \vspace{2cm}
+                }
+                {%
+                    \includegraphics[width=3.5cm]{images/uniovi.png}
+                    \hspace{5cm}
+                    \includegraphics[width=3cm]{images/euitio.png}\\
+                    \vspace{1cm}
+                }
+                {%
+                    \Large\textrm{ESCUELA UNIVERSITARIA DE INGENIERÍA TÉCNICA EN INFORMÁTICA DE OVIEDO}\\
+                    \vspace{3cm}
+                }
+                {%
+                    \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
+                    \vspace{3cm}
+                }
+                {%
+                    \Large\textrm{\TituloPFC}\\
+                    \vspace{3cm}
+                }
+	\end{center}
+            {
+                \bfseries
+                \begin{tabular}{cp{2cm}l}
+                \begin{tabular}{|p{5cm}|}
+                    \hline
+                    \\
+                    \\
+                    \\
+                    {\scriptsize \textbf{VºBº del Director del Proyecto}}\\
+                    \hline
+                \end{tabular}
+		&
+		&
+                \begin{tabular}{ll}
+                        {\footnotesize\textrm\textbf{DIRECTORES:}} &
+                        {\textrm\textbf{\DirectorPFC}} \\ &
+                        {\textrm\textbf{\CoDirectorPFC}} 
+                        \vspace{0.5cm}\\
+                        {\footnotesize\textrm\textbf{AUTOR:}} &
+                        {\textrm\textbf{\AutorPFC}}
+                \end{tabular}
+                \end{tabular}
+            }
+	\pagestyle{empty}
+	\cleardoublepage
+    \end{titlepage}
+}
