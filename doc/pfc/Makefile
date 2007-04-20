@@ -1,26 +1,30 @@
 # MIEX PFC Makefile
-# based on SWAML PFC
+# based on SWAML PFC Makefile
 
-DESTDIR =
+# Depends on:
+# 	* Make
+#		* Dia
+#		* Rubber 
+#   * TeTeX || TeXlive
 
-NAME = miex
+#DESTDIR =
 
-#PDFVIEWER = evince
+PFC = miex
 
-#IMAGES= images/swaml-owl.png images/sad.png
+IMAGES= images/build/bdd-e-r.png images/build/evolution.png
 
-all:	$(NAME).pdf
+all: $(PFC).pdf
 
-$(NAME).pdf: $(IMAGES)	
+$(NAME).pdf: dirs $(IMAGES)	
 #	umbrello --export png --directory images/uml/ uml/swaml.xmi 2> /dev/null
 #	umbrello --export png --directory images/uml/ uml/swaml-clases.xmi 2> /dev/null
-	rubber --pdf $(NAME).tex
+	rubber --pdf $(PFC).tex
 
-#%.png:  %.dia
-#	dia -t png $?
+dirs:
+	mkdir images/build
 
-#view:	$(NAME).pdf
-#	$(PDFVIEWER) $(NAME).pdf &
+images/build/%.png:  images/diagrams/%.dia
+	dia -t png $? -e $@
 
 #src:
 #	python2.4 python2text.py ../../swaml/trunk/*.py #output dir?
@@ -29,6 +33,4 @@ clean:
 	rm -f *.aux *.log *.dvi *.toc *.pdf *.bbl *.blg *.lof *.bak *.lot *.out
 	rm -f `find . -name "*.backup"`
 	rm -f `find . -name "*~"`
-#	rm -f images/uml/*
-
-
+	rm -rf images/build
