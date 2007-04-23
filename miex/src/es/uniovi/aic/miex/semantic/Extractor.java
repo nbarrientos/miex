@@ -137,8 +137,6 @@ public class Extractor
 	{
 		letsGetParseReady(sentence);
 
-		parse.pennPrint();
-
 	  List sent = myTaggedYield(parse);
 	
 		return (ArrayList<ExtendedTaggedWord>)sent;
@@ -168,19 +166,14 @@ public class Extractor
     {
       for (int i = 0; i < kids.length; i++)
       {
-				ArrayList<String> newphrase = null;
-	
         if(kids[i].isPhrasal())
         {
-						newphrase = new ArrayList<String>(phrase);
-						newphrase.add(kids[i].label().value());
+					ArrayList<String> newphrase = new ArrayList<String>(phrase);
+					newphrase.add(kids[i].label().value());
+					myTaggedYield(kids[i],ty,newphrase);
         }
-
-				if(newphrase != null)
-        	myTaggedYield(kids[i],ty,newphrase);
 				else
-					myTaggedYield(kids[i],ty,phrase);
-
+					myTaggedYield(kids[i],ty,phrase);						
       }
     }
     return ty;

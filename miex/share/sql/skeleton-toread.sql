@@ -11,6 +11,7 @@
 DROP TABLE IF EXISTS wordwordpropdoc;
 DROP TABLE IF EXISTS wordpropdoc;
 DROP TABLE IF EXISTS doccat;
+DROP TABLE IF EXISTS propproplist;
 
 DROP TABLE IF EXISTS property;
 DROP TABLE IF EXISTS document;
@@ -20,6 +21,7 @@ DROP TABLE IF EXISTS collection;
 DROP TABLE IF EXISTS doctype;
 DROP TABLE IF EXISTS proptype;
 DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS propertylist;
 
 ---
 ---> Creating 'single' tables
@@ -44,6 +46,10 @@ CREATE TABLE proptype( proptype_id int NOT NULL, string varchar(30) NOT NULL, PR
 --- category = (@category_id, string)
 
 CREATE TABLE category( category_id int NOT NULL AUTO_INCREMENT, string varchar(20) NOT NULL, PRIMARY KEY (category_id) ) TYPE = INNODB;
+
+---- propertylist = (@propertylist_id, hashCode)
+
+CREATE TABLE propertylist( propertylist_id int NOT NULL AUTO_INCREMENT, hashCode varchar(200) NOT NULL, PRIMARY KEY (propertylist_id) ) TYPE = INNODB;
 
 ---
 ---> Relationship tables (1:M)
@@ -72,6 +78,10 @@ CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int
 --- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, @fromTitle, times)
 
 CREATE TABLE wordwordpropdoc( masterWord_id int NOT NULL, slaveWord_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT '0', normalized bool NOT NULL DEFAULT '0', PRIMARY KEY (masterWord_id,slaveWord_id,prop_id,doc_id,col_id,fromTitle,normalized), FOREIGN KEY (masterWord_id) REFERENCES word (word_id), FOREIGN KEY (slaveWord_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id),FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
+
+--- propproplist = (@list_id, @prop_id)
+
+CREATE TABLE propproplist( list_id int NOT NULL, prop_id int NOT NULL, PRIMARY KEY (list_id,prop_id), FOREIGN KEY (list_id) REFERENCES propertylist (propertylist_id), FOREIGN KEY (prop_id) REFERENCES property (property_id) ) TYPE = INNODB;
 
 ---
 ---> Inserting static data

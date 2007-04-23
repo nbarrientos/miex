@@ -18,7 +18,7 @@ MIEXVERSION = 0.1
 PACKAGES= es.uniovi.aic.miex.input es.uniovi.aic.miex.run \
 					es.uniovi.aic.miex.config es.uniovi.aic.miex.datastr \
 					es.uniovi.aic.miex.semantic es.uniovi.aic.miex.filter \
-					es.uniovi.aic.miex.sql
+					es.uniovi.aic.miex.sql es.uniovi.aic.miex.tools
 
 # Javac options
 JAVAC = javac
