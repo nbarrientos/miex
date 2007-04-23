@@ -1,4 +1,4 @@
---[ Title ][ Base MySQL 4.1 database for MIEX ]--
+--[ Title ][ Base MySQL 4.1/5.x database for MIEX ]--
 --[ Desc ][ Creates a clean database from scratch ]---
 --[ Author ][ Nacho Barrientos Arias <chipi@criptonita.com> ]--
 --[ Date ][ March 2007 ]--
@@ -93,10 +93,16 @@ INSERT INTO doctype (doctype_id,string) VALUES ('1',"DOCTRAIN");
 INSERT INTO doctype (doctype_id,string) VALUES ('2',"DOCTEST");
 
 --- Properties types
----   Phrase (e.g.: (NP (DT/The) (NNP/Debian) ...)
+---   Clause (e.g.: (S (NP (DT/The) (NNP/Debian) ...))
+---                  ^
+---   Phrase (e.g.: (NP (DT/The) (NNP/Debian) ...))
+---                  ^
 ---		Word (e.g.: NNP/Project)
----		Relationship (e.g.: nn(Project,Debian)
+---               ^
+---		Relationship (e.g.: nn(Project,Debian))
+---                       ^
 
+INSERT INTO proptype (proptype_id,string) VALUES ('0',"CLAUSE");
 INSERT INTO proptype (proptype_id,string) VALUES ('1',"PHRASE");
 INSERT INTO proptype (proptype_id,string) VALUES ('2',"WORD");
 INSERT INTO proptype (proptype_id,string) VALUES ('3',"RELATIONSHIP");
@@ -104,69 +110,75 @@ INSERT INTO proptype (proptype_id,string) VALUES ('3',"RELATIONSHIP");
 --- Grammatical categories (phrase and word level), extracted from:
 --- http://bulba.sdsu.edu/jeanette/thesis/PennTags.html
 
+--- CLAUSAL LEVEL
+INSERT INTO property (type_id,string,description) VALUES ('0','S','simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion');
+INSERT INTO property (type_id,string,description) VALUES ('0','SBAR','Clause introduced by a (possibly empty) subordinating conjunction.');
+INSERT INTO property (type_id,string,description) VALUES ('0','SBARQ','Direct question introduced by a wh-word or a wh-phrase. Indirect questions and relative clauses should be bracketed as SBAR, not SBARQ.');
+INSERT INTO property (type_id,string,description) VALUES ('0','SINV','Inverted declarative sentence, i.e. one in which the subject follows the tensed verb or modal');
+INSERT INTO property (type_id,string,description) VALUES ('0','SQ','Inverted yes/no question, or main clause of a wh-question, following the wh-phrase in SBARQ.');
+
+--- PHRASAL LEVEL
 INSERT INTO property (type_id,string,description) VALUES ('1','ADJP','Adjective Phrase');  
 INSERT INTO property (type_id,string,description) VALUES ('1','ADVP','Adverb Phrase'); 
-INSERT INTO property (type_id,string,description) VALUES ('2','CC','Coordinating conjunction');
-INSERT INTO property (type_id,string,description) VALUES ('2','CD','Cardinal number');  
 INSERT INTO property (type_id,string,description) VALUES ('1','CONJP','Conjunction Phrase');  
-INSERT INTO property (type_id,string,description) VALUES ('2','DT','Determiner');  
-INSERT INTO property (type_id,string,description) VALUES ('2','EX','Existential there');  
 INSERT INTO property (type_id,string,description) VALUES ('1','FRAG','Fragment'); 
-INSERT INTO property (type_id,string,description) VALUES ('2','FW','Foreign word');  
-INSERT INTO property (type_id,string,description) VALUES ('2','IN','Preposition or subordinating conjunction');  
 INSERT INTO property (type_id,string,description) VALUES ('1','INTJ','Interjection');  
-INSERT INTO property (type_id,string,description) VALUES ('2','JJ','Adjective');  
-INSERT INTO property (type_id,string,description) VALUES ('2','JJR','Adjective, comparative');  
-INSERT INTO property (type_id,string,description) VALUES ('2','JJS','Adjective, superlative');  
-INSERT INTO property (type_id,string,description) VALUES ('2','LS','List item marker');  
 INSERT INTO property (type_id,string,description) VALUES ('1','LST','List marker');  
-INSERT INTO property (type_id,string,description) VALUES ('2','MD','Modal');  
 INSERT INTO property (type_id,string,description) VALUES ('1','NAC','Not a Constituent. used to show the scope of certain prenominal modifiers within an NP.');  
-INSERT INTO property (type_id,string,description) VALUES ('2','NN','Noun, singular or mass');
-INSERT INTO property (type_id,string,description) VALUES ('2','NNS','Noun, plural');  
-INSERT INTO property (type_id,string,description) VALUES ('2','NNP','Proper noun, singular');
-INSERT INTO property (type_id,string,description) VALUES ('2','NNPS','Proper noun, plural');  
 INSERT INTO property (type_id,string,description) VALUES ('1','NP','Noun Phrase');  
 INSERT INTO property (type_id,string,description) VALUES ('1','NX','Used within certain complex NPs to mark the head of the NP. Corresponds very roughly to N-bar level but used quite differently');  
-INSERT INTO property (type_id,string,description) VALUES ('2','PDT','Predeterminer');  
-INSERT INTO property (type_id,string,description) VALUES ('2','POS','Possessive ending');  
 INSERT INTO property (type_id,string,description) VALUES ('1','PP','Prepositional Phrase');  
 INSERT INTO property (type_id,string,description) VALUES ('1','PRN','Parenthetical');  
-INSERT INTO property (type_id,string,description) VALUES ('2','PRP','Personal pronoun');  
-INSERT INTO property (type_id,string,description) VALUES ('2','PRP$','Possessive pronoun');
 INSERT INTO property (type_id,string,description) VALUES ('1','PRP-S','Prolog version of PRP$');
 INSERT INTO property (type_id,string,description) VALUES ('1','PRT','Particle. Category for words that should be tagged RP.');   
 INSERT INTO property (type_id,string,description) VALUES ('1','QP','Quantifier Phrase');  
-INSERT INTO property (type_id,string,description) VALUES ('2','RB','Adverb');  
-INSERT INTO property (type_id,string,description) VALUES ('2','RBR','Adverb, comparative');  
-INSERT INTO property (type_id,string,description) VALUES ('2','RBS','Adverb, superlative');  
-INSERT INTO property (type_id,string,description) VALUES ('2','RP','Particle');  
 INSERT INTO property (type_id,string,description) VALUES ('1','RRC','Reduced Relative Clause');  
-INSERT INTO property (type_id,string,description) VALUES ('1','S','simple declarative clause, i.e. one that is not introduced by a (possible empty) subordinating conjunction or a wh-word and that does not exhibit subject-verb inversion');  
-INSERT INTO property (type_id,string,description) VALUES ('1','SBAR','Clause introduced by a (possibly empty) subordinating conjunction.');  
-INSERT INTO property (type_id,string,description) VALUES ('1','SBARQ','Direct question introduced by a wh-word or a wh-phrase. Indirect questions and relative clauses should be bracketed as SBAR, not SBARQ.');  
-INSERT INTO property (type_id,string,description) VALUES ('1','SINV','Inverted declarative sentence, i.e. one in which the subject follows the tensed verb or modal');  
-INSERT INTO property (type_id,string,description) VALUES ('1','SQ','Inverted yes/no question, or main clause of a wh-question, following the wh-phrase in SBARQ.');  
-INSERT INTO property (type_id,string,description) VALUES ('2','SYM','Symbol');  
-INSERT INTO property (type_id,string,description) VALUES ('2','TO','to');  
 INSERT INTO property (type_id,string,description) VALUES ('1','UCP','Unlike Coordinated Phrase.');   
-INSERT INTO property (type_id,string,description) VALUES ('2','UH','Interjection');  
-INSERT INTO property (type_id,string,description) VALUES ('2','VB','Verb, base form');  
-INSERT INTO property (type_id,string,description) VALUES ('2','VBD','Verb, past tense');  
-INSERT INTO property (type_id,string,description) VALUES ('2','VBG','Verb, gerund or present participle');  
-INSERT INTO property (type_id,string,description) VALUES ('2','VBN','Verb, past participle');  
-INSERT INTO property (type_id,string,description) VALUES ('2','VBP','Verb, non-3rd person singular present'); 
-INSERT INTO property (type_id,string,description) VALUES ('2','VBZ','Verb, 3rd person singular present');  
 INSERT INTO property (type_id,string,description) VALUES ('1','VP','Vereb Phrase');  
-INSERT INTO property (type_id,string,description) VALUES ('2','WDT','Wh-determiner');  
 INSERT INTO property (type_id,string,description) VALUES ('1','WHADJP','Wh-adjective Phrase. Adjectival phrase containing a wh-adverb, as in how hot.');  
 INSERT INTO property (type_id,string,description) VALUES ('1','WHADVP','Wh-adverb Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing a wh-adverb such as how or why.');  
 INSERT INTO property (type_id,string,description) VALUES ('1','WHNP','Wh-noun Phrase. Introduces a clause with an NP gap. May be null (containing the 0 complementizer) or lexical, containing some wh-word, e.g. who, which book, whose daughter, none of which, or how many leopards.');  
 INSERT INTO property (type_id,string,description) VALUES ('1','WHPP','Wh-prepositional Phrase. Prepositional phrase containing a wh-noun phrase (such as of which or by whose authority) that either introduces a PP gap or is contained by a WHNP.');  
-INSERT INTO property (type_id,string,description) VALUES ('2','WP','Wh-pronoun');  
-INSERT INTO property (type_id,string,description) VALUES ('2','WP$','Possessive wh-pronoun'); 
-INSERT INTO property (type_id,string,description) VALUES ('1','WP-S','Prolog version of WP$');  
-INSERT INTO property (type_id,string,description) VALUES ('2','WRB','Wh-adverb');  
+INSERT INTO property (type_id,string,description) VALUES ('1','WP-S','Prolog version of WP$');
 INSERT INTO property (type_id,string,description) VALUES ('1','X','Unknown, uncertain, or unbracketable. X is often used for bracketing typos and in bracketing the...the-constructions.');
+
+--- WORD LEVEL
+INSERT INTO property (type_id,string,description) VALUES ('2','CC','Coordinating conjunction');
+INSERT INTO property (type_id,string,description) VALUES ('2','CD','Cardinal number');
+INSERT INTO property (type_id,string,description) VALUES ('2','DT','Determiner');
+INSERT INTO property (type_id,string,description) VALUES ('2','EX','Existential there');
+INSERT INTO property (type_id,string,description) VALUES ('2','FW','Foreign word');
+INSERT INTO property (type_id,string,description) VALUES ('2','IN','Preposition or subordinating conjunction');
+INSERT INTO property (type_id,string,description) VALUES ('2','JJ','Adjective');
+INSERT INTO property (type_id,string,description) VALUES ('2','JJR','Adjective, comparative');
+INSERT INTO property (type_id,string,description) VALUES ('2','JJS','Adjective, superlative');
+INSERT INTO property (type_id,string,description) VALUES ('2','LS','List item marker');
+INSERT INTO property (type_id,string,description) VALUES ('2','MD','Modal');
+INSERT INTO property (type_id,string,description) VALUES ('2','NN','Noun, singular or mass');
+INSERT INTO property (type_id,string,description) VALUES ('2','NNS','Noun, plural');
+INSERT INTO property (type_id,string,description) VALUES ('2','NNP','Proper noun, singular');
+INSERT INTO property (type_id,string,description) VALUES ('2','NNPS','Proper noun, plural');
+INSERT INTO property (type_id,string,description) VALUES ('2','PDT','Predeterminer');
+INSERT INTO property (type_id,string,description) VALUES ('2','POS','Possessive ending');
+INSERT INTO property (type_id,string,description) VALUES ('2','PRP','Personal pronoun');
+INSERT INTO property (type_id,string,description) VALUES ('2','PRP$','Possessive pronoun');
+INSERT INTO property (type_id,string,description) VALUES ('2','RB','Adverb');
+INSERT INTO property (type_id,string,description) VALUES ('2','RBR','Adverb, comparative');
+INSERT INTO property (type_id,string,description) VALUES ('2','RBS','Adverb, superlative');
+INSERT INTO property (type_id,string,description) VALUES ('2','RP','Particle');
+INSERT INTO property (type_id,string,description) VALUES ('2','SYM','Symbol');
+INSERT INTO property (type_id,string,description) VALUES ('2','TO','to');
+INSERT INTO property (type_id,string,description) VALUES ('2','UH','Interjection');
+INSERT INTO property (type_id,string,description) VALUES ('2','VB','Verb, base form');
+INSERT INTO property (type_id,string,description) VALUES ('2','VBD','Verb, past tense');
+INSERT INTO property (type_id,string,description) VALUES ('2','VBG','Verb, gerund or present participle');
+INSERT INTO property (type_id,string,description) VALUES ('2','VBN','Verb, past participle');
+INSERT INTO property (type_id,string,description) VALUES ('2','VBP','Verb, non-3rd person singular present');
+INSERT INTO property (type_id,string,description) VALUES ('2','VBZ','Verb, 3rd person singular present');
+INSERT INTO property (type_id,string,description) VALUES ('2','WDT','Wh-determiner');
+INSERT INTO property (type_id,string,description) VALUES ('2','WP','Wh-pronoun');
+INSERT INTO property (type_id,string,description) VALUES ('2','WP$','Possessive wh-pronoun');
+INSERT INTO property (type_id,string,description) VALUES ('2','WRB','Wh-adverb');
+INSERT INTO property (type_id,string,description) VALUES ('2','X','Unknown, uncertain, or unnormalizable');
 
 -- EOF ;)
