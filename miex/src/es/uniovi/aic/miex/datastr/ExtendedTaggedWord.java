@@ -1,31 +1,33 @@
 package es.uniovi.aic.miex.datastr;
 
+import java.util.ArrayList;
+
 import edu.stanford.nlp.ling.TaggedWord;
 
 public class ExtendedTaggedWord
 extends TaggedWord
 {
 
-public ExtendedTaggedWord(String word, String tag, String _zone)
+public ExtendedTaggedWord(String word, String tag, ArrayList<String> _phrase)
 {
   super(word,tag);
-  zone = new String(_zone);
+	phrase = _phrase;
 }
 
-public String zone()
+public ArrayList<String> phrase()
 {
-  return zone;
+  return phrase;
 }
 
 public String toString()
 {
   String old = super.toString();
 
-  old = old + "/" + zone;
+  old = old + "/" + phrase;
 
   return old;
 }
 
-private String zone;
+private ArrayList<String> phrase;
 
 }

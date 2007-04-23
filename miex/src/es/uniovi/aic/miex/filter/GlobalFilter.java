@@ -67,7 +67,7 @@ public class GlobalFilter
 			String ncat = normalizeCat(wordAndProp.tag());
 
 			if(!(nword.equals("")))
-				normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.zone())); 
+				normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.phrase())); 
 		}
 
 		return normalizedProps;

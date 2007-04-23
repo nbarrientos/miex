@@ -21,6 +21,8 @@ import edu.stanford.nlp.trees.TypedDependency;
 
 import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
+import es.uniovi.aic.miex.tools.MD5;
+
 /** 
  * Manages all SQL related stuff 
  * 
@@ -404,6 +406,79 @@ public class SQLHandler
   }
 
   /** 
+   * FIXME 
+   * 
+   * @param _list 
+   * @return 
+   */
+  private int addPropertyList(ArrayList<String> _list)
+  {
+    Statement stmt;
+    ResultSet rs;
+    String query;
+
+    int out = 0;
+
+		String plainCode = "";
+
+		for(String foo: _list)
+		{
+			plainCode = plainCode + foo;
+		}		
+
+    try
+    {
+			String hashCode = MD5.gen(plainCode);	
+
+      stmt = this.createStatement();
+
+     	query = "SELECT propertylist_id " + "FROM propertylist WHERE hashCode='" + hashCode + "'";
+
+      rs = stmt.executeQuery(query);
+
+      rs.last();
+
+      if(rs.getRow() > 0) // 1
+        return rs.getInt("propertylist_id");
+      else
+      {
+				query = "INSERT INTO propertylist (hashCode) VALUES ('" + hashCode + "')";
+        stmt.executeUpdate(query);
+      }
+
+      rs.close();
+
+      rs = stmt.getGeneratedKeys();
+
+      if (rs.next())
+      {
+        out = rs.getInt(1);
+      }
+
+			for(String foo: _list)
+			{
+				int prop_id = addProperty(1,foo);
+															  //^	Id 1 (proptype) = PHRASE
+	
+				query = "INSERT INTO propproplist (list_id,prop_id) VALUES ('" + out + "','" + prop_id + "')";
+
+				stmt.executeUpdate(query);
+			}
+
+      rs.close();
+
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+    return out;
+  }
+
+
+
+  /** 
    * Adds grammatical information for a single sentece to the database 
    * 
    * @param docNumber As usual
@@ -421,7 +496,7 @@ public class SQLHandler
 		ResultSet rs;
     String query;
 
-    int prop_ID, word_ID, zone_ID, times, ft=0, nd=0;
+    int prop_ID, word_ID, list_ID, times, ft=0, nd=0;
 
 		if(isFromTitle) ft = 1;
 		if(normalized) nd = 1;
@@ -432,16 +507,16 @@ public class SQLHandler
       prop_ID = addProperty(2,wordAndTag.tag());
 													//^ (word)
 			word_ID = addWord(wordAndTag.word());
-			zone_ID = addProperty(1,wordAndTag.zone());
-													//^ (phrase)
+			
+			list_ID = addPropertyList(wordAndTag.phrase());
 
       try
       {
         stmt = this.createStatement();
 
 				query = "SELECT times FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND zone_id='" + 
-								zone_ID + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
+								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND list_id='" + 
+								list_ID + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 
 	      rs = stmt.executeQuery(query);
 
@@ -451,13 +526,13 @@ public class SQLHandler
 				{ 
 	        times = rs.getInt("times"); times++;
 					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND zone_id='" + zone_ID + 
+									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND list_id='" + list_ID + 
 									"' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 				}
 	      else
 	      { 
-					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,zone_id,times,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + zone_ID + "','1','" + ft + 
+					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,times,fromTitle,normalized) VALUES ('" +
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + "','1','" + ft + 
 									"','" + nd + "')";
   	    }
 
