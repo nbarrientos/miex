@@ -137,6 +137,8 @@ public class Extractor
 	{
 		letsGetParseReady(sentence);
 
+		parse.pennPrint();
+
 	  List sent = myTaggedYield(parse);
 	
 		return (ArrayList<ExtendedTaggedWord>)sent;
@@ -150,16 +152,15 @@ public class Extractor
 	 * @param zone 
 	 * @return 
 	 */
-	private List myTaggedYield(Tree t, List ty, String zone)
+	private List myTaggedYield(Tree t, List ty, ArrayList<String> phrase)
 	{
 		Tree[] kids = t.children();
 
     if (kids.length == 1 && kids[0].isLeaf())
     {
-			if(zone == null)
-				zone = "X";
+//			System.out.println("Camino para la palabra " + kids[0].label().value() + " " + phrase);
 
-      ExtendedTaggedWord stw = new ExtendedTaggedWord(kids[0].label().value(), t.label().value(), zone);
+      ExtendedTaggedWord stw = new ExtendedTaggedWord(kids[0].label().value(), t.label().value(), "NP");
 
       ty.add(stw);
     }
@@ -167,11 +168,19 @@ public class Extractor
     {
       for (int i = 0; i < kids.length; i++)
       {
-        if(kids[i].isPhrasal() && t.label().toString().equals("S"))
+				ArrayList<String> newphrase = null;
+	
+        if(kids[i].isPhrasal())
         {
-            zone = kids[i].label().value();
+						newphrase = new ArrayList<String>(phrase);
+						newphrase.add(kids[i].label().value());
         }
-        myTaggedYield(kids[i],ty,zone);
+
+				if(newphrase != null)
+        	myTaggedYield(kids[i],ty,newphrase);
+				else
+					myTaggedYield(kids[i],ty,phrase);
+
       }
     }
     return ty;
@@ -185,7 +194,7 @@ public class Extractor
 	 */
 	private Sentence myTaggedYield(Tree t)
 	{
-		return (Sentence) myTaggedYield(t,new Sentence(),null);
+		return (Sentence) myTaggedYield(t,new Sentence(),new ArrayList<String>());
 	}
 
 	/** 
