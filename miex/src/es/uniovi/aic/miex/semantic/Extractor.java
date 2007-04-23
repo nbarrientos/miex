@@ -150,7 +150,7 @@ public class Extractor
 	 * @param zone 
 	 * @return 
 	 */
-	private List myTaggedYield(Tree t, List ty, ArrayList<String> phrase)
+	private List myTaggedYield(Tree t, Sentence ty, ArrayList<String> phrase)
 	{
 		Tree[] kids = t.children();
 
