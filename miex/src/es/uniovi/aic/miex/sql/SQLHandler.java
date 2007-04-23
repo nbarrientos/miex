@@ -428,7 +428,8 @@ public class SQLHandler
 
     try
     {
-			String hashCode = MD5.gen(plainCode);	
+			String hashCode = MD5.gen(plainCode);
+			//String hashCode = plainCode;
 
       stmt = this.createStatement();
 

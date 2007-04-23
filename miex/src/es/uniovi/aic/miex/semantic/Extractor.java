@@ -156,8 +156,6 @@ public class Extractor
 
     if (kids.length == 1 && kids[0].isLeaf())
     {
-//			System.out.println("Camino para la palabra " + kids[0].label().value() + " " + phrase);
-
       ExtendedTaggedWord stw = new ExtendedTaggedWord(kids[0].label().value(), t.label().value(), phrase);
 
       ty.add(stw);

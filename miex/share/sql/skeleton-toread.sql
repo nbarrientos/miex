@@ -49,7 +49,7 @@ CREATE TABLE category( category_id int NOT NULL AUTO_INCREMENT, string varchar(2
 
 ---- propertylist = (@propertylist_id, hashCode)
 
-CREATE TABLE propertylist( propertylist_id int NOT NULL AUTO_INCREMENT, hashCode varchar(200) NOT NULL, PRIMARY KEY (propertylist_id) ) TYPE = INNODB;
+CREATE TABLE propertylist( propertylist_id int NOT NULL AUTO_INCREMENT, hashCode char(40) NOT NULL, PRIMARY KEY (propertylist_id) ) TYPE = INNODB;
 
 ---
 ---> Relationship tables (1:M)
