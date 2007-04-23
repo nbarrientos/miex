@@ -432,7 +432,7 @@ public class SQLHandler
 
       stmt = this.createStatement();
 
-     	query = "SELECT propertylist_id " + "FROM propertylist WHERE hashCode='" + hashCode + "'";
+     	query = "SELECT propertylist_id FROM propertylist WHERE hashCode='" + hashCode + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -455,6 +455,7 @@ public class SQLHandler
         out = rs.getInt(1);
       }
 
+			// This list do not exist, so we need to insert it into the relationship table propproplist
 			for(String foo: _list)
 			{
 				int prop_id = addProperty(1,foo);
