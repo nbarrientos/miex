@@ -15,7 +15,7 @@ IMAGES= images/build/bdd-e-r.png images/build/evolution.png
 
 all: $(PFC).pdf
 
-$(NAME).pdf: dirs $(IMAGES)	
+$(PFC).pdf: dirs $(IMAGES)	
 #	umbrello --export png --directory images/uml/ uml/swaml.xmi 2> /dev/null
 #	umbrello --export png --directory images/uml/ uml/swaml-clases.xmi 2> /dev/null
 	rubber --pdf $(PFC).tex
