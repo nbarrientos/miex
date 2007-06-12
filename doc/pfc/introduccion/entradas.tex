@@ -3,24 +3,26 @@
 En la siguiente sección se explicarán todos los aspectos relevantes a los
 ficheros de entrada que procesará MIEX.
 
-\subsection{XML}
+Los ficheros de entrada con los que va a interacturar MIEX están todos en
+formato XML, lo cual facilita un poco el tratamiento y análisis del contenido.
 
-Los ficheros de entrada está en formato XML, en primer lugar vamos a ver qué es
-XML. La definición, extraida
-de Wikipedia\footnote{http://es.wikipedia.org/wiki/XML} es la siguiente:
+\subsection{¿Qué es XML?}
 
-\textit{«XML, sigla en inglés de eXtensible Markup Language («lenguaje de
+XML, sigla en inglés de eXtensible Markup Language («lenguaje de
 marcas extensible»), es un metalenguaje extensible de etiquetas desarrollado
 por el World Wide Web Consortium (W3C). Es una simplificación y adaptación
 del SGML y permite definir la gramática de lenguajes específicos (de la
 misma manera que HTML es a su vez un lenguaje definido por SGML). Por lo
 tanto XML no es realmente un lenguaje en particular, sino una manera de
-definir lenguajes para diferentes necesidades».}
+definir lenguajes para diferentes necesidades.
+
+Fuente: Wikipedia\footnote{http://es.wikipedia.org/wiki/XML}
 
 \subsection{El lenguaje utilizado}
 
-El lenguaje utilizado en los ficheros de entrada corresponde al siguiente
-\textit{schema}
+El lenguaje que se define utilizando XML para representar las colecciones
+satisface la siguiente plantilla (más conocido por su nombre
+en inglés, \textit{XML Schema}).
 
 \begin{Verbatim}[fontsize=\relsize{-2}]
 <?xml version="1.0"?>
@@ -28,35 +30,26 @@ El lenguaje utilizado en los ficheros de entrada corresponde al siguiente
 
 <xs:complexType name="categoriestype">
  <xs:sequence>
-
   <xs:element name="D" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-
  </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="doctype">
   <xs:all>
-
-  <xs:element name="TOPIC" type="categoriestype" minOccurs="1" maxOccurs="1"/>
-
-  <xs:element name="TITLE" type="xs:string" maxOccurs="1"/>
-
-  <xs:element name="BODY" type="xs:string" minOccurs="1" maxOccurs="1"/>
-
+   <xs:element name="TOPIC" type="categoriestype" minOccurs="1" maxOccurs="1"/>
+   <xs:element name="TITLE" type="xs:string" maxOccurs="1"/>
+   <xs:element name="BODY" type="xs:string" minOccurs="1" maxOccurs="1"/>
   </xs:all>
 </xs:complexType>
 
 <xs:element name="COLLECTION">
 <xs:complexType>
-  <xs:sequence>
-
-    <xs:element name="DOCTRAIN" type="doctype" minOccurs="0"
+ <xs:sequence>
+   <xs:element name="DOCTRAIN" type="doctype"
+minOccurs="0" maxOccurs="unbounded"/>
+  <xs:element name="DOCTEST" type="doctype" minOccurs="0"
 maxOccurs="unbounded"/>
-
-    <xs:element name="DOCTEST" type="doctype" minOccurs="0"
-maxOccurs="unbounded"/>
-
-  </xs:sequence>
+ </xs:sequence>
 </xs:complexType>
 </xs:element>
 
@@ -124,8 +117,8 @@ y \textit{engine}.
 \subsection{Adaptando ficheros mal formados}
 
 Los ficheros de colección para los que inicialmente fue diseñado MIEX no tenían
-un formato correcto. Concretamente el XML no incluía nodo raíz ni cerraba
+un formato correcto, concretamente el XML no incluía nodo raíz ni cerraba
 correctamente las etiquetas. Para paliar este problema, se han desarrollado un
 par de herramientas que permiten fácilmente la adaptación al formato correcto
-de los ficheros problemáticos. Se proporcionará más información en los próximos
-capítulos.
+de los ficheros problemáticos. Se proporcionará más información en los
+siguientes capítulos.
