@@ -11,7 +11,8 @@
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
 # General options
-CLASSPATH = 'lib/JSAP-2.1.jar:lib/sax2.jar:lib/stanford-parser-2006-06-11.jar:lib/mysql-connector-java-5.0.5-bin.jar'
+CBASEDIR = /usr/lib/java
+CLASSPATH = '$(CBASEDIR)/JSAP-2.1.jar:$(CBASEDIR)/sax2.jar:$(CBASEDIR)/stanford-parser-2006-06-11.jar:$(CBASEDIR)/mysql-connector-java-5.0.5-bin.jar'
 PATHTOMIEX = src/es/uniovi/aic/miex
 MIEXVERSION = 0.1
 

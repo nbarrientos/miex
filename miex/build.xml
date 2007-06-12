@@ -30,7 +30,8 @@
 <!-- ===================== Default Classpath ========================== -->
 
 	<path id="default.classpath">
-		<fileset dir="${basedir}/lib">
+<!--		<fileset dir="${basedir}/lib"> -->
+				<fileset dir="/usr/lib/java">
 			<include name="*.jar"/>
 		</fileset>
 	</path>
