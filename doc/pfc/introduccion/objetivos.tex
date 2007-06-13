@@ -1,14 +1,62 @@
 \section{Objetivos}
 
-Los objetivos de este proyecto son los siguientes:
+Entre otras características, el principal objetivo de MIEX es analizar
+sintácticamente colecciones de pequeños documentos escritos en inglés. En el
+siguiente capítulo se verá con más profundidad el funcionamiento interno, pero
+si por ahora nos abstraemos, lo primero debería de ser separar cada documento
+en oraciones y posteriormente analizarlas.
+
+Se realizan dos tipos de análisis, a nivel de palabra individual, y a nivel de
+relaciones entre palabras, vamos a ver un ejemplo. Veamos que análisis produce
+el analizador para la siguiente oración.
+
+\textit{The Debian Project is an association of individuals.}
+
+La representación más vistosa del resultado es en forma de árbol, por lo que lo
+dibujaremos así. Para saber el significado de cada etiqueta no tiene más que
+echar un vistazo al anexo \ref{sec:penntags}.
+
+\Tree[.ROOT [.S [.NP [.DT The ] [.NNP Debian ] [.NNP Project ] ] [.VP [.VBZ is
+] [.NP [.NP [.DT an ] [.NN association ] ] [.PP [.IN of ] [.NP [.NNS individuals
+ ] ] ] ] ] ] ]
+ 
+
+Se puede ver que se asignan etiquetas a nivel de palabra, a nivel de grupo
+frasal y a nivel clausal, tal y como se hace habitualmente en cualquier análisis
+sintáctico.
+
+Aprovecharemos también que el analizador calcula las dependencias entra
+palabras:
+
+\begin{Verbatim}[fontsize=\relsize{-1}]
+det(Project-3, The-1)
+nn(Project-3, Debian-2)
+nsubj(association-6, Project-3)
+cop(association-6, is-4)
+det(association-6, an-5)
+prep_of(association-6, individuals-8)
+\end{Verbatim}
+
+Tanto el análisis a nivel de palabra (y obviamente a nivel de grupo) como las
+relacciones entre las palabras será la información que nos va a interesar
+guardar.
+
+En resumen, una buena visión global de los objetivos de MIEX es la siguientes:
 
 \begin{itemize}
-	\item Análisis de documentos XML.
-	\item Comprobación de la integridad de los documentos XML.
-	\item Utilización de ficheros de configuración.
-	\item Uso del Stanford Parser para extraer toda la información posible
-de los documentos analizados.
-	\item Análisis de la información recabada por el Stanford Parser.
-	\item Limpieza de información inútil.
-	\item Diseño de una base de datos para guardar la información extraida.
+	\item Comprobación de integridad y análisis de documentos XML.
+	\item Uso del Stanford Parser para extraer los análisis
+sintácticos de las oraciones así como las relaciones entre las palabras.
+	\item Análisis y limpieza de la información recabada.
+	\item Almacenamiento en un medio flexible para posteriormente realizar
+consultas a medida.
 \end{itemize}
+
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[bb=0 0 148 240]{images/miex.png}
+	% miex.png: 257x416 pixel, 125dpi, 5.22x8.45 cm, bb=0 0 148 240
+\end{center}
+\caption{Esquema de funcionamiento de MIEX}
+\end{figure} 
