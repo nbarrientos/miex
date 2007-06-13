@@ -1,36 +1,43 @@
-# MIEX PFC Makefile
-# based on SWAML PFC Makefile
+# MIEX PFC Book Makefile
 
 # Depends on:
-# 	* Make
+# 	* GNU Make
 #		* Dia
 #		* Rubber 
 #   * TeTeX || TeXlive
 
-#DESTDIR =
+IMAGES= bdd-e-r evolution
+AUXEXT= aux log dvi toc pdf bbl blg lof bak lot out
 
-PFC = miex
+all: build 
 
-IMAGES= images/build/bdd-e-r.png images/build/evolution.png
-
-all: $(PFC).pdf
-
-$(PFC).pdf: dirs $(IMAGES)	
+build: dirs images	
 #	umbrello --export png --directory images/uml/ uml/swaml.xmi 2> /dev/null
 #	umbrello --export png --directory images/uml/ uml/swaml-clases.xmi 2> /dev/null
-	rubber --pdf $(PFC).tex
+	rubber --pdf miex.tex
 
-dirs:
+## Directories ##
+
+dirs: dirs-stamp
+
+dirs-stamp:
 	mkdir images/build
+	touch $@
 
-images/build/%.png:  images/diagrams/%.dia
+## Images ##
+
+images: images-stamp
+
+images-stamp: dirs-stamp $(IMAGES:%=images/build/%.png)
+	touch $@
+
+images/build/%.png: images/diagrams/%.dia
 	dia -t png $? -e $@
 
-#src:
-#	python2.4 python2text.py ../../swaml/trunk/*.py #output dir?
+## Clean ##
 
 clean:
-	rm -f *.aux *.log *.dvi *.toc *.pdf *.bbl *.blg *.lof *.bak *.lot *.out
-	rm -f `find . -name "*.backup"`
-	rm -f `find . -name "*~"`
-	rm -rf images/build
+	for i in $(AUXEXT); do rm -f *.$$i;	done
+	find . -name "*.backup" | xargs rm -f
+	find . -name "*~" | xargs rm -f
+	rm -rf images/build dirs-stamp images-stamp
