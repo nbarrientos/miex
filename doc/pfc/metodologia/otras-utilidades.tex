@@ -2,4 +2,45 @@
 
 \subsection{Scripts de transformación}
 
+Aunque estos scripts tienen una funcionalidad muy concreta y han sido diseñados
+para un caso de uso muy especial se distribuyen igualmente por si resultaran
+necesarios.
+
+Durante el periodo de pruebas se detectó la existencia de algunos ficheros de
+entrada que no estaban bien formados, por lo que el analizador no los era capaz
+de tratar correctamente. El script llamado \textbf{\texttt{fixxml.sh}} situado
+en el directorio \texttt{share/utils} toma como argumento un fichero a arreglar
+e imprime el fichero correcto por la salida estándar.
+
+Los errores que éste script arregla son los siguientes:
+
+\begin{itemize}
+	\item Añade un nodo raíz al ficheros de
+colección (\texttt{\textless{}collection\textgreater{}} y
+\texttt{\textless{}/collection\textgreater{}})
+	\item Finaliza correctamente las etiquetas de las secciones
+\texttt{doctrain} y \texttt{doctest} de ficheros de colección erróneos
+(por ejemplo, los que comienzen por
+\texttt{\textless{}doctrain\textgreater{}} y acaben con
+\texttt{\textless{}/doc\textgreater{}}, se cambiaría esta última etiqueta por
+\texttt{\textless{}/doctrain\textgreater{}})
+\end{itemize}
+
+\textbf{Recuerde}: MIEX no funcionará si los ficheros de entrada no cumplen el
+\textit{schema} proporcionado. Puede obtener más información acerca del formato
+de los ficheros de entrada en la sección \ref{sec:schema} de este mismo libro.
+
 \subsection{Integración con FK}
+
+Como herramienta experimental, en el directorio \texttt{misc/fk} se distribuye
+un \textit{wrapper} para poder invocar fácilmente MIEX (y por consiguiente la
+JVM\footnote{Java Virtual Machine})
+desde FK\footnote{http://www.aic.uniovi.es/pir/Software.htm}.
+
+Hasta el momento no existe ninguna manera de configurar el \textit{wrapper} en
+tiempo de ejecución por lo que probablemente tendrá que modificar algún
+\textit{path} en el fichero fuente antes de compilar y ejecutar para que
+funcione correctamente.
+
+Finalmente, el autor de esta documentación \textbf{no recomienda} lanzar MIEX
+utilizando FK, utilice el sistema habitual para realizar las ejecuciones.
