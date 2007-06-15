@@ -31,4 +31,4 @@ if [ ! -f $1 ]; then
   exit -1;
 fi
 
-awk -f fixxml-1b-parser.awk $1
+awk -f fixxml.awk $1
