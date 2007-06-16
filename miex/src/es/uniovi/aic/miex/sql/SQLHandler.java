@@ -50,7 +50,8 @@ public class SQLHandler
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+			System.exit(-1);
 		}
 	}
 
@@ -74,7 +75,8 @@ public class SQLHandler
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+      System.err.println(e.getMessage());
+			System.exit(-1);
 		}
 	}
 
@@ -113,7 +115,8 @@ public class SQLHandler
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
+      System.err.println(e.getMessage());
+      System.exit(-1);
 		}
 
 	}
@@ -163,7 +166,8 @@ public class SQLHandler
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
 		}
 		
 		return out;
@@ -202,7 +206,8 @@ public class SQLHandler
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
 		}
 
 	}
@@ -253,7 +258,8 @@ public class SQLHandler
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
     }
 
 		return out;
@@ -290,7 +296,8 @@ public class SQLHandler
 	    }
 	    catch (Exception e)
 	    {
-		     e.printStackTrace();
+				System.err.println(e.getMessage());
+				System.exit(-1);
     	}
   	}
 	}
@@ -341,7 +348,8 @@ public class SQLHandler
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
     }
 
     return out;
@@ -399,7 +407,8 @@ public class SQLHandler
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
     }
 
     return out;
@@ -472,7 +481,8 @@ public class SQLHandler
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      System.err.println(e.getMessage());
+      System.exit(-1);
     }
 
     return out;
@@ -544,7 +554,8 @@ public class SQLHandler
       }
       catch (Exception e)
       {
-         e.printStackTrace();
+     	 System.err.println(e.getMessage());
+     	 System.exit(-1);
       }
     }
   }
@@ -619,7 +630,8 @@ public class SQLHandler
       }
       catch (Exception e)
       {
-         e.printStackTrace();
+	      System.err.println(e.getMessage());
+				System.exit(-1);
       }
     }
   }

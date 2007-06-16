@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<COLLECTION>
+<DOCTRAIN>
+<TOPIC> <D>debian</D> <D>computing</D> <D>linux</D> </TOPIC>
+<TITLE>
+Debian project
+</TTLE>
+<BODY>
+Debian is a free operating system (OS) for your computer. An operating system is the set of basic programs and utilities that make your computer run. Debian uses the Linux kernel (the core of an operating system), but most of the basic OS tools come from the GNU project; hence the name GNU/Linux.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>computing</D> <D>search</D> <D>engine</D> </TOPIC>
+<TITLE>
+Google is great.
+</TITLE>
+<BODY>
+Google Inc. (NASDAQ: GOOG and LSE: GGEA) is an American public corporation, specializing in Internet search and online advertising. The company had 10,674 full-time employees as of December 31, 2006, and is based in Mountain View, California.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>computing</D> <D>gentoo</D> <D>linux</D> </TOPIC>
+<TITLE>
+Gentoo Linux
+</TITLE>
+<BODY>
+The Gentoo Linux operating system is a Linux distribution named after 
+the Gentoo penguin. It is designed to be modular, portable, 
+easy to maintain, flexible, and optimized for the
+users machine. All tools and utilities are built from source code.
+For convenience, however, several large software packages are also
+available as precompiled binaries for various architectures via the
+Portage system.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>computing</D> <D>linux</D> <D>redhat</D> </TOPIC>
+<TITLE>
+RedHat Linux
+</TITLE>
+<BODY>
+The company is best known for its enterprise-class operating system,
+Red Hat Enterprise Linux and more recently through the acquisition of
+open source enterprise middleware vendor JBoss. Red Hat provides
+operating system platforms along with middleware, applications, and
+management solutions, as well as support, training, and consulting
+services.
+
+In 1993 Bob Young incorporated the ACC Corporation, a catalog business
+that sold Linux and UNIX software accessories. Then in 1994 Marc Ewing
+created his own version of Linux, which he named Red Hat Linux. Ewing
+released it in October, and it became known as the Halloween release.
+Young bought Ewings business in 1995, and the two merged to become
+Red Hat Software with Young serving as CEO.
+</BODY>
+</DOCTRAIN>
+</COLLECTION>
