@@ -1,23 +1,36 @@
 \section{Funcionamiento interno}
 
-Como puede observar en la figura \ref{fig:esquema-funcionamiento}, lo que
-hasta ahora se ha comentado en esta sección no trata
-en profundidad cada elemento del código fuente, es decir, no se describen
-minuciosamente cada una de las clases, métodos, etcétera, más bien se hace una
-descripción abstrata de cada módulo del programa. La razón de esto, es que junto
-a MIEX se distribuye documentación del código generada con
-Javadoc\footnote{http://java.sun.com/j2se/javadoc/} que puede ser utilizada como
-referencia para posibles usos posteriores del proyecto.
+Como puede observar en la figura \ref{fig:esquema-funcionamiento} en primer
+lugar se analiza el contenido tanto de las opciones pasadas a través de la
+línea de comandos como a través del fichero de configuración. Seguidamente, si
+el usuario así lo especifica se crea una base de datos vacía y se comprueba la
+integridad de los ficheros de entrada, utilizando el \textit{schema}
+seleccionado.
 
-Para generar la documentación, no tiene nada más que ejecutar \texttt{make doc}
-(si usa GNU Make) o \texttt{ant doc} (si usa Ant) en el diretorio raíz donde
-tenga las fuentes del programa.
+Si todo ha ido bien, se procede con el análisis de las colecciones siguiendo el
+cauce que se establece en la figura.
 
 \begin{figure}[p]
 \label{fig:esquema-funcionamiento}
 \begin{center}
-\includegraphics[width=347pt,height=690pt]{images/build/evolution.pdf}
+%\includegraphics[width=347pt,height=690pt]{images/build/evolution.pdf}
+\includegraphics[scale=0.35]{images/build/evolution.pdf}
 % evolution.png: 694x1380 pixel, 51dpi, 34.70x69.00 cm, bb=0 0 984 1956
 \end{center}
 \caption{Esquema de funcionamiento interno}
-\end{figure} 
+\end{figure}
+ 
+Como paso opcional dentro del proceso de tratamiento, existe la posibilidad de
+crear un fichero de texto por cada categoría encontrada con todas las oraciones
+que se vayan analizando pertenecientes a esa categoría. Por otro lado, el
+filtrado trata de eliminar palabras vacías y eliminar elementos inútiles del
+análisis, como signos de puntuación.
+
+Como se observa en los pasos finales, también es opcional la normalización de
+las palabras analizadas. Básicamente el proceso de normalización trata de
+aplicar el algoritmo de Porter. De cara a analizar los resultados
+posteriormente, una palabra normalizada de una que no lo está se distingue con
+una marca en la base de datos, por lo que realizar filtros resulta bastante
+sencillo.
+
+\newpage

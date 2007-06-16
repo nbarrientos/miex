@@ -1,1 +1,97 @@
 \section{Los ficheros de configuración}
+
+MIEX utiliza un fichero de configuración de tipo \textit{clave-valor} para
+personalizar el comportamiento del programa. El fichero de configuración de
+ejemplo que se distribuye con el software está bastante explicado, por lo que en
+esta sección simplemente se hará referencia a él.
+
+\begin{Verbatim}[fontsize=\relsize{-2}]
+# BDHostname
+#   Type:     String
+#   Default:  -
+#   Required: Yes
+#   Desc:     Self-explaining.
+#   See also: BD*
+BDHostname=192.168.0.1
+
+# BDUser
+#   Type:     String
+#   Default:  -
+#   Required: Yes
+#   Desc:     Self-explaining.
+#   See also: BD*
+BDUser=foouser
+
+# BDPassword
+#   Type:     String
+#   Default:  -
+#   Required: Yes
+#   Desc:     Self-explaining.
+#   See also: BD*
+BDPassword=foopasswd
+
+# BDName
+#   Type:     String
+#   Default:  -
+#   Required: Yes
+#   Desc:     Self-explaining.
+#   See also: BD*
+BDName=miex
+
+# Validate
+#   Type:     Yes/No (boolean)
+#   Default:  No
+#   Required: No
+#   Desc:     Tries to validate each collection file using XML Schema.
+#   See also: XMLschemaURI
+Validate=Yes
+
+# XMLschemaURI
+#   Type:     String
+#   Default:  /usr/share/miex/schemas/default.xsd
+#   Required: No
+#   Desc:     Path to a XML Schema used to validate XML inputs.
+#   See also: Validate
+XMLschemaURI=share/xml/collection.xsd
+
+# Dump
+#   Type:     Yes/No (boolean)
+#   Default:  No
+#   Required: No
+#   Desc:     Creates one file per category containing sentences.
+#   See also: DumpDir
+#Dump=Yes
+
+# DumpDir
+#   Type:     String
+#   Default:  /tmp
+#   Required: No
+#   Desc:     Path to a directory where the files will be dumped.
+#   See also: Dump
+#DumpDir=/tmp
+
+# CreateDB
+#   Type:     Yes/No (boolean)
+#   Default:  No
+#   Required: No
+#   Desc:     Injects the template sql file into the database before do any
+insert. USE CAREFULLY.
+#   See also: SQLSkeleton
+CreateDB=Yes
+
+# SQLSkeleton
+#   Type:     String
+#   Default:  /usr/share/miex/sql/skeleton.sql
+#   Required: No
+#   Desc:     Path to an SQL file containing the DB creation statements
+#   See also: CreateDB
+SQLSkeleton=share/sql/skeleton-toread.sql
+
+# Normalize
+#   Type:     Yes/No (boolean)
+#   Default:  No
+#   Required: No
+#   Desc:     If 'Yes' MIEX uses Porter and inserts normalized words as well.
+#   See also: -
+#Normalize=Yes
+\end{Verbatim}

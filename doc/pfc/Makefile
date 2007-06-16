@@ -5,6 +5,7 @@
 #		* Dia
 #		* Rubber 
 #   * TeTeX || TeXlive
+#   * Perl
 
 IMAGES= bdd-e-r evolution
 AUXEXT= aux log dvi toc pdf bbl blg lof bak lot out
