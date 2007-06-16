@@ -39,16 +39,19 @@
 <!-- ===================== Build Environment =========================== -->
 
 	<property name="build.home"    value="${basedir}/build"/>
+	<property name="dist.home"     value="${basedir}/dist"/>
+	<property name="prefix"        value="/usr"/>
 
 <!--  ==================== All ==================== -->
 
-	<target name="all" depends="jar,doc"
+	<target name="all" depends="jar,doc,dist"
 		description="Clean up and produce JARs and documentation"/>
 
 <!--  ==================== Clean ==================== -->
 
 	<target name="clean" description="Delete all generated files and directories">
 		<delete dir="${build.home}/"/>
+		<delete dir="${dist.home}"/>
 	</target>
 
 <!--  ==================== Init ==================== -->
@@ -134,5 +137,38 @@
     <echo message="Operating system architecture: ${os.arch}"/>
     <echo message="Operating system version: ${os.version}"/>
   </target>
+
+<!--  =============== Install ================ -->
+
+	<target name="install" depends="dist" description="Installs MIEX (run as root)">
+		<copy todir="${prefix}">
+			<fileset dir="${dist.home}"/>
+		</copy>
+		<chmod file="${prefix}/bin/miex" perm="755"/>
+	</target>
+
+<!--  =============== Dist preparation ================ -->
+
+	<target name="dist" depends="dist.dirs" description="Prepares the binary distribution directories">
+		<copy file="${basedir}/build/lib/miex.jar" todir="${dist.home}/lib/miex"/>
+		<copy file="${basedir}/miex.sh" tofile="${dist.home}/bin/miex"/>
+		<copy file="${basedir}/share/sql/skeleton-toread.sql" tofile="${dist.home}/share/miex/sql/skeleton.sql"/>
+		<copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xml"/>
+		<copy file="${basedir}/etc/example-default.conf" tofile="${dist.home}/share/doc/miex/examples/conf/example.conf"/>
+		<copy file="${basedir}/share/input/collection-well-formed-easy.xml" tofile="${dist.home}/share/doc/miex/examples/input/example.xml"/>
+		<copy todir="${dist.home}/share/doc/miex/api">
+			<fileset dir="${basedir}/build/doc/api"/>
+		</copy>
+	</target>
+
+	<target name="dist.dirs">
+		<mkdir dir="${dist.home}/bin"/>
+		<mkdir dir="${dist.home}/lib/miex"/>
+		<mkdir dir="${dist.home}/share/miex/sql"/>	
+		<mkdir dir="${dist.home}/share/miex/schemas"/>
+		<mkdir dir="${dist.home}/share/doc/miex/examples/conf"/>
+		<mkdir dir="${dist.home}/share/doc/miex/examples/input"/>
+		<mkdir dir="${dist.home}/share/doc/miex/api"/>
+	</target>
 
 </project>
