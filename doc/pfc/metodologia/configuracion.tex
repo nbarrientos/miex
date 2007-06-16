@@ -1,9 +1,11 @@
 \section{Los ficheros de configuración}
 
-MIEX utiliza un fichero de configuración de tipo \textit{clave-valor} para
+MIEX utiliza un fichero de configuración de tipo \textit{clave=valor} para
 personalizar el comportamiento del programa. El fichero de configuración de
 ejemplo que se distribuye con el software está bastante explicado, por lo que en
 esta sección simplemente se hará referencia a él.
+
+Las opciones de configuración existentes hasta la fecha son las siguientes:
 
 \begin{Verbatim}[fontsize=\relsize{-2}]
 # BDHostname
@@ -12,7 +14,6 @@ esta sección simplemente se hará referencia a él.
 #   Required: Yes
 #   Desc:     Self-explaining.
 #   See also: BD*
-BDHostname=192.168.0.1
 
 # BDUser
 #   Type:     String
@@ -20,7 +21,6 @@ BDHostname=192.168.0.1
 #   Required: Yes
 #   Desc:     Self-explaining.
 #   See also: BD*
-BDUser=foouser
 
 # BDPassword
 #   Type:     String
@@ -28,7 +28,6 @@ BDUser=foouser
 #   Required: Yes
 #   Desc:     Self-explaining.
 #   See also: BD*
-BDPassword=foopasswd
 
 # BDName
 #   Type:     String
@@ -36,7 +35,6 @@ BDPassword=foopasswd
 #   Required: Yes
 #   Desc:     Self-explaining.
 #   See also: BD*
-BDName=miex
 
 # Validate
 #   Type:     Yes/No (boolean)
@@ -44,7 +42,6 @@ BDName=miex
 #   Required: No
 #   Desc:     Tries to validate each collection file using XML Schema.
 #   See also: XMLschemaURI
-Validate=Yes
 
 # XMLschemaURI
 #   Type:     String
@@ -52,7 +49,6 @@ Validate=Yes
 #   Required: No
 #   Desc:     Path to a XML Schema used to validate XML inputs.
 #   See also: Validate
-XMLschemaURI=share/xml/collection.xsd
 
 # Dump
 #   Type:     Yes/No (boolean)
@@ -60,7 +56,6 @@ XMLschemaURI=share/xml/collection.xsd
 #   Required: No
 #   Desc:     Creates one file per category containing sentences.
 #   See also: DumpDir
-#Dump=Yes
 
 # DumpDir
 #   Type:     String
@@ -68,7 +63,6 @@ XMLschemaURI=share/xml/collection.xsd
 #   Required: No
 #   Desc:     Path to a directory where the files will be dumped.
 #   See also: Dump
-#DumpDir=/tmp
 
 # CreateDB
 #   Type:     Yes/No (boolean)
@@ -77,7 +71,6 @@ XMLschemaURI=share/xml/collection.xsd
 #   Desc:     Injects the template sql file into the database before do any
 insert. USE CAREFULLY.
 #   See also: SQLSkeleton
-CreateDB=Yes
 
 # SQLSkeleton
 #   Type:     String
@@ -85,7 +78,6 @@ CreateDB=Yes
 #   Required: No
 #   Desc:     Path to an SQL file containing the DB creation statements
 #   See also: CreateDB
-SQLSkeleton=share/sql/skeleton-toread.sql
 
 # Normalize
 #   Type:     Yes/No (boolean)
@@ -93,5 +85,9 @@ SQLSkeleton=share/sql/skeleton-toread.sql
 #   Required: No
 #   Desc:     If 'Yes' MIEX uses Porter and inserts normalized words as well.
 #   See also: -
-#Normalize=Yes
 \end{Verbatim}
+
+Una vez instalado el programa como se indica en el siguiente capítulo, se puede
+tomar como plantilla el fichero de ejemplo que se encuentra en el directorio:
+
+\texttt{\$PREFIX/share/doc/miex/examples/conf}
