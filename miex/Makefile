@@ -7,6 +7,7 @@
 # Targets:
 #  - miex: Build all .java files and store .class in lib/miex.jar
 #  - doc: Create javadoc of all packages listed in PACKAGES.
+#  - install: Installs MIEX into PREFIX (you probably will need run this target as root)
 #
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
@@ -72,7 +73,7 @@ install:
 	install -D build/lib/miex.jar $(PREFIX)/usr/lib/miex/miex.jar
 	install miex.sh $(PREFIX)/usr/bin/miex
 	install -D -m 644 share/sql/skeleton-toread.sql $(PREFIX)/usr/share/miex/sql/skeleton.sql
-	install -D -m 644 share/xml/collection.xsd $(PREFIX)/usr/share/miex/schemas/default.xml
+	install -D -m 644 share/xml/collection.xsd $(PREFIX)/usr/share/miex/schemas/default.xsd
 	install -D -m 644 etc/example-default.conf $(PREFIX)/usr/share/doc/miex/examples/conf/example.conf
 	install -D -m 644 share/input/collection-well-formed-easy.xml $(PREFIX)/usr/share/doc/miex/examples/input/example.xml
 	cp -r build/doc/api $(PREFIX)/usr/share/doc/miex

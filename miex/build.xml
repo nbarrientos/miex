@@ -153,7 +153,7 @@
 		<copy file="${basedir}/build/lib/miex.jar" todir="${dist.home}/lib/miex"/>
 		<copy file="${basedir}/miex.sh" tofile="${dist.home}/bin/miex"/>
 		<copy file="${basedir}/share/sql/skeleton-toread.sql" tofile="${dist.home}/share/miex/sql/skeleton.sql"/>
-		<copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xml"/>
+		<copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xsd"/>
 		<copy file="${basedir}/etc/example-default.conf" tofile="${dist.home}/share/doc/miex/examples/conf/example.conf"/>
 		<copy file="${basedir}/share/input/collection-well-formed-easy.xml" tofile="${dist.home}/share/doc/miex/examples/input/example.xml"/>
 		<copy todir="${dist.home}/share/doc/miex/api">
