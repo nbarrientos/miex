@@ -8,6 +8,7 @@
 
 IMAGES= bdd-e-r evolution
 AUXEXT= aux log dvi toc pdf bbl blg lof bak lot out
+TEMPFILE=/tmp/miex.build.eps
 
 all: build 
 
@@ -28,11 +29,12 @@ dirs-stamp:
 
 images: images-stamp
 
-images-stamp: dirs-stamp $(IMAGES:%=images/build/%.png)
+images-stamp: dirs-stamp $(IMAGES:%=images/build/%.pdf)
 	touch $@
 
-images/build/%.png: images/diagrams/%.dia
-	dia -t png $? -e $@
+images/build/%.pdf: images/diagrams/%.dia
+	dia -t eps $? -e $(TEMPFILE)
+	perl tools/epstopdf $(TEMPFILE) --outfile=$@
 
 ## Clean ##
 
