@@ -10,8 +10,8 @@ package es.uniovi.aic.miex.config;
 
 import java.util.Properties;
 import java.util.HashMap;
+import java.util.Enumeration;
 import java.io.*;
-import java.util.*;
 import java.lang.Exception;
 
 /** 
@@ -122,11 +122,9 @@ public class ConfigFile
     try
     {
       real = getRealName(stt);
-      //System.out.println("Real name for " + stt + " is " + real);
     }
     catch(Exception e) // If real field name is requested and not found, using default value
     {
-      //System.err.println("\n\tW: Using default bahaviour for field" + stt);
 			return defaultValuesBoolean.get(stt.toLowerCase()).booleanValue();
     }
 		
