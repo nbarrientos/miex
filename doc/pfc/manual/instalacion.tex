@@ -1,2 +1,96 @@
 \section{Instalación}
 
+Antes de comenzar la instalación, es necesario descargar todas las dependencias
+que son las siguientes. Colocaremos los JAR correspondientes de cada biblioteca
+en el directorio \textit{/usr/lib/java}
+
+\begin{itemize}
+	\item Stanford Parser
+	\footnote{http://nlp.stanford.edu/} 
+	\begin{small}(\textgreater= 2006-06-11)\end{small}
+	
+	\item JSAP
+	\footnote{http://www.martiansoftware.com/jsap/}
+	\begin{small}(\textgreater= 2.1)\end{small}
+	 
+	\item MySQL Connector/J
+        \footnote{http://www.mysql.com/products/connector/j/}
+	\begin{small}(\textgreater= 5.0.5)\end{small}
+	 
+	\item SAX
+	\footnote{http://www.saxproject.org/}
+	\begin{small}(\textgreater= 2.0)\end{small}
+\end{itemize}
+
+Para compilar e instalar es necesario una de las siguientes herramientas.
+
+\begin{itemize}
+	\item Ant
+	\footnote{http://ant.apache.org/}
+	\item GNU Make
+	\footnote{http://www.gnu.org/software/make/}
+\end{itemize}
+
+Una vez instaladas todas estas dependencias se procederá a descargar el código
+fuente del programa. Para obtenerlo existen varios caminos.
+
+\begin{itemize}
+	\item Desde el CD-ROM que acompaña a este tomo.
+	\item Descarga de una \textit{release} desde la página web del proyecto.
+	\footnote{http://miex.sf.net/}
+	\item Desde el repositorio de fuentes del proyecto.
+\end{itemize}
+
+Para las dos primeras opciones, es suficiente con descomprimir y desempaquetar
+el \textit{tarball} de la siguiente manera (supongamos que estamos utilizando
+la versión 0.1 del software).
+
+\begin{small}
+\texttt{\$ tar xzvf miex-0.1.tar.gz}	
+\end{small}
+
+Si quiere obtener la última versión del código deberá de instalar antes
+Subversion\footnote{http://subversion.tigris.org/} y posteriormente ejecutar:
+
+\begin{small}
+\texttt{\$ svn co https://miex.svn.sf.net/svnroot/miex/trunk/miex miex}
+\end{small}
+
+Una vez que tengamos el código, nos situamos en el directorio que contenga las
+fuentes utilizando \textit{cd} y ejecutamos cualquiera de las siguientes
+órdenes, dependiendo de el sistema de construcción por el que se haya optado
+anteriormente.
+
+\begin{small}
+\texttt{\$ make}	
+\end{small}
+
+O bien, si prefiere usar Ant,
+
+\begin{small}
+\texttt{\$ ant}	
+\end{small}
+
+Finalmente, para instalarlo en el sistema bajo el \textit{prefix} \texttt{/usr}
+es necesario teclear lo siguiente.
+
+\begin{small}
+\texttt{\$ sudo make install}	
+\end{small}
+
+O bien, si prefiere usar Ant,
+
+\begin{small}
+\texttt{\$ sudo ant install}	
+\end{small}
+
+Si no utiliza Sudo, simplemente haga que su UID efectivo (y/o real) sea 0, (por
+ejemplo con \textit{su}) y ejecute la misma orden sin precederla
+por \textit{sudo}.
+
+
+
+
+
+
+

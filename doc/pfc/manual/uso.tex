@@ -1,1 +1,81 @@
 \section{Utilización}
+
+Antes de empezar a ver algún ejemplo de utilización, es necesario contar con un
+sistema de gestión de bases de datos MySQL\footnote{http://www.mysql.com/}
+instalado en alguna máquina, bien sea la propia máquina donde se vaya a ejecutar
+MIEX o una máquina remota.
+
+La mayoría de las distribuciones de GNU/Linux distribuyen MySQL mediante su
+sistema de paquetería, por ejemplo en Debian GNU/Linux sería suficiente con
+ejecutar como root:
+
+\begin{small}
+\texttt{\# sudo apt-get install mysql-server}	
+\end{small}
+
+Posteriormente utilice el manual de MySQL para crear una base de datos vacía y
+un usuario que tenga permisos de escritura en la misma. Si no se encuentra
+cómodo con el cliente clásico de MySQL puede instalar algún gestor del estilo
+de phpMyAdmin\footnote{http://www.phpmyadmin.net/}.
+
+En este punto MIEX ya debería de estar correctamente instalado, puede
+comprobarlo ejecutándolo sin ningún argumento. Debería de obtener una salida
+similar a esta:
+
+\begin{Verbatim}[fontsize=\relsize{-1}]
+$ miex
+Error: Parameter 'configFileURI' is required.
+Error: Parameter 'files' is required.
+
+Usage: ./run
+                (-c|--config) <confFile.conf> files1 files2 ... filesN
+...
+\end{Verbatim}
+
+Antes de comenzar a analizar documentos, es necesario crear un fichero de
+configuración para ajustar el comportamiento del programa a los resultados que
+se quieren obtener. Lo más sencillo es tomar como plantilla el que se encuentra
+en \url{/usr/share/doc/miex/examples} y hacer las mofidificaciones pertinentes.
+
+Los valores por omisión deberían de ser adecuados por lo que sólo debería de
+rellenar las claves que configuran las credenciales para acceder a la base de
+datos y la clave \textit{CreateDB} que, al menos la primera vez, debería de
+estar a \texttt{Yes}.
+
+En el fichero de configuración de ejemplo, en forma de comentarios, se explica
+la utilidad de cada una de las opciones por lo que no se volverán a explicar c
+ada una de ellas de nuevo en este capítulo.
+
+Como ejemplo, vamos a analizar el fichero de ejemplo que se distribuye al
+instalar el programa, localizado en \url{/usr/share/doc/miex/examples/input/}
+
+Suponiendo que el fichero de configuración está situado en el directorio
+actual, procedamos a la ejecución.
+
+\begin{small}
+\texttt{\$ miex -c example.conf /usr/share/doc/miex/examples/input/example.xml}	
+\end{small}
+
+Nótese que, por seguridad, antes de comenzar el análisis es necesario que usted
+confirme que quiere borrar el contenido actual de la base de datos (en el caso
+de que existiera).
+
+Como el programa es bastante \textit{verboso} se puede ver fácilmente como
+procesa cada colección y cada documento. Separa el título del cuerpo y analiza
+tanto las dependencias como las propiedades de cada palabra por separado. A
+continuación se explica el significado de cada una de las letras que muestran la
+evolución del proceso a nivel de oración.
+
+\begin{itemize}
+	\item \textbf{C} - La oración está \textit{cacheada} en el
+\textit{parser}.
+	\item \textbf{R(n)} - Se han eliminado n elementos inútiles.
+	\item \textbf{F} - Se ha aplicado el filtro.
+	\item \textbf{S} - Se ha ejecutado una sentencia SQL.
+	\item \textbf{N} - Se ha aplicado el algoritmo de normalización.
+\end{itemize}
+
+Una vez procesadas las colecciones que necesite, puede construir las consultas
+que considere oportunas para obtener los datos que desee de la base de datos.
+
+
