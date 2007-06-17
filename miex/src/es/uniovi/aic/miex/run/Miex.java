@@ -144,7 +144,7 @@ public class Miex
 
 			if(collectionID < 0)
 			{
-				System.out.println("Collection already parsed");
+				System.out.println("\nCollection " + theFile.getName() + " already parsed.\n");
 				continue;
 			}
 
