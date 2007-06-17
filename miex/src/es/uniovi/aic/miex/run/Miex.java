@@ -126,7 +126,7 @@ public class Miex
 
 	private static void processFiles(String[] files, ConfigFile config, SQLHandler sql)
 	{
-		Extractor ex = new Extractor();
+		Extractor ex = new Extractor(config.getStringSetting("GrammarURI"));
 
 		GlobalFilter filter = new GlobalFilter();
 

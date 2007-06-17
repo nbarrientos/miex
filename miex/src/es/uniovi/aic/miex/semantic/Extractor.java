@@ -32,18 +32,6 @@ public class Extractor
 {
 	
 	/** 
-	 * Creates an Extractor using the default grammar file
-   * (lib/grammars/englishPCFG.ser.gz)
-	 */
-	public Extractor()
-	{
-		lp = null;
-		lastParsedSentence = null;
-		parse = null;
-		grammarName = "lib/grammars/englishPCFG.ser.gz";
-	}
-
-	/** 
 	 * Creates an Extractor using the specified grammar file 
 	 * 
 	 * @param grammar Path to a grammar file 

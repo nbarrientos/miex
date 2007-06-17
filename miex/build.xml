@@ -156,6 +156,7 @@
 		<copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xsd"/>
 		<copy file="${basedir}/etc/example-default.conf" tofile="${dist.home}/share/doc/miex/examples/conf/example.conf"/>
 		<copy file="${basedir}/share/input/collection-well-formed-easy.xml" tofile="${dist.home}/share/doc/miex/examples/input/example.xml"/>
+		<copy file="${basedir}/lib/grammars/englishPCFG.ser.gz" tofile="${dist.home}/share/miex/grammars/englishPCFG.ser.gz"/>
 		<copy todir="${dist.home}/share/doc/miex/api">
 			<fileset dir="${basedir}/build/doc/api"/>
 		</copy>
@@ -166,6 +167,7 @@
 		<mkdir dir="${dist.home}/lib/miex"/>
 		<mkdir dir="${dist.home}/share/miex/sql"/>	
 		<mkdir dir="${dist.home}/share/miex/schemas"/>
+		<mkdir dir="${dist.home}/share/miex/grammars"/>
 		<mkdir dir="${dist.home}/share/doc/miex/examples/conf"/>
 		<mkdir dir="${dist.home}/share/doc/miex/examples/input"/>
 		<mkdir dir="${dist.home}/share/doc/miex/api"/>

@@ -103,8 +103,7 @@ public class ConfigFile
 		}
 		catch(Exception e)
 		{
-			//System.err.println("\n\tW: Using default bahaviour for field" + stt);
-			defaultValuesString.get(stt.toLowerCase());
+			return defaultValuesString.get(stt.toLowerCase());
 		}
 
 		return properties.getProperty(real);
@@ -190,6 +189,7 @@ public class ConfigFile
 
 		// Loading default values to string settings
 		defaultValuesString.put("xmlschemauri", "/usr/share/miex/schemas/default.xsd");
+		defaultValuesString.put("grammaruri", "/usr/share/miex/grammars/englishPCFG.ser.gz");
     defaultValuesString.put("dumpdir", "/tmp");
     defaultValuesString.put("sqlskeleton", "/usr/share/miex/sql/skeleton.sql");
 

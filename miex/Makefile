@@ -76,8 +76,9 @@ install:
 	install -D -m 644 share/xml/collection.xsd $(PREFIX)/usr/share/miex/schemas/default.xsd
 	install -D -m 644 etc/example-default.conf $(PREFIX)/usr/share/doc/miex/examples/conf/example.conf
 	install -D -m 644 share/input/collection-well-formed-easy.xml $(PREFIX)/usr/share/doc/miex/examples/input/example.xml
+	install -D -m 644 lib/grammars/englishPCFG.ser.gz $(PREFIX)/usr/share/miex/grammars/englishPCFG.ser.gz
 	cp -r build/doc/api $(PREFIX)/usr/share/doc/miex
 
 uninstall:
-	rm -rf $(PREFIX)/usr/lib/miex $(PREFIX)/usr/share/miex $(PREFIX)/usr/share/doc/miex \
-	$(PREFIX)/usr/bin/miex
+	rm -rf $(PREFIX)/usr/lib/miex $(PREFIX)/usr/share/miex \
+	$(PREFIX)/usr/share/doc/miex $(PREFIX)/usr/bin/miex
