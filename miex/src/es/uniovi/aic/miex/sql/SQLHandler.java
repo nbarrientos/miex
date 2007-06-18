@@ -138,7 +138,7 @@ public class SQLHandler
 		{	
 			stmt = this.createStatement();
 
-			query = "SELECT name " + "FROM collection WHERE name = '" + fileName + "'";
+			query = "SELECT name FROM collection WHERE name = '" + fileName + "'";
 
 			rs = stmt.executeQuery(query);
 
@@ -230,7 +230,7 @@ public class SQLHandler
     {
       stmt = this.createStatement();
 
-      query = "SELECT category_id " + "FROM category WHERE string = '" + catName.trim().toLowerCase() + "'";
+      query = "SELECT category_id FROM category WHERE string = '" + catName.trim().toLowerCase() + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -316,11 +316,14 @@ public class SQLHandler
 
     int out = 0;
 
+		// Escaping dangerous 's which could break the SQL statement.
+		if(wordName.matches(".*'.*")) wordName = wordName.replace("'","\\'");
+
     try
     {
       stmt = this.createStatement();
 
-      query = "SELECT word_id " + "FROM word WHERE string = '" + wordName.trim().toLowerCase() + "'";
+      query = "SELECT word_id FROM word WHERE string = '" + wordName.trim().toLowerCase() + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -378,7 +381,7 @@ public class SQLHandler
 			// Id 2 (proptype) = WORD
 			// Id 3 (proptype) = RELATIONSHIP
 
-     	query = "SELECT property_id " + "FROM property WHERE type_id='" + type + "' AND string = '" + 
+     	query = "SELECT property_id FROM property WHERE type_id='" + type + "' AND string = '" + 
 							propName.trim().toUpperCase() + "'";
 
       rs = stmt.executeQuery(query);
