@@ -526,31 +526,11 @@ public class SQLHandler
       {
         stmt = this.createStatement();
 
-				query = "SELECT times FROM wordpropdoc WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-								"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND list_id='" + 
-								list_ID + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
-
-	      rs = stmt.executeQuery(query);
-
-	      rs.last();
-
-	      if(rs.getRow() > 0) // 1
-				{ 
-	        times = rs.getInt("times"); times++;
-					query = "UPDATE wordpropdoc SET times='" + times + "' WHERE word_id='" + word_ID + "' AND prop_id='" + prop_ID +
-									"' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + "' AND list_id='" + list_ID + 
-									"' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
-				}
-	      else
-	      { 
-					query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,times,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + "','1','" + ft + 
+				query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,fromTitle,normalized) VALUES ('" +
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + "','" + ft + 
 									"','" + nd + "')";
-  	    }
 
-				rs.close();
-
-        stmt.executeUpdate(query);
+				stmt.executeUpdate(query);
       }
       catch (Exception e)
       {

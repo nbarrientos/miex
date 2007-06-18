@@ -71,9 +71,9 @@ CREATE TABLE property( property_id int NOT NULL AUTO_INCREMENT, string varchar(1
 
 CREATE TABLE doccat( cat_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, PRIMARY KEY (cat_id,doc_id,col_id), FOREIGN KEY (cat_id) REFERENCES category (category_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
---- wordpropdoc = (@_word_id_, @_property_id_, @_document_id, @collection_id_, @fromTitle, @normalized, times)
+--- wordpropdoc = (@propproplist_id, _word_id_, _property_id_, _document_id, _collection_id_, _list_id_, fromTitle, normalized)
 
-CREATE TABLE wordpropdoc( word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, list_id int NOT NULL, times int NOT NULL DEFAULT '1', fromTitle bool NOT NULL DEFAULT '0', normalized bool NOT NULL DEFAULT '0', PRIMARY KEY (word_id,prop_id,doc_id,col_id,list_id,fromTitle,normalized), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (list_id) REFERENCES propertylist (propertylist_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
+CREATE TABLE wordpropdoc( propproplist_id int NOT NULL AUTO_INCREMENT, word_id int NOT NULL, prop_id int NOT NULL, doc_id int NOT NULL, col_id int NOT NULL, list_id int NOT NULL, fromTitle bool NOT NULL DEFAULT '0', normalized bool NOT NULL DEFAULT '0', PRIMARY KEY (propproplist_id), FOREIGN KEY (word_id) REFERENCES word (word_id), FOREIGN KEY (prop_id) REFERENCES property (property_id), FOREIGN KEY (list_id) REFERENCES propertylist (propertylist_id), FOREIGN KEY (doc_id,col_id) REFERENCES document (document_id,collection_id) ) TYPE = INNODB;
 
 --- wordwordpropdoc = (@_masterWord_id_, @_slaveWord_id_, @_property_id_, @_document_id, @collection_id_, @fromTitle, times)
 
