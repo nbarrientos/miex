@@ -2,16 +2,73 @@
 
 \subsection{Diagrama de clases}
 
-\subsection{Módulos}
+\subsection{Paquetes}
+
+Para una modulularidad mayor, así como para intentar dar una visión aún más
+clara de la construcción de este proyecto, el código fuente de MIEX está
+distribuido en los siguientes paquetes.
 
 \subsubsection{Config}
+
+Este paquete contiene dos clases. La clase \textit{ConfigCMDLine} proporciona un
+manejador de la línea de comandos para poder consultar de una manera fácil el
+valor de las opciones que el usuario pasa mediante línea de comandos. Por otro
+lado, la clase \textit{ConfigFile} sirve para instanciar manejadores de las
+opciones del fichero de configuración principalmente para consultar el valor que
+el usuario ha dado a una clave en particular.
+
 \subsubsection{Datastr}
+
+Las clases distribuidas con este paquete representan estructuras de datos para
+guardar información que se capture durante el tratamiento de las colecciones.
+La gran mayoría son utilizadas a la hora de interpretar los ficheros XML de
+entrada para poder representar fácilmente cada uno de los elementos de los
+ficheros de colección.
+
 \subsubsection{Filter}
+
+Aquí se pueden encontrar todos los filtros que han sido construidos para cribar
+algunos elementos que carecen utilidad(palabras vacías, números, signos de
+puntuación...) así como para aplicar el algoritmo de normalización cuando sea
+necesario. Existe una clase llamada \textit{GlobalFilter} que es bastante
+útil para aplicar varios filtros simultáneamente sin preocuparse de instanciar
+objetos de cada una de las clases filtro.
+
 \subsubsection{Input}
+
+En primer lugar este paquete contiene una clase (\textit{XMLValidator})
+para validar el contenido de los ficheros de entrada utilizando XML Schema. Las
+otras clases se combinan para construir un \textit{Unmarshaller} de los
+ficheros de colección. Como era de esperar, esta última clase se apoya en las
+clases que representaban estructuras de datos comentadas unas líneas más arriba.
+
 \subsubsection{Run}
+
+La única clase que se puede encontrar en este módulo constituye el punto de
+entrada a la aplicación. En ella se puede observar como se van utilizando cada
+una de las clases y se van aplicando los pasos de procesamiento tal y como se
+explicaron en la primera sección de este capítulo.
+
 \subsubsection{Semantic}
+
+Este paquete provee la clase que maneja el Stanford Parser simplificando
+notablemente el análisis de oraciones. Esta clase contiene métodos para obtener
+la lista de dependencias entre palabras de una oración así como la información
+referente a cada palabra, como se explica en el capítulo \ref{cap:introduccion}.
+
 \subsubsection{Sql}
+
+Las utilidades para manejar la base de datos se encierran en este paquete. En
+la clase \textit{SQLHandler} se proveen métodos para añadir sencillamente
+colecciones, documentos, relaciones entre palabras etcétera.
+
 \subsubsection{Tools}
+
+Finalmente aquí se recojen todas las clases que no tienen una utilidad crucial
+a la hora de hacer funcionar el programa, sino que son pequeñas utilidades
+(normalmente extraídas de otros proyectos) para realizar tareas muy concretas.
+Hasta el momento sólo se distribuyen un par de clases para generar
+\textit{hashes} MD5 (código de comprobación).
 
 \subsection{API}
 
@@ -28,6 +85,9 @@ Para generar la documentación, no tiene nada más que ejecutar \texttt{make doc}
 tenga las fuentes del programa.
 
 Una vez construida, la documentación se encuenta en el directorio
-\texttt{build/doc/api} y puede ser consultada con cualquier intérprete de HTML,
+\url{build/doc/api} y puede ser consultada con cualquier intérprete de HTML,
 por ejemplo, un navegador web (Mozilla Firefox, Konqueror, Safari, Links...).
+
+Si ha instalado MIEX utilizando las utilidades correspondientes también puede
+consultar la documentación en el directorio \url{/usr/share/doc/miex/api}
 
