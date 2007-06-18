@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<COLLECTION>
+<DOCTRAIN>
+<TOPIC> <D>status</D> <D>demo</D> </TOPIC>
+<TITLE>
+Status of this Memo
+</TITLE>
+<BODY>
+This handbook is the product of the Site Security Policy Handbook
+Working Group (SSPHWG), a combined effort of the Security Area and
+User Services Area of the Internet Engineering Task Force (IETF).
+This FYI RFC provides information for the Internet community.  It
+does not specify an Internet standard.  Distribution of this memo is
+unlimited.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>handbook</D> <D>authors</D> </TOPIC>
+<TITLE>
+Contributing Authors
+</TITLE>
+<BODY>
+The following are the authors of the Site Security Handbook.  Without
+their dedication, this handbook would not have been possible.
+
+Dave Curry (Purdue University), Sean Kirkpatrick (Unisys), Tom
+Longstaff (LLNL), Greg Hollingsworth (Johns Hopkins University),
+Jeffrey Carpenter (University of Pittsburgh), Barbara Fraser (CERT),
+Fred Ostapik (SRI NISC), Allen Sturtevant (LLNL), Dan Long (BBN), Jim
+Duncan (Pennsylvania State University), and Frank Byrum (DEC).
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>Internet</D> <D>spirit</D> </TOPIC>
+<TITLE>
+Editors Note
+</TITLE>
+<BODY>
+This FYI RFC is a first attempt at providing Internet users guidance
+on how to deal with security issues in the Internet.  As such, this
+document is necessarily incomplete.  There are some clear shortfalls;
+for example, this document focuses mostly on resources available in
+the United States.  In the spirit of the Internets "Request for
+Comments" series of notes, we encourage feedback from users of this
+handbook.  In particular, those who utilize this document to craft
+their own policies and procedures.
+
+This handbook is meant to be a starting place for further research
+and should be viewed as a useful resource, but not the final
+authority.  Different organizations and jurisdictions will have
+different resources and rules.  Talk to your local organizations,
+consult an informed lawyer, or consult with local and national law
+enforcement.  These groups can help fill in the gaps that this
+document cannot hope to cover.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>handbook</D> <D>discussions</D> </TOPIC>
+<TITLE>
+Purpose of this Work
+</TITLE>
+<BODY>
+This handbook is a guide to setting computer security policies and
+procedures for sites that have systems on the Internet.  This guide
+lists issues and factors that a site must consider when setting their
+own policies.  It makes some recommendations and gives discussions of
+relevant areas.
+
+This guide is only a framework for setting security policies and
+procedures.  In order to have an effective set of policies and
+procedures, a site will have to make many decisions, gain agreement,
+and then communicate and implement the policies.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>audience</D> <D>administrators</D> </TOPIC>
+<TITLE>
+Audience
+</TITLE>
+<BODY>
+The audience for this work are system administrators and decision
+makers (who are more traditionally called "administrators" or "middle
+management") at sites.  This document is not directed at programmers
+or those trying to create secure programs or systems.  The focus of
+this document is on the policies and procedures that need to be in
+place to support any technical security features that a site may be
+implementing.
+
+The primary audience for this work are sites that are members of the
+Internet community.  However, this document should be useful to any
+site that allows communication with other sites.  As a general guide
+to security policies, this document may also be useful to sites with
+isolated systems.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>concurrence</D> <D>Internet</D> </TOPIC>
+<TITLE>
+Definitions
+</TITLE>
+<BODY>
+For the purposes of this guide, a "site" is any organization that
+owns computers or network-related resources.  These resources may
+include host computers that users use, routers, terminal servers,
+PCs or other devices that have access to the Internet.  A site may
+be a end user of Internet services or a service provider such as a
+regional network.  However, most of the focus of this guide is on
+those end users of Internet services.
+
+We assume that the site has the ability to set policies and
+procedures for itself with the concurrence and support from those who
+actually own the resources.
+
+The "Internet" is those set of networks and machines that use the
+TCP/IP protocol suite, connected through gateways, and sharing a
+common name and address spaces [1].
+
+The term "system administrator" is used to cover all those who are
+responsible for the day-to-day operation of resources.  This may be a
+number of individuals or an organization.
+
+The term "decision maker" refers to those people at a site who set or
+approve policy.  These are often (but not always) the people who own
+Related Work
+
+The IETF Security Policy Working Group (SPWG) is working on a set of
+recommended security policy guidelines for the Internet [23].  These
+guidelines may be adopted as policy by regional networks or owners of
+other resources.  This handbook should be a useful tool to help sites
+implement those policies as desired or required.  However, even
+implementing the proposed policies isnt enough to secure a site.
+The proposed Internet policies deal only with network access
+security.  It says nothing about how sites should deal with local
+security issues.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>network</D> <D>security</D> </TOPIC>
+<TITLE>
+Scope
+</TITLE>
+<BODY>
+This document covers issues about what a computer security policy
+should contain, what kinds of procedures are need to enforce
+security, and some recommendations about how to deal with the
+problem.  When developing a security policy, close attention should
+be made not only on the security needs and requirements of the local
+network, but also the security needs and requirements of the other
+interconnected networks.
+
+This is not a cookbook for computer security.  Each site has
+different needs; the security needs of a corporation might well be
+different than the security needs of an academic institution.  Any
+security plan has to conform to the needs and culture of the site.
+
+This handbook does not cover details of how to do risk assessment,
+contingency planning, or physical security.  These things are
+essential in setting and implementing effective security policy, but
+this document leaves treatment of those issues to other documents.
+We will try to provide some pointers in that direction.
+
+This document also doesnt talk about how to design or implement
+secure systems or programs.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>computer</D> <D>techniques</D> </TOPIC>
+<TITLE>
+Why Do We Need Security Policies and Procedures?
+</TITLE>
+<BODY>
+For most sites, the interest in computer security is proportional to
+the perception of risk and threats.
+
+The world of computers has changed dramatically over the past
+twenty-five years.  Twenty-five years ago, most computers were
+centralized and managed by data centers.  Computers were kept in
+locked rooms and staffs of people made sure they were carefully
+managed and physically secured.  Links outside a site were unusual.
+Computer security threats were rare, and were basically concerned
+with insiders: authorized users misusing accounts, theft and
+vandalism, and so forth.  These threats were well understood and
+dealt with using standard techniques: computers behind locked doors,
+and accounting for all resources.
+
+Computing in the 1990s is radically different.  Many systems are in
+private offices and labs, often managed by individuals or persons
+employed outside a computer center.  Many systems are connected into
+the Internet, and from there around the world: the United States,
+Europe, Asia, and Australia are all connected together.
+
+Security threats are different today.  The time honored advice says
+"dont write your password down and put it in your desk" lest someone
+find it.  With world-wide Internet connections, someone could get
+into your system from the other side of the world and steal your
+password in the middle of the night when your building is locked up.
+Viruses and worms can be passed from machine to machine.  The
+Internet allows the electronic equivalent of the thief who looks for
+open windows and doors; now a person can check hundreds of machines
+for vulnerabilities in a few hours.
+
+System administrators and decision makers have to understand the
+security threats that exist, what the risk and cost of a problem
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>Approach</D> <D>decisions</D> </TOPIC>
+<TITLE>
+Basic Approach
+</TITLE>
+<BODY>
+Setting security policies and procedures really means developing a
+plan for how to deal with computer security.  One way to approach
+this task is suggested by Fites, et. al. [3, FITES]:
+
+This handbook will concentrate mostly on the last two steps, but the
+first three are critically important to making effective decisions
+about security.  One old truism in security is that the cost of
+protecting yourself against a threat should be less than the cost
+recovering if the threat were to strike you.  Without reasonable
+knowledge of what you are protecting and what the likely threats are,
+following this rule could be difficult.
+</BODY>
+</DOCTRAIN>
+<DOCTRAIN>
+<TOPIC> <D>Organization</D> <D>computer</D> </TOPIC>
+<TITLE>
+Organization of this Document
+</TITLE>
+<BODY>
+This document is organized into seven parts in addition to this
+introduction.
+
+The basic form of each section is to discuss issues that a site might
+want to consider in creating a computer security policy and setting
+procedures to implement that policy.  In some cases, possible options
+are discussed along with the some of the ramifications of those
+choices.  As far as possible, this document tries not to dictate the
+choices a site should make, since these depend on local
+circumstances.  Some of the issues brought up may not apply to all
+sites.  Nonetheless, all sites should at least consider the issues
+brought up here to ensure that they do not miss some important area.
+
+The overall flow of the document is to discuss policy issues followed
+by the issues that come up in creating procedures to implement the
+policies.
+
+Section 2 discusses setting official site policies for access to
+computing resources.  It also goes into the issue of what happens
+when the policy is violated.  The policies will drive the procedures
+that need to be created, so decision makers will need to make choices
+about policies before many of the procedural issues in following
+sections can be dealt with.  A key part of creating policies is doing
+some kind of risk assessment to decide what really needs to be
+protected and the level of resources that should be applied to
+protect them.
+
+Once policies are in place, procedures to prevent future security
+problems should be established.  Section 3 defines and suggests
+actions to take when unauthorized activity is suspected.  Resources
+to prevent secruity breaches are also discussed.
+
+Section 4 discusses types of procedures to prevent security problems.
+Prevention is a key to security; as an example, the Computer
+Emergency Response Team/Coordination Center (CERT/CC) at Carnegie-
+Mellon University (CMU) estimates that 80% or more of the problems
+they see have to do with poorly chosen passwords.
+
+Section 5 discusses incident handling: what kinds of issues does a
+site face when someone violates the security policy.  Many decisions
+will have to made on the spot as the incident occurs, but many of the
+options and issues can be discussed in advance.  At very least,
+responsibilities and methods of communication can be established
+before an incident.  Again, the choices here are influenced by the
+policies discussed in section 2.
+
+Section 6 deals with what happens after a security violation has been
+dealt with.  Security planning is an on-going cycle; just after an
+incident has occurred is an excellent opportunity to improve policies
+and procedures.
+
+The rest of the document provides references and an annotated
+bibliography.
+</BODY>
+</DOCTRAIN>
+</COLLECTION>
