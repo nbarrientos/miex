@@ -96,7 +96,7 @@ public class ConfigCMDLine
 			}
 
 			System.err.println();
-			System.err.println("Usage: ./run");
+			System.err.println("Usage: miex");
 			System.err.println("                " + jsap.getUsage());
 			System.err.println();
 			System.err.println(jsap.getHelp());
