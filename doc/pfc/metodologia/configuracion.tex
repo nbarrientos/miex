@@ -8,73 +8,70 @@ esta sección simplemente se hará referencia a él.
 Las opciones de configuración existentes hasta la fecha son las siguientes:
 
 \begin{Verbatim}[fontsize=\relsize{-2}]
-# BDHostname
+# DBHostname
 #   Type:     String
-#   Default:  -
-#   Required: Yes
+#   Default:  127.0.0.1
 #   Desc:     Self-explaining.
-#   See also: BD*
+#   See also: DB*
 
-# BDUser
+# DBPort
 #   Type:     String
-#   Default:  -
-#   Required: Yes
+#   Default:  3306
 #   Desc:     Self-explaining.
-#   See also: BD*
+#   See also: DB*
 
-# BDPassword
+# DBUser
 #   Type:     String
-#   Default:  -
-#   Required: Yes
+#   Default:  - (Required field)
 #   Desc:     Self-explaining.
-#   See also: BD*
+#   See also: DB*
 
-# BDName
+# DBPassword
 #   Type:     String
-#   Default:  -
-#   Required: Yes
+#   Default:  - (Required field)
 #   Desc:     Self-explaining.
-#   See also: BD*
+#   See also: DB*
+
+# DBName
+#   Type:     String
+#   Default:  - (Required field)
+#   Desc:     Self-explaining.
+#   See also: DB*
+DBName=foodatabase
 
 # Validate
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Required: No
 #   Desc:     Tries to validate each collection file using XML Schema.
 #   See also: XMLschemaURI
-
-# GrammarURI
-#   Type:     String
-#   Default:  /usr/share/miex/grammars/englishPCFG.ser.gz
-#   Required: No
-#   Desc:     Path to a grammar file, usually shipped with the S. Parser.
-#   See also: -
 
 # XMLschemaURI
 #   Type:     String
 #   Default:  /usr/share/miex/schemas/default.xsd
-#   Required: No
 #   Desc:     Path to a XML Schema used to validate XML inputs.
 #   See also: Validate
+
+# GrammarURI
+#   Type:     String
+#   Default:  /usr/share/miex/grammars/englishPCFG.ser.gz
+#   Desc:     Path to a grammar file, usually shipped with the S. Parser.
+#   See also: -
 
 # Dump
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Required: No
 #   Desc:     Creates one file per category containing sentences.
 #   See also: DumpDir
 
 # DumpDir
 #   Type:     String
 #   Default:  /tmp
-#   Required: No
 #   Desc:     Path to a directory where the files will be dumped.
 #   See also: Dump
 
 # CreateDB
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Required: No
 #   Desc:     Injects the template sql file into the database before do any
 insert. USE CAREFULLY.
 #   See also: SQLSkeleton
@@ -82,14 +79,12 @@ insert. USE CAREFULLY.
 # SQLSkeleton
 #   Type:     String
 #   Default:  /usr/share/miex/sql/skeleton.sql
-#   Required: No
-#   Desc:     Path to an SQL file containing the DB creation statements
+#   Desc:     Path to a SQL file containing the statements to create a empty DB
 #   See also: CreateDB
 
 # Normalize
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Required: No
 #   Desc:     If 'Yes' MIEX uses Porter and inserts normalized words as well.
 #   See also: -
 \end{Verbatim}

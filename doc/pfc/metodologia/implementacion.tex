@@ -17,6 +17,14 @@ lado, la clase \textit{ConfigFile} sirve para instanciar manejadores de las
 opciones del fichero de configuración principalmente para consultar el valor que
 el usuario ha dado a una clave en particular.
 
+\begin{figure}[h]
+\label{fig:uml-config}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/config.png}
+\end{center}
+\caption{Diagrama UML del paquete Config}
+\end{figure}
+
 \subsubsection{Datastr}
 
 Las clases distribuidas con este paquete representan estructuras de datos para
@@ -25,22 +33,46 @@ La gran mayoría son utilizadas a la hora de interpretar los ficheros XML de
 entrada para poder representar fácilmente cada uno de los elementos de los
 ficheros de colección.
 
+\begin{figure}[H]
+\label{fig:uml-datastr}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/datastr.png}
+\end{center}
+\caption{Diagrama UML del paquete Datastr}
+\end{figure}
+
 \subsubsection{Filter}
 
 Aquí se pueden encontrar todos los filtros que han sido construidos para cribar
-algunos elementos que carecen utilidad(palabras vacías, números, signos de
+algunos elementos que carecen de utilidad (palabras vacías, números, signos de
 puntuación...) así como para aplicar el algoritmo de normalización cuando sea
 necesario. Existe una clase llamada \textit{GlobalFilter} que es bastante
 útil para aplicar varios filtros simultáneamente sin preocuparse de instanciar
 objetos de cada una de las clases filtro.
 
+\begin{figure}[H]
+\label{fig:uml-filter}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/filter.png}
+\end{center}
+\caption{Diagrama UML del paquete Filter}
+\end{figure}
+
 \subsubsection{Input}
 
 En primer lugar este paquete contiene una clase (\textit{XMLValidator})
 para validar el contenido de los ficheros de entrada utilizando XML Schema. Las
-otras clases se combinan para construir un \textit{Unmarshaller} de los
+otras clases se combinan para construir un \textit{unmarshaller} de los
 ficheros de colección. Como era de esperar, esta última clase se apoya en las
 clases que representaban estructuras de datos comentadas unas líneas más arriba.
+
+\begin{figure}[H]
+\label{fig:uml-input}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/input.png}
+\end{center}
+\caption{Diagrama UML del paquete Input}
+\end{figure}
 
 \subsubsection{Run}
 
@@ -49,6 +81,14 @@ entrada a la aplicación. En ella se puede observar como se van utilizando cada
 una de las clases y se van aplicando los pasos de procesamiento tal y como se
 explicaron en la primera sección de este capítulo.
 
+\begin{figure}[H]
+\label{fig:uml-run}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/run.png}
+\end{center}
+\caption{Diagrama UML del paquete Run (sin parámetros en las operaciones)}
+\end{figure}
+
 \subsubsection{Semantic}
 
 Este paquete provee la clase que maneja el Stanford Parser simplificando
@@ -56,11 +96,27 @@ notablemente el análisis de oraciones. Esta clase contiene métodos para obtener
 la lista de dependencias entre palabras de una oración así como la información
 referente a cada palabra, como se explica en el capítulo \ref{cap:introduccion}.
 
+\begin{figure}[H]
+\label{fig:uml-semantic}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/semantic.png}
+\end{center}
+\caption{Diagrama UML del paquete Semantic}
+\end{figure}
+
 \subsubsection{Sql}
 
 Las utilidades para manejar la base de datos se encierran en este paquete. En
 la clase \textit{SQLHandler} se proveen métodos para añadir sencillamente
 colecciones, documentos, relaciones entre palabras etcétera.
+
+\begin{figure}[H]
+\label{fig:uml-sql}
+\begin{center}
+\includegraphics[scale=0.5]{images/uml/sql.png}
+\end{center}
+\caption{Diagrama UML del paquete Sql}
+\end{figure}
 
 \subsubsection{Tools}
 
@@ -68,7 +124,15 @@ Finalmente aquí se recogen todas las clases que no tienen una utilidad crucial
 a la hora de hacer funcionar el programa, sino que son pequeñas utilidades
 (normalmente extraídas de otros proyectos) para realizar tareas muy concretas.
 Hasta el momento sólo se distribuyen un par de clases para generar
-\textit{hashes} MD5 (código de comprobación).
+\textit{hashes} MD5 (códigos de comprobación).
+
+\begin{figure}[H]
+\label{fig:uml-tools}
+\begin{center}
+\includegraphics[scale=0.6]{images/uml/tools.png}
+\end{center}
+\caption{Diagrama UML del paquete Tools}
+\end{figure}
 
 \subsection{API}
 
