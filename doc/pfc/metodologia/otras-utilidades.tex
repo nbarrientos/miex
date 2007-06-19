@@ -4,7 +4,7 @@
 
 Aunque estos scripts tienen una funcionalidad muy concreta y han sido diseñados
 para un caso de uso muy especial se distribuyen igualmente por si resultaran
-necesarios.
+necesarios. \textbf{No los utilice si no sabe bien lo que está haciendo.}
 
 Durante el periodo de pruebas se detectó la existencia de algunos ficheros de
 entrada que no estaban bien formados, por lo que el analizador no los era capaz
@@ -26,9 +26,14 @@ colección (\texttt{\textless{}collection\textgreater{}} y
 \texttt{\textless{}/doctrain\textgreater{}})
 \end{itemize}
 
-\textbf{Recuerde}: MIEX no funcionará si los ficheros de entrada no cumplen el
-\textit{schema} proporcionado. Puede obtener más información acerca del formato
-de los ficheros de entrada en la sección \ref{sec:schema} de este mismo libro.
+Recuerde, MIEX \textbf{abandonará la ejecución} si alguno de los ficheros de
+entrada no cumple el \textit{schema} proporcionado. Si usted fuerza evitar la
+comprobación utilizando \textit{schema} y el fichero de colección está mal
+formado, el \textit{unmarshaller} lanzará una excepción no recuperable y
+abortará la ejecución.
+
+Puede obtener más información acerca del formato correcto de los ficheros de
+entrada en la sección \ref{sec:schema} de este mismo libro.
 
 \subsection{Integración con FK}
 
