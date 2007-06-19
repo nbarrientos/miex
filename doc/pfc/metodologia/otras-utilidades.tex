@@ -15,15 +15,13 @@ e imprime el fichero correcto por la salida estándar.
 Los errores que éste script arregla son los siguientes:
 
 \begin{itemize}
-	\item Añade un nodo raíz al ficheros de
-colección (\texttt{\textless{}collection\textgreater{}} y
-\texttt{\textless{}/collection\textgreater{}})
-	\item Finaliza correctamente las etiquetas de las secciones
+\item Añade un nodo raíz al ficheros de colección (\texttt{<collection>} y
+\texttt{</collection>})
+
+\item Finaliza correctamente las etiquetas de las secciones
 \texttt{doctrain} y \texttt{doctest} de ficheros de colección erróneos
-(por ejemplo, los que comiencen por
-\texttt{\textless{}doctrain\textgreater{}} y acaben con
-\texttt{\textless{}/doc\textgreater{}}, se cambiaría esta última etiqueta por
-\texttt{\textless{}/doctrain\textgreater{}})
+(por ejemplo, los que comiencen por \texttt{<doctrain>} y acaben con
+\texttt{</doc>}, se cambiaría esta última etiqueta por \texttt{</doctrain>})
 \end{itemize}
 
 Recuerde, MIEX \textbf{abandonará la ejecución} si alguno de los ficheros de

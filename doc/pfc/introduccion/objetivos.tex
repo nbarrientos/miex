@@ -8,7 +8,7 @@ Aprovechando las capacidades del analizador se realizan dos tipos de análisis.
 En primer lugar un análisis sintáctico de la oración y posteriormente un
 análisis semántico con el fin de obtener las relaciones entre las palabras de
 cada una de las oraciones. La mejor manera de ilustrar estos conceptos es
-utilizando un pequeño ejemplo por lo que veamos que análisis que produce el
+utilizando un pequeño ejemplo, por lo que veamos que análisis que produce el
 analizador para la siguiente oración.
 
 \textit{The Debian Project is an association of individuals.}
@@ -27,10 +27,8 @@ más visual y lógica es utilizar un árbol.
 Se puede apreciar como se asignan etiquetas a nivel de palabra, a nivel de
 grupo frasal y a nivel clausal tal y como se hace habitualmente en cualquier
 análisis sintáctico. Si desea conocer el significado de cada etiqueta no tiene
-más que echar un vistazo al anexo \ref{sec:penntags}.
-
-Aprovecharemos también que el analizador calcula las dependencias entre algunas
-palabras de la oración:
+más que echar un vistazo al anexo \ref{sec:penntags}. Aprovecharemos también que
+el analizador calcula las dependencias entre algunas palabras de la oración.
 
 \begin{figure}[h]
 \begin{Verbatim}[fontsize=\relsize{-1}]
@@ -44,7 +42,7 @@ prep_of(association-6, individuals-8)
 \caption{Ejemplo de representación de relaciones entre palabras de una oración}
 \end{figure}
 
-Tanto el análisis a nivel de palabra (y obviamente a nivel de grupo) como las
+Tanto el análisis a nivel de palabra (y obviamente a nivel de grupos) como las
 relaciones entre las palabras será la información que nos va a interesar
 guardar más adelante.
 
