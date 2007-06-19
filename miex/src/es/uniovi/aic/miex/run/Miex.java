@@ -140,7 +140,7 @@ public class Miex
 			File theFile = new File(files[j]);
 
 			// Registering collection into the database
-			collectionID = sql.getNewCollectionID((theFile.getName().split("\\."))[0]);
+			collectionID = sql.addCollection((theFile.getName().split("\\."))[0]);
 
 			if(collectionID < 0)
 			{

@@ -127,7 +127,7 @@ public class SQLHandler
 	 * @param fileName The name of the file containing the collection
 	 * @return -1 if it already exists, a new ID otherwise.
 	 */
-	public int getNewCollectionID(String fileName)
+	public int addCollection(String fileName)
 	{
 		ResultSet rs;
 		Statement stmt;
@@ -195,6 +195,8 @@ public class SQLHandler
 
 		if(isTrain) docTypeID = 1;
 
+		title = safeSQL(title);
+
     try
     {
       stmt = this.createStatement();
@@ -225,6 +227,8 @@ public class SQLHandler
 		String query;
 
 		int out = 0;
+
+		catName = safeSQL(catName);
 
     try
     {
@@ -316,8 +320,7 @@ public class SQLHandler
 
     int out = 0;
 
-		// Escaping dangerous 's which could break the SQL statement.
-		if(wordName.matches(".*'.*")) wordName = wordName.replace("'","\\'");
+		wordName = safeSQL(wordName);
 
     try
     {
@@ -530,8 +533,8 @@ public class SQLHandler
         stmt = this.createStatement();
 
 				query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + "','" + ft + 
-									"','" + nd + "')";
+									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + 
+									"','" + ft + "','" + nd + "')";
 
 				stmt.executeUpdate(query);
       }
@@ -586,9 +589,9 @@ public class SQLHandler
       {
         stmt = this.createStatement();
 
-        query = "SELECT times FROM wordwordpropdoc WHERE masterWord_id='" + master_ID + "' AND slaveWord_id='" + slave_ID + 
-								"' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + collectionNumber + 
-								"' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
+        query = "SELECT times FROM wordwordpropdoc WHERE masterWord_id='" + master_ID + "' AND slaveWord_id='" + 
+								slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + 
+								collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 
         rs = stmt.executeQuery(query);
 
@@ -603,9 +606,10 @@ public class SQLHandler
         }
         else
         {
-          query = "INSERT INTO wordwordpropdoc (masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
-                  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + collectionNumber + "','1','" + ft + 
-									"','" + nd + "')";
+          query = "INSERT INTO wordwordpropdoc " +
+									"(masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
+        					  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + 
+										collectionNumber + "','1','" + ft + "','" + nd + "')";
         }
         rs.close();
 
@@ -629,6 +633,21 @@ public class SQLHandler
 	private Statement createStatement() throws SQLException
 	{
 		return theConn.createStatement();
+	}
+
+	/** 
+	 * A simple filter to prevent crashes into the SQL statements 
+	 * 
+	 * @param orig The string to filter
+	 * @return The filtered and safe string
+	 */
+	private String safeSQL(String orig)
+	{
+		// Escaping dangerous "'" which could break the SQL statement.
+		if(orig.matches(".*'.*")) 
+			return orig.replace("'","\\'");
+		else
+			return orig;
 	}
 
 	// Members
