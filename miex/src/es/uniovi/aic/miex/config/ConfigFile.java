@@ -57,14 +57,14 @@ public class ConfigFile
 	{
 	
 		// Looking for missing required config fields	
-		for(int i=0; i < configFileFields.length; i++)
+		for(int i=0; i < reqConfigFileFields.length; i++)
 			try
 			{
-				getRealName(configFileFields[i]);
+				getRealName(reqConfigFileFields[i]);
 			}
 			catch(Exception e)
 			{
-				System.err.println("Missing required field " + configFileFields[i] + " in config file.");
+				System.err.println("Missing required field " + reqConfigFileFields[i] + " in config file.");
 				System.exit(-1);
 			}
 		
@@ -158,7 +158,7 @@ public class ConfigFile
 	/** 
 	 * Self-explaining 
 	 */
-	private static String[] configFileFields, configFileBooleanFields; 
+	private static String[] reqConfigFileFields, configFileBooleanFields; 
 	
 	/** 
 	 * Self-explaining 
@@ -172,7 +172,7 @@ public class ConfigFile
 
   static
   {
-    configFileFields = new String[]{"BDHostname", "BDUser", "BDPassword", "BDName"};
+    reqConfigFileFields = new String[]{"DBUser", "DBPassword", "DBName"};
 
 		configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump", "Normalize"};
 		
@@ -190,7 +190,8 @@ public class ConfigFile
 		defaultValuesString.put("grammaruri", "/usr/share/miex/grammars/englishPCFG.ser.gz");
     defaultValuesString.put("dumpdir", "/tmp");
     defaultValuesString.put("sqlskeleton", "/usr/share/miex/sql/skeleton.sql");
-
+		defaultValuesString.put("dbhostname", "127.0.0.1");
+		defaultValuesString.put("dbport", "3306");
   }
 
 }

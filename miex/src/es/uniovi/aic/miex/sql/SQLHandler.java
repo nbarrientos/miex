@@ -33,45 +33,36 @@ public class SQLHandler
 {
 
 	/** 
-	 * Creates a new handler and establishes the connection
+	 * Creates a new handler and establishes the connection using a
+	 * config file
 	 * 
 	 * @param cf A configfile storing database settings 
 	 */
 	public SQLHandler(ConfigFile cf)
 	{
-		String url = "jdbc:mysql://" + cf.getStringSetting("BDHostname") 
-									+ ":3306/" + cf.getStringSetting("BDName");
-		
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-	
-			theConn = DriverManager.getConnection(url,cf.getStringSetting("BDUser"), cf.getStringSetting("BDPassword"));
-		}
-		catch (Exception e)
-		{
-			System.err.println(e.getMessage());
-			System.exit(-1);
-		}
+		this(cf.getStringSetting("DBHostname"), cf.getStringSetting("DBPort"),
+					cf.getStringSetting("DBUser"), cf.getStringSetting("DBPassword"),
+					cf.getStringSetting("DBName"));
 	}
 
 	/** 
 	 * Creates a new handler and establishes the connection 
 	 * 
-	 * @param BDHostname FQDN for the database server
-	 * @param BDUser User to log in with
-	 * @param BDPassword This well-known secret string ;)
-	 * @param BDName Database name
+	 * @param DBHostname FQDN for the database server
+	 * @param DBPort Port to connect on
+	 * @param DBUser User to log in with
+	 * @param DBPassword This well-known secret string ;)
+	 * @param DBName Database name
 	 */
-	public SQLHandler(String BDHostname, String BDUser, String BDPassword, String BDName)
+	public SQLHandler(String DBHostname, String DBPort, String DBUser, String DBPassword, String DBName)
 	{
-		String url = "jdbc:mysql://" + BDHostname + ":3306/" + BDName;
+		String url = "jdbc:mysql://" + DBHostname + ":" + DBPort + "/" + DBName;
 
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 
-			theConn = DriverManager.getConnection(url,BDUser, BDPassword);			
+			theConn = DriverManager.getConnection(url,DBUser, DBPassword);			
 		}
 		catch (Exception e)
 		{
