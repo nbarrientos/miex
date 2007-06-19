@@ -1,233 +1,170 @@
 \chapter{Penn Treebank II Tags\label{sec:penntags}}
 
-En el siguiente anexo se explica en inglés el significado de cada una de las
-etiquetas.
-
-\subsection*{Bracket Labels}
-
-\subsubsection*{Clause Level}
-
-\par 
-
-\textbf{S} - simple declarative clause, i.e. one that is not introduced by a
-(possible empty) subordinating conjunction or a \textit{wh}-word and that does
-not exhibit subject-verb inversion.\\
-
-\textbf{SBAR} - Clause introduced by a (possibly empty) subordinating
-conjunction.\\
-
-\textbf{SBARQ} - Direct question introduced by a \textit{wh}-word or
-a \textit{wh}-phrase.  Indirect questions and relative clauses should be
-bracketed as SBAR, not SBARQ.\\
-
-
-
-\textbf{SINV} - Inverted declarative sentence, i.e. one in which the subject follows the tensed verb or modal.\\
-
-
-
-\textbf{SQ} - Inverted yes/no question, or main clause of a \textit{wh}-question, following the \textit{wh}-phrase in SBARQ.\\
-
-
-
-\subsubsection*{Phrase Level}
-
-\textbf{ADJP} - Adjective Phrase.\\
-
-
-
-\textbf{ADVP} - Adverb Phrase.\\
-
-
-
-\textbf{CONJP} - Conjunction Phrase.\\
-
-
-
-\textbf{FRAG} - Fragment.\\
-
-
-
-\textbf{INTJ} - Interjection.  Corresponds approximately to the part-of-speech tag UH.\\
-
-
-
-\textbf{LST} - List marker.  Includes surrounding punctuation.\\
-
-
-
-\textbf{NAC} - Not a Constituent; used to show the scope of certain prenominal modifiers within an NP.\\
-
-
-
-\textbf{NP} - Noun Phrase. \\
-
-
-
-\textbf{NX} - Used within certain complex NPs to mark the head of the NP.  Corresponds very roughly to N-bar level but used  
-quite differently.\\
-
-
-
-\textbf{PP} - Prepositional Phrase.\\
-
-
-
-\textbf{PRN} - Parenthetical. \\
-
-
-
-\textbf{PRT} - Particle.  Category for words that should be tagged RP. \\
-
-
-
-\textbf{QP} - Quantifier Phrase (i.e. complex measure/amount phrase); used within NP.\\
-
-
-
-\textbf{RRC} - Reduced Relative Clause. \\
-
-
-
-\textbf{UCP} - Unlike Coordinated Phrase. \\
-
-
-
-\textbf{VP} - Vereb Phrase. \\
-
-
-
-\textbf{WHADJP} - \textit{Wh}-adjective Phrase.  Adjectival phrase containing a \textit{wh}-adverb, as in \textit{how hot}.\\
-
-
-
-\textbf{WHAVP} - \textit{Wh}-adverb Phrase.  Introduces a clause with an NP gap.  May be null (containing the 0 complementizer)  
-or lexical, containing a \textit{wh}-adverb such as \textit{how} or \textit{why}.\\
-
-
-
-\textbf{WHNP} - \textit{Wh}-noun Phrase.  Introduces a clause with an NP gap.  May be null (containing the 0 complementizer) or  
-lexical, containing some \textit{wh}-word, e.g. \textit{who}, \textit{which book}, \textit{whose daughter}, \textit{none of which},  
-or \textit{how many leopards}.\\
-
-
-
-\textbf{WHPP} - \textit{Wh}-prepositional Phrase.  Prepositional phrase containing a \textit{wh}-noun phrase (such as  
-\textit{of which} or \textit{by whose authority}) that either introduces a PP gap or is contained by a WHNP.\\
-
-
-
-\textbf{X} - Unknown, uncertain, or unbracketable.  X is often used for bracketing typos and in bracketing  
-\textit{the...the}-constructions.\\
-
-
-
-\subsubsection*{Word level}
-
-
-\textbf{CC}   - Coordinating conjunction\\
-
-
-\textbf{CD}   - Cardinal number\\
-
-
-\textbf{DT}   - Determiner\\
-
-
-\textbf{EX}   - Existential there\\
-
-
-\textbf{FW}   - Foreign word\\
-
-
-\textbf{IN}   - Preposition or subordinating conjunction\\
-
-
-\textbf{JJ}   - Adjective\\
-
-
-\textbf{JJR}  - Adjective, comparative\\
-
-
-\textbf{JJS}  - Adjective, superlative\\
-
-
-\textbf{LS}   - List item marker\\
-
-
-\textbf{MD}   - Modal\\
-
-
-\textbf{NN}   - Noun, singular or mass\\
-
-
-\textbf{NNS}  - Noun, plural\\
-
-
-\textbf{NNP}  - Proper noun, singular\\
-
-
-\textbf{NNPS} - Proper noun, plural\\
-
-
-\textbf{PDT}  - Predeterminer\\
-
-
-\textbf{POS}  - Possessive ending\\
-
-
-\textbf{PRP}  - Personal pronoun\\
-
-
-\textbf{PRP\$} - Possessive pronoun (prolog version PRP-S)\\
-
-
-\textbf{RB}   - Adverb\\
-
-
-\textbf{RBR}  - Adverb, comparative\\
-
-
-\textbf{RBS}  - Adverb, superlative\\
-
-
-\textbf{RP}   - Particle\\
-
-
-\textbf{SYM}  - Symbol\\
-
-
-\textbf{TO}   - to\\
-
-
-\textbf{UH}   - Interjection\\
-
-
-\textbf{VB}   - Verb, base form\\
-
-
-\textbf{VBD}  - Verb, past tense\\
-
-
-\textbf{VBG}  - Verb, gerund or present participle\\
-
-
-\textbf{VBN}  - Verb, past participle\\
-
-
-\textbf{VBP}  - Verb, non-3rd person singular present\\
-
-
-\textbf{VBZ}  - Verb, 3rd person singular present\\
-
-
-\textbf{WDT}  - Wh-determiner\\
-
-
-\textbf{WP}   - Wh-pronoun\\
-
-
-\textbf{WP\$}  - Possessive wh-pronoun (prolog version WP-S)\\
-
-
-\textbf{WRB}  - Wh-adverb\\
+En el siguiente anexo se explica el significado de cada una de las etiquetas
+que se puedan encontrar.
+ 
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{rcl}
+\hline \hline
+Número & Etiqueta & Descripción\\
+\hline \hline
+1 & S & simple declarative clause, i.e. one that is not introduced \\
+  &   & by a (possible empty) subordinating conjunction or a\\
+  &   & \textit{wh}-word and that does not exhibit subject-verb inversion\\
+\hline
+2 & SBAR & Clause introduced by a (possibly empty) subordinating conjunction.\\
+\hline
+3 & SBARQ & Direct question introduced by a \textit{wh}-word or \\
+  &       & a \textit{wh}-phrase.  Indirect questions and relative clauses\\
+  &       & should be bracketed as SBAR, not SBARQ.\\
+\hline  
+4 & SINV & Inverted declarative sentence, i.e. one in which the\\
+  &      & subject follows the tensed verb or modal.\\
+\hline  
+5 & SQ   & Inverted yes/no question, or main clause of a \textit{wh}-question,\\
+  &      & following the \textit{wh}-phrase in SBARQ.
+\end{tabular}
+\caption{Significado de las etiquetas a nivel de cláusula}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{rcl}
+\hline \hline
+Número & Etiqueta & Descripción\\
+\hline \hline
+1 & ADJP & Adjective Phrase\\
+\hline
+2 & ADVP & Adverb Phrase\\
+\hline
+3 & CONJP & Conjunction Phrase\\
+\hline
+4 & FRAG & Fragment\\
+\hline
+5 & INTJ & Interjection. Corresponds approximately to the part-of-speech\\
+  &      & tag UH\\
+\hline
+6 & LST & List marker. Includes surrounding punctuation\\
+\hline
+7 & NAC & Not a Constituent; used to show the scope of certain prenominal\\
+  &     & modifiers within an NP\\
+\hline
+8 & NP & Noun Phrase\\
+\hline
+9 & NX & Used within certain complex NPs to mark the head of the NP\\
+\hline
+10 & PP & Prepositional Phrase\\
+\hline
+11 & PRN & Parenthetical\\
+\hline
+12 & PRT & Particle. Category for words that should be tagged RP\\
+\hline
+13 & QP & Quantifier Phrase\\
+\hline
+14 & RRC & Reduced Relative Clause\\
+\hline
+15 & UCP & Unlike Coordinated Phrase\\
+\hline
+16 & VP & Vereb Phrase\\
+\hline
+17 & WHADJP & \textit{Wh}-adjective Phrase\\
+\hline
+18 & WHAVP & \textit{Wh}-adverb Phrase\\
+\hline
+19 & WHNP & \textit{Wh}-noun Phrase\\
+\hline
+20 & WHPP & \textit{Wh}-prepositional Phrase.\\
+\hline
+21 & X & Unknown, uncertain, or unbracketable\\
+\end{tabular}
+\caption{Significado de las etiquetas a nivel de frase}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{rcl}
+\hline \hline
+Número & Etiqueta & Descripción\\
+\hline \hline
+1 & CC & Coordinating conjunction\\
+\hline
+2 & CD & Cardinal number\\
+\hline
+3 & CC & Coordinating conjunction\\
+\hline
+4 & CD & Cardinal number\\
+\hline
+5 & DT & Determiner\\
+\hline
+6 & EX & Existential there\\
+\hline
+7 & FW & Foreign word\\
+\hline
+8 & IN & Preposition or subordinating conjunction\\
+\hline
+9 & JJ & Adjective\\
+\hline
+10 & JJR & Adjective, comparative\\
+\hline
+11 & JJS & Adjective, superlative\\
+\hline
+12 & LS & List item marker\\
+\hline
+13 & MD & Modal\\
+\hline
+14 & NN & Noun, singular or mass\\
+\hline
+15 & NNS & Noun, plural\\
+\hline
+16 & NNP & Proper noun, singular\\
+\hline
+17 & NNPS & Proper noun, plural\\
+\hline
+18 & PDT & Predeterminer\\
+\hline
+19 & POS & Possessive ending\\
+\hline
+20 & PRP & Personal pronoun\\
+\hline
+21 & PRP\$ & Possessive pronoun (prolog version PRP-S)\\
+\hline
+22 & RB & Adverb\\
+\hline
+23 & RBR & Adverb, comparative\\
+\hline
+24 & RBS & Adverb, superlative\\
+\hline
+25 & RP & Particle\\
+\hline
+26 & SYM & Symbol\\
+\hline
+27 & TO & to\\
+\hline
+28 & UH & Interjection\\
+\hline
+29 & VB & Verb, base form\\
+\hline
+30 & VBD & Verb, past tense\\
+\hline
+31 & VBG & Verb, gerund or present participle\\
+\hline
+32 & VBN & Verb, past participle\\
+\hline
+33 & VBP & Verb, non-3rd person singular present\\
+\hline
+34 & VBZ & Verb, 3rd person singular present\\
+\hline
+35 & WDT & Wh-determiner\\
+\hline
+36 & WP & Wh-pronoun\\
+\hline
+37 & WP\$ & Possessive wh-pronoun (prolog version WP-S)\\
+\hline
+38 & WRB & Wh-adverb\\
+\end{tabular}
+\caption{Significado de las etiquetas a nivel de palabra}
+\end{center}
+\end{table}
