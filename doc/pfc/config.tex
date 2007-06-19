@@ -24,7 +24,8 @@
 \definecolor{listinggray}{gray}{0.97}
 
 %listings
-\lstset{
+\lstset
+{
 	basewidth=0.50em,
 	backgroundcolor=\color{listinggray},
 	basicstyle=\footnotesize\ttfamily,
@@ -36,15 +37,22 @@
 	showstringspaces=false,
 	frame=trbl,
 	extendedchars=true,
-	numbers=none,
-	aboveskip=0.5cm,
-	belowskip=0.5cm,
+	%aboveskip=0.5cm,
+	%belowskip=0.5cm,
 	xleftmargin=0cm,
-	xrightmargin=0cm
+	xrightmargin=0cm,
+	tabsize=1,
+	numbers=left, 
+	numberstyle=\small,
+	stepnumber=9,
+	numbersep=5pt
 }
 
-%\lstdefinelanguage{PeliculasXML}[]{XML}{%
-%	morekeywords = {peliculas, pelicula, titulo, autor, url }
-%}
-
 \parskip   \medskipamount
+
+\newcommand{\sourcepath}
+{/home/nacho/devel/pfc/svn/trunk/miex/src/es/uniovi/aic/miex/}
+\newcommand{\trunkpath}
+{/home/nacho/devel/pfc/svn/trunk/miex/}
+\newcommand{\codeversion}
+{0.0.1}

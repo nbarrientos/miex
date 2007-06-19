@@ -1,109 +1,93 @@
 
 \chapter{C骴igo fuente\label{sec:source}} 
 
-%La versi贸n actual del c贸digo (versi贸n 0.0.5) se incluye bajo este ep铆grafe. Si
-%se desea m谩s informaci贸n puede acceder al repositorio de c贸digo\footnote{\url{http://swaml.berlios.de/wsvn}}
-%o consultar la documentaci贸n en linea\footnote{\url{http://swaml.berlios.de/doc/}}.
+La versi髇 actual del c骴igo (versi髇 \codeversion) se incluye en este
+ep韌rafe. De cara a poner el software en producci髇 se aconseja obtener la
+鷏tima versi髇 de la p醙ina web del proyecto\footnote{http://miex.sf.net}
 
-%\section*{Paquete swaml}
+\section*{Paquete Config}
 
-%\subsection*{swaml.py}
+\subsection*{ConfigCMDLine.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/swaml.py}
+\lstinputlisting[language=Java]{\sourcepath/config/ConfigCMDLine.java}
 
-%\subsection*{configWizard.py}
+\subsection*{ConfigFile.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/configWizard.py}
+\lstinputlisting[language=Java]{\sourcepath/config/ConfigFile.java}
 
-%\subsection*{foaf.py}
+\section*{Paquete Datastr}
 
-%\lstinputlisting[language=Python]{../../../swaml/foaf.py}
+\subsection*{ExtendedTaggedWord.java}
+\lstinputlisting[language=Java]{\sourcepath/datastr/ExtendedTaggedWord.java}
 
-%\subsection*{kml.py}
+\subsection*{MyCategories.java}
+\lstinputlisting[language=Java]{\sourcepath/datastr/MyCategories.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/kml.py}
+\subsection*{MyCollection.java}
+\lstinputlisting[language=Java]{\sourcepath/datastr/MyCollection.java}
 
-%\subsection*{buxon.py}
+\subsection*{MyDoc.java}
+\lstinputlisting[language=Java]{\sourcepath/datastr/MyDoc.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/buxon.py}
+\section*{Paquete filter}
 
+\subsection*{GlobalFilter.java}
+\lstinputlisting[language=Java]{\sourcepath/filter/GlobalFilter.java}
 
-%\section*{Paquete swaml.classes}
+\subsection*{NumbersDetector.java}
+\lstinputlisting[language=Java]{\sourcepath/filter/NumbersDetector.java}
 
-%\subsection*{cache.py}
+\subsection*{Porter.java}
+\lstinputlisting[language=Java]{\sourcepath/filter/Porter.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/cache.py}
+\subsection*{StopWordsDetector.java}
+\lstinputlisting[language=Java]{\sourcepath/filter/StopWordsDetector.java}
 
-%\subsection*{calendarwindow.py}
+\subsection*{UselessTagsDetector.java}
+\lstinputlisting[language=Java]{\sourcepath/filter/UselessTagsDetector.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/calendarwindow.py}
+\section*{Paquete Input}
 
-%\subsection*{charset.py}
+\subsection*{FieldsParser.java}
+\lstinputlisting[language=Java]{\sourcepath/input/FieldsParser.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/charset.py}
+\subsection*{SAXCollectionUnmarshaller.java}
+\lstinputlisting[language=Java]{\sourcepath/input/SAXCollectionUnmarshaller.java
+}
 
-%\subsection*{configuration.py}
+\subsection*{XMLValidator.java}
+\lstinputlisting[language=Java]{\sourcepath/input/XMLValidator.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/configuration.py}
+\section*{Paquete Run}
 
-%\subsection*{date.py}
+\subsection*{Miex.java}
+\lstinputlisting[language=Java]{\sourcepath/run/Miex.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/date.py}
+\section*{Paquete Semantic}
 
-%\subsection*{foaf.py}
+\subsection*{Extractor.java}
+\lstinputlisting[language=Java]{\sourcepath/semantic/Extractor.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/foaf.py}
+\section*{Paquete Sql}
 
-%\subsection*{index.py}
+\subsection*{SQLHandler.java}
+\lstinputlisting[language=Java]{\sourcepath/sql/SQLHandler.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/index.py}
+\section*{Paquete Tools}
 
-%\subsection*{kml.py}
+\subsection*{HexString.java}
+\lstinputlisting[language=Java]{\sourcepath/tools/HexString.java}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/kml.py}
+\subsection*{MD5.java}
+\lstinputlisting[language=Java]{\sourcepath/tools/MD5.java}
 
-%\subsection*{loadprogressbar.py}
+\section*{Otros}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/loadprogressbar.py}
+\subsection*{Makefile (MIEX)}
+\lstinputlisting{\trunkpath/Makefile}
 
-%\subsection*{mailinglist.py}
+\subsection*{Build.xml (MIEX)}
+\lstinputlisting{\trunkpath/build.xml}
 
-%\lstinputlisting[language=Python]{../../../swaml/classes/mailinglist.py}
-
-%\subsection*{mbox.py}
-
-%\lstinputlisting[language=Python]{../../../swaml/classes/mbox.py}
-
-%\subsection*{message.py}
-
-%\lstinputlisting[language=Python]{../../../swaml/classes/message.py}
-
-%\subsection*{subscribers.py}
-
-%\lstinputlisting[language=Python]{../../../swaml/classes/subscribers.py}
-
-%\subsection*{ui.py}
-
-%\lstinputlisting[language=Python]{../../../swaml/classes/ui.py}
-
-%\section*{Otros}
-
-%Adem谩s de c贸digo fuente propiamente dicho, como apoyo al desarrollo del proyecto
-%se han escrito un serie de peque帽os script que han sido de gran utilidad para
-%desempe帽ar labores repetitivas.
-
-%\subsection*{Makefile (c贸digo)}
-
-%\lstinputlisting{../../../swaml/Makefile}
-%
-%\subsection*{Makefile (documentaci贸n)}
-%
-%\lstinputlisting{../../../doc/es/pfc/Makefile}
-
-%\subsection*{Ant (p谩gina web)}
-%
-%\lstinputlisting{../../../webpage/build.xml}
-
-%\subsection*{owl2html.xsl}
-
-%\lstinputlisting[language=XSL]{../../../ontology/owl2html.xsl}
+\subsection*{Makefile (Documentaci髇)}
+\lstinputlisting{Makefile}
