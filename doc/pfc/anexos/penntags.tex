@@ -4,12 +4,37 @@ En el siguiente anexo se explica en forma de tabla el significado de cada una
 de las etiquetas que se puedan ir asignando durante el análisis de las
 oraciones.
  
-\begin{table}
+
 \begin{center}
-\begin{tabular}{rcl}
-\hline \hline
-Número & Etiqueta & Descripción\\
-\hline \hline
+
+\begin{longtable}{rcl}
+
+% Cabecera principal
+\hline \hline \\[-2ex]
+   \multicolumn{1}{c}{\textbf{Número}} &
+   \multicolumn{1}{c}{\textbf{Etiqueta}} &
+   \multicolumn{1}{c}{\textbf{Descripción}} \\%[0.5ex] 
+   \hline
+   \\[-2.6ex]
+\endfirsthead
+
+% Cabecera de las otras partes de la tabla
+\multicolumn{3}{c}{{Continuación del \tablename} \thetable{}}\\[1.5ex]
+  \hline \hline \\[-2ex]
+  \multicolumn{1}{c}{\textbf{Número}} &
+  \multicolumn{1}{c}{\textbf{Etiqueta}} &
+  \multicolumn{1}{c}{\textbf{Descripción}} \\
+  \\[-2.8ex]
+\endhead
+
+% Pié de las páginas, excepto de la última
+  \multicolumn{3}{l}{{Continúa en la siguiente página\ldots}} \\
+\endfoot
+
+% Pié de la última página
+\endlastfoot
+
+% Datos
 1 & S & simple declarative clause, i.e. one that is not introduced \\
   &   & by a (possible empty) subordinating conjunction or a\\
   &   & \textit{wh}-word and that does not exhibit subject-verb inversion\\
@@ -24,18 +49,44 @@ Número & Etiqueta & Descripción\\
   &      & subject follows the tensed verb or modal.\\
 \hline  
 5 & SQ   & Inverted yes/no question, or main clause of a \textit{wh}-question,\\
-  &      & following the \textit{wh}-phrase in SBARQ.
-\end{tabular}
-\caption{Significado de las etiquetas a nivel de cláusula}
-\end{center}
-\end{table}
+  &      & following the \textit{wh}-phrase in SBARQ.\\
+\hline \hline
 
-\begin{table}
-\begin{center}
-\begin{tabular}{rcl}
-\hline \hline
-Número & Etiqueta & Descripción\\
-\hline \hline
+\caption{Etiquetas a nivel de cláusula}
+\end{longtable}
+
+
+%%%%%%%%%%%
+%%%%%%%%%%%
+
+\begin{longtable}{rcl}
+
+% Cabecera principal
+\hline \hline \\[-2ex]
+   \multicolumn{1}{c}{\textbf{Número}} &
+   \multicolumn{1}{c}{\textbf{Etiqueta}} &
+   \multicolumn{1}{c}{\textbf{Descripción}} \\%[0.5ex] 
+   \hline
+   \\[-2.6ex]
+\endfirsthead
+
+% Cabecera de las otras partes de la tabla
+\multicolumn{3}{c}{{Continuación del \tablename} \thetable{}}\\[1.5ex]
+  \hline \hline \\[-2ex]
+  \multicolumn{1}{c}{\textbf{Número}} &
+  \multicolumn{1}{c}{\textbf{Etiqueta}} &
+  \multicolumn{1}{c}{\textbf{Descripción}} \\
+  \\[-2.8ex]
+\endhead
+
+% Pié de las páginas, excepto de la última
+  \multicolumn{3}{l}{{Continúa en la siguiente página\ldots}} \\
+\endfoot
+
+% Pié de la última página
+\endlastfoot
+
+% Datos
 1 & ADJP & Adjective Phrase\\
 \hline
 2 & ADVP & Adverb Phrase\\
@@ -79,17 +130,45 @@ Número & Etiqueta & Descripción\\
 20 & WHPP & \textit{Wh}-prepositional Phrase.\\
 \hline
 21 & X & Unknown, uncertain, or unbracketable\\
-\end{tabular}
-\caption{Significado de las etiquetas a nivel de frase}
-\end{center}
-\end{table}
+\hline \hline
 
-\begin{table}
-\begin{center}
-\begin{tabular}{rcl}
-\hline \hline
-Número & Etiqueta & Descripción\\
-\hline \hline
+\caption{Etiquetas a nivel de frase}
+
+\end{longtable}
+
+
+%%%%%%%%%%%%%
+%%%%%%%%%%%%%
+
+
+\begin{longtable}{rcl}
+
+% Cabecera principal
+\hline \hline \\[-2ex]
+   \multicolumn{1}{c}{\textbf{Número}} &
+   \multicolumn{1}{c}{\textbf{Etiqueta}} &
+   \multicolumn{1}{c}{\textbf{Descripción}} \\%[0.5ex] 
+   \hline
+   \\[-2.6ex]
+\endfirsthead
+
+% Cabecera de las otras partes de la tabla
+\multicolumn{3}{c}{{Continuación del \tablename} \thetable{}}\\[1.5ex]
+  \hline \hline \\[-2ex]
+  \multicolumn{1}{c}{\textbf{Número}} &
+  \multicolumn{1}{c}{\textbf{Etiqueta}} &
+  \multicolumn{1}{c}{\textbf{Descripción}} \\
+  \\[-2.8ex]
+\endhead
+
+% Pié de las páginas, excepto de la última
+  \multicolumn{3}{l}{{Continúa en la siguiente página\ldots}} \\
+\endfoot
+
+% Pié de la última página
+\endlastfoot
+
+% Datos
 1 & CC & Coordinating conjunction\\
 \hline
 2 & CD & Cardinal number\\
@@ -165,7 +244,9 @@ Número & Etiqueta & Descripción\\
 37 & WP\$ & Possessive wh-pronoun (prolog version WP-S)\\
 \hline
 38 & WRB & Wh-adverb\\
-\end{tabular}
-\caption{Significado de las etiquetas a nivel de palabra}
+\hline \hline
+
+\caption{Etiquetas a nivel de palabra}
+
+\end{longtable}
 \end{center}
-\end{table}
