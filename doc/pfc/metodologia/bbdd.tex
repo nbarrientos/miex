@@ -50,15 +50,15 @@ ver.
 
 \begin{description}
 
-\item [Syntactic]
+\item [Parse tree]
 Las n-uplas generadas por esta relación contendrán toda la información
-sintáctica que el analizador provee, es decir, las etiquetas a nivel de
-palabra, a nivel frasal y a nivel clausal.
+referente a la estructura de las oraciones analizadas, es decir, las etiquetas
+asignadas a nivel de palabra, a nivel frasal y a nivel clausal.
 
-\item [Semantic]
-Esta relación está diseñada para guardar los datos relativos a la información
-semántica extraida, en concreto las relaciones gramaticales entre las palabras
-(en forma de dependencias).
+\item [Dependencies]
+Esta relación está diseñada para guardar los datos relativos a una parte de la
+información semántica extraída, en concreto las relaciones gramaticales entre
+las palabras (en forma de dependencias entre ellas).
 
 \end{description}
 
@@ -72,7 +72,7 @@ semántica extraida, en concreto las relaciones gramaticales entre las palabras
 
 \subsection{Generación de la base de datos}
 
-MIEX es capaz de, mediante un fichero de texto con sentencas SQL, construir la
+MIEX es capaz de, mediante un fichero de texto con sentencias SQL, construir la
 base de datos antes de empezar a procesar los ficheros de entrada (véase la
 opción \textit{CreateDB} del fichero de configuración). 
 
@@ -86,7 +86,7 @@ como para insertar una serie de datos estáticos necesarios.
 
 \subsection{Vistas}
 
-Como se puede figurar después de haber leido el primer capítulo, no es objetivo
+Como se puede figurar después de haber leído el primer capítulo, no es objetivo
 del proyecto proporcionar un interfaz de consulta de la base de datos. De todos
 modos, en el directorio \url{misc/query}, se pueden encontrar dos pequeños
 scripts escritos en PHP\footnote{http://www.php.net} que contienen consultas de
