@@ -2,11 +2,13 @@
 
 \subsection{Estructura}
 
-\subsubsection{Entidades}
+La figura \ref{fig:diagrama-e-r} representa el diagrama E-R de la base de datos
+que ha sido diseñada para almacenar toda la información extraída mediante el
+\textit{parser}. En ella se pueden ver en color naranja las entidades y en color
+marrón las relaciones. En el siguiente apartado se
+intentará explicar brevemente la utilidad de cada uno de estos elementos.
 
-En la \ref{fig:diagrama-e-r} se pueden localizar en color naranja las
-entidades. En la siguiente lista se recogen los datos que almacenan cada una de
-ellas.
+\subsubsection{Entidades}
 
 \begin{description}
 \item [Word] 
@@ -41,15 +43,22 @@ Todas las categorías encontradas.
 
 \subsubsection{Relaciones}
 
-La mayoría de relaciones son bastante obvias mirando el diagrama
-entidad-relación por lo que en este apartado sólo se van a comentar las que
-tienen nombres que puedan inducir a confusión.
+La mayoría de relaciones son bastante obvias, con tan sólo echar un vistazo al
+diagrama entidad-relación se puede entender su utilidad. Por esa razón en este
+apartado sólo se van a comentar las dos que pueden resultar más complejas de
+ver.
 
 \begin{description}
 
 \item [Syntactic]
+Las n-uplas generadas por esta relación contendrán toda la información
+sintáctica que el analizador provee, es decir, las etiquetas a nivel de
+palabra, a nivel frasal y a nivel clausal.
 
 \item [Semantic]
+Esta relación está diseñada para guardar los datos relativos a la información
+semántica extraida, en concreto las relaciones gramaticales entre las palabras
+(en forma de dependencias).
 
 \end{description}
 
