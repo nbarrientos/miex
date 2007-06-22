@@ -72,24 +72,20 @@ public class Miex
 					sql.executeSQLFile(theFileConfig.getStringSetting("SQLSkeleton"));
 				}
 
-				/* STEP 4: Validating input XML files (if required) */
+				/* STEP 4: Skipping not readable files */
+
+				ArrayList<String> realFiles = dropBadInputs(theCMDConfig.getFiles());
+
+				/* STEP 5: Validating input XML files (if required) */
 
 				if(theFileConfig.getBooleanSetting("Validate"))
-				{
-					if(!validateXMLInputFiles(theCMDConfig.getFiles(), theFileConfig))
-					{
-						System.err.println("ERROR: Internal error validating XML input files");
-						System.exit(-1);
-					}
-
-					System.out.println("Input file's XML syntax is sane (matches XML Schema), parsing files...\n");
-				}
+					realFiles = validateXMLInputFiles(realFiles, theFileConfig);
 				else
-					System.out.println("Warning: continuing without validate XML input...\n");
+					stopUntilUserPressesEnter("WARNING: The input files are not being validated, wanna continue anyway? [Y/N]: ");
 
 				/* STEP 5: Getting metadata from input files */
 
-				processFiles(theCMDConfig.getFiles(), theFileConfig, sql);
+				processFiles(realFiles, theFileConfig, sql);
 				
     }
 
@@ -97,34 +93,46 @@ public class Miex
    * Begin of a set of auxiliar methods called from main
 	 */
 
-	private static boolean validateXMLInputFiles(String[] files, ConfigFile config)
+	private static ArrayList<String> dropBadInputs(String[] files)
 	{
-		XMLValidator validator = new XMLValidator(config.getStringSetting("XMLschemaURI"));
+		ArrayList<String> newFiles = new ArrayList<String>();
 
 		for(int j=0; j < files.length; j++)
 		{
 			File theFile = new File(files[j]);
 
 			if(!theFile.canRead())
-			{
-				System.err.println("Input file " + files[j] + " is not readable or not exists, terminating.");
-				return false;
-			}
-
-			if(!(validator.validate(theFile)))
-			{
-				System.err.println("Input file's XML " + files[j] + " does not match this Schema.");
-				return false;
-			 }
+				System.err.println("The input file \"" + files[j] + "\" is not readable or not exists, skipping...\n");
+			else
+				newFiles.add(files[j]);
 		}
 
-		return true;
+		return newFiles;
+	}
+
+	private static ArrayList<String> validateXMLInputFiles(ArrayList<String> files, ConfigFile config)
+	{
+		XMLValidator validator = new XMLValidator(config.getStringSetting("XMLschemaURI"));
+
+		ArrayList<String> newFiles = new ArrayList<String>();
+
+		for(int j=0; j < files.size(); j++)
+		{
+			File theFile = new File(files.get(j));
+
+			if(!(validator.validate(theFile)))
+				System.err.println("The input file \"" + files.get(j) + "\" does not match the schema, skipping...\n");
+			else
+				newFiles.add(files.get(j));
+		}
+
+		return newFiles;
 	}
 
 	/* Before this function is called validation using Schema has been completed 
 		 then we only need to process the files with the SP */
 
-	private static void processFiles(String[] files, ConfigFile config, SQLHandler sql)
+	private static void processFiles(ArrayList<String> files, ConfigFile config, SQLHandler sql)
 	{
 		Extractor ex = new Extractor(config.getStringSetting("GrammarURI"));
 
@@ -135,20 +143,20 @@ public class Miex
 		int collectionID;
 		
 		// Iterating through all collections
-		for(int j=0; j < files.length; j++)
+		for(int j=0; j < files.size(); j++)
 		{
-			File theFile = new File(files[j]);
+			File theFile = new File(files.get(j));
 
 			// Registering collection into the database
 			collectionID = sql.addCollection((theFile.getName().split("\\."))[0]);
 
 			if(collectionID < 0)
 			{
-				System.out.println("\nCollection " + theFile.getName() + " already parsed.\n");
+				System.out.println("\nCollection \"" + theFile.getName() + "\" already parsed, skipping...\n");
 				continue;
 			}
 
-			System.out.println("Parsing file " + files[j] + "\n");
+			System.out.println("Parsing file \"" + files.get(j) + "\"\n");
 
 			// Dumping XML to memory
 			MyCollection collection = unMarshaller.run(theFile);

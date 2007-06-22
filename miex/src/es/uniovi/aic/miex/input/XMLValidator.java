@@ -45,7 +45,6 @@ public class XMLValidator
         }
         catch (Exception e) 
 				{
-						System.err.println(e.toString());
 						return false;
         }
         
