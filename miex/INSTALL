@@ -1,0 +1,27 @@
+QUICK START
+===========
+
+ a) Download the required libraries and build tools.
+
+  * J2SE (JRE+JDK) (>= 5.0) <http://java.sun.com/javase/>
+  * Stanford Parser (>= 2006-06-11) <http://nlp.stanford.edu/>
+  * JSAP (>= 2.1) <http://www.martiansoftware.com/jsap/>
+  * MySQL Connector/J (>= 5.0.5) <http://www.mysql.com/products/connector/j/>
+  * SAX (>= 2.0) <http://www.saxproject.org/>
+
+  * Apache Ant (recommended) OR Gnu Make
+
+ b) Copy each JAR to /usr/lib/java and modify build.xml or Makefile at
+    your own.
+
+ c) Compile and install
+
+   c.1) Using Apache Ant
+        $ ant
+	      $ sudo ant install
+
+   c.2) Using GNU Make
+        $ make
+        $ sudo make install
+
+ d) Run

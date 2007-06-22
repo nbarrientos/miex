@@ -1,0 +1,39 @@
+
+ _|      _|  _|_|_|  _|_|_|_|  _|      _|
+ _|_|  _|_|    _|    _|          _|  _|
+ _|  _|  _|    _|    _|_|_|        _|
+ _|      _|    _|    _|          _|  _|
+ _|      _|  _|_|_|  _|_|_|_|  _|      _|
+
+ Metadata and Information Extractor from small XML documents.
+
+
+OVERVIEW
+
+ The aim of MIEX (Metadata and Information Extractor from small XML
+ documents) is to create a wrapper for the Stanford Parser, developed
+ by The Stanford Natural Language Processing Group, to extract and
+ store metadata (syntactic structures, relationships among words...)
+ from simple XML documents in order to apply IR methodologies to
+ retrieve useful information afterwards. 
+
+ MIEX is being developed as my final year project at the University of
+ Oviedo. This application analyses a batch of XML documents and
+ navigates through Stanford Parser's output trees to store all the
+ extracted semantic information into a MySQL database.
+
+DOCUMENTATION
+
+ English written documentation is not available yet.
+
+INSTALL
+
+ See INSTALL.
+
+HOMEPAGE
+
+ http://miex.sourceforge.net/
+
+AUTHOR
+
+ Nacho Barrientos Arias <nacho@criptonita.com>
