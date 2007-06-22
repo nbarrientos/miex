@@ -4,18 +4,13 @@
 \newcommand{\DirectorPFC}{Susana Irene Díaz Rodríguez}
 \newcommand{\CoDirectorPFC}{Elena Montañés Roces}
 
-
 %cabeceras (con el paquete "fancyhdr")
 \headheight 15pt
 
-%macro que me ha chivado Frade, extraido del libro Â«LaTeX, una imprenta en sus manosÂ», para aÃ±adir la bibliografÃ­a al indice
-%\let\OLDthebibliography=\thebibliography
-%\def\thebibliography#1{\OLDthebibliography{#1}%
-%	\addcontentsline{toc}{chapter}{\bibname}}
-
-%renombrar las tablas (no funciona)
-%\renewcommand{\tablename}{Tabla}
-%\renewcommand{\listtablename}{Indice de tablas}
+% Thanks yo Wikier and Frade, this macro rocks. 
+\let\OLDthebibliography=\thebibliography
+\def\thebibliography#1{\OLDthebibliography{#1}
+	\addcontentsline{toc}{chapter}{\bibname}}
 
 %colores
 \definecolor{darkred}{rgb}{0.5, 0, 0}
@@ -50,6 +45,7 @@
 
 \parskip   \medskipamount
 
+% Misc commands
 \newcommand{\sourcepath}
 {/home/nacho/devel/pfc/svn/trunk/miex/src/es/uniovi/aic/miex/}
 \newcommand{\trunkpath}
