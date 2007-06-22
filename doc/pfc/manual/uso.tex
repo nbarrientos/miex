@@ -30,28 +30,31 @@ datos y la clave \textit{CreateDB} que, al menos la primera vez, debería de
 estar a \texttt{Yes}.
 
 En el fichero de configuración de ejemplo, en forma de comentarios, se explica
-la utilidad de cada una de las opciones por lo que no se volverán a explicar c
-ada una de ellas de nuevo en este capítulo.
+la utilidad de cada una de las opciones por lo que no se volverán a explicar
+cada una de ellas de nuevo en este capítulo.
 
 Como ejemplo de fichero de colección, vamos a analizar el fichero de ejemplo que
 se distribuye al instalar el programa, localizado en
 \url{/usr/share/doc/miex/examples/input/}
 
-Suponiendo que el fichero de configuración está situado en el directorio
-actual, procedamos a la ejecución.
+Suponiendo que el fichero de configuración que hemos preparado (llamado
+\textit{example.conf}) está situado en el directorio actual, procedamos a la
+ejecución.
 
 \begin{small}
 \texttt{\$ miex -c example.conf /usr/share/doc/miex/examples/input/example.xml}	
 \end{small}
 
-Nótese que, por seguridad, antes de comenzar el análisis es necesario que usted
-confirme que quiere borrar el contenido actual de la base de datos (en el caso
-de que existiera).
+Nótese que, por seguridad, si la clave \textit{CreateDB} está a \textit{Yes},
+antes de comenzar el análisis es necesario que usted confirme que quiere borrar
+el contenido actual de la base de datos (en el caso de que existiera).
 
-Como el programa es bastante \textit{verboso} se puede ver fácilmente el
-proceso de análisis de cada uno de los documentos que conforman la colección.
-También se puede apreciar que el análisis de cada oración se realiza en pasos
-descritos por una serie de letras que se detallan a continuación.
+Los mensajes que se imprimen por la salida estándar son bastante
+explicativos por lo que se puede ver fácilmente el proceso de análisis de cada
+uno de los documentos que conforman las colecciones. Fijándose un poco más,
+también se puede apreciar que el análisis de cada oración se realiza en pasos
+descritos por una serie de letras de las cuales se detalla su significado a
+continuación.
 
 \begin{itemize}
 	\item \textbf{C} - La oración está \textit{cacheada} en el

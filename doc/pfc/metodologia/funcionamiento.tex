@@ -3,7 +3,7 @@
 Como puede observar en la figura \ref{fig:esquema-funcionamiento} en primer
 lugar se analiza el contenido tanto de las opciones pasadas a través de la
 línea de comandos como a través del fichero de configuración. Seguidamente, si
-el usuario así lo especifica se crea una base de datos vacía y se comprueba la
+el usuario así lo especifica, se crea una base de datos vacía y se comprueba la
 integridad de los ficheros de entrada, utilizando el \textit{schema}
 seleccionado.
 
@@ -22,15 +22,17 @@ cauce que se establece en la figura.
  
 Como paso opcional dentro del proceso de tratamiento, existe la posibilidad de
 crear un fichero de texto por cada categoría encontrada con todas las oraciones
-que se vayan analizando pertenecientes a esa categoría. Por otro lado, el
-filtrado trata de eliminar palabras vacías y eliminar elementos inútiles del
-análisis, como signos de puntuación.
+que se vayan analizando pertenecientes a esa categoría. El proceso de filtrado
+trata de eliminar palabras vacías (más usualmente conocidas como \textit{stop
+words}\footnote{http://en.wikipedia.org/wiki/Stop\_words}) y eliminar elementos
+inútiles del análisis, como signos de puntuación.
 
 Como se observa en los pasos finales, también es opcional la normalización de
-las palabras analizadas. Básicamente el proceso de normalización trata de
-aplicar el algoritmo de Porter. De cara a analizar los resultados
-posteriormente, una palabra normalizada de una que no lo está se distingue con
-una marca en la base de datos, por lo que realizar filtros resulta bastante
-sencillo.
+las palabras analizadas. Básicamente el proceso de normalización se trata de
+aplicar el conocido algoritmo de Porter (en inglés, \textit{Porter
+Stemmer algorithm}\footnote{http://en.wikipedia.org/wiki/Stemming}). De cara a
+analizar los resultados posteriormente, una palabra normalizada de una que no lo
+está se distingue con una marca en la base de datos, por lo que realizar filtros
+resulta bastante sencillo.
 
 \newpage
