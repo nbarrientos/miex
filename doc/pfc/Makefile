@@ -14,8 +14,6 @@ TEMPFILE=/tmp/miex.build.eps
 all: build 
 
 build: dirs images	
-#	umbrello --export png --directory images/uml/ uml/swaml.xmi 2> /dev/null
-#	umbrello --export png --directory images/uml/ uml/swaml-clases.xmi 2> /dev/null
 	rubber --pdf miex.tex
 
 ## Directories ##
