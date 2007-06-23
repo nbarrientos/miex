@@ -7,7 +7,7 @@ esta sección simplemente se hará referencia a él.
 
 Las opciones de configuración existentes hasta la fecha son las siguientes:
 
-\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{Verbatim}[frame=single,framesep=2pt,fontsize=\relsize{-1}]
 # DBHostname
 #   Type:     String
 #   Default:  127.0.0.1
@@ -72,20 +72,22 @@ DBName=foodatabase
 # CreateDB
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     Injects the template sql file into the database before do any
-insert. USE CAREFULLY.
+#   Desc:     Injects the template sql file into the database before 
+#             do any insert. USE CAREFULLY.
 #   See also: SQLSkeleton
 
 # SQLSkeleton
 #   Type:     String
 #   Default:  /usr/share/miex/sql/skeleton.sql
-#   Desc:     Path to a SQL file containing the statements to create a empty DB
+#   Desc:     Path to a SQL file containing the statements to create 
+#             a empty DB
 #   See also: CreateDB
 
 # Normalize
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     If 'Yes' MIEX uses Porter and inserts normalized words as well.
+#   Desc:     If 'Yes' MIEX uses Porter and inserts normalized 
+#             words as well.
 #   See also: -
 \end{Verbatim}
 

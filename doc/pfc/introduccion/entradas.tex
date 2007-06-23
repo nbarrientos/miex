@@ -22,31 +22,35 @@ El lenguaje que se define utilizando XML para representar las colecciones
 satisface la siguiente plantilla (concepto más conocido por su nombre
 en inglés, \textit{XML Schema}).
 
-\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{Verbatim}[label=default.xsd, frame=single,framesep=2pt,fontsize=\relsize{
+-1 } ]
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 <xs:complexType name="categoriestype">
  <xs:sequence>
-  <xs:element name="D" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+  <xs:element name="D" type="xs:string" minOccurs="1" 
+   maxOccurs="unbounded"/>
  </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="doctype">
   <xs:all>
-   <xs:element name="TOPIC" type="categoriestype" minOccurs="1" maxOccurs="1"/>
+   <xs:element name="TOPIC" type="categoriestype" minOccurs="1" 
+    maxOccurs="1"/>
    <xs:element name="TITLE" type="xs:string" maxOccurs="1"/>
-   <xs:element name="BODY" type="xs:string" minOccurs="1" maxOccurs="1"/>
+   <xs:element name="BODY" type="xs:string" minOccurs="1" 
+    maxOccurs="1"/>
   </xs:all>
 </xs:complexType>
 
 <xs:element name="COLLECTION">
 <xs:complexType>
  <xs:sequence>
-   <xs:element name="DOCTRAIN" type="doctype"
-minOccurs="0" maxOccurs="unbounded"/>
+  <xs:element name="DOCTRAIN" type="doctype"
+    minOccurs="0" maxOccurs="unbounded"/>
   <xs:element name="DOCTEST" type="doctype" minOccurs="0"
-maxOccurs="unbounded"/>
+    maxOccurs="unbounded"/>
  </xs:sequence>
 </xs:complexType>
 </xs:element>
@@ -57,7 +61,7 @@ maxOccurs="unbounded"/>
 Por lo que cada fichero que represente una colección de documentos será
 genéricamente de esta forma:
 
-\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{Verbatim}[frame=single,framesep=2pt,fontsize=\relsize{-1}]
 <collection>
  <doctrain>
  <topic> <d>c1</d> <d>c2</d> ... <d>cn</d> </topic>
@@ -86,23 +90,27 @@ hacer agrupamientos de palabras.
 A continuación, un pequeño ejemplo de uno fichero de colección llamado
 \textit{computers.xml}.
 
-\begin{Verbatim}[fontsize=\relsize{-2}]
+\begin{Verbatim}[label=example.xml,frame=single,framesep=2pt,fontsize=\relsize{
+-1}]
 <collection>
  <doctrain>
  <topic> <d>debian</d> <d>linux</d> <d>OS</d> </topic>
  <title>Debian project</title>
- <body> Debian is a free operating system (OS) for your computer. An operating
-system is the set of basic programs and utilities that make your computer run.
-Debian uses the Linux kernel (the core of an operating system), but most of the
-basic OS tools come from the GNU project; hence the name GNU/Linux </body>
+ <body> Debian is a free operating system (OS) for your computer. An 
+ operating system is the set of basic programs and utilities that 
+ make your computer run. Debian uses the Linux kernel (the core of 
+ an operating system), but most of the basic OS tools come from the 
+ GNU project; hence the name GNU/Linux.
+ </body>
  </doctrain>
  <doctrain>
  <topic> <d>computing</d> <d>search</d> <d>engine</d> </topic>
  <title>Google</title>
- <body> Google Inc. (NASDAQ: GOOG and LSE: GGEA) is an American public
-corporation, specializing in Internet search and online advertising. The company
-had 10,674 full-time employees as of December 31, 2006, and is based in Mountain
-View, California. </body>
+ <body> Google Inc. (NASDAQ: GOOG and LSE: GGEA) is an American 
+ public corporation, specializing in Internet search and online 
+ advertising. The company had 10,674 full-time employees as of 
+ December 31, 2006, and is based in Mountain View, California. 
+ </body>
  </doctrain>
 </collection>
 \end{Verbatim}

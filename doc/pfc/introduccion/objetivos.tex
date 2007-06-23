@@ -20,6 +20,7 @@ hacerla de la forma clásica (subrayando cada elemento de la oración), la manera
 más visual y lógica es utilizar un árbol (figura \ref{fig:arbol-sintactico}).
 
 \begin{figure}[h]
+\centering
 \Tree[.ROOT [.S [.NP [.DT The ] [.NNP Debian ] [.NNP Project ] ] [.VP [.VBZ is
 ] [.NP [.NP [.DT an ] [.NN association ] ] [.PP [.IN of ] [.NP [.NNS individuals
  ] ] ] ] ] ] ]
@@ -36,7 +37,8 @@ dependencias entre algunas palabras de la oración
 (figura \ref{fig:relaciones-palabras}).
 
 \begin{figure}[h]
-\begin{Verbatim}[fontsize=\relsize{-1}]
+\centering
+\begin{Verbatim}[frame=single,framesep=10pt,fontsize=\relsize{-1}]
 det(Project-3, The-1)
 nn(Project-3, Debian-2)
 nsubj(association-6, Project-3)

@@ -1,11 +1,14 @@
 \section{Funcionamiento interno}
 
-Como puede observar en la figura \ref{fig:esquema-funcionamiento} en primer
+Como puede observar en la figura \ref{fig:esquema-funcionamiento}, en primer
 lugar se analiza el contenido tanto de las opciones pasadas a través de la
-línea de comandos como a través del fichero de configuración. Seguidamente, si
-el usuario así lo especifica, se crea una base de datos vacía y se comprueba la
-integridad de los ficheros de entrada, utilizando el \textit{schema}
-seleccionado.
+línea de comandos, como a través del fichero de configuración. Seguidamente, se
+comprueba la validez de los ficheros que el usuario demanda procesar.
+Obligatoriamente se eliminan ficheros que no existen y, si el usuario así lo
+solicita, los ficheros que no cumplan el \textit{schema} seleccionado. Para
+finalizar este primer bloque de acciones, si después de los filtros anteriores,
+existen ficheros que procesar se crea una nueva base de datos, si así se
+hubiese especificado en el fichero de configuración.
 
 Si todo ha ido bien, se procede con el análisis de las colecciones siguiendo el
 cauce que se establece en la figura.
@@ -25,7 +28,7 @@ crear un fichero de texto por cada categoría encontrada con todas las oraciones
 que se vayan analizando pertenecientes a esa categoría. El proceso de filtrado
 trata de eliminar palabras vacías (más usualmente conocidas como \textit{stop
 words}\footnote{http://en.wikipedia.org/wiki/Stop\_words}) y eliminar elementos
-inútiles del análisis, como signos de puntuación.
+inútiles del análisis, por ejemplo, como signos de puntuación.
 
 Como se observa en los pasos finales, también es opcional la normalización de
 las palabras analizadas. Básicamente el proceso de normalización se trata de

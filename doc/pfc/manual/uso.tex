@@ -9,7 +9,7 @@ En este punto MIEX ya debería de estar correctamente instalado, puede
 comprobarlo ejecutándolo sin ningún argumento. Debería de obtener una salida
 similar a esta:
 
-\begin{Verbatim}[fontsize=\relsize{-1}]
+\begin{Verbatim}[frame=single,framesep=10pt,fontsize=\relsize{-1}]
 $ miex
 Error: Parameter 'configFileURI' is required.
 Error: Parameter 'files' is required.
@@ -49,12 +49,61 @@ Nótese que, por seguridad, si la clave \textit{CreateDB} está a \textit{Yes},
 antes de comenzar el análisis es necesario que usted confirme que quiere borrar
 el contenido actual de la base de datos (en el caso de que existiera).
 
-Los mensajes que se imprimen por la salida estándar son bastante
-explicativos por lo que se puede ver fácilmente el proceso de análisis de cada
-uno de los documentos que conforman las colecciones. Fijándose un poco más,
-también se puede apreciar que el análisis de cada oración se realiza en pasos
-descritos por una serie de letras de las cuales se detalla su significado a
-continuación.
+Como se puede comprobar en la figura \ref{fig:ejemplo-procesamiento}, los
+mensajes que se imprimen por la salida estándar son bastante explicativos por lo
+que se puede ver fácilmente el proceso de análisis de cada uno de los documentos
+que conforman las colecciones. Fijándose un poco más, también se puede apreciar
+que el análisis de cada oración se realiza en pasos descritos por una serie de
+letras de las cuales se detalla su significado a continuación.
+
+\begin{figure}[h]
+\centering
+\begin{Verbatim}[frame=single,framesep=5pt,fontsize=\relsize{-1}]
+Cmdline syntax is OK, continuing...
+
+Config file is OK, continuing...
+
+WARNING: Existing database will be completely deleted. [Y/N]: Y
+
+Creating DB...
+
+Parsing file "/usr/share/doc/miex/examples/input/example.xml"
+
+Loading parser from serialized file lib/grammars/englishPCFG.ser.gz ... 
+done [2.4 sec].
+
+        Processing TITLE of the document titled: Debian project
+                Processing sentence #1
+                        Dependencies... [ R(0)  F  S ]
+                        Properties...  [ C  R(0)  F  S ]
+
+        Processing BODY of the document titled: Debian project
+                Processing sentence #1
+                        Dependencies... [ R(9)  F  S ]
+                        Properties...  [ C  R(9)  F  S ]
+                Processing sentence #2
+                        Dependencies... [ R(11)  F  S ]
+                        Properties...  [ C  R(10)  F  S ]
+                Processing sentence #3
+                        Dependencies... [ R(18)  F  S ]
+                        Properties...  [ C  R(19)  F  S ]
+
+        Processing TITLE of the document titled: Google is great.
+                Processing sentence #1
+                        Dependencies... [ R(1)  F  S ]
+                        Properties...  [ C  R(2)  F  S ]
+
+        Processing BODY of the document titled: Google is great.
+                Processing sentence #1
+                        Dependencies... [ R(6)  F  S ]
+                        Properties...  [ C  R(11)  F  S ]
+                Processing sentence #2
+                        Dependencies... [ R(15)  F  S ]
+                        Properties...  [ C  R(15)  F  S ]
+\end{Verbatim}
+\label{fig:ejemplo-procesamiento}
+\caption{Información mostrada durante un procesamiento}
+\end{figure}
 
 \begin{itemize}
 	\item \textbf{C} - La oración está \textit{cacheada} en el
