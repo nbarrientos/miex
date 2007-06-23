@@ -253,7 +253,7 @@ public class Miex
 				{
 					String catName = categories.get(i).toString().replace(" ","");
 
-					System.out.print("\t\tCreating file " + destination + catName + "... ");
+					System.out.print("\t\tOpening file " + destination + catName + "... ");
 
 					FileWriter fw = new FileWriter(destination + catName + ".txt",true);
 
