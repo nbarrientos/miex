@@ -8,9 +8,10 @@ necesarios. \textbf{No los utilice si no sabe bien lo que está haciendo.}
 
 Durante el periodo de pruebas se detectó la existencia de algunos ficheros de
 entrada que no estaban bien formados, por lo que el analizador no los era capaz
-de tratar correctamente. El script llamado \textbf{\texttt{fixxml.sh}} situado
-en el directorio \texttt{share/utils} toma como argumento un fichero a arreglar
-e imprime el fichero correcto por la salida estándar.
+de tratar correctamente. El script llamado \textbf{\texttt{fixxml.sh}}, situado
+en el directorio \texttt{misc/transformation} y dependiente de \textbf{gawk}
+toma como argumento la ruta de un fichero a arreglar e imprime el fichero
+correcto por la salida estándar.
 
 Los errores que éste script arregla son los siguientes:
 
@@ -24,8 +25,8 @@ Los errores que éste script arregla son los siguientes:
 \texttt{</doc>}, se cambiaría esta última etiqueta por \texttt{</doctrain>})
 \end{itemize}
 
-Recuerde, MIEX \textbf{abandonará la ejecución} si alguno de los ficheros de
-entrada no cumple el \textit{schema} proporcionado. Si usted fuerza evitar la
+Recuerde, MIEX \textbf{excluirá del procesamiento} a los ficheros que no cumplan
+el \textit{schema} proporcionado. Si usted fuerza evitar la
 comprobación utilizando \textit{schema} y el fichero de colección está mal
 formado, el \textit{unmarshaller} lanzará una excepción no recuperable y
 abortará la ejecución.
