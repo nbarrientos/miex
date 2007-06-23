@@ -176,24 +176,12 @@ public class Extractor
 		return (Sentence) myTaggedYield(t,new Sentence(),new ArrayList<String>());
 	}
 
-	/** 
-	 * A reference to the parser 
-	 */
 	private LexicalizedParser lp;
 
-	/** 
-	 * A tree to store whole parse 
-	 */
 	private Tree parse;
 
-	/** 
-	 * The path to the grammar file. 
-	 */
 	private String grammarName;
 
-	/** 
-	 * A reference to last parsed sentence, used as cache. 
-	 */
 	private List lastParsedSentence;
 
 }

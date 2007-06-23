@@ -58,9 +58,6 @@ class NumbersDetector
 		return !(wordAndProp.word().matches(regexp));
 	}
 
-	/** 
-	 * The magic regular expression
-	 */
 	private String regexp;
 
 } //class

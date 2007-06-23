@@ -69,9 +69,5 @@ public class MyCategories
 
 	// Members
 	
-	/** 
-	 * The categories encapsulated container 
-	 */
 	private ArrayList<String> categories;
-
 }

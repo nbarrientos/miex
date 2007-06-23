@@ -46,13 +46,6 @@ public class ConfigFile
 
 	}
 
-	/** 
-	 * Checks configuration file consistency 
-	 * 
-	 * @throws Exception If something weird happens, i.e.:
-   *				    - Missing mandatory fields
-   *            - Boolean fields set as non-boolean 
-	 */
 	private void checkFile() 
 	{
 
@@ -153,24 +146,12 @@ public class ConfigFile
 		throw new Exception("\'" + dumbprop + " not found.");
 	}
 
-	/** 
-	 * Storage for all settings after reading the configuration file 
-	 */
 	private Properties properties;
 
-	/** 
-	 * Self-explaining 
-	 */
 	private static String[] reqConfigFileFields, configFileBooleanFields; 
 	
-	/** 
-	 * Self-explaining 
-	 */
 	private static HashMap<String,String> defaultValuesString;
 	
-	/** 
-	 * Self-explaining 
-	 */
 	private static HashMap<String,Boolean> defaultValuesBoolean;
 
   static

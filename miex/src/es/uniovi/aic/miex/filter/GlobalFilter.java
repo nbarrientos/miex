@@ -9,9 +9,18 @@ import java.util.ArrayList;
 
 import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
+/** 
+ * Filter handler 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class GlobalFilter
 {
 
+	/** 
+	 * Initialize all filters 
+	 */
 	public GlobalFilter()
 	{
 		swd = new StopWordsDetector();
@@ -20,6 +29,12 @@ public class GlobalFilter
 		pt = new Porter();
 	}
 
+  /** 
+   * Cleans a set of dependencies using the initialized filters 
+   * 
+   * @param rs The dependencies to clean
+   * @return The cleaned up dependencies
+   */
   public ArrayList<TypedDependency> cleanDependencies(ArrayList<TypedDependency> rs)
   {
 
@@ -36,6 +51,12 @@ public class GlobalFilter
     return cleanDeps;
   }
 
+  /** 
+   * Cleans a set of properties using the initialized filters 
+   * 
+   * @param words The properties to clean
+   * @return The cleaned up properties
+   */
   public ArrayList<ExtendedTaggedWord> cleanProperties(ArrayList<ExtendedTaggedWord> words)
   {
 
@@ -56,6 +77,12 @@ public class GlobalFilter
 
 	/* Normalization utils */
 
+	/** 
+	 * Normalizes a set of properties 
+	 * 
+	 * @param words The properties to normalize
+	 * @return The normalized properties
+	 */
 	public ArrayList<ExtendedTaggedWord> normalizeProperties(ArrayList<ExtendedTaggedWord> words)
 	{
 		ArrayList<ExtendedTaggedWord> normalizedProps = new ArrayList<ExtendedTaggedWord>();
@@ -73,6 +100,12 @@ public class GlobalFilter
 		return normalizedProps;
 	}
 
+	/** 
+	 * Normalizes a set of dependencies 
+	 * 
+	 * @param rs The dependencies to normalize
+	 * @return The normalized dependencies
+	 */
 	public ArrayList<TypedDependency> normalizeDependencies(ArrayList<TypedDependency> rs)
 	{
 		ArrayList<TypedDependency> normalizedDeps = new ArrayList<TypedDependency>();

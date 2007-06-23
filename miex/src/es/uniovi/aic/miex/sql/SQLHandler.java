@@ -615,23 +615,11 @@ public class SQLHandler
   }
 
 
-	/** 
-	 * A helper method to easy create a SQL statement object 
-	 * 
-	 * @return The Created statement
-	 * @throws SQLException 
-	 */
 	private Statement createStatement() throws SQLException
 	{
 		return theConn.createStatement();
 	}
 
-	/** 
-	 * A simple filter to prevent crashes into the SQL statements 
-	 * 
-	 * @param orig The string to filter
-	 * @return The filtered and safe string
-	 */
 	private String safeSQL(String orig)
 	{
 		// Escaping dangerous "'" which could break the SQL statement.
@@ -643,9 +631,5 @@ public class SQLHandler
 
 	// Members
 	
-	/** 
-	 * A reference to a Connection object  
-	 */
 	private Connection theConn;
-
 }	

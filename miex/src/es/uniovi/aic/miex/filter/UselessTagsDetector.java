@@ -4,7 +4,12 @@ import java.util.HashSet;
 
 import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
-// Package class
+/** 
+ * Filters useless tags 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 class UselessTagsDetector 
 {
   public UselessTagsDetector()
@@ -23,18 +28,14 @@ class UselessTagsDetector
 	private boolean is(String tag)
 	{
 		return uselessTags.contains(tag);
-/*
-		if(uselessTags.contains(word.toLowerCase()))
-		{
-			System.out.println("Found stop word: " + word);
-			return true;
-		}
-		else
-			return false;
-*/
-					
 	}
 
+	/** 
+	 * The filter itself 
+	 * 
+	 * @param wordAndProp a object containing the tag to check
+	 * @return true if the tag is useful
+	 */
 	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
 		return !(is(wordAndProp.tag()));
