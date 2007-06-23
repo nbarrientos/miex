@@ -48,7 +48,6 @@ public class Miex
 {
     public static void main(String[] args)
 		{
-
 				/* STEP 1: Parsing CMDLine arguments */
 
 				ConfigCMDLine theCMDConfig = new ConfigCMDLine(args);
@@ -190,7 +189,7 @@ public class Miex
 				if(config.getBooleanSetting("Dump"))
 				{
 					// Creating data files
-					System.out.println("\tCreating category files for document titled: " + doc.getTitle());
+					System.out.println("\n\tCreating category files for document titled: " + doc.getTitle().trim());
 					injectDataToFiles(doc.getCategories().toArray(), bodySentences, config.getStringSetting("DumpDir"));
 				}
 
@@ -232,19 +231,35 @@ public class Miex
 																				List<List<? extends HasWord>> sentences,
 																				String destination)
 	{
-			String newline = System.getProperty( "line.separator" );
-	
+			String newline = System.getProperty("line.separator");
+
+			if(!(destination.matches(".*/$"))) destination = destination + "/";
+
+			File fd = new File(destination);
+
+			if(fd.mkdirs())
+				System.out.println("\t\tDirectory " + destination + " created.");
+			else // It already exists OR it has no enough permissions
+				if(!(fd.canWrite()))
+				{
+					System.err.println("\nERROR: Unable to create the directory " + destination + 
+														 ", check permissions, exiting...");
+					System.exit(-1);
+				}
+
 			for(int i=0; i < categories.size(); i++)
 			{
 				try
 				{
 					String catName = categories.get(i).toString().replace(" ","");
 
-					System.out.println("\tCreating file " + destination + catName + "...");
+					System.out.print("\t\tCreating file " + destination + catName + "... ");
 
 					FileWriter fw = new FileWriter(destination + catName + ".txt",true);
 
-					System.out.println("\tInjecting the sentences...");
+					System.out.println("Done");
+
+					System.out.print("\t\tInjecting the sentences... ");
 
 					for (List sentence : sentences)
 					{
@@ -254,7 +269,7 @@ public class Miex
 
 					fw.close();
 
-					System.out.println("\tDone");
+					System.out.println("Done");
 
 				}
 				catch(IOException e)
