@@ -96,7 +96,7 @@
 				     use="true"
 				     author="false"
 				     version="false"
-             private="true"
+             private="false"
 				     windowtitle="${app.name} v${app.version} API Specification"
 				     doctitle="${app.name} v${app.version} API Specification">
 

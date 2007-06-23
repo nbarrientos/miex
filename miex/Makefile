@@ -32,7 +32,7 @@ JAVADOC = javadoc
 JAVADOCDEST = build/doc/api/
 JAVADOCSRCPATH = src/
 JAVADOCDOCTITLE = 'MIEX: Metadata and Information Extractor from small XML documents'
-JAVADOCOPTIONS = -classpath $(CLASSPATH) -sourcepath $(JAVADOCSRCPATH) -private \
+JAVADOCOPTIONS = -classpath $(CLASSPATH) -sourcepath $(JAVADOCSRCPATH) \
 								 -windowtitle "MIEX v$(MIEXVERSION) API Specification" \
 								 -doctitle "MIEX v$(MIEXVERSION) API Specification" \
 								 -link "http://java.sun.com/javase/6/docs/api"
