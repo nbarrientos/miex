@@ -55,3 +55,19 @@
 {/home/nacho/devel/pfc/svn/trunk/miex/}
 \newcommand{\codeversion}
 {0.0.1}
+
+% Titlesec
+\titleformat{\chapter}[frame]
+  {\fontfamily{phv}}
+  {\filright\large\enspace \chaptertitlename \enspace \thechapter\enspace}
+  {8pt}
+  {\huge\bfseries\filcenter}
+\titleformat{\section}
+ {\normalfont\selectfont\large}
+ {\thesection}{1em}{\bfseries}[\titlerule]
+\titleformat{\section}
+  {\fontfamily{phv}\selectfont\Large}
+  {\thesection}{1em}{\bfseries}[\titlerule]
+\titleformat{\subsection}
+  {\fontfamily{phv}\selectfont\large}
+  {\thesubsection}{1em}{\bfseries}
