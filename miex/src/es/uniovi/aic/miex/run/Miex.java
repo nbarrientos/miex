@@ -61,29 +61,31 @@ public class Miex
 
 				System.out.println("Config file is OK, continuing...\n");
 
-				/* STEP 3: Creating database structure (if required) */
-
-				SQLHandler sql = new SQLHandler(theFileConfig);
-
-				if(theFileConfig.getBooleanSetting("CreateDB"))
-				{
-					stopUntilUserPressesEnter("WARNING: Existing database will be completely deleted. [Y/N]: ");
-					System.out.println("Creating DB...\n");
-					sql.executeSQLFile(theFileConfig.getStringSetting("SQLSkeleton"));
-				}
-
-				/* STEP 4: Skipping not readable files */
+				/* STEP 3: Skipping not readable files */
 
 				ArrayList<String> realFiles = dropBadInputs(theCMDConfig.getFiles());
 
-				/* STEP 5: Validating input XML files (if required) */
+				/* STEP 4: Validating input files (if required) */
 
 				if(theFileConfig.getBooleanSetting("Validate"))
 					realFiles = validateXMLInputFiles(realFiles, theFileConfig);
 				else
 					stopUntilUserPressesEnter("WARNING: The input files are not being validated, wanna continue anyway? [Y/N]: ");
 
-				/* STEP 5: Getting metadata from input files */
+				if(realFiles.isEmpty()) System.exit(0);
+
+        /* STEP 5: Creating database structure (if required) */
+
+        SQLHandler sql = new SQLHandler(theFileConfig);
+
+        if(theFileConfig.getBooleanSetting("CreateDB"))
+        {
+          stopUntilUserPressesEnter("WARNING: Existing database will be completely deleted. [Y/N]: ");
+          System.out.println("Creating DB...\n");
+          sql.executeSQLFile(theFileConfig.getStringSetting("SQLSkeleton"));
+        }
+
+				/* STEP 6: Getting metadata from input files */
 
 				processFiles(realFiles, theFileConfig, sql);
 				
@@ -102,7 +104,7 @@ public class Miex
 			File theFile = new File(files[j]);
 
 			if(!theFile.canRead())
-				System.err.println("The input file \"" + files[j] + "\" is not readable or not exists, skipping...\n");
+				System.err.println("The input file \"" + files[j] + "\" is not readable or does not exist, skipping...\n");
 			else
 				newFiles.add(files[j]);
 		}
