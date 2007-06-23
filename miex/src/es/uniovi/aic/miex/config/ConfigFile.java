@@ -53,9 +53,9 @@ public class ConfigFile
    *				    - Missing mandatory fields
    *            - Boolean fields set as non-boolean 
 	 */
-	private void checkFile() throws Exception
+	private void checkFile() 
 	{
-	
+
 		// Looking for missing required config fields	
 		for(int i=0; i < reqConfigFileFields.length; i++)
 			try
@@ -73,11 +73,14 @@ public class ConfigFile
 			try
 			{
 				String real = getRealName(configFileBooleanFields[i]);
-
+			
 				if( !(properties.getProperty(real).toLowerCase().equals("yes"))
 						&&
 						!(properties.getProperty(real).toLowerCase().equals("no")))
-				throw new Exception("Boolean keys must only contain \"Yes\" or \"No\" values");
+				{
+					System.out.println("Boolean keys must only contain \"Yes\" or \"No\" values");
+					System.exit(-1);
+				}
 			}
 			// If a realname couldn't be found it means that it's commented out, so don't checkin' its value.
 			catch(Exception e)
