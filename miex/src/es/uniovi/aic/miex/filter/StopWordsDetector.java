@@ -22,8 +22,19 @@ import edu.stanford.nlp.ling.MapLabel;
 import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 // Package class
+
+/** 
+ * Detects stop words 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 class StopWordsDetector 
 {
+  
+  /** 
+   * Initializes the detector and the wordlist 
+   */
   public StopWordsDetector()
 	{
 		
@@ -113,6 +124,12 @@ class StopWordsDetector
 		return stopWords.contains(word.toLowerCase());
 	}
 
+	/** 
+	 * Determines whether a dependency contains stop words or not 
+	 * 
+	 * @param dep The dependency to look inside for stop words
+	 * @return true if it's clean (i.e.:does not contain stop words)
+	 */
 	public boolean isCleanDep(TypedDependency dep)
 	{
 		MapLabel governorLabel = (MapLabel)dep.gov().label();
@@ -124,6 +141,12 @@ class StopWordsDetector
 		return (!is(governorWord) && !is(depWord));
 	}
 
+	/** 
+	 * Determines whether a property contains stop words or not 
+	 * 
+	 * @param wordAndProp The property to look inside for stop words
+	 * @return true if it's clean (i.e. does not contain stop words)
+	 */
 	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
 		return !(is(wordAndProp.word()));

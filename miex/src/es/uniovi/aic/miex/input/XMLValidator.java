@@ -7,8 +7,20 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
 import javax.xml.XMLConstants;
 
+/** 
+ * Determines whether a XML file matches a XML Schema 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class XMLValidator 
 {
+		
+		/** 
+		 * Prepares a validator to check files using a schema 
+		 * 
+		 * @param SchemaURI The URI to a file containing the schema
+		 */
 		public XMLValidator(String SchemaURI)
 		{
 			// 1. Lookup a factory for the W3C XML Schema language
@@ -32,6 +44,12 @@ public class XMLValidator
 			validator = schema.newValidator();
 		}
 
+    /** 
+     * Runs the validator over an input file 
+     * 
+     * @param targetFileURI URI to a input file (usually XML-formatted)
+     * @return true if the file matches the schema, false otherwise 
+     */
     public boolean validate(File targetFileURI)
     {
         // Parse the document you want to check.

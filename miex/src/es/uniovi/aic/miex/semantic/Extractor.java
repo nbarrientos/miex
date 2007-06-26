@@ -98,7 +98,6 @@ public class Extractor
 	public ArrayList<TypedDependency> getDependencies(List sentence)
 	throws Exception
 	{
-
 		letsGetParseReady(sentence);
 
 		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
@@ -106,7 +105,6 @@ public class Extractor
 		GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
 
 		return (ArrayList<TypedDependency>)gs.getDeps(false);
-
 	}
 
 	/* taggedYield() returns a Sentence object, which inheritates from
@@ -115,7 +113,7 @@ public class Extractor
 	@SuppressWarnings("unchecked")
 	
 	/** 
-	 * Gets the grammatical property of each word in the sentence 
+	 * Gets the grammatical properties for each word in the sentence 
 	 * 
 	 * @param sentence The sentence to process
 	 * @return The result of this process 
@@ -131,12 +129,12 @@ public class Extractor
 	}
 
 	/** 
+	 * Recursively navigates the parse tree storing all the labels 
 	 * 
-	 * 
-	 * @param t 
-	 * @param ty 
-	 * @param zone 
-	 * @return 
+	 * @param t The tree to parse 
+	 * @param ty Information captured wrt the sentence until now
+	 * @param phrase Phrase tags collected until now
+	 * @return The tagged yield we were looking for 
 	 */
 	private List myTaggedYield(Tree t, Sentence ty, ArrayList<String> phrase)
 	{
@@ -166,10 +164,11 @@ public class Extractor
   }
 
 	/** 
+	 * Gets a special TaggedYield with phrase and clause level tags in
+	 * addiction to the word level tags 
 	 * 
-	 * 
-	 * @param t 
-	 * @return 
+	 * @param t A tree representing the parse of a sentence 
+	 * @return The requested information 
 	 */
 	private Sentence myTaggedYield(Tree t)
 	{

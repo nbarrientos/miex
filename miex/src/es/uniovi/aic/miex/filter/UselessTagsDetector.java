@@ -12,6 +12,10 @@ import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
  */
 class UselessTagsDetector 
 {
+  
+  /** 
+   * Initializes an useless tag detector 
+   */
   public UselessTagsDetector()
 	{
 		

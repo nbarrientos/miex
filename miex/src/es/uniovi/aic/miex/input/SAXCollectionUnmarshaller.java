@@ -9,6 +9,12 @@ import org.xml.sax.helpers.*;
 import java.util.Stack;
 
 
+/** 
+ * Implements XML parser' behaviour 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 class SAXCollectionUnmarshaller
 extends DefaultHandler
 {

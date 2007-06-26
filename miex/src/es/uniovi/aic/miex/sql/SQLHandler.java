@@ -72,7 +72,7 @@ public class SQLHandler
 	}
 
 	/** 
-	 * Injects a SQL script into the database (useful for fill
+	 * Injects a SQL script into the database (useful to fill
 	 * the database with blank tables) 
    *
 	 * @param path The path to the script.
@@ -206,7 +206,7 @@ public class SQLHandler
 	}
 
 	/** 
-	 * Checks if exists and/or adds a single category to the database 
+	 * Adds a category to the DB (if needed)
 	 * 
 	 * @param catName Category's name 
 	 * @return The (new) ID for this category
@@ -262,7 +262,7 @@ public class SQLHandler
 	}
 
   /** 
-   * Adds a bunch of categories in a batch and register that into document table 
+   * Adds a bunch of categories in a row and register that into document table 
    * 
    * @param docNumber as usual 
    * @param collectionNumber as usual
@@ -298,7 +298,7 @@ public class SQLHandler
 	}
 
   /** 
-   * Checks if exists and/or adds a single word to the database  
+   * Adds a word to the DB (if needed)  
    * 
    * @param wordName the word itself
    * @return The (new) ID for this word.
@@ -353,9 +353,9 @@ public class SQLHandler
   }
 
   /** 
-   * Checks if exists and/or adds a single property to the database
+   * Adds a property to the DB (if needed)
    * 
-   * @param isGrammatical True if it's a gram property, false otherwise
+   * @param type An integer representing the sort of the property [0-3]
    * @param propName The property itself
    * @return The (new) ID for this property 
    */
@@ -371,6 +371,7 @@ public class SQLHandler
     {
       stmt = this.createStatement();
 
+			// Id 0 (proptype) = CLAUSE
 			// Id 1 (proptype) = PHRASE
 			// Id 2 (proptype) = WORD
 			// Id 3 (proptype) = RELATIONSHIP
@@ -412,10 +413,10 @@ public class SQLHandler
   }
 
   /** 
-   * FIXME 
+   * Adds a whole list of property to the DB (if needed) 
    * 
-   * @param _list 
-   * @return 
+   * @param _list The list itself 
+   * @return The (new) ID for this propertylist
    */
   private int addPropertyList(ArrayList<String> _list)
   {
@@ -435,7 +436,6 @@ public class SQLHandler
     try
     {
 			String hashCode = MD5.gen(plainCode);
-			//String hashCode = plainCode;
 
       stmt = this.createStatement();
 
@@ -488,13 +488,13 @@ public class SQLHandler
 
 
   /** 
-   * Adds grammatical information for a single sentece to the database 
+   * Adds grammatical information for a single sentence to the database 
    * 
    * @param docNumber As usual
    * @param collectionNumber As usual
-   * @param props A list of word-tag pairs
+   * @param props A list of word-tag-extendedlist 
    * @param isFromTitle True if this sentence comes from document title, false if it comes from the body
-   * @param normalized True if the list has been normalized with Porter, false otherwise
+   * @param normalized True if the list has been normalized, false otherwise
    */
   public void	
 	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<ExtendedTaggedWord> props, 

@@ -11,8 +11,21 @@ import java.io.*;
 
 import java.lang.Exception;
 
+/** 
+ * Discovers the information stored in a XML collection 
+ * 
+ * @author Nacho Barrientos Arias <chipi@criptonita.com>
+ * @version 0.1
+ */
 public class FieldsParser
 {
+	
+	/** 
+	 * Runs the parser over a file 
+	 * 
+	 * @param targetFileURI The file to parse
+	 * @return a MyCollection instace with the parsed information
+	 */
 	public MyCollection run(File targetFileURI)
 	{
 		SAXCollectionUnmarshaller saxUms = new SAXCollectionUnmarshaller();
