@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																															%
+%	MIEX																											  %
+% Extracción de información de documentos XML mediante SP     %
+%																															%
+% Proyecto Fin de Carrera (EUITITG)                           %
+% nn de Septiembre de 2007 - Gijón                            %
+%																															%
+% Licencia GNU GPL2                                           %
+%																															%
+% Ignacio Barrientos <nacho@criptonita.com>										%
+%																															%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Configuración del entorno %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Tipo de documento LaTeX-beamer
+\documentclass[14pt]{beamer}
+
+% Acentos pasivos
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Look and feel
+\usetheme{Copenhagen}
+\usecolortheme{rose}
+%\usefonttheme{structurebold}
+
+% Color de fondo por defecto.
+%\beamertemplatesolidbackgroundcolor{yellow!30!white}
+
+% Comando programado para crear los titulos de las secciones
+%\newcommand{\tit}[1]
+%{
+%\frame
+%{
+
+ % \setlength{\fboxrule}{5pt}
+
+  %\Huge{
+  %\begin{center}
+  %  % El color se hereda del color theme crane
+  %  \fcolorbox{craneorange}{craneorange}{#1}
+  %\end{center}
+ % }
+%}
+%}
+
+% Información de autoría
+\title{MIEX}
+\subtitle{Extracción de información de documentos XML mediante Stanford Parser}
+\date{nn de Septiembre de 2007}
+\institute
+{
+	\bf
+	{
+		Proyecto Fin de Carrera\\
+		E.U.I.T. Informática y Telemática de Gijón
+	}
+}
+\author{Ignacio Barrientos <nacho@debian.org>}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% Inicio de la presentación %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+	% Portada
+	\titlepage
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+	% Solo interesan las secciones para el índice
+	\setcounter{tocdepth}{1}
+	% Creamos tabla de contenidos
+	\tableofcontents
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Introducción																													%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introducción}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+	\frametitle{Why Inforg\footnote{http://www.inforg.uniovi.es} could be better}
+
+	\begin{block}{Students behaviour}
+		\begin{itemize}
+			% Sólo visible en la primera y segunda parte de la slide
+			\item<1-2> Sane
+			% De la segunda en adelante, con alerta de la segunda en
+			% adelante.
+			\item<2- | alert@2-> Really?
+			% De la tercera en adelante
+			\item<3-> Yes
+		\end{itemize}
+	\end{block}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Demo + Preguntas                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Demo + Preguntas}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+	\frametitle{¿Preguntas?}
+
+	\begin{beamerboxesrounded}[shadow=true]{Autoría}
+
+	\begin{center}
+
+	\normalsize{Ignacio Barrientos Arias}\\
+	\small{nacho@debian.org}\\
+
+	\end{center}
+
+	\end{beamerboxesrounded}
+
+	%%%%
+
+	\begin{beamerboxesrounded}[shadow=true]{Licencia}
+
+	\begin{center}
+
+	\small
+	{
+	GNU General Public License (version 2)\\
+	Sources at: http://miex.sf.net/
+	}
+
+	\end{center}
+
+	\end{beamerboxesrounded}
+
+	%%%%
+
+	\begin{beamerboxesrounded}[shadow=true]{Tecnología}
+
+	\begin{center}
+
+	\small
+	{
+	\LaTeX{} Beamer \scriptsize{http://latex-beamer.sf.net/}
+	}
+
+	\end{center}
+
+	\end{beamerboxesrounded}
+
+}
+
+% That's all folks
+\end{document}
