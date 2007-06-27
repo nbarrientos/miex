@@ -1,74 +1,65 @@
-% redefinir la construcción del titulo para hacer una portada acorde a las
-% espeficiaciones de la escuela
-
 \renewcommand{\maketitle}
 {
     \begin{titlepage}
-
-	%portada del tomo
+	% Tapa
 	\begin{center}
-                {%
-                    \Large\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
-                }
-                {%
-                    \Large\textrm{Escuela Universitaria de Ingeniería Técnica Informática de Gijón}\\
-                    \vspace{4cm}
-                }
-                {%
-                    \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
-                    \vspace{5cm}
-                }
-                {%
-                    \Large\textrm{``\TituloPFC''}\\
-                    \vspace{5cm}
-                }
+	\vspace*{1cm}
+	\Huge\textrm{\textbf{\MakeUppercase{\Universidad}}}\\
+	\vspace{1cm}
+        \Large\textrm{\MakeUppercase{\Escuela}}\\
+        \vspace{3cm}
+
+        \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
+        \vspace{5cm}
+
+        \Large\textrm{\textquotedblleft
+                      \MakeUppercase{\TituloPFC}\textquotedblright}\\
+        \vspace{4cm}
+        
+        \Large\textrm{AUTOR:\\ \AutorPFC}\\
+        \vspace{0.5cm}
+        
 	\end{center}
 	\begin{flushright}
-		\Large\textrm{\AutorPFC}\\
-		\Large\textrm{Septiembre 2007}
+		\large\textrm{\Convocatoria}
 	\end{flushright}
-	\pagestyle{empty}
 	
+	\pagestyle{empty}
 	\cleardoublepage
 
-	%portada de dentro
+	% Portada
 	\begin{center}
-                {%
-                    \Large\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
-                    \vspace{1cm}
-                }
-                {%
-                    \fbox{\includegraphics[width=3.5cm]{images/uniovi.png}}\\
-                    \vspace{1cm}
-                }
-                {%
-                    \Large\textrm{ESCUELA UNIVERSITARIA DE INGENIERÍA TÉCNICA EN INFORMÁTICA DE GIJÓN}\\
-                    \vspace{3cm}
-                }
-                {%
-                    \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
-                    \vspace{2cm}
-                }
-                {%
-                    \Large\textrm{\uppercase{''\TituloPFC``}}\\
-                    \vspace{3cm}
-                }
-		{
-		    \Large\textrm{DIRECTORAS:}\\
-		    \Large\textrm{\DirectorPFC}\\
-		    \Large\textrm{\CoDirectorPFC}\\
-		    \vspace{2cm}
-		}
-		{
-		    \Large\textrm{AUTOR:\\ \AutorPFC}\\
-		}
+
+	\huge\textrm{\textbf{UNIVERSIDAD DE OVIEDO}}\\
+	\vspace{1cm}
+
+	\fbox{\includegraphics[width=3.5cm]{images/uniovi.png}}\\
+	\vspace{1cm}
+
+        \Large\textrm{\MakeUppercase{\Escuela}}\\
+        \vspace{3cm}
+
+        \Large\textrm{\textbf{PROYECTO FIN DE CARRERA}}\\
+        \vspace{2cm}
+
+        \Large\textrm{\textquotedblleft
+                      \MakeUppercase{\TituloPFC}\textquotedblright}\\
+        \vspace{2cm}
+
+        \Large\textrm{DIRECTORAS:}\\
+	\Large\textrm{\DirectorPFC}\\
+	\Large\textrm{\CoDirectorPFC}\\
+	\vspace{1.5cm}
+
+	\Large\textrm{AUTOR:\\ \AutorPFC}\\
+	\vspace{0.5cm}
 	
 	\end{center}
 	\begin{flushright}
-		\Large\textrm{Septiembre 2007}
+		\large\textrm{\Convocatoria}
 	\end{flushright}
+
         \pagestyle{empty}
-	
 	\cleardoublepage
     
     \end{titlepage}
