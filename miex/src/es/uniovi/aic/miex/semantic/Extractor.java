@@ -140,7 +140,7 @@ public class Extractor
 	{
 		Tree[] kids = t.children();
 
-    if (kids.length == 1 && kids[0].isLeaf())
+    if (kids.length == 1 && kids[0].isLeaf()) // t's root is a)
     {
       ExtendedTaggedWord stw = new ExtendedTaggedWord(kids[0].label().value(), t.label().value(), phrase);
 
@@ -150,18 +150,33 @@ public class Extractor
     {
       for (int i = 0; i < kids.length; i++)
       {
-        if(kids[i].isPhrasal())
+        if(kids[i].isPhrasal()) // t's root is b)
         {
 					ArrayList<String> newphrase = new ArrayList<String>(phrase);
 					newphrase.add(kids[i].label().value());
 					myTaggedYield(kids[i],ty,newphrase);
         }
-				else
+				else // c) t's root is c)
 					myTaggedYield(kids[i],ty,phrase);						
       }
     }
     return ty;
   }
+
+  /*
+	 * Example:
+  
+                       ROOT
+                        |
+     ---- b -->         S
+                      /   \
+     ---- c -->     NP     VP
+	      				   / | \    \
+     ---- a -->  DT NNP ...  ...
+                 |   |
+                The cup
+
+   */
 
 	/** 
 	 * Gets a special TaggedYield with phrase and clause level tags in
