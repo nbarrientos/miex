@@ -1,12 +1,12 @@
 # Makefile for MIEX.
 #
-# Dear MIEX user,
+# Dear MIEX user and/or developer,
 #  I strongly recommend using Ant instead of this Makefile. Use it
 #  at your own risk!
 #
 # Targets:
-#  - miex: Build all .java files and store .class in lib/miex.jar
-#  - doc: Create javadoc of all packages listed in PACKAGES.
+#  - miex: Builds all .java files and stores .class into lib/miex.jar using jar
+#  - doc: Creates javadoc for all packages listed in PACKAGES.
 #  - install: Installs MIEX into PREFIX (you probably will need run this target as root)
 #
 # Nacho Barrientos Arias <nacho@criptonita.com>
