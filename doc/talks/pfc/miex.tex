@@ -22,6 +22,7 @@
 % Acentos pasivos
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{ulem}
 
 % Look and feel
 \usetheme{Copenhagen}
@@ -30,23 +31,6 @@
 
 % Color de fondo por defecto.
 %\beamertemplatesolidbackgroundcolor{yellow!30!white}
-
-% Comando programado para crear los titulos de las secciones
-%\newcommand{\tit}[1]
-%{
-%\frame
-%{
-
- % \setlength{\fboxrule}{5pt}
-
-  %\Huge{
-  %\begin{center}
-  %  % El color se hereda del color theme crane
-  %  \fcolorbox{craneorange}{craneorange}{#1}
-  %\end{center}
- % }
-%}
-%}
 
 % Información de autoría
 \title{MIEX}
@@ -92,7 +76,7 @@
 
 \section{Introducción}
 
-%-------------------------- SLIDE ---------------------------%
+%------------------------ DEMO SLIDE ------------------------%
 
 \frame
 {
@@ -109,6 +93,64 @@
 			\item<3-> Yes
 		\end{itemize}
 	\end{block}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Desventajas del analizador}
+
+    \begin{itemize}
+      \item<1-> Deficiente sistema de entradas (\sout{batch})
+			\uncover{\item<2-> Manejo \textit{poco amigable}}
+			\item<3-> El almacenamiento no es \textbf{flexible}
+    \end{itemize}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{La cara amigable del Stanford Parser}
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[scale=0.3]{images/spui.png}
+    \end{center}
+  \end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Funcionamiento                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Funcionamiento}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{¿Cómo funciona?}
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[scale=0.8]{images/miex.png}
+    \end{center}
+  \end{figure}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{¡Más detalle, por favor!}
+
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=0.1425]{images/build/miex-libs.png}
+		\end{center}
+	\end{figure}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
