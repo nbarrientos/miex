@@ -18,16 +18,16 @@ import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 public class GlobalFilter
 {
 
-	/** 
-	 * Initialize all filters 
-	 */
-	public GlobalFilter()
-	{
-		swd = new StopWordsDetector();
-		utd = new UselessTagsDetector();
-		nd = new NumbersDetector();
-		pt = new Porter();
-	}
+  /** 
+   * Initialize all filters 
+   */
+  public GlobalFilter()
+  {
+    swd = new StopWordsDetector();
+    utd = new UselessTagsDetector();
+    nd = new NumbersDetector();
+    pt = new Porter();
+  }
 
   /** 
    * Cleans a set of dependencies using the initialized filters 
@@ -42,8 +42,8 @@ public class GlobalFilter
 
     for(TypedDependency dep: rs)
     {
-			if(swd.isCleanDep(dep) && nd.isCleanDep(dep))
-				cleanDeps.add(dep);
+      if(swd.isCleanDep(dep) && nd.isCleanDep(dep))
+        cleanDeps.add(dep);
     }
 
     System.out.print(" R(" + (rs.size()-cleanDeps.size()) + ") ");
@@ -65,8 +65,8 @@ public class GlobalFilter
     for(ExtendedTaggedWord wordAndProp: words)
     {
       if(swd.isCleanProp(wordAndProp) && 
-				 utd.isCleanProp(wordAndProp) &&
-				 nd.isCleanProp(wordAndProp))
+         utd.isCleanProp(wordAndProp) &&
+         nd.isCleanProp(wordAndProp))
         cleanProps.add(wordAndProp);
     }
 
@@ -75,65 +75,65 @@ public class GlobalFilter
     return cleanProps;
   }
 
-	/* Normalization utils */
+  /* Normalization utils */
 
-	/** 
-	 * Normalizes a set of properties 
-	 * 
-	 * @param words The properties to normalize
-	 * @return The normalized properties
-	 */
-	public ArrayList<ExtendedTaggedWord> normalizeProperties(ArrayList<ExtendedTaggedWord> words)
-	{
-		ArrayList<ExtendedTaggedWord> normalizedProps = new ArrayList<ExtendedTaggedWord>();
+  /** 
+   * Normalizes a set of properties 
+   * 
+   * @param words The properties to normalize
+   * @return The normalized properties
+   */
+  public ArrayList<ExtendedTaggedWord> normalizeProperties(ArrayList<ExtendedTaggedWord> words)
+  {
+    ArrayList<ExtendedTaggedWord> normalizedProps = new ArrayList<ExtendedTaggedWord>();
 
-		for(ExtendedTaggedWord wordAndProp: words)
-		{
-			String nword = pt.stripAffixes(wordAndProp.word());
+    for(ExtendedTaggedWord wordAndProp: words)
+    {
+      String nword = pt.stripAffixes(wordAndProp.word());
 
-			String ncat = normalizeCat(wordAndProp.tag());
+      String ncat = normalizeCat(wordAndProp.tag());
 
-			if(!(nword.equals("")))
-				normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.phrase())); 
-		}
+      if(!(nword.equals("")))
+        normalizedProps.add(new ExtendedTaggedWord(nword, ncat, wordAndProp.phrase())); 
+    }
 
-		return normalizedProps;
-	}
+    return normalizedProps;
+  }
 
-	/** 
-	 * Normalizes a set of dependencies 
-	 * 
-	 * @param rs The dependencies to normalize
-	 * @return The normalized dependencies
-	 */
-	public ArrayList<TypedDependency> normalizeDependencies(ArrayList<TypedDependency> rs)
-	{
-		ArrayList<TypedDependency> normalizedDeps = new ArrayList<TypedDependency>();
+  /** 
+   * Normalizes a set of dependencies 
+   * 
+   * @param rs The dependencies to normalize
+   * @return The normalized dependencies
+   */
+  public ArrayList<TypedDependency> normalizeDependencies(ArrayList<TypedDependency> rs)
+  {
+    ArrayList<TypedDependency> normalizedDeps = new ArrayList<TypedDependency>();
 
-		for(TypedDependency dep: rs)
-		{
-			MapLabel governorLabel = (MapLabel)dep.gov().label();
-			MapLabel depLabel = (MapLabel)dep.dep().label();
+    for(TypedDependency dep: rs)
+    {
+      MapLabel governorLabel = (MapLabel)dep.gov().label();
+      MapLabel depLabel = (MapLabel)dep.dep().label();
 
-			String governorWord = governorLabel.toString("value");
-			String depWord = depLabel.toString("value");
+      String governorWord = governorLabel.toString("value");
+      String depWord = depLabel.toString("value");
 
-			String nmword = pt.stripAffixes(governorWord);
-			String nsword = pt.stripAffixes(depWord);
+      String nmword = pt.stripAffixes(governorWord);
+      String nsword = pt.stripAffixes(depWord);
 
-			if( !(nmword.equals("")) && !(nsword.equals("")) )
-				normalizedDeps.add(new TypedDependency(dep.reln(), new TreeGraphNode(new Word(nmword)), new TreeGraphNode(new Word(nsword)))); 
-		}
+      if( !(nmword.equals("")) && !(nsword.equals("")) )
+        normalizedDeps.add(new TypedDependency(dep.reln(), new TreeGraphNode(new Word(nmword)), new TreeGraphNode(new Word(nsword)))); 
+    }
 
-		return normalizedDeps;
+    return normalizedDeps;
 
-	}
+  }
 
-	private String normalizeCat(String cat)
-	{
-		if(cat.matches("VB.*"))
-			return "VB";	
-		else
+  private String normalizeCat(String cat)
+  {
+    if(cat.matches("VB.*"))
+      return "VB";  
+    else
     if(cat.matches("RB.*"))
       return "RB";
     else
@@ -143,11 +143,11 @@ public class GlobalFilter
     if(cat.matches("JJ.*"))
       return "JJ";
     else
-			return "X";
-	}
+      return "X";
+  }
 
-	private Porter pt;
-	private StopWordsDetector swd;
-	private UselessTagsDetector utd;
-	private NumbersDetector nd;
+  private Porter pt;
+  private StopWordsDetector swd;
+  private UselessTagsDetector utd;
+  private NumbersDetector nd;
 }

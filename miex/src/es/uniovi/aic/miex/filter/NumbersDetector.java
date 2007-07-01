@@ -26,38 +26,38 @@ import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 class NumbersDetector 
 {
   public NumbersDetector()
-	{
-		regexp = "-?[0-9]+(,[0-9]+)?"; // (-)Natural(,Natural)
-	} 
-
-	/** 
-	 * Filter for typed dependencies among words. 
-	 * 
-	 * @param dep
-	 * @return True if a dependency is clean, false otherwise (word 'a' or word 'b' is a number)
-	 */
-	public boolean isCleanDep(TypedDependency dep)
-	{
-		MapLabel governorLabel = (MapLabel)dep.gov().label();
-		MapLabel depLabel = (MapLabel)dep.dep().label();
-
-		String governorWord = governorLabel.toString("value");
-		String depWord = depLabel.toString("value");
-
-		return !(governorWord.matches(regexp) || depWord.matches(regexp));
-	}
-
-	/** 
-	 * Filter for tagged words 
-	 * 
-	 * @param wordAndProp 
-	 * @return True if the word is not a number, false otherwise
-	 */
-	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
-		return !(wordAndProp.word().matches(regexp));
-	}
+    regexp = "-?[0-9]+(,[0-9]+)?"; // (-)Natural(,Natural)
+  } 
 
-	private String regexp;
+  /** 
+   * Filter for typed dependencies among words. 
+   * 
+   * @param dep
+   * @return True if a dependency is clean, false otherwise (word 'a' or word 'b' is a number)
+   */
+  public boolean isCleanDep(TypedDependency dep)
+  {
+    MapLabel governorLabel = (MapLabel)dep.gov().label();
+    MapLabel depLabel = (MapLabel)dep.dep().label();
+
+    String governorWord = governorLabel.toString("value");
+    String depWord = depLabel.toString("value");
+
+    return !(governorWord.matches(regexp) || depWord.matches(regexp));
+  }
+
+  /** 
+   * Filter for tagged words 
+   * 
+   * @param wordAndProp 
+   * @return True if the word is not a number, false otherwise
+   */
+  public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
+  {
+    return !(wordAndProp.word().matches(regexp));
+  }
+
+  private String regexp;
 
 } //class

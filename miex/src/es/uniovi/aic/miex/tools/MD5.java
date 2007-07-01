@@ -9,13 +9,13 @@ import java.security.*;
 
 public class MD5
 {
-	public static String gen(String clearTextPassword)
-	throws NoSuchAlgorithmException
-	{
-		MessageDigest md = MessageDigest.getInstance("MD5");
+  public static String gen(String clearTextPassword)
+  throws NoSuchAlgorithmException
+  {
+    MessageDigest md = MessageDigest.getInstance("MD5");
 
-		md.update(clearTextPassword.getBytes());
+    md.update(clearTextPassword.getBytes());
 
-		return HexString.bufferToHex(md.digest());
-	}
+    return HexString.bufferToHex(md.digest());
+  }
 }

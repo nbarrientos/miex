@@ -12,51 +12,51 @@ import java.util.Iterator;
 public class MyCollection
 {
 
-	/** 
-	 * Creates and empty collection 
-	 */
-	public MyCollection()
-	{
-		docs = new ArrayList<MyDoc>();
-	}
+  /** 
+   * Creates and empty collection 
+   */
+  public MyCollection()
+  {
+    docs = new ArrayList<MyDoc>();
+  }
 
-	/** 
-	 * Adds a document to the collection 
-	 * 
-	 * @param rhs The document to add
-	 */
-	public void addDoc(MyDoc rhs)
-	{
-		docs.add(rhs);
-	}
+  /** 
+   * Adds a document to the collection 
+   * 
+   * @param rhs The document to add
+   */
+  public void addDoc(MyDoc rhs)
+  {
+    docs.add(rhs);
+  }
 
-	/** 
-	 *  
-	 * 
-	 * @return An iterator over the list containing the docs of the
-	 * collection
-	 */
-	public Iterator getDocsIterator()
-	{
-		return docs.iterator();
-	}
+  /** 
+   *  
+   * 
+   * @return An iterator over the list containing the docs of the
+   * collection
+   */
+  public Iterator getDocsIterator()
+  {
+    return docs.iterator();
+  }
 
-	public String toString()
-	{
-  	String newline = System.getProperty( "line.separator" );
+  public String toString()
+  {
+    String newline = System.getProperty( "line.separator" );
 
-		StringBuffer buf = new StringBuffer();
+    StringBuffer buf = new StringBuffer();
        
-		buf.append( "--- Documents ---" ).append(newline);
-		for(int i=0; i < docs.size(); i++)
-		{
-			buf.append(docs.get(i)).append(newline);
-		}
+    buf.append( "--- Documents ---" ).append(newline);
+    for(int i=0; i < docs.size(); i++)
+    {
+      buf.append(docs.get(i)).append(newline);
+    }
         
-		return buf.toString();
-	}
+    return buf.toString();
+  }
 
-	// Members
-	private ArrayList<MyDoc> docs;
+  // Members
+  private ArrayList<MyDoc> docs;
 
 }

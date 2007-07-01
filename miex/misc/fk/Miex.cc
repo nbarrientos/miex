@@ -6,17 +6,17 @@ class Miex : public FkMainPluggableClass
 {
 
   public:
-  	Miex() {};
-  	virtual ~Miex() {};
+    Miex() {};
+    virtual ~Miex() {};
 
-		void CreatePlugs();
-	
-  	int Main();
+    void CreatePlugs();
+  
+    int Main();
 
-	private:
-		std::string params;
+  private:
+    std::string params;
 
-		static std::string classPath;
+    static std::string classPath;
 
 };
 
@@ -24,15 +24,15 @@ class Miex : public FkMainPluggableClass
 
 int Miex::Main()
 {
-		string exec = "../../miex.sh " + params;
-		system(exec.c_str());
-		return 0;
+    string exec = "../../miex.sh " + params;
+    system(exec.c_str());
+    return 0;
 }
 
 void Miex::CreatePlugs()
 {
-	const char * t = (const char *)NewDataPlug("params",const char *, "Parameters for MIEX");
-	params = string(t).erase(0,1);
+  const char * t = (const char *)NewDataPlug("params",const char *, "Parameters for MIEX");
+  params = string(t).erase(0,1);
 }
 
 MAKE_PLUGGABLE(Miex,FkMainPluggableClass)

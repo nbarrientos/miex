@@ -17,7 +17,7 @@ extends TaggedWord
 public ExtendedTaggedWord(String word, String tag, ArrayList<String> _phrase)
 {
   super(word,tag);
-	phrase = _phrase;
+  phrase = _phrase;
 }
 
 /** 

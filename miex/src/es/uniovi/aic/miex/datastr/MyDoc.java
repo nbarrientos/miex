@@ -11,43 +11,43 @@ import java.util.ArrayList;
 public class MyDoc
 {
 
-	/** 
-	 * Creates a DOCTEST document 
-	 */
-	public MyDoc()
-	{
-		isTrain = false;
-	}
-	
-	/** 
-	 * Creates a document
-	 * 
-	 * @param isTrainRHS true if the document is a DOCTRAIN
-	 */
-	public MyDoc(boolean isTrainRHS)
-	{
-		isTrain = isTrainRHS;
-	}
+  /** 
+   * Creates a DOCTEST document 
+   */
+  public MyDoc()
+  {
+    isTrain = false;
+  }
+  
+  /** 
+   * Creates a document
+   * 
+   * @param isTrainRHS true if the document is a DOCTRAIN
+   */
+  public MyDoc(boolean isTrainRHS)
+  {
+    isTrain = isTrainRHS;
+  }
 
-	/** 
-	 * Attaches a bunch of categories to the document 
-	 * 
-	 * @param rhs 
-	 */
-	public void addCategories(MyCategories rhs)
-	{
-		categories = rhs;
-	}
+  /** 
+   * Attaches a bunch of categories to the document 
+   * 
+   * @param rhs 
+   */
+  public void addCategories(MyCategories rhs)
+  {
+    categories = rhs;
+  }
 
-	/** 
-	 * 
-	 * 
-	 * @param rhs The string to set the body to
-	 */
-	public void setBody(String rhs)
-	{
-		body = rhs;
-	}
+  /** 
+   * 
+   * 
+   * @param rhs The string to set the body to
+   */
+  public void setBody(String rhs)
+  {
+    body = rhs;
+  }
 
   /** 
    * 
@@ -59,23 +59,23 @@ public class MyDoc
     title = rhs;
   }
 
-	/** 
-	 * Changes the document nature to DOCTRAIN 
-	 */
-	public void setIsTrain()
-	{
-		isTrain = true;
-	}
+  /** 
+   * Changes the document nature to DOCTRAIN 
+   */
+  public void setIsTrain()
+  {
+    isTrain = true;
+  }
 
-	/** 
-	 * Observer 
-	 * 
-	 * @return The body of the document
-	 */
-	public String getBody()
-	{
-		return body;
-	}
+  /** 
+   * Observer 
+   * 
+   * @return The body of the document
+   */
+  public String getBody()
+  {
+    return body;
+  }
 
   /** 
    * Observer 
@@ -96,44 +96,44 @@ public class MyDoc
   {
     return categories;
   }
-	
-	/** 
-	 * Observer 
-	 * 
-	 * @return true if it is a DOCTRAIN document
-	 */
-	public boolean isTrain()
-	{
-		return isTrain;
-	}
+  
+  /** 
+   * Observer 
+   * 
+   * @return true if it is a DOCTRAIN document
+   */
+  public boolean isTrain()
+  {
+    return isTrain;
+  }
 
-	public String toString()
-	{
-  	String newline = System.getProperty( "line.separator" );
+  public String toString()
+  {
+    String newline = System.getProperty( "line.separator" );
 
-		StringBuffer buf = new StringBuffer();
+    StringBuffer buf = new StringBuffer();
        
-		buf.append( "--- Title ---" ).append( newline );
-		buf.append(title).append(newline);
+    buf.append( "--- Title ---" ).append( newline );
+    buf.append(title).append(newline);
 
     buf.append( "--- Body ---" ).append( newline );
     buf.append(body).append(newline);
 
-		if(isTrain)
-			buf.append( "Is a TRAIN document" ).append( newline );
-		else
-			buf.append( "Is a TEST document" ).append( newline );
+    if(isTrain)
+      buf.append( "Is a TRAIN document" ).append( newline );
+    else
+      buf.append( "Is a TEST document" ).append( newline );
 
-		buf.append(categories).append(newline);
+    buf.append(categories).append(newline);
         
-		return buf.toString();
-	}
+    return buf.toString();
+  }
 
-	// Members
-	private MyCategories categories;
-	private String body;
-	private String title;
+  // Members
+  private MyCategories categories;
+  private String body;
+  private String title;
 
-	private boolean isTrain;
+  private boolean isTrain;
 
 }

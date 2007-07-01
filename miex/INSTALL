@@ -18,7 +18,7 @@ QUICK START
 
    c.1) Using Apache Ant
         $ ant
-	      $ sudo ant install
+        $ sudo ant install
 
    c.2) Using GNU Make
         $ make

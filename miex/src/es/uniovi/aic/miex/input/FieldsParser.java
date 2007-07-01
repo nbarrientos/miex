@@ -19,32 +19,32 @@ import java.lang.Exception;
  */
 public class FieldsParser
 {
-	
-	/** 
-	 * Runs the parser over a file 
-	 * 
-	 * @param targetFileURI The file to parse
-	 * @return a MyCollection instace with the parsed information
-	 */
-	public MyCollection run(File targetFileURI)
-	{
-		SAXCollectionUnmarshaller saxUms = new SAXCollectionUnmarshaller();
-		
+  
+  /** 
+   * Runs the parser over a file 
+   * 
+   * @param targetFileURI The file to parse
+   * @return a MyCollection instace with the parsed information
+   */
+  public MyCollection run(File targetFileURI)
+  {
+    SAXCollectionUnmarshaller saxUms = new SAXCollectionUnmarshaller();
+    
     try
     {
-			InputSource src = new InputSource(new FileInputStream(targetFileURI));
+      InputSource src = new InputSource(new FileInputStream(targetFileURI));
 
-			XMLReader rdr = XMLReaderFactory.createXMLReader();
-			rdr.setContentHandler(saxUms);
+      XMLReader rdr = XMLReaderFactory.createXMLReader();
+      rdr.setContentHandler(saxUms);
 
-			rdr.parse(src);
-		}
-		catch(Exception e)
-		{
-			System.err.println("Parsing ERROR: " + e);
-		}
+      rdr.parse(src);
+    }
+    catch(Exception e)
+    {
+      System.err.println("Parsing ERROR: " + e);
+    }
 
-		// Returns a MyCollection instance that contains all the parsed file.
-		return saxUms.getCollection();
-	}
+    // Returns a MyCollection instance that contains all the parsed file.
+    return saxUms.getCollection();
+  }
 }

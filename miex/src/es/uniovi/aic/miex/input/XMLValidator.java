@@ -15,34 +15,34 @@ import javax.xml.XMLConstants;
  */
 public class XMLValidator 
 {
-		
-		/** 
-		 * Prepares a validator to check files using a schema 
-		 * 
-		 * @param SchemaURI The URI to a file containing the schema
-		 */
-		public XMLValidator(String SchemaURI)
-		{
-			// 1. Lookup a factory for the W3C XML Schema language
-			SchemaFactory factory =  SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    
+    /** 
+     * Prepares a validator to check files using a schema 
+     * 
+     * @param SchemaURI The URI to a file containing the schema
+     */
+    public XMLValidator(String SchemaURI)
+    {
+      // 1. Lookup a factory for the W3C XML Schema language
+      SchemaFactory factory =  SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         
-			// 2. Compile the schema. 
-			File schemaLocation = new File(SchemaURI);
-			Schema schema = null;
+      // 2. Compile the schema. 
+      File schemaLocation = new File(SchemaURI);
+      Schema schema = null;
 
-			try
-			{
-				schema = factory.newSchema(schemaLocation);
-			}
-			catch(Exception e)
-			{
-				System.err.println(e.toString());
-				System.exit(-1);
-			}
+      try
+      {
+        schema = factory.newSchema(schemaLocation);
+      }
+      catch(Exception e)
+      {
+        System.err.println(e.toString());
+        System.exit(-1);
+      }
     
       // 3. Get a validator from the schema.
-			validator = schema.newValidator();
-		}
+      validator = schema.newValidator();
+    }
 
     /** 
      * Runs the validator over an input file 
@@ -57,16 +57,16 @@ public class XMLValidator
 
         // Check the document
         try 
-				{
+        {
             validator.validate(source);
             return true;
         }
         catch (Exception e) 
-				{
-						return false;
+        {
+            return false;
         }
         
     }
 
-		private Validator validator;
+    private Validator validator;
 }

@@ -17,35 +17,35 @@ class UselessTagsDetector
    * Initializes an useless tag detector 
    */
   public UselessTagsDetector()
-	{
-		
-		String[] uselessTagsLocal = new String[]{"``", "''", "-LRB-", "-RRB-",
-		"-LCB-", "-RCB-", "--", "...", "*CR*", ",", ":", "."};
-	
-		uselessTags = new HashSet<String>();
-
-		for(String word: uselessTagsLocal)
-			uselessTags.add(word);
-
-	} // constructor
-
-	private boolean is(String tag)
-	{
-		return uselessTags.contains(tag);
-	}
-
-	/** 
-	 * The filter itself 
-	 * 
-	 * @param wordAndProp a object containing the tag to check
-	 * @return true if the tag is useful
-	 */
-	public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
   {
-		return !(is(wordAndProp.tag()));
-	}
+    
+    String[] uselessTagsLocal = new String[]{"``", "''", "-LRB-", "-RRB-",
+    "-LCB-", "-RCB-", "--", "...", "*CR*", ",", ":", "."};
+  
+    uselessTags = new HashSet<String>();
 
-	private HashSet<String> uselessTags;
+    for(String word: uselessTagsLocal)
+      uselessTags.add(word);
+
+  } // constructor
+
+  private boolean is(String tag)
+  {
+    return uselessTags.contains(tag);
+  }
+
+  /** 
+   * The filter itself 
+   * 
+   * @param wordAndProp a object containing the tag to check
+   * @return true if the tag is useful
+   */
+  public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
+  {
+    return !(is(wordAndProp.tag()));
+  }
+
+  private HashSet<String> uselessTags;
 
 } //class
 

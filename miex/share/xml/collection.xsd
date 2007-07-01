@@ -4,7 +4,7 @@
 <xs:complexType name="categoriestype">
  <xs:sequence>
 
-	<xs:element name="D" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+  <xs:element name="D" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
 
  </xs:sequence>
 </xs:complexType>
@@ -12,10 +12,10 @@
 <xs:complexType name="doctype">
   <xs:all>
 
-	<xs:element name="TOPIC" type="categoriestype" minOccurs="1" maxOccurs="1"/>
+  <xs:element name="TOPIC" type="categoriestype" minOccurs="1" maxOccurs="1"/>
 
   <xs:element name="TITLE" type="xs:string" maxOccurs="1"/>
-				
+        
   <xs:element name="BODY" type="xs:string" minOccurs="1" maxOccurs="1"/>
 
   </xs:all> 
@@ -23,13 +23,13 @@
 
 <xs:element name="COLLECTION">
 <xs:complexType>
-	<xs:sequence>
+  <xs:sequence>
 
-		<xs:element name="DOCTRAIN" type="doctype" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="DOCTRAIN" type="doctype" minOccurs="0" maxOccurs="unbounded"/>
 
-		<xs:element name="DOCTEST" type="doctype" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="DOCTEST" type="doctype" minOccurs="0" maxOccurs="unbounded"/>
 
-	</xs:sequence>
+  </xs:sequence>
 </xs:complexType>
 </xs:element>
 

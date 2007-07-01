@@ -32,149 +32,149 @@ import es.uniovi.aic.miex.tools.MD5;
 public class SQLHandler
 {
 
-	/** 
-	 * Creates a new handler and establishes the connection using a
-	 * config file
-	 * 
-	 * @param cf A configfile storing database settings 
-	 */
-	public SQLHandler(ConfigFile cf)
-	{
-		this(cf.getStringSetting("DBHostname"), cf.getStringSetting("DBPort"),
-					cf.getStringSetting("DBUser"), cf.getStringSetting("DBPassword"),
-					cf.getStringSetting("DBName"));
-	}
+  /** 
+   * Creates a new handler and establishes the connection using a
+   * config file
+   * 
+   * @param cf A configfile storing database settings 
+   */
+  public SQLHandler(ConfigFile cf)
+  {
+    this(cf.getStringSetting("DBHostname"), cf.getStringSetting("DBPort"),
+          cf.getStringSetting("DBUser"), cf.getStringSetting("DBPassword"),
+          cf.getStringSetting("DBName"));
+  }
 
-	/** 
-	 * Creates a new handler and establishes the connection 
-	 * 
-	 * @param DBHostname FQDN for the database server
-	 * @param DBPort Port to connect on
-	 * @param DBUser User to log in with
-	 * @param DBPassword This well-known secret string ;)
-	 * @param DBName Database name
-	 */
-	public SQLHandler(String DBHostname, String DBPort, String DBUser, String DBPassword, String DBName)
-	{
-		String url = "jdbc:mysql://" + DBHostname + ":" + DBPort + "/" + DBName;
+  /** 
+   * Creates a new handler and establishes the connection 
+   * 
+   * @param DBHostname FQDN for the database server
+   * @param DBPort Port to connect on
+   * @param DBUser User to log in with
+   * @param DBPassword This well-known secret string ;)
+   * @param DBName Database name
+   */
+  public SQLHandler(String DBHostname, String DBPort, String DBUser, String DBPassword, String DBName)
+  {
+    String url = "jdbc:mysql://" + DBHostname + ":" + DBPort + "/" + DBName;
 
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
+    try
+    {
+      Class.forName("com.mysql.jdbc.Driver");
 
-			theConn = DriverManager.getConnection(url,DBUser, DBPassword);			
-		}
-		catch (Exception e)
-		{
+      theConn = DriverManager.getConnection(url,DBUser, DBPassword);      
+    }
+    catch (Exception e)
+    {
       System.err.println(e.getMessage());
-			System.exit(-1);
-		}
-	}
+      System.exit(-1);
+    }
+  }
 
-	/** 
-	 * Injects a SQL script into the database (useful to fill
-	 * the database with blank tables) 
+  /** 
+   * Injects a SQL script into the database (useful to fill
+   * the database with blank tables) 
    *
-	 * @param path The path to the script.
-	 */
-	public void executeSQLFile(String path)
-	{
-		/* BE CAREFUL WITH SQL FILE FORMAT, ONE SQL STATEMENT PER LINE!! */
-		Statement stmt;
-		String line;
+   * @param path The path to the script.
+   */
+  public void executeSQLFile(String path)
+  {
+    /* BE CAREFUL WITH SQL FILE FORMAT, ONE SQL STATEMENT PER LINE!! */
+    Statement stmt;
+    String line;
 
-		try
-		{
-			stmt = this.createStatement();
+    try
+    {
+      stmt = this.createStatement();
 
-			FileReader input = new FileReader(path);
-			BufferedReader bufRead = new BufferedReader(input);
+      FileReader input = new FileReader(path);
+      BufferedReader bufRead = new BufferedReader(input);
 
-			line = bufRead.readLine();
+      line = bufRead.readLine();
 
-			while(line != null)
-			{
-				if(line.length() > 0 && !(line.matches("^-+.*")))
-					stmt.addBatch(line);
-				
-				line = bufRead.readLine();
-			}
+      while(line != null)
+      {
+        if(line.length() > 0 && !(line.matches("^-+.*")))
+          stmt.addBatch(line);
+        
+        line = bufRead.readLine();
+      }
 
-			bufRead.close();
+      bufRead.close();
 
-			stmt.executeBatch();
-		}
-		catch(Exception e)
-		{
+      stmt.executeBatch();
+    }
+    catch(Exception e)
+    {
       System.err.println(e.getMessage());
       System.exit(-1);
-		}
+    }
 
-	}
+  }
 
-	/** 
-	 * Queries the database for an existing collection
-	 * 
-	 * @param fileName The name of the file containing the collection
-	 * @return -1 if it already exists, a new ID otherwise.
-	 */
-	public int addCollection(String fileName)
-	{
-		ResultSet rs;
-		Statement stmt;
-		String query;
-		int out = -1;
-	
-		try
-		{	
-			stmt = this.createStatement();
+  /** 
+   * Queries the database for an existing collection
+   * 
+   * @param fileName The name of the file containing the collection
+   * @return -1 if it already exists, a new ID otherwise.
+   */
+  public int addCollection(String fileName)
+  {
+    ResultSet rs;
+    Statement stmt;
+    String query;
+    int out = -1;
+  
+    try
+    { 
+      stmt = this.createStatement();
 
-			query = "SELECT name FROM collection WHERE name = '" + fileName + "'";
+      query = "SELECT name FROM collection WHERE name = '" + fileName + "'";
 
-			rs = stmt.executeQuery(query);
+      rs = stmt.executeQuery(query);
 
-			rs.last();
+      rs.last();
 
-			if(rs.getRow() > 0)
-				return out;
-			else
-			{
-				query = "INSERT INTO collection (name) VALUES ('" + fileName + "')";
-				stmt.executeUpdate(query);
-			}
+      if(rs.getRow() > 0)
+        return out;
+      else
+      {
+        query = "INSERT INTO collection (name) VALUES ('" + fileName + "')";
+        stmt.executeUpdate(query);
+      }
 
-			rs.close();
+      rs.close();
 
-			rs = stmt.getGeneratedKeys();
+      rs = stmt.getGeneratedKeys();
 
-			if (rs.next())
-		 	{
+      if (rs.next())
+      {
         out = rs.getInt(1);
-			} 
-    	
-			rs.close();
+      } 
+      
+      rs.close();
 
-		}
-		catch (Exception e)
-		{
+    }
+    catch (Exception e)
+    {
       System.err.println(e.getMessage());
       System.exit(-1);
-		}
-		
-		return out;
-	
-	}
+    }
+    
+    return out;
+  
+  }
 
-	/** 
-	 * Adds a document into the database. 
-	 * 
-	 * @param docNumber The document ID (0...n)
-	 * @param collectionNumber The collection ID (0....n) (UNIQUE)
-	 * @param title The document's title
-	 * @param isTrain True if it is DOCTRAIN, false otherwise
-	 */
-	public void addDocument(int docNumber, int collectionNumber, String title, boolean isTrain)
-	{
+  /** 
+   * Adds a document into the database. 
+   * 
+   * @param docNumber The document ID (0...n)
+   * @param collectionNumber The collection ID (0....n) (UNIQUE)
+   * @param title The document's title
+   * @param isTrain True if it is DOCTRAIN, false otherwise
+   */
+  public void addDocument(int docNumber, int collectionNumber, String title, boolean isTrain)
+  {
 
     Statement stmt;
     String query;
@@ -182,44 +182,44 @@ public class SQLHandler
     // Id 1 (doctype) = DOCTRAIN
     // Id 2 (doctype) = DOCTEST
 
-		int docTypeID = 0;
+    int docTypeID = 0;
 
-		if(isTrain) docTypeID = 1;
+    if(isTrain) docTypeID = 1;
 
-		title = safeSQL(title);
+    title = safeSQL(title);
 
     try
     {
       stmt = this.createStatement();
 
       query = "INSERT INTO document (document_id,collection_id,title,doctype_id) VALUES ('" +
-							 docNumber + "','" + collectionNumber + "','" + title + "','" + docTypeID + "')"; 
-																
+               docNumber + "','" + collectionNumber + "','" + title + "','" + docTypeID + "')"; 
+                                
       stmt.executeUpdate(query);
     }
     catch (Exception e)
     {
       System.err.println(e.getMessage());
       System.exit(-1);
-		}
+    }
 
-	}
+  }
 
-	/** 
-	 * Adds a category to the DB (if needed)
-	 * 
-	 * @param catName Category's name 
-	 * @return The (new) ID for this category
-	 */
-	private int addCategory(String catName)
-	{
-		Statement stmt;
-		ResultSet rs;
-		String query;
+  /** 
+   * Adds a category to the DB (if needed)
+   * 
+   * @param catName Category's name 
+   * @return The (new) ID for this category
+   */
+  private int addCategory(String catName)
+  {
+    Statement stmt;
+    ResultSet rs;
+    String query;
 
-		int out = 0;
+    int out = 0;
 
-		catName = safeSQL(catName);
+    catName = safeSQL(catName);
 
     try
     {
@@ -257,9 +257,9 @@ public class SQLHandler
       System.exit(-1);
     }
 
-		return out;
+    return out;
 
-	}
+  }
 
   /** 
    * Adds a bunch of categories in a row and register that into document table 
@@ -274,28 +274,28 @@ public class SQLHandler
     Statement stmt;
     String query;
 
-		int cat_ID;
+    int cat_ID;
 
-		for(String cat: categories.toArray())
-		{
-			cat_ID = addCategory(cat);
+    for(String cat: categories.toArray())
+    {
+      cat_ID = addCategory(cat);
 
-    	try
-	    {
-  	    stmt = this.createStatement();
+      try
+      {
+        stmt = this.createStatement();
 
-	      query = "INSERT INTO doccat (doc_id,col_id,cat_id) VALUES ('" +
+        query = "INSERT INTO doccat (doc_id,col_id,cat_id) VALUES ('" +
                docNumber + "','" + collectionNumber + "','" + cat_ID + "')";
 
-	      stmt.executeUpdate(query);
-	    }
-	    catch (Exception e)
-	    {
-				System.err.println(e.getMessage());
-				System.exit(-1);
-    	}
-  	}
-	}
+        stmt.executeUpdate(query);
+      }
+      catch (Exception e)
+      {
+        System.err.println(e.getMessage());
+        System.exit(-1);
+      }
+    }
+  }
 
   /** 
    * Adds a word to the DB (if needed)  
@@ -311,7 +311,7 @@ public class SQLHandler
 
     int out = 0;
 
-		wordName = safeSQL(wordName);
+    wordName = safeSQL(wordName);
 
     try
     {
@@ -371,13 +371,13 @@ public class SQLHandler
     {
       stmt = this.createStatement();
 
-			// Id 0 (proptype) = CLAUSE
-			// Id 1 (proptype) = PHRASE
-			// Id 2 (proptype) = WORD
-			// Id 3 (proptype) = RELATIONSHIP
+      // Id 0 (proptype) = CLAUSE
+      // Id 1 (proptype) = PHRASE
+      // Id 2 (proptype) = WORD
+      // Id 3 (proptype) = RELATIONSHIP
 
-     	query = "SELECT property_id FROM property WHERE type_id='" + type + "' AND string = '" + 
-							propName.trim().toUpperCase() + "'";
+      query = "SELECT property_id FROM property WHERE type_id='" + type + "' AND string = '" + 
+              propName.trim().toUpperCase() + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -387,7 +387,7 @@ public class SQLHandler
         return rs.getInt("property_id");
       else
       {
-				query = "INSERT INTO property (type_id,string) VALUES ('" + type + "','" + propName.trim().toUpperCase() + "')";
+        query = "INSERT INTO property (type_id,string) VALUES ('" + type + "','" + propName.trim().toUpperCase() + "')";
         stmt.executeUpdate(query);
       }
 
@@ -426,20 +426,20 @@ public class SQLHandler
 
     int out = 0;
 
-		String plainCode = "";
+    String plainCode = "";
 
-		for(String foo: _list)
-		{
-			plainCode = plainCode + foo;
-		}		
+    for(String foo: _list)
+    {
+      plainCode = plainCode + foo;
+    }   
 
     try
     {
-			String hashCode = MD5.gen(plainCode);
+      String hashCode = MD5.gen(plainCode);
 
       stmt = this.createStatement();
 
-     	query = "SELECT propertylist_id FROM propertylist WHERE hashCode='" + hashCode + "'";
+      query = "SELECT propertylist_id FROM propertylist WHERE hashCode='" + hashCode + "'";
 
       rs = stmt.executeQuery(query);
 
@@ -449,7 +449,7 @@ public class SQLHandler
         return rs.getInt("propertylist_id");
       else
       {
-				query = "INSERT INTO propertylist (hashCode) VALUES ('" + hashCode + "')";
+        query = "INSERT INTO propertylist (hashCode) VALUES ('" + hashCode + "')";
         stmt.executeUpdate(query);
       }
 
@@ -462,16 +462,16 @@ public class SQLHandler
         out = rs.getInt(1);
       }
 
-			// This list do not exist, so we need to insert it into the relationship table propproplist
-			for(String foo: _list)
-			{
-				int prop_id = addProperty(1,foo);
-															  //^	Id 1 (proptype) = PHRASE
-	
-				query = "INSERT INTO propproplist (list_id,prop_id) VALUES ('" + out + "','" + prop_id + "')";
+      // This list do not exist, so we need to insert it into the relationship table propproplist
+      for(String foo: _list)
+      {
+        int prop_id = addProperty(1,foo);
+                                //^ Id 1 (proptype) = PHRASE
+  
+        query = "INSERT INTO propproplist (list_id,prop_id) VALUES ('" + out + "','" + prop_id + "')";
 
-				stmt.executeUpdate(query);
-			}
+        stmt.executeUpdate(query);
+      }
 
       rs.close();
 
@@ -496,43 +496,43 @@ public class SQLHandler
    * @param isFromTitle True if this sentence comes from document title, false if it comes from the body
    * @param normalized True if the list has been normalized, false otherwise
    */
-  public void	
-	addWordsAndTags(int docNumber, int collectionNumber, ArrayList<ExtendedTaggedWord> props, 
-									boolean isFromTitle, boolean normalized)
+  public void 
+  addWordsAndTags(int docNumber, int collectionNumber, ArrayList<ExtendedTaggedWord> props, 
+                  boolean isFromTitle, boolean normalized)
   {
 
     Statement stmt;
-		ResultSet rs;
+    ResultSet rs;
     String query;
 
     int prop_ID, word_ID, list_ID, times, ft=0, nd=0;
 
-		if(isFromTitle) ft = 1;
-		if(normalized) nd = 1;
+    if(isFromTitle) ft = 1;
+    if(normalized) nd = 1;
 
     for(ExtendedTaggedWord wordAndTag: props)
     {
 
       prop_ID = addProperty(2,wordAndTag.tag());
-													//^ (word)
-			word_ID = addWord(wordAndTag.word());
-			
-			list_ID = addPropertyList(wordAndTag.phrase());
+                          //^ (word)
+      word_ID = addWord(wordAndTag.word());
+      
+      list_ID = addPropertyList(wordAndTag.phrase());
 
       try
       {
         stmt = this.createStatement();
 
-				query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,fromTitle,normalized) VALUES ('" +
-									word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + 
-									"','" + ft + "','" + nd + "')";
+        query = "INSERT INTO wordpropdoc (word_ID,prop_ID,doc_id,col_id,list_id,fromTitle,normalized) VALUES ('" +
+                  word_ID + "','" + prop_ID + "','" + docNumber + "','" + collectionNumber + "','" + list_ID + 
+                  "','" + ft + "','" + nd + "')";
 
-				stmt.executeUpdate(query);
+        stmt.executeUpdate(query);
       }
       catch (Exception e)
       {
-     	 System.err.println(e.getMessage());
-     	 System.exit(-1);
+       System.err.println(e.getMessage());
+       System.exit(-1);
       }
     }
   }
@@ -547,8 +547,8 @@ public class SQLHandler
    * @param normalized True if the list has been normalized with Porter, false otherwise 
    */
   public void 
-	addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, 
-									boolean isFromTitle, boolean normalized)
+  addDependencies(int docNumber, int collectionNumber, ArrayList<TypedDependency> deps, 
+                  boolean isFromTitle, boolean normalized)
   {
 
     Statement stmt;
@@ -558,31 +558,31 @@ public class SQLHandler
     int prop_ID, master_ID, slave_ID, times, ft=0, nd=0;
 
     if(isFromTitle) ft = 1;
-		if(normalized) nd = 1;
+    if(normalized) nd = 1;
 
     for(TypedDependency dep: deps)
     {
 
-			MapLabel masterLabel = (MapLabel)dep.gov().label();
-			MapLabel slaveLabel = (MapLabel)dep.dep().label();
-			
-			String masterWord = masterLabel.toString("value");
-			String slaveWord = slaveLabel.toString("value");
-			String prop = dep.reln().toString();
-			
+      MapLabel masterLabel = (MapLabel)dep.gov().label();
+      MapLabel slaveLabel = (MapLabel)dep.dep().label();
+      
+      String masterWord = masterLabel.toString("value");
+      String slaveWord = slaveLabel.toString("value");
+      String prop = dep.reln().toString();
+      
       prop_ID = addProperty(3,prop);
-	 											 // ^ (relationship)
+                         // ^ (relationship)
 
       master_ID = addWord(masterWord);
-			slave_ID = addWord(slaveWord);
+      slave_ID = addWord(slaveWord);
 
       try
       {
         stmt = this.createStatement();
 
         query = "SELECT times FROM wordwordpropdoc WHERE masterWord_id='" + master_ID + "' AND slaveWord_id='" + 
-								slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + 
-								collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
+                slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + "' AND col_id='" + 
+                collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
 
         rs = stmt.executeQuery(query);
 
@@ -592,15 +592,15 @@ public class SQLHandler
         {
           times = rs.getInt("times"); times++;
           query = "UPDATE wordwordpropdoc SET times='" + times + "' WHERE masterWord_id='" + master_ID + 
-									"' AND slaveWord_id='" + slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + 
-									"' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
+                  "' AND slaveWord_id='" + slave_ID + "' AND prop_id='" + prop_ID + "' AND doc_id='" + docNumber + 
+                  "' AND col_id='" + collectionNumber + "' AND fromTitle='" + ft + "' AND normalized='" + nd + "'";
         }
         else
         {
           query = "INSERT INTO wordwordpropdoc " +
-									"(masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
-        					  master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + 
-										collectionNumber + "','1','" + ft + "','" + nd + "')";
+                  "(masterWord_ID,slaveWord_id,prop_ID,doc_id,col_id,times,fromTitle,normalized) VALUES ('" +
+                    master_ID + "','" + slave_ID + "','"  + prop_ID + "','" + docNumber + "','" + 
+                    collectionNumber + "','1','" + ft + "','" + nd + "')";
         }
         rs.close();
 
@@ -608,28 +608,28 @@ public class SQLHandler
       }
       catch (Exception e)
       {
-	      System.err.println(e.getMessage());
-				System.exit(-1);
+        System.err.println(e.getMessage());
+        System.exit(-1);
       }
     }
   }
 
 
-	private Statement createStatement() throws SQLException
-	{
-		return theConn.createStatement();
-	}
+  private Statement createStatement() throws SQLException
+  {
+    return theConn.createStatement();
+  }
 
-	private String safeSQL(String orig)
-	{
-		// Escaping dangerous "'" which could break the SQL statement.
-		if(orig.matches(".*'.*")) 
-			return orig.replace("'","\\'");
-		else
-			return orig;
-	}
+  private String safeSQL(String orig)
+  {
+    // Escaping dangerous "'" which could break the SQL statement.
+    if(orig.matches(".*'.*")) 
+      return orig.replace("'","\\'");
+    else
+      return orig;
+  }
 
-	// Members
-	
-	private Connection theConn;
-}	
+  // Members
+  
+  private Connection theConn;
+} 

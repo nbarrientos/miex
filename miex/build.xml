@@ -12,117 +12,117 @@
 
 <!-- ===================== Project Properties =========================== -->
 
-	<property name="app.name"       value="MIEX"/>
-	<property name="app.jar"       	value="miex.jar"/>
-	<property name="app.version"    value="0.1"/>
-	<property name="longversion"    value="0.1"/>
+  <property name="app.name"       value="MIEX"/>
+  <property name="app.jar"        value="miex.jar"/>
+  <property name="app.version"    value="0.1"/>
+  <property name="longversion"    value="0.1"/>
 
 <!-- ===================== Project Environment =========================== -->
 
-	<property name="source.home"    value="${basedir}/src"/>
+  <property name="source.home"    value="${basedir}/src"/>
 
 <!--  ==================== Compilation Options ======================== -->
 
-	<property name="compile.debug"       value="false"/>
-	<property name="compile.deprecation" value="false"/>
-	<property name="compile.optimize"    value="true"/>
+  <property name="compile.debug"       value="false"/>
+  <property name="compile.deprecation" value="false"/>
+  <property name="compile.optimize"    value="true"/>
 
 <!-- ===================== Default Classpath ========================== -->
 
-	<path id="default.classpath">
-<!--		<fileset dir="${basedir}/lib"> -->
-				<fileset dir="/usr/lib/java">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
+  <path id="default.classpath">
+<!--    <fileset dir="${basedir}/lib"> -->
+        <fileset dir="/usr/lib/java">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
 
 <!-- ===================== Build Environment =========================== -->
 
-	<property name="build.home"    value="${basedir}/build"/>
-	<property name="dist.home"     value="${basedir}/dist"/>
-	<property name="prefix"        value="/usr"/>
+  <property name="build.home"    value="${basedir}/build"/>
+  <property name="dist.home"     value="${basedir}/dist"/>
+  <property name="prefix"        value="/usr"/>
 
 <!--  ==================== All ==================== -->
 
-	<target name="all" depends="jar,doc,dist"
-		description="Clean up and produce JARs and documentation"/>
+  <target name="all" depends="jar,doc,dist"
+    description="Clean up and produce JARs and documentation"/>
 
 <!--  ==================== Clean ==================== -->
 
-	<target name="clean" description="Delete all generated files and directories">
-		<delete dir="${build.home}/"/>
-		<delete dir="${dist.home}"/>
-	</target>
+  <target name="clean" description="Delete all generated files and directories">
+    <delete dir="${build.home}/"/>
+    <delete dir="${dist.home}"/>
+  </target>
 
 <!--  ==================== Init ==================== -->
 
-	<target name="init" description="Initialize the build directory">
-		<tstamp/>
-		<mkdir dir="${build.home}"/>
-		<mkdir dir="${build.home}/classes"/>
-		<mkdir dir="${build.home}/doc"/>
-		<mkdir dir="${build.home}/doc/api"/>
-		<mkdir dir="${build.home}/lib"/>
-	</target>
+  <target name="init" description="Initialize the build directory">
+    <tstamp/>
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/classes"/>
+    <mkdir dir="${build.home}/doc"/>
+    <mkdir dir="${build.home}/doc/api"/>
+    <mkdir dir="${build.home}/lib"/>
+  </target>
 
 <!--  ==================== Generate ==================== -->
 
-	<target name="generate" depends="init" description="Generate the build tree">
-		<copy todir="${build.home}/src">
-			<fileset dir="${source.home}" includes="**/*.java"/>
-		</copy>
-	</target>
+  <target name="generate" depends="init" description="Generate the build tree">
+    <copy todir="${build.home}/src">
+      <fileset dir="${source.home}" includes="**/*.java"/>
+    </copy>
+  </target>
 
 <!--  ==================== Compile ==================== -->
 
-	<target name="compile" depends="generate" description="Compile the build tree">
-		<javac srcdir="${build.home}/src"
-			     debug="${compile.debug}"
-			     deprecation="${compile.deprecation}"
-			     optimize="${compile.optimize}"
-			     destdir="${build.home}/classes">
-			<classpath refid="default.classpath"/>
-			<compilerarg value="-Xlint:unchecked"/> <!-- FIXME: Could be removed... -->
-		</javac>
-	</target>
+  <target name="compile" depends="generate" description="Compile the build tree">
+    <javac srcdir="${build.home}/src"
+           debug="${compile.debug}"
+           deprecation="${compile.deprecation}"
+           optimize="${compile.optimize}"
+           destdir="${build.home}/classes">
+      <classpath refid="default.classpath"/>
+      <compilerarg value="-Xlint:unchecked"/> <!-- FIXME: Could be removed... -->
+    </javac>
+  </target>
 
 <!--  ==================== Apidoc ==================== -->
 
-	<target name="apidoc" depends="generate" description="Generate the API specification (javadoc)">
-		<javadoc packagenames="es.uniovi.aic.miex.*"
-				     sourcepath="${build.home}/src"
-				     classpath="${build.home}/classes" 
-				     destdir="${build.home}/doc/api"
-				     use="true"
-				     author="false"
-				     version="false"
+  <target name="apidoc" depends="generate" description="Generate the API specification (javadoc)">
+    <javadoc packagenames="es.uniovi.aic.miex.*"
+             sourcepath="${build.home}/src"
+             classpath="${build.home}/classes" 
+             destdir="${build.home}/doc/api"
+             use="true"
+             author="false"
+             version="false"
              private="false"
-				     windowtitle="${app.name} v${app.version} API Specification"
-				     doctitle="${app.name} v${app.version} API Specification">
+             windowtitle="${app.name} v${app.version} API Specification"
+             doctitle="${app.name} v${app.version} API Specification">
 
-			<header><![CDATA[<p><b>${app.name}</b><br>v${app.version}</p>]]></header>
+      <header><![CDATA[<p><b>${app.name}</b><br>v${app.version}</p>]]></header>
 
-			<bottom><![CDATA[<font size=1>Copyright (C) 2006-2007 
+      <bottom><![CDATA[<font size=1>Copyright (C) 2006-2007 
               <a href="http://miex.sf.net">Nacho Barrientos Arias</a>. All rights reserved.</font>]]>
       </bottom>
-		  
-			<!-- FIXME - This shouldn't be static (${java.specification.version}) -->  
-			<link href="http://java.sun.com/javase/6/docs/api"/>
+      
+      <!-- FIXME - This shouldn't be static (${java.specification.version}) -->  
+      <link href="http://java.sun.com/javase/6/docs/api"/>
 
-			<classpath refid="default.classpath"/>
+      <classpath refid="default.classpath"/>
 
-		</javadoc>
-	</target>
+    </javadoc>
+  </target>
 
 <!--  ==================== Doc ==================== -->
 
-	<target name="doc" depends="apidoc" description="Generate all documentation"/> 
+  <target name="doc" depends="apidoc" description="Generate all documentation"/> 
 
 <!--  ==================== Jar ==================== -->
 
-	<target name="jar" depends="compile" description="Build all Java archives (JARs)">
-		<jar jarfile="${build.home}/lib/${app.jar}" basedir="${build.home}/classes"/>
-	</target>
+  <target name="jar" depends="compile" description="Build all Java archives (JARs)">
+    <jar jarfile="${build.home}/lib/${app.jar}" basedir="${build.home}/classes"/>
+  </target>
 
 <!--  ================ Diagnostics ================ -->
 
@@ -140,37 +140,37 @@
 
 <!--  =============== Install ================ -->
 
-	<target name="install" depends="dist" description="Installs MIEX (run as root)">
-		<copy todir="${prefix}">
-			<fileset dir="${dist.home}"/>
-		</copy>
-		<chmod file="${prefix}/bin/miex" perm="755"/>
-	</target>
+  <target name="install" depends="dist" description="Installs MIEX (run as root)">
+    <copy todir="${prefix}">
+      <fileset dir="${dist.home}"/>
+    </copy>
+    <chmod file="${prefix}/bin/miex" perm="755"/>
+  </target>
 
 <!--  =============== Dist preparation ================ -->
 
-	<target name="dist" depends="dist.dirs" description="Prepares the binary distribution directories">
-		<copy file="${basedir}/build/lib/miex.jar" todir="${dist.home}/lib/miex"/>
-		<copy file="${basedir}/miex.sh" tofile="${dist.home}/bin/miex"/>
-		<copy file="${basedir}/share/sql/skeleton-toread.sql" tofile="${dist.home}/share/miex/sql/skeleton.sql"/>
-		<copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xsd"/>
-		<copy file="${basedir}/etc/example-default.conf" tofile="${dist.home}/share/doc/miex/examples/conf/example.conf"/>
-		<copy file="${basedir}/share/input/collection-well-formed-easy.xml" tofile="${dist.home}/share/doc/miex/examples/input/example.xml"/>
-		<copy file="${basedir}/lib/grammars/englishPCFG.ser.gz" tofile="${dist.home}/share/miex/grammars/englishPCFG.ser.gz"/>
-		<copy todir="${dist.home}/share/doc/miex/api">
-			<fileset dir="${basedir}/build/doc/api"/>
-		</copy>
-	</target>
+  <target name="dist" depends="dist.dirs" description="Prepares the binary distribution directories">
+    <copy file="${basedir}/build/lib/miex.jar" todir="${dist.home}/lib/miex"/>
+    <copy file="${basedir}/miex.sh" tofile="${dist.home}/bin/miex"/>
+    <copy file="${basedir}/share/sql/skeleton-toread.sql" tofile="${dist.home}/share/miex/sql/skeleton.sql"/>
+    <copy file="${basedir}/share/xml/collection.xsd" tofile="${dist.home}/share/miex/schemas/default.xsd"/>
+    <copy file="${basedir}/etc/example-default.conf" tofile="${dist.home}/share/doc/miex/examples/conf/example.conf"/>
+    <copy file="${basedir}/share/input/collection-well-formed-easy.xml" tofile="${dist.home}/share/doc/miex/examples/input/example.xml"/>
+    <copy file="${basedir}/lib/grammars/englishPCFG.ser.gz" tofile="${dist.home}/share/miex/grammars/englishPCFG.ser.gz"/>
+    <copy todir="${dist.home}/share/doc/miex/api">
+      <fileset dir="${basedir}/build/doc/api"/>
+    </copy>
+  </target>
 
-	<target name="dist.dirs">
-		<mkdir dir="${dist.home}/bin"/>
-		<mkdir dir="${dist.home}/lib/miex"/>
-		<mkdir dir="${dist.home}/share/miex/sql"/>	
-		<mkdir dir="${dist.home}/share/miex/schemas"/>
-		<mkdir dir="${dist.home}/share/miex/grammars"/>
-		<mkdir dir="${dist.home}/share/doc/miex/examples/conf"/>
-		<mkdir dir="${dist.home}/share/doc/miex/examples/input"/>
-		<mkdir dir="${dist.home}/share/doc/miex/api"/>
-	</target>
+  <target name="dist.dirs">
+    <mkdir dir="${dist.home}/bin"/>
+    <mkdir dir="${dist.home}/lib/miex"/>
+    <mkdir dir="${dist.home}/share/miex/sql"/>  
+    <mkdir dir="${dist.home}/share/miex/schemas"/>
+    <mkdir dir="${dist.home}/share/miex/grammars"/>
+    <mkdir dir="${dist.home}/share/doc/miex/examples/conf"/>
+    <mkdir dir="${dist.home}/share/doc/miex/examples/input"/>
+    <mkdir dir="${dist.home}/share/doc/miex/api"/>
+  </target>
 
 </project>
