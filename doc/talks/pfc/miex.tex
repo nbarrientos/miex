@@ -33,7 +33,7 @@
 %\beamertemplatesolidbackgroundcolor{yellow!30!white}
 
 % Información de autoría
-\title{MIEX}
+\title{MIEX} 
 \subtitle{Extracción de información de documentos XML mediante Stanford Parser}
 \date{nn de Septiembre de 2007}
 \institute
@@ -76,24 +76,6 @@
 
 \section{Introducción}
 
-%------------------------ DEMO SLIDE ------------------------%
-
-\frame
-{
-  \frametitle{Why Inforg\footnote{http://www.inforg.uniovi.es} could be better}
-
-  \begin{block}{Students behaviour}
-    \begin{itemize}
-      % Sólo visible en la primera y segunda parte de la slide
-      \item<1-2> Sane
-      % De la segunda en adelante, con alerta de la segunda en
-      % adelante.
-      \item<2- | alert@2-> Really?
-      % De la tercera en adelante
-      \item<3-> Yes
-    \end{itemize}
-  \end{block}
-}
 
 %-------------------------- SLIDE ---------------------------%
 
@@ -112,13 +94,49 @@
 
 \frame
 {
-  \frametitle{La cara amigable del Stanford Parser}
+  \frametitle{La cara amigable del Stanford Parser...}
 
   \begin{figure}[h]
     \begin{center}
       \includegraphics[scale=0.3]{images/spui.png}
     \end{center}
   \end{figure}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{... y la cara más fea}
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[scale=0.4]{images/spconsole.png}
+    \end{center}
+  \end{figure}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Líneas de trabajo}
+  
+  \begin{block}{Entrada}
+    \begin{itemize}
+      \item<1-> Simple procesamiento en batch
+      \item<1-> Configurable fácilmente
+      \item<2- | alert@2-> Fichero .conf + línea de comandos simplificada
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Salida}<3->
+    \begin{itemize}
+      \item<3-> No \textit{final}
+      \item<3-> Flexible
+      \item<4- | alert@3-> Base de datos
+    \end{itemize}
+  \end{block}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
