@@ -104,8 +104,8 @@
 
 					<div id="miexlogo"><img src="images/miex.png" alt="Miex structure"/></div>
 
-						<p>For more informacion, development and end-user tools (Documentation, Subversion, feature requests, 
-						project status...) are stored at <a href="http://sourceforge.net/projects/miex/">project page at SourceForge</a>.</p>
+						<p>For more information, development and end-user tools (Documentation, Subversion, feature requests, 
+						project status...) look at <a href="http://sourceforge.net/projects/miex/">the project page at SourceForge</a>.</p>
 
         </div>
 
