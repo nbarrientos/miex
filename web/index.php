@@ -97,7 +97,7 @@
 						
 						</div>
 
-						<p>It's planned to provide a configuration mechanism to point <b>MIEX</b> what fields are suitable
+						<p>It's planned to provide a configuration mechanism to point <b>MIEX</b> which fields are suitable
 						for extract semantic information, on the other hand, XML input files are validated using
 				    a <a href="http://www.w3.org/XML/Schema">XML schema</a> supplied by the end user. Let's see how
 						<b>MIEX</b> works.</p>
