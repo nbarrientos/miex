@@ -23,14 +23,12 @@
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
+\usepackage{qtree}
 
 % Look and feel
 \usetheme{Copenhagen}
 \usecolortheme{rose}
 %\usefonttheme{structurebold}
-
-% Color de fondo por defecto.
-%\beamertemplatesolidbackgroundcolor{yellow!30!white}
 
 % Información de autoría
 \title{MIEX} 
@@ -76,18 +74,86 @@
 
 \section{Introducción}
 
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
 
 %-------------------------- SLIDE ---------------------------%
 
 \frame
 {
-  \frametitle{Desventajas del analizador}
 
-    \begin{itemize}
-      \item<1-> Deficiente sistema de entradas (\sout{batch})
-      \uncover{\item<2-> Manejo \textit{poco amigable}}
-      \item<3-> El almacenamiento no es \textbf{flexible}
-    \end{itemize}
+  \frametitle{El Stanford Parser}
+
+  \begin{itemize}
+  \item Stanford Natural Language Processing Group\footnote{http://nlp.stanford.edu/}
+  \item Analizador de lenguaje natural
+  \item Sintáctico + Semántico
+  \item Java (J2SE)
+  \end{itemize}
+
+  \begin{center}
+  \begin{block}{Objetivo principal}<2->
+    \begin{large}
+      \begin{center}
+      Cubrir las carencias de usabilidad del programa para un problema
+      en concreto.
+      \end{center}
+    \end{large}
+  \end{block}
+  \end{center}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Ejemplo de metadatos generados}
+
+  \begin{itemize}
+    \item Parse tree
+    \item Dependencias entre palabras
+  \end{itemize}
+
+  \begin{block}{Oración objetivo}
+    \begin{center}
+      The Debian Project is an association of individuals
+    \end{center}
+  \end{block}
+}
+
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Parse tree}
+
+  \begin{center}
+  \begin{scriptsize}
+  \Tree[.ROOT [.S [.NP [.DT The ] [.NNP Debian ] [.NNP Project ] ] [.VP
+  [.VBZ is ] [.NP [.NP [.DT an ] [.NN association ] ] [.PP [.IN of ] [.NP [.NNS individuals ] ] ] ] ] ] ]
+  \end{scriptsize}
+  \end{center}
+}
+
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Dependencias\footnote{http://nlp.stanford.edu/pubs/LREC06\_dependencies.pdf} entre palabras}
+
+  \begin{enumerate}
+    \item det(Project-3, The-1)
+    \item nn(Project-3, Debian-2)
+    \item nsubj(association-6, Project-3)
+    \item cop(association-6, is-4)
+    \item det(association-6, an-5)
+    \item prep\_of(association-6, individuals-8)
+  \end{enumerate}
 }
 
 %-------------------------- SLIDE ---------------------------%
@@ -107,13 +173,26 @@
 
 \frame
 {
-  \frametitle{... y la cara más fea}
+  \frametitle{... y la cara más usual}
 
   \begin{figure}[h]
     \begin{center}
       \includegraphics[scale=0.4]{images/spconsole.png}
     \end{center}
   \end{figure}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Carencias del analizador}
+
+    \begin{itemize}
+      \item<1-> Deficiente sistema de entradas (\sout{batch})
+      \uncover{\item<2-> Manejo \textit{poco amigable}}
+      \item<3-> El almacenamiento no es \textbf{flexible}
+    \end{itemize}
 }
 
 %-------------------------- SLIDE ---------------------------%
@@ -145,6 +224,12 @@
 
 \section{Funcionamiento}
 
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
+
 %-------------------------- SLIDE ---------------------------%
 
 \frame
@@ -172,27 +257,60 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Recursos sobre el proyecto                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recursos}
+
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Demo + Preguntas                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Demo + Preguntas}
 
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
+
 %-------------------------- SLIDE ---------------------------%
 
 \frame
 {
-  \frametitle{¿Preguntas?}
-
-  \begin{beamerboxesrounded}[shadow=true]{Autoría}
 
   \begin{center}
 
-  \normalsize{Ignacio Barrientos Arias}\\
-  \small{nacho@debian.org}\\
+  {\fontfamily{augie}\fontsize{50}{52}\selectfont Demo}
+
+  \end{center}
+
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Fin}
+
+  \begin{beamerboxesrounded}[shadow=true]{}
+
+  \begin{center}
+
+  \Large{¿Preguntas?}\\
 
   \end{center}
 
   \end{beamerboxesrounded}
+
+  \vspace{1cm}
 
   %%%%
 
@@ -202,8 +320,8 @@
 
   \small
   {
-  GNU General Public License (version 2)\\
-  Sources at: http://miex.sf.net/
+  GNU General Public License (versión 2)\\
+  Fuentes en: http://miex.sf.net/
   }
 
   \end{center}
