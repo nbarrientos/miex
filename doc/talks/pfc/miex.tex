@@ -192,8 +192,8 @@
   \frametitle{Carencias del analizador}
 
     \begin{itemize}
-      \item<1-> Deficiente sistema de entradas (\sout{batch})
-      \uncover{\item<2-> Manejo \textit{poco amigable}}
+      \item<1-> Pobre tratamiento de ficheros XML
+      \item<2-> Manejo tedioso y \textit{poco amigable}
       \item<3-> El almacenamiento no es \textbf{flexible}
     \end{itemize}
 }
@@ -204,11 +204,11 @@
 {
   \frametitle{Líneas de trabajo}
   
-  \begin{block}{Entrada}
+  \begin{block}{Entrada}<1->
     \begin{itemize}
-      \item<1-> Simple procesamiento en batch
+      \item<1-> Enriquecer el tratamiento de XML + validación 
       \item<1-> Configurable fácilmente
-      \item<2- | alert@2-> Fichero .conf + línea de comandos simplificada
+      \item<2- | alert@2-> .conf + línea de comandos simple + schema
     \end{itemize}
   \end{block}
 
@@ -255,6 +255,21 @@
   \begin{figure}[h]
     \begin{center}
       \includegraphics[scale=0.1425]{images/build/miex-libs.png}
+    \end{center}
+  \end{figure}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Estructura de la BDD}
+
+  \vspace{-0.4cm}
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[scale=0.175]{images/bdd-e-r.pdf}
     \end{center}
   \end{figure}
 }
