@@ -32,6 +32,7 @@
 
 % Eliminar la botonera de navegación
 \setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
 
 % Información de autoría
 \title{MIEX} 
@@ -82,6 +83,51 @@
   \setcounter{tocdepth}{1}
   \tableofcontents[currentsection]
 }
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Objetivos del PFC}
+
+  \begin{enumerate}
+    \item Análisis de lenguaje natural
+    \item Colecciones de documentos
+    \item XML
+    \item Almacenamiento reutilizable
+  \end{enumerate}
+
+  \begin{block}{¿Qué analizador utilizar?}<2->
+    \begin{center}
+      {\Large \textbf{STANFORD PARSER}}
+    \end{center}
+  \end{block}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\begin{frame}[fragile]
+
+  \frametitle{Ejemplo de fichero de entrada}
+
+\begin{small}
+\begin{semiverbatim}
+\uncover<1->{<collection>}
+\uncover<2->{\alert<2>{<doctrain>}}
+\uncover<3->{\alert<3>{<topic><d>c1</d><d>c2</d>...<d>cn</d> </topic>}}
+\uncover<3->{\alert<3>{<title>Un título</title>}}
+\uncover<3->{\alert<3>{<body>Un cuerpo</body>}}
+\uncover<2->{\alert<2>{</doctrain>}}
+\uncover<2->{\alert<2->{...}}
+\uncover<4->{<doctrain>}
+\uncover<4->{<topic><d>c1</d><d>c2</d>...<d>cm</d></topic>}
+\uncover<4->{<title>Otro título</title>}
+\uncover<4->{<body>Otro cuerpo</body>}
+\uncover<4->{</doctrain>}
+\uncover<1->{</collection>}
+\end{semiverbatim}
+\end{small}
+\end{frame}
 
 %-------------------------- SLIDE ---------------------------%
 
