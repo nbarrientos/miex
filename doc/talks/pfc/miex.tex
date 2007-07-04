@@ -17,9 +17,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Tipo de documento LaTeX-beamer
-\documentclass[14pt]{beamer}
+\documentclass[spanish,14pt]{beamer}
 
 % Acentos pasivos
+\usepackage[spanish]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
@@ -32,7 +33,7 @@
 
 % Eliminar la botonera de navegación
 \setbeamertemplate{navigation symbols}{}
-\setbeamercovered{transparent}
+\setbeamercovered{invisible}
 
 % Información de autoría
 \title{MIEX} 
@@ -97,16 +98,19 @@
     \item Almacenamiento reutilizable
   \end{enumerate}
 
-  \begin{block}{¿Qué analizador utilizar?}<2->
+  \begin{alertblock}{¿Qué analizador utilizar?}<2->
     \begin{center}
-      {\Large \textbf{STANFORD PARSER}}
+     \only<2>{\vspace{0.65cm}}
+     \only<3->{{\fontfamily{augie}\selectfont {\Large Stanford Parser}}}
     \end{center}
-  \end{block}
+  \end{alertblock}
 }
 
 %-------------------------- SLIDE ---------------------------%
 
 \begin{frame}[fragile]
+
+  \setbeamercovered{transparent}
 
   \frametitle{Ejemplo de fichero de entrada}
 
@@ -137,9 +141,9 @@
   \frametitle{El Stanford Parser}
 
   \begin{itemize}
-  \item Stanford Natural Language Processing Group\footnote{http://nlp.stanford.edu/}
   \item Analizador de lenguaje natural
   \item Sintáctico + Semántico
+  \item Stanford Natural Language Processing Group\footnote{http://nlp.stanford.edu/}
   \item Java (J2SE)
   \end{itemize}
 
@@ -166,11 +170,11 @@
     \item Dependencias entre palabras
   \end{itemize}
 
-  \begin{block}{Oración objetivo}
+  \begin{exampleblock}{Oración de ejemplo}
     \begin{center}
       The Debian Project is an association of individuals
     \end{center}
-  \end{block}
+  \end{exampleblock}
 }
 
 
