@@ -1,5 +1,5 @@
 ALLTEX= miex.tex
-AUXEXT= aux log dvi toc pdf bbl blg lof bak lot out nav snm
+AUXEXT= aux log dvi toc pdf bbl blg lof bak lot out nav snm vrb
 
 PDF= miex.pdf
 TEX= miex.tex
