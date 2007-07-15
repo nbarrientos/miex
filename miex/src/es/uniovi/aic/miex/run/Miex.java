@@ -198,12 +198,12 @@ public class Miex
         // Really processing document title         
         System.out.println("\n\t" + docN + "Processing TITLE of the document titled: " + doc.getTitle().trim());    
         processSentences(titleSentences, config, ex, filter, sql, docID, collectionID, true);
-                                                                              // ^ (isFromTitle)
+                                                                                      // ^ (isFromTitle)
 
         // Really processing document body
         System.out.println("\n\t" + docN + "Processing BODY of the document titled: " + doc.getTitle().trim());
         processSentences(bodySentences, config, ex, filter, sql, docID, collectionID, false);
-                                                                              // ^ (isFromTitle)
+                                                                                    // ^ (isFromTitle)
   
         // Next document
         docID++;
