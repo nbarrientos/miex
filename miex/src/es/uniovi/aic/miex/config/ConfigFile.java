@@ -158,7 +158,7 @@ public class ConfigFile
   {
     reqConfigFileFields = new String[]{"DBUser", "DBPassword", "DBName"};
 
-    configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump", "Normalize"};
+    configFileBooleanFields = new String[]{"Validate", "CreateDB", "Dump", "Normalize", "SkipProcessing"};
     
     defaultValuesString = new HashMap<String,String>();
     defaultValuesBoolean = new HashMap<String,Boolean>();
@@ -168,6 +168,7 @@ public class ConfigFile
     defaultValuesBoolean.put("dump", new Boolean(false));
     defaultValuesBoolean.put("createdb", new Boolean(false));
     defaultValuesBoolean.put("normalize", new Boolean(false));
+    defaultValuesBoolean.put("skipprocessing", new Boolean(false));
 
     // Loading default values to string settings
     defaultValuesString.put("xmlschemauri", "/usr/share/miex/schemas/default.xsd");

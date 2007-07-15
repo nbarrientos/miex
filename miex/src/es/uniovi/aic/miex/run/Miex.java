@@ -149,7 +149,10 @@ public class Miex
       File theFile = new File(files.get(j));
 
       // Registering collection into the database
-      collectionID = sql.addCollection((theFile.getName().split("\\."))[0]);
+      if(!(config.getBooleanSetting("SkipProcessing")))
+        collectionID = sql.addCollection((theFile.getName().split("\\."))[0]);
+      else // just to avoid some refactoring ;)
+        collectionID = 0;
 
       if(collectionID < 0)
       {
@@ -174,9 +177,11 @@ public class Miex
         MyDoc doc = (MyDoc)it.next();
 
         // Registering document into the database
+        if(!(config.getBooleanSetting("SkipProcessing")))
         sql.addDocument(docID, collectionID, doc.getTitle(), doc.isTrain());
 
         // And its categories
+        if(!(config.getBooleanSetting("SkipProcessing"))) 
         sql.addCategories(docID, collectionID, doc.getCategories());
 
         // Splitting title in sentences
@@ -192,6 +197,8 @@ public class Miex
           System.out.println("\n\tCreating category files for document titled: " + doc.getTitle().trim());
           injectDataToFiles(doc.getCategories().toArray(), bodySentences, config.getStringSetting("DumpDir"));
         }
+
+        if(config.getBooleanSetting("SkipProcessing")) continue; // --------^
 
         String docN = "[" + docID + "/" + collection.size() + "] ";
 
