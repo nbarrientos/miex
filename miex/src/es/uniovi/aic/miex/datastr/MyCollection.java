@@ -56,6 +56,11 @@ public class MyCollection
     return buf.toString();
   }
 
+  public int size()
+  {
+    return docs.size();
+  }
+
   // Members
   private ArrayList<MyDoc> docs;
 
