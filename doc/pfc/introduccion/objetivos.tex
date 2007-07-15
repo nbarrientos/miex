@@ -1,15 +1,14 @@
 \section{Objetivos}
 
-Entre otras características, el principal objetivo de MIEX es analizar
-sintáctica y semánticamente colecciones de pequeños documentos escritos
-en inglés.
+Entre otros, el principal objetivo de MIEX es analizar sintáctica y
+semánticamente colecciones de pequeños documentos escritos en inglés.
 
-Aprovechando las capacidades del analizador se realizan dos tipos de análisis.
-En primer lugar un análisis sintáctico de la oración y posteriormente un
-análisis semántico con el fin de obtener las relaciones entre las palabras de
-cada una de las oraciones. La mejor manera de ilustrar estos conceptos es
-utilizando un pequeño ejemplo, por lo que veamos que análisis que produce el
-analizador para la siguiente oración.
+Aprovechando las capacidades del analizador (Stanford Parser) se realizan dos
+tipos de análisis. En primer lugar un análisis sintáctico de la oración y
+posteriormente un análisis semántico con el fin de obtener las relaciones entre
+las palabras de cada una de las oraciones. La mejor manera de ilustrar estos
+conceptos es utilizando un pequeño ejemplo, por lo que veamos que análisis
+produce el analizador para la siguiente oración.
 
 \begin{center}
 \textit{The Debian Project is an association of individuals.}
@@ -29,7 +28,7 @@ más visual y lógica es utilizar un árbol (figura \ref{fig:arbol-sintactico}).
 \end{figure} 
  
 Se puede apreciar como se asignan etiquetas a nivel de palabra, a nivel de
-grupo frasal y a nivel clausal tal y como se hace habitualmente en cualquier
+grupo frasal y a nivel clausal, tal y como se hace habitualmente en cualquier
 análisis sintáctico. Si desea conocer el significado de cada etiqueta no tiene
 más que echar un vistazo a los apéndices \ref{cha:penntags} y
 \ref{cha:gramrelations}. Aprovecharemos también que el analizador calcula las
@@ -51,7 +50,7 @@ prep_of(association-6, individuals-8)
 \end{figure}
 
 Tanto el análisis a nivel de palabra (y obviamente a nivel de grupo), como las
-relaciones entre las palabras será la información que nos va a interesar
+relaciones entre las palabras, será la información que nos va a interesar
 guardar más adelante.
 
 Aunque en el siguiente capítulo se explica con más detalle cada uno de los

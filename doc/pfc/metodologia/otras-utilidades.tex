@@ -36,10 +36,17 @@ entrada en la sección \ref{sec:schema} de este mismo libro.
 
 \subsection{Integración con FK}
 
+FK\footnote{http://www.aic.uniovi.es/pir/Software.htm} es un entorno para el
+desarrollo de aplicaciones modulares en  C++ basado en un modelo de plugins
+jerárquicos, extensibles y reutilizables. FK ofrece al programador servicios
+para cargar dinámicamente plugins que tengan un cierto interfaz y
+automáticamente comprueba, convierte y enlaza las instancias particulares
+especificadas en tiempo de ejecución.
+
 Como herramienta experimental, en el directorio \texttt{misc/fk} se distribuye
 un \textit{wrapper} para poder invocar fácilmente MIEX (y por consiguiente la
 JVM\footnote{Java Virtual Machine})
-desde FK\footnote{http://www.aic.uniovi.es/pir/Software.htm}.
+desde FK.
 
 Hasta el momento no existe ninguna manera de configurar el \textit{wrapper} en
 tiempo de ejecución por lo que probablemente tendrá que modificar algún
