@@ -1,0 +1,35 @@
+\section{Análisis respecto a la longitud de las oraciones}
+
+Para esta prueba, se han construido una serie de colecciones con un sólo
+documento formado por dieciocho oraciones. Cada una de esas colecciones
+varía el tamaño medio de las oraciones que componen el documento que hay en su
+interior. En la tabla \ref{tab:longitud-oraciones} se presentan los resultados
+obtenidos.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{cc}
+ \hline \hline
+ \multicolumn{1}{c}{\textbf{Tamaño medio \small{(oraciones)}}} &
+ \multicolumn{1}{c}{\textbf{Tiempo \small{(segundos)}}} \\
+ \hline \hline
+ 5 & 12,44\\
+ \hline
+ 10 & 15,03\\
+ \hline
+ \textbf{15} & \textbf{18,15}\\
+ \hline
+ 20 & 28,45\\
+ \hline
+ 25 & 43,56\\
+ \hline
+ \textbf{30} & \textbf{53,22}\\
+ \hline \hline
+\end{tabular}
+\caption{Tiempo de procesamiento en función de la longitud de las oraciones}
+\label{tab:longitud-oraciones}
+\end{center}
+\end{table}
+
+Como se puede apreciar en el caso resaltado, duplicar el tamaño medio de
+las oraciones casi triplica el tiempo de procesamiento.

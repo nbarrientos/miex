@@ -15,92 +15,9 @@ El tiempo de procesamiento depende de el número de documentos a tratar y,
 en mayor medida, de la longitud media de las oraciones de los mismos. En las
 próximas secciones, se presentan sendos análisis desde los dos puntos de vista.
 
-\section{Análisis respecto al número de documentos}
+\input{experimentacion/numero-documentos.tex}
 
-En el análisis de las colecciones, no es tan difícil predecir el tiempo que
-puede tardar en completarse el análisis si sólo tenemos en cuenta como variable
-el número de documentos a analizar. Como veremos en la siguiente sección existe
-otra cuestión a tener en cuenta mucho más importante a la hora de medir lo que
-puede llevar procesar una serie de entradas. 
+\input{experimentacion/longitud-oraciones.tex}
 
-Para realizar este estudio se ha creado un documento y se ha utilizado para
-construir colecciones con 10, 25, 50, 100 y 500 documentos iguales. Como es de
-esperar, el tiempo de procesamiento crece aproximadamente de manera lineal en
-función del número de documentos, como se puede observar en la tabla
-\ref{tab:longitud-colecciones}.
-
-\begin{table}
-\begin{center}
-\begin{tabular}{ccc}
- \hline \hline
- \multicolumn{1}{c}{\textbf{Documentos}} &
- \multicolumn{1}{c}{\textbf{Tiempo \small{(segundos)}}} &
- \multicolumn{1}{c}{\textbf{Tiempo formateado \small{(aprox)}}} \\
- \hline \hline
- 10 & 31,488 & 0m 31s\\
- \hline
- 25 & 69,708 & 1m 9s\\
- \hline
- 50 & 133,932 & 2m 13s\\
- \hline
- 100 & 276,026 & 4m 36s\\
- \hline
- 500 & 1271,352 & 21m 11s\\
- \hline \hline
-\end{tabular}
-\caption{Tiempo de procesamiento en función del número de documentos}
-\label{tab:longitud-colecciones}
-\end{center}
-\end{table}
-
-\section{Análisis respecto a la longitud de las oraciones}
-
-Para esta prueba, se han construido una serie de colecciones con un sólo
-documento formado por dieciocho oraciones. Cada una de esas colecciones
-varía el tamaño medio de las oraciones que componen el documento que hay en su
-interior. En la tabla \ref{tab:longitud-oraciones} se presentan los resultados
-obtenidos.
-
-\begin{table}
-\begin{center}
-\begin{tabular}{cc}
- \hline \hline
- \multicolumn{1}{c}{\textbf{Tamaño medio \small{(oraciones)}}} &
- \multicolumn{1}{c}{\textbf{Tiempo \small{(segundos)}}} \\
- \hline \hline
- 5 & 12,44\\
- \hline
- 10 & 15,03\\
- \hline
- \textbf{15} & \textbf{18,15}\\
- \hline
- 20 & 28,45\\
- \hline
- 25 & 43,56\\
- \hline
- \textbf{30} & \textbf{53,22}\\
- \hline \hline
-\end{tabular}
-\caption{Tiempo de procesamiento en función de la longitud de las oraciones}
-\label{tab:longitud-oraciones}
-\end{center}
-\end{table}
-
-Como se puede apreciar en el caso resaltado, duplicar el tamaño medio de
-las oraciones casi triplica el tiempo de procesamiento.
-
-\section{Otros aspectos a tener en cuenta}
-
-Con vistas a realizar un análisis más exhaustivo hay otras cuestiones que sería
-recomendable tener en cuenta. En primer lugar el estado de la base de datos es
-interesante, habría que estudiar el coste de las
-transacciones a realizar ya que no es siempre uniforme\footnote{Por ejemplo, no
-es lo mismo buscar una entrada en una tabla con un registro que con un millón}.
-Seguidamente, también sería interesante buscar una máquina con carga media lo
-más cercana a cero, para logar un mayor rigor en las pruebas. Finalmente,
-también ayudaría disgregar en la medida de lo posible los tiempos totales en
-función de cada tarea que realiza el programa (filtros, análisis, etcétera).
-
-
-
+\input{experimentacion/otros-aspectos.tex}
 

@@ -1,0 +1,37 @@
+\section{Análisis respecto al número de documentos}
+
+En el análisis de las colecciones, no es tan difícil predecir el tiempo que
+puede tardar en completarse el análisis si sólo tenemos en cuenta como variable
+el número de documentos a analizar. Como veremos en la siguiente sección existe
+otra cuestión a tener en cuenta mucho más importante a la hora de medir lo que
+puede llevar procesar una serie de entradas. 
+
+Para realizar este estudio se ha creado un documento y se ha utilizado para
+construir colecciones con 10, 25, 50, 100 y 500 documentos iguales. Como es de
+esperar, el tiempo de procesamiento crece aproximadamente de manera lineal en
+función del número de documentos, como se puede observar en la tabla
+\ref{tab:longitud-colecciones}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ccc}
+ \hline \hline
+ \multicolumn{1}{c}{\textbf{Documentos}} &
+ \multicolumn{1}{c}{\textbf{Tiempo \small{(segundos)}}} &
+ \multicolumn{1}{c}{\textbf{Tiempo formateado \small{(aprox)}}} \\
+ \hline \hline
+ 10 & 31,488 & 0m 31s\\
+ \hline
+ 25 & 69,708 & 1m 9s\\
+ \hline
+ 50 & 133,932 & 2m 13s\\
+ \hline
+ 100 & 276,026 & 4m 36s\\
+ \hline
+ 500 & 1271,352 & 21m 11s\\
+ \hline \hline
+\end{tabular}
+\caption{Tiempo de procesamiento en función del número de documentos}
+\label{tab:longitud-colecciones}
+\end{center}
+\end{table}
