@@ -11,15 +11,14 @@ procesamiento. Por si el lector siente especial curiosidad, estas pruebas se
 han realizado en un \textit{AMD Athlon\texttrademark{} 64 X2 Dual Core
 Processor 3800+} corriendo Debian GNU/Linux.
 
-El tiempo de procesamiento depende tanto de, obviamente, el número de
-documentos a tratar y, en mayor medida, de la longitud media de las oraciones
-en los mismos por lo que, en las próximas secciones, se presentan sendos
-análisis desde los dos puntos de vista.
+El tiempo de procesamiento depende de el número de documentos a tratar y,
+en mayor medida, de la longitud media de las oraciones de los mismos. En las
+próximas secciones, se presentan sendos análisis desde los dos puntos de vista.
 
 \section{Análisis respecto al número de documentos}
 
 En el análisis de las colecciones, no es tan difícil predecir el tiempo que
-puede tardar en completarse en análisis si sólo tenemos en cuenta como variable
+puede tardar en completarse el análisis si sólo tenemos en cuenta como variable
 el número de documentos a analizar. Como veremos en la siguiente sección existe
 otra cuestión a tener en cuenta mucho más importante a la hora de medir lo que
 puede llevar procesar una serie de entradas. 
@@ -27,7 +26,7 @@ puede llevar procesar una serie de entradas.
 Para realizar este estudio se ha creado un documento y se ha utilizado para
 construir colecciones con 10, 25, 50, 100 y 500 documentos iguales. Como es de
 esperar, el tiempo de procesamiento crece aproximadamente de manera lineal en
-función al número de documentos, como se puede observar en la tabla
+función del número de documentos, como se puede observar en la tabla
 \ref{tab:longitud-colecciones}.
 
 \begin{table}
@@ -56,9 +55,11 @@ función al número de documentos, como se puede observar en la tabla
 
 \section{Análisis respecto a la longitud de las oraciones}
 
-Para esta prueba, se han construido colecciones de un sólo documento variando
-el tamaño medio de las oraciones que lo componen. En la tabla
-\ref{tab:longitud-oraciones} se presentan los resultados obtenidos.
+Para esta prueba, se han construido una serie de colecciones con un sólo
+documento formado por dieciocho oraciones. Cada una de esas colecciones
+varía el tamaño medio de las oraciones que componen el documento que hay en su
+interior. En la tabla \ref{tab:longitud-oraciones} se presentan los resultados
+obtenidos.
 
 \begin{table}
 \begin{center}
@@ -90,15 +91,15 @@ las oraciones casi triplica el tiempo de procesamiento.
 
 \section{Otros aspectos a tener en cuenta}
 
-Con vistas a realizar un análisis más exaustivo hay otras cuestiones que sería
-recomendable tener en cuenta a la hora de hacerlo. En primer lugar el estado de
-la base de datos es interesante, habría que estudiar el coste de las
+Con vistas a realizar un análisis más exhaustivo hay otras cuestiones que sería
+recomendable tener en cuenta. En primer lugar el estado de la base de datos es
+interesante, habría que estudiar el coste de las
 transacciones a realizar ya que no es siempre uniforme\footnote{Por ejemplo, no
 es lo mismo buscar una entrada en una tabla con un registro que con un millón}.
-Seguidamente, sería interesante buscar una máquina con carga media lo más
-cercana a cero, para logar un mayor rigor en las pruebas. Finalmente, también
-resultaría interesante disgregar en la medida de lo posible los tiempos totales
-en función de cada tarea que realiza el programa (filtros, análisis, etcétera).
+Seguidamente, también sería interesante buscar una máquina con carga media lo
+más cercana a cero, para logar un mayor rigor en las pruebas. Finalmente,
+también ayudaría disgregar en la medida de lo posible los tiempos totales en
+función de cada tarea que realiza el programa (filtros, análisis, etcétera).
 
 
 
