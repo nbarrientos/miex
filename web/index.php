@@ -156,7 +156,8 @@
         <div class="noteContent">
           <div class="title"><a name="legal">LEGAL STUFF</a></div>
 					<p><b>MIEX</b> is licensed under a <a href="http://www.gnu.org/copyleft/gpl.html">GPLv2 License</a>, 
-					otherwise <b>MIEX</b> works thanks to a set of third-party libraries detailed in the next list.</p>
+					otherwise <b>MIEX</b> works thanks to a set of third-party
+          libraries detailed in the following list.</p>
           <ul>
 						<li>Natural language parser: <a href="http://nlp.stanford.edu/software/lex-parser.shtml">Stanford Parser</a> (GPL).</li>
 						<li>Command line argument parser: <a href="http://www.martiansoftware.com/jsap/">JSAP</a> (LGPL - <a href="http://www.martiansoftware.com/jsap/license.html">see JSAP license notes</a>).</li>
