@@ -1,74 +1,213 @@
 \section{Base de datos}
 
-\subsection{Estructura}
+En esta sección se estudiará el proceso de construcción de la base de datos,
+desde la elaboración de un modelo entidad-relación hasta un pequeño estudio de
+normalización, pasando por el modelo relacional.
+
+\subsection{Diagrama Entidad-Relación}
 
 La figura \ref{fig:diagrama-e-r} representa el diagrama E-R de la base de datos
 que ha sido diseñada para almacenar toda la información extraída mediante el
-\textit{parser}. En ella se pueden ver en color naranja las entidades y en color
-marrón las relaciones. En el siguiente apartado se
-intentará explicar brevemente la utilidad de cada uno de estos elementos.
+\textit{parser}. En ella se pueden ver en color naranja las entidades, en color
+marrón las relaciones y en color verde/azul los atributos correspondientes.
 
-\begin{center}\begin{large}\underline{Entidades}\end{large}\end{center}
+En primer lugar, se procederá a explicar la utilidad de cada una de las
+entidades.
 
-\begin{description}
-\item [Word] 
-Palabras encontradas (en su norma normalizada o en su forma natural).
+\begin{tabular}{cp{12cm}}
+ \hline \hline
+ \multicolumn{1}{c}{\textbf{Entidad}} &
+ \multicolumn{1}{c}{\textbf{Descripción}} \\
+ \hline \hline
+ Word & 
+ Palabras encontradas (en su norma normalizada o en su forma natural)\\
+ \hline
+ Document & 
+ Documentos procesados, con su título (entidad débil, forma clave con
+ Collection).\\
+ \hline
+ DocType & 
+ Tipos de documentos posibles (hasta el momento TRAIN y TEST)\\
+ \hline
+ Collection & 
+ Colecciones completas procesadas y el nombre del fichero donde se encontraba.\\
+ \hline
+ Property &
+ Todos los tags posibles, a nivel de palabra, clausal, frasal o de relación
+ entre palabras.\\ 
+ \hline
+ PropertyList &
+ Listas de elementos de tipo Property, para guardar los análisis a nivel frasal
+ y clausal. \\
+ \hline
+ PropType &
+ Tipos de las propiedades (\begin{small}CLAUSE, WORD, PHRASE y
+ RELATIONSHIP\end{small}). \\
+ \hline
+ Category & 
+ Todas las categorías encontradas.\\
+ \hline
+ ParseElement &
+ Almacén para cada uno de los elementos del análisis extraídos del árbol
+ (ver figura \ref{fig:arbol-sintactico}).\\
+ \hline \hline
+\end{tabular}
 
-\item [Document]
-Documentos procesados, con su título (entidad débil, forma clave con
-Collection).
+Los atributos que contienen las entidades anteriores son los siguientes:
 
-\item [DocType]
-Tipos de documentos posibles (hasta el momento TRAIN y TEST). 
-
-\item [Collection]
-Colecciones completas procesadas y el nombre del fichero donde se encontraba.
-
-\item [Property]
-Todos los tags posibles, a nivel de palabra, clausal, frasal o de relación
-entre palabras.
-	
-\item [PropertyList]
-Listas de elementos de tipo Property, para guardar los análisis a nivel frasal
-y clausal.
-
-\item [PropType]
-Tipos de las propiedades (\begin{small}CLAUSE, WORD, PHRASE y
-RELATIONSHIP\end{small}).
-	
-\item [Category]
-Todas las categorías encontradas.
-
-\end{description}
-
-\begin{center}\begin{large}\underline{Relaciones}\end{large}\end{center}
+\begin{tabular}{cccl}
+ \hline \hline
+ \multicolumn{1}{c}{\textbf{Entidad}} &
+ \multicolumn{1}{c}{\textbf{Atributo}} &
+ \multicolumn{1}{c}{\textbf{Tipo}} &
+ \multicolumn{1}{c}{\textbf{Descripción}} \\
+ \hline \hline
+ Word & word\_id & int & Índice\\
+ \hline
+ & string & varchar & Contenedor de la palabra\\
+ \hline
+ Collection & collection\_id & int & Índice\\
+ \hline
+ & name & varchar & Nombre de la colección\\
+ \hline
+ Document & document\_id & int & Índice débil\\
+ \hline
+ & title & varchar & Título del documento\\
+ \hline
+ Doctype & doctype\_id & int & Índice\\
+ \hline
+ & string & varchar & Contenedor del nombre del tipo de documento\\
+ \hline
+ Category & category\_id & int & Índice\\
+ \hline
+ & string & varchar & Contenedor del nombre de la categoría\\
+ \hline
+ Property & property\_id & int & Índice\\
+ \hline
+ Property & string & varchar & Contenedor del nombre de la propiedad\\
+ \hline
+ & description & tinytext & Descripción de la propiedad\\
+ \hline
+ Proptype & proptype\_id & int & Índice\\
+ \hline
+ & string & varchar & Contenedor del nombre del tipo de la propiedad\\
+ \hline
+ PropertyList & propertylist\_id & int & Índice\\
+ \hline
+ & hashCode & char & Hash identificador de la lista\\
+ \hline
+ ParseElement & element\_id & int & Índice\\
+ \hline
+ & fromTitle & bool & 1 si el elemento pertenece al título del
+ documento\\
+ \hline
+ & normalized & bool & 1 si el elemento está normalizado\\
+ \hline \hline
+\end{tabular}
 
 La mayoría de relaciones son bastante obvias, con tan sólo echar un vistazo al
 diagrama entidad-relación se puede entender su utilidad. Por esa razón en este
-apartado sólo se van a comentar las dos que pueden resultar más complejas de
-ver.
+apartado sólo se van a comentar la relación \textit{Dependencies}, que puede
+ser la que necesite un poco más de explicación.
 
 \begin{description}
-
-\item [Parse tree]
-Las n-uplas generadas por esta relación contendrán toda la información
-referente a la estructura de las oraciones analizadas, es decir, las etiquetas
-asignadas a nivel de palabra, a nivel frasal y a nivel clausal.
 
 \item [Dependencies]
 Esta relación está diseñada para guardar los datos relativos a una parte de la
 información semántica extraída, en concreto las relaciones gramaticales entre
-las palabras (en forma de dependencias entre ellas).
+las palabras (véase la figura \ref{fig:relaciones-palabras}).
 
 \end{description}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[angle=90,scale=0.425]{images/build/bdd-e-r.pdf}
 \end{center}
 \caption{Diagrama entidad-relación de la base de datos}
 \label{fig:diagrama-e-r}
 \end{figure}
+
+\subsection{Modelo relacional}
+
+El paso a tablas del modelo E-R da lugar al modelo relacional, posteriormente
+utilizado para elaborar la lista de sentencias SQL necesarias para crear la
+base de datos.
+
+Para representarlo se utiliza la siguiente leyenda. Si un atributo está en
+\textbf{negrita} significa que forma parte de la clave primaria. Por otro lado,
+si un atributo está \underline{subrayado} quiere decir que es una clave ajena,
+que viene de la tabla que indica el superíndice.
+
+\subsubsection{Tablas simples}
+
+\noindent
+word = (\textbf{word\_id}, string)
+
+\noindent
+collection = (\textbf{collection\_id}, name)
+
+\noindent
+doctype = (\textbf{doctype\_id}, string)
+
+\noindent
+proptype = (\textbf{proptype\_id}, string)
+
+\noindent
+category = (\textbf{category\_id}, string)
+
+\noindent
+propertylist = (\textbf{propertylist\_id}, hashCode)
+
+% 1:N
+
+\subsubsection{Tablas que forman parte de relaciones 1:N}
+
+\noindent
+document = (\textbf{document\_id},
+\underline{\textbf{collection\_id}}$^{collection}$, 
+title,
+\underline{doctype\_id}$^{doctype}$)
+
+\noindent
+property = (\textbf{property\_id}, string, description,
+\underline{type\_id}$^{proptype}$)
+
+\noindent
+wordpropdoc = (\textbf{propproplist\_id},
+\underline{word\_id}$^{word}$,
+\underline{property\_id}$^{property}$,
+\underline{document\_id}$^{document}$, 
+\underline{collection\_id}$^{document}$,
+\underline{list\_id}$^{propertylist}$,
+fromTitle,
+normalized)
+
+%N:M
+
+\subsubsection{Tablas nuevas geneneradas por relaciones del tipo N:M}
+
+\noindent
+doccat = (\underline{\textbf{category\_id}}$^{category}$, 
+\underline{\textbf{document\_id}}$^{document}$, 
+\underline{\textbf{collection\_id}}$^{document}$)
+
+\noindent
+wordwordpropdoc = (\underline{\textbf{masterWord\_id}}$^{word}$,
+\underline{\textbf{slaveWord\_id}}$^{word}$,
+\underline{\textbf{property\_id}}$^{property}$,
+\underline{\textbf{document\_id}}$^{document}$,
+\underline{\textbf{collection\_id}}$^{document}$,
+\textbf{fromTitle},
+\textbf{normalized},
+times)
+
+\noindent
+propproplist = (\underline{\textbf{list\_id}}$^{propertylist}$,
+\underline{\textbf{prop\_id}}$^{property}$)
+
+\subsection{Normalización}
+
+¿Elena? FIXME
 
 \subsection{Generación de la base de datos}
 
@@ -79,10 +218,6 @@ opción \textit{CreateDB} del fichero de configuración).
 En el directorio \url{share/sql} está situado el fichero de sentencias SQL
 necesario para construir la base de datos que se comenta en esta sección, así
 como para insertar una serie de datos estáticos necesarios.
-
-\subsection{Normalización}
-
-¿Elena? FIXME
 
 \subsection{Vistas}
 
