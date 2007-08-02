@@ -14,10 +14,13 @@ marrón las relaciones y en color verde/azul los atributos correspondientes.
 En primer lugar, se procederá a explicar la utilidad de cada una de las
 entidades.
 
-\begin{tabular}{cp{12cm}}
+\subsubsection{Entidades}
+
+\noindent
+\begin{tabular}{rp{12cm}}
  \hline \hline
  \multicolumn{1}{c}{\textbf{Entidad}} &
- \multicolumn{1}{c}{\textbf{Descripción}} \\
+ \multicolumn{1}{c}{\textbf{Información que almacena}} \\
  \hline \hline
  Word & 
  Palabras encontradas (en su norma normalizada o en su forma natural)\\
@@ -38,7 +41,9 @@ entidades.
  \hline
  PropertyList &
  Listas de elementos de tipo Property, para guardar los análisis a nivel frasal
- y clausal. \\
+ y clausal. En el ejemplo de la figura \ref{fig:arbol-sintactico}, tomando la
+ palabra \textit{Debian}, la lista de propiedades a guardar sería \textit{S NP} 
+ \\
  \hline
  PropType &
  Tipos de las propiedades (\begin{small}CLAUSE, WORD, PHRASE y
@@ -48,13 +53,17 @@ entidades.
  Todas las categorías encontradas.\\
  \hline
  ParseElement &
- Almacén para cada uno de los elementos del análisis extraídos del árbol
- (ver figura \ref{fig:arbol-sintactico}).\\
+ Almacén para cada uno de los elementos del análisis extraídos del árbol, tanto
+ a nivel clausal y frasal (ver PropertyList), como a nivel de palabra (ver
+ Property).\\
  \hline \hline
 \end{tabular}
 
+\subsubsection{Atributos}
+
 Los atributos que contienen las entidades anteriores son los siguientes:
 
+\noindent
 \begin{tabular}{cccl}
  \hline \hline
  \multicolumn{1}{c}{\textbf{Entidad}} &
@@ -84,7 +93,7 @@ Los atributos que contienen las entidades anteriores son los siguientes:
  \hline
  Property & property\_id & int & Índice\\
  \hline
- Property & string & varchar & Contenedor del nombre de la propiedad\\
+ & string & varchar & Contenedor del nombre de la propiedad\\
  \hline
  & description & tinytext & Descripción de la propiedad\\
  \hline
@@ -105,6 +114,8 @@ Los atributos que contienen las entidades anteriores son los siguientes:
  \hline \hline
 \end{tabular}
 
+\subsubsection{Relaciones}
+
 La mayoría de relaciones son bastante obvias, con tan sólo echar un vistazo al
 diagrama entidad-relación se puede entender su utilidad. Por esa razón en este
 apartado sólo se van a comentar la relación \textit{Dependencies}, que puede
@@ -119,7 +130,7 @@ las palabras (véase la figura \ref{fig:relaciones-palabras}).
 
 \end{description}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{center}
 \includegraphics[angle=90,scale=0.425]{images/build/bdd-e-r.pdf}
 \end{center}
@@ -129,11 +140,11 @@ las palabras (véase la figura \ref{fig:relaciones-palabras}).
 
 \subsection{Modelo relacional}
 
-El paso a tablas del modelo E-R da lugar al modelo relacional, posteriormente
-utilizado para elaborar la lista de sentencias SQL necesarias para crear la
-base de datos.
+El modelo relacional es el paso siguiente a realizar una vez hecho el diagrama
+E-R, necesario para posteriormente hacer el paso a tablas y crear la lista de
+sentencias SQL necesarias para crear la base de datos.
 
-Para representarlo se utiliza la siguiente leyenda. Si un atributo está en
+Para representarlo he utilizado las siguientes reglas. Si un atributo está en
 \textbf{negrita} significa que forma parte de la clave primaria. Por otro lado,
 si un atributo está \underline{subrayado} quiere decir que es una clave ajena,
 que viene de la tabla que indica el superíndice.
