@@ -11,10 +11,12 @@ que ha sido diseñada para almacenar toda la información extraída mediante el
 \textit{parser}. En ella se pueden ver en color naranja las entidades, en color
 marrón las relaciones y en color verde/azul los atributos correspondientes.
 
+\subsubsection{Entidades}
+
 En primer lugar, se procederá a explicar la utilidad de cada una de las
 entidades.
 
-\subsubsection{Entidades}
+\hyphenation{RE-LA-TION-SHIP}
 
 \noindent
 \begin{tabular}{rp{12cm}}
@@ -61,7 +63,8 @@ entidades.
 
 \subsubsection{Atributos}
 
-Los atributos que contienen las entidades anteriores son los siguientes:
+Los atributos que contienen las entidades anteriores son los siguientes (se
+excluyen aquellos que son utilizados como índice):
 
 \noindent
 \begin{tabular}{cccl}
@@ -71,46 +74,46 @@ Los atributos que contienen las entidades anteriores son los siguientes:
  \multicolumn{1}{c}{\textbf{Tipo}} &
  \multicolumn{1}{c}{\textbf{Descripción}} \\
  \hline \hline
- Word & word\_id & int & Índice\\
+ %Word & word\_id & int & Índice\\
+ %\hline
+ Word & string & varchar & Contenedor de la palabra\\
+ %\hline
+ %Collection & collection\_id & int & Índice\\
  \hline
- & string & varchar & Contenedor de la palabra\\
+ Collection & name & varchar & Nombre de la colección\\
  \hline
- Collection & collection\_id & int & Índice\\
+ %Document & document\_id & int & Índice débil\\
+ %\hline
+ Document & title & varchar & Título del documento\\
  \hline
- & name & varchar & Nombre de la colección\\
+ %Doctype & doctype\_id & int & Índice\\
+ %\hline
+ Doctype & string & varchar & Contenedor del nombre del tipo de documento\\
  \hline
- Document & document\_id & int & Índice débil\\
+ %Category & category\_id & int & Índice\\
+ %\hline
+ Category & string & varchar & Contenedor del nombre de la categoría\\
  \hline
- & title & varchar & Título del documento\\
+ %Property & property\_id & int & Índice\\
+ %\hline
+ Property & string & varchar & Contenedor del nombre de la propiedad\\
  \hline
- Doctype & doctype\_id & int & Índice\\
+ Property & description & tinytext & Descripción de la propiedad\\
  \hline
- & string & varchar & Contenedor del nombre del tipo de documento\\
+ %Proptype & proptype\_id & int & Índice\\
+ %\hline
+ Proptype & string & varchar & Contenedor del nombre del tipo de la propiedad\\
  \hline
- Category & category\_id & int & Índice\\
+ %PropertyList & propertylist\_id & int & Índice\\
+ %\hline
+ PropertyList & hashCode & char & Hash identificador de la lista\\
  \hline
- & string & varchar & Contenedor del nombre de la categoría\\
- \hline
- Property & property\_id & int & Índice\\
- \hline
- & string & varchar & Contenedor del nombre de la propiedad\\
- \hline
- & description & tinytext & Descripción de la propiedad\\
- \hline
- Proptype & proptype\_id & int & Índice\\
- \hline
- & string & varchar & Contenedor del nombre del tipo de la propiedad\\
- \hline
- PropertyList & propertylist\_id & int & Índice\\
- \hline
- & hashCode & char & Hash identificador de la lista\\
- \hline
- ParseElement & element\_id & int & Índice\\
- \hline
- & fromTitle & bool & 1 si el elemento pertenece al título del
+ %ParseElement & element\_id & int & Índice\\
+ %\hline
+ ParseElement & fromTitle & bool & 1 si el elemento pertenece al título del
  documento\\
  \hline
- & normalized & bool & 1 si el elemento está normalizado\\
+ ParseElement & normalized & bool & 1 si el elemento está normalizado\\
  \hline \hline
 \end{tabular}
 
@@ -118,17 +121,15 @@ Los atributos que contienen las entidades anteriores son los siguientes:
 
 La mayoría de relaciones son bastante obvias, con tan sólo echar un vistazo al
 diagrama entidad-relación se puede entender su utilidad. Por esa razón en este
-apartado sólo se van a comentar la relación \textit{Dependencies}, que puede
-ser la que necesite un poco más de explicación.
+apartado sólo se van a comentar la relación llamada \textit{dependencies}, que
+puede ser la que necesite un poco más de explicación.
 
-\begin{description}
-
-\item [Dependencies]
-Esta relación está diseñada para guardar los datos relativos a una parte de la
-información semántica extraída, en concreto las relaciones gramaticales entre
-las palabras (véase la figura \ref{fig:relaciones-palabras}).
-
-\end{description}
+La relación \textit{dependencies} está diseñada para guardar los datos relativos
+a una parte de la información semántica extraída, en concreto las relaciones
+gramaticales entre las palabras (véase la figura
+\ref{fig:relaciones-palabras}). Como se puede observar en el diagrama E-R, es
+necesario conocer que pareja de palabras está relacionada, así como que
+propiedad las relaciona.
 
 \begin{figure}[h]
 \begin{center}
