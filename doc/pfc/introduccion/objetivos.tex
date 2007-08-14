@@ -1,72 +1,22 @@
 \section{Objetivos}
 
-Entre otros, el principal objetivo de MIEX es analizar sintáctica y
+De manera abstracta, el propósito de MIEX es analizar sintáctica y
 semánticamente colecciones de pequeños documentos escritos en inglés.
 
-Aprovechando las capacidades del analizador (Stanford Parser) se realizan dos
-tipos de análisis. En primer lugar un análisis sintáctico de la oración y
-posteriormente un análisis semántico con el fin de obtener las relaciones entre
-las palabras de cada una de las oraciones. La mejor manera de ilustrar estos
-conceptos es utilizando un pequeño ejemplo, por lo que veamos que análisis
-produce el analizador para la siguiente oración.
-
-\begin{center}
-\textit{The Debian Project is an association of individuals.}
-\end{center}
-
-Si bien la representación gráfica del análisis es más habitual hacerla de la
-forma clásica (subrayando cada elemento de la oración), la manera más visual y
-lógica es utilizar un árbol (figura \ref{fig:arbol-sintactico}).
-
-\begin{figure}[h]
-\centering
-\Tree[.ROOT [.S [.NP [.DT The ] [.NNP Debian ] [.NNP Project ] ] [.VP [.VBZ is
-] [.NP [.NP [.DT an ] [.NN association ] ] [.PP [.IN of ] [.NP [.NNS individuals
- ] ] ] ] ] ] ]
-\caption{Ejemplo de representación en forma de árbol de un análisis sintáctico}
-\label{fig:arbol-sintactico}
-\end{figure} 
- 
-Se puede apreciar como se asignan etiquetas a nivel de palabra, a nivel de
-grupo frasal y a nivel clausal, tal y como se hace habitualmente en cualquier
-análisis sintáctico. Si desea conocer el significado de cada etiqueta no tiene
-más que echar un vistazo a los apéndices \ref{cha:penntags} y
-\ref{cha:gramrelations}. Aprovecharemos también que el analizador calcula las
-dependencias entre algunas palabras de la oración
-(figura \ref{fig:relaciones-palabras}).
-
-\begin{figure}[h]
-\centering
-\begin{Verbatim}[frame=single,framesep=10pt,fontsize=\relsize{-1}]
-det(Project-3, The-1)
-nn(Project-3, Debian-2)
-nsubj(association-6, Project-3)
-cop(association-6, is-4)
-det(association-6, an-5)
-prep_of(association-6, individuals-8)
-\end{Verbatim}
-\caption{Ejemplo de representación de relaciones entre palabras de una oración}
-\label{fig:relaciones-palabras}
-\end{figure}
-
-Tanto el análisis a nivel de palabra (y obviamente a nivel de grupo), como las
-relaciones entre las palabras, será la información que nos va a interesar
-guardar más adelante.
-
 Aunque en el siguiente capítulo se explica con más detalle cada uno de los
-pasos en los que se divide la ejecución, una visión global de los objetivos que
-cumple MIEX es la siguiente:
+pasos en los que se divide la ejecución y las posibilidades de la aplicación,
+una visión global de los objetivos que tiene este proyecto es la siguiente:
 
 \begin{itemize}
 	\item Comprobación de integridad y análisis de documentos XML.
-	\item Uso del Stanford Parser para extraer los análisis
-sintácticos de las oraciones así como las relaciones entre las palabras.
+	\item Uso del Stanford Parser para extraer los análisis de cada una
+de las oraciones así como las relaciones entre las palabras.
 	\item Análisis y limpieza de la información recabada.
 	\item Almacenamiento en un medio flexible para posteriormente realizar
 consultas a medida.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[bb=0 0 148 240]{images/miex.png}
 \end{center}
