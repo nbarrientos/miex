@@ -150,7 +150,7 @@ Para representarlo he utilizado las siguientes reglas. Si un atributo está en
 si un atributo está \underline{subrayado} quiere decir que es una clave ajena,
 que viene de la tabla que indica el superíndice.
 
-\subsubsection{Tablas simples}
+\subsubsection{Tablas generadas a partir de entidades}
 
 \noindent
 word = (\textbf{word\_id}, string)
@@ -172,8 +172,6 @@ propertylist = (\textbf{propertylist\_id}, hashCode)
 
 % 1:N
 
-\subsubsection{Tablas que forman parte de relaciones 1:N}
-
 \noindent
 document = (\textbf{document\_id},
 \underline{\textbf{collection\_id}}$^{collection}$, 
@@ -188,7 +186,7 @@ property = (\textbf{property\_id}, string, description,
 wordpropdoc = (\textbf{propproplist\_id},
 \underline{word\_id}$^{word}$,
 \underline{property\_id}$^{property}$,
-\underline{document\_id}$^{document}$, 
+\underline{document\_id}$^{document}$,\\
 \underline{collection\_id}$^{document}$,
 \underline{list\_id}$^{propertylist}$,
 fromTitle,
@@ -196,7 +194,7 @@ normalized)
 
 %N:M
 
-\subsubsection{Tablas nuevas geneneradas por relaciones del tipo N:M}
+\subsubsection{Tablas generadas a partir de relaciones}
 
 \noindent
 doccat = (\underline{\textbf{category\_id}}$^{category}$, 
