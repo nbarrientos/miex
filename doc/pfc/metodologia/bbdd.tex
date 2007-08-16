@@ -121,7 +121,7 @@ excluyen aquellos que son utilizados como índice):
 
 La mayoría de relaciones son bastante obvias, con tan sólo echar un vistazo al
 diagrama entidad-relación se puede entender su utilidad. Por esa razón en este
-apartado sólo se van a comentar la relación llamada \textit{dependencies}, que
+apartado sólo se va a comentar la relación llamada \textit{dependencies}, que
 puede ser la que necesite un poco más de explicación.
 
 La relación \textit{dependencies} está diseñada para guardar los datos relativos
@@ -217,7 +217,17 @@ propproplist = (\underline{\textbf{list\_id}}$^{propertylist}$,
 
 \subsection{Normalización}
 
-¿Elena? FIXME
+Las tablas que sólo tienen dos atributos y uno de ellos es clave alcanzan
+FNBC\footnote{Forma Normal de Boyce-Codd} ya que, están en 3FN\footnote{Tercera
+Forma Normal} y en la única dependencia funcional existente el antecedente es
+clave primaria.
+
+Las tablas en las que todos sus atributos son clave primaria (doccat y
+propproplist) están en FNBC.
+
+Ya que no existe dependencia funcional entre los atributos no principales y
+todas las dependencias que se cumplen tienen como antecedente superclave las
+tablas restantes están en FNBC.
 
 \subsection{Generación de la base de datos}
 
