@@ -1,7 +1,7 @@
 QUICK START
 ===========
 
- a) Download the required libraries and build tools.
+ a) Download and install the required libraries and build tools.
 
   * J2SE (JRE+JDK) (>= 5.0) <http://java.sun.com/javase/>
   * Stanford Parser (>= 2006-06-11) <http://nlp.stanford.edu/>

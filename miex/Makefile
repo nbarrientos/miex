@@ -7,7 +7,7 @@
 # Targets:
 #  - miex: Builds all .java files and stores .class into lib/miex.jar using jar
 #  - doc: Creates javadoc for all packages listed in PACKAGES.
-#  - install: Installs MIEX into PREFIX (you probably will need run this target as root)
+#  - install: Installs MIEX into PREFIX (you will probably need run this target as root)
 #
 # Nacho Barrientos Arias <nacho@criptonita.com>
 
