@@ -6,8 +6,8 @@ línea de comandos, como a través del fichero de configuración. Seguidamente, se
 comprueba la validez de los ficheros que el usuario demanda procesar.
 Obligatoriamente se eliminan ficheros que no existen y, si el usuario así lo
 solicita, los ficheros que no cumplan el \textit{schema} seleccionado. Para
-finalizar este primer bloque de acciones, si después de los filtros anteriores,
-existen ficheros que procesar se crea una nueva base de datos, si así se
+finalizar este primer bloque de acciones, si después de los filtros anteriores
+existen ficheros que procesar, se crea una nueva base de datos, si así se
 hubiese especificado en el fichero de configuración.
 
 Si todo ha ido bien, se procede con el análisis de las colecciones siguiendo el
@@ -31,7 +31,7 @@ words}\footnote{http://en.wikipedia.org/wiki/Stop\_words}) y eliminar elementos
 inútiles del análisis, por ejemplo, signos de puntuación.
 
 Como se observa en los pasos finales, también es opcional la normalización de
-las palabras analizadas. Básicamente el proceso de normalización se trata de
+las palabras analizadas. Básicamente el proceso de normalización consiste en
 aplicar el conocido algoritmo de Porter (en inglés, \textit{Porter
 Stemmer algorithm}\footnote{http://en.wikipedia.org/wiki/Stemming}). De cara a
 analizar los resultados posteriormente, una palabra normalizada de una que no lo
