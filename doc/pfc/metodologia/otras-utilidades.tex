@@ -3,20 +3,20 @@
 \subsection{Scripts de transformación}
 
 Aunque estos scripts tienen una funcionalidad muy concreta y han sido diseñados
-para un caso de uso muy especial se distribuyen igualmente por si resultaran
+para un caso de uso muy especial, se distribuyen igualmente por si resultaran
 necesarios. \textbf{No los utilice si no sabe bien lo que está haciendo.}
 
 Durante el periodo de pruebas se detectó la existencia de algunos ficheros de
-entrada que no estaban bien formados, por lo que el analizador no los era capaz
-de tratar correctamente. El script llamado \textbf{\texttt{fixxml.sh}}, situado
-en el directorio \texttt{misc/transformation} y dependiente de \textbf{gawk}
-toma como argumento la ruta de un fichero a arreglar e imprime el fichero
-correcto por la salida estándar.
+entrada que no estaban bien formados, por lo que el analizador no era capaz
+de tratarlos correctamente. El script llamado \textbf{\texttt{fixxml.sh}},
+situado en el directorio \texttt{misc/transformation} y dependiente de
+\textbf{gawk} toma como argumento la ruta de un fichero a arreglar e imprime el
+fichero correcto por la salida estándar.
 
 Los errores que éste script arregla son los siguientes:
 
 \begin{itemize}
-\item Añade un nodo raíz al ficheros de colección (\texttt{<collection>} y
+\item Añade un nodo raíz al fichero de colección (\texttt{<collection>} y
 \texttt{</collection>})
 
 \item Finaliza correctamente las etiquetas de las secciones
