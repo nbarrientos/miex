@@ -41,25 +41,27 @@ Las opciones de configuración existentes hasta la fecha son las siguientes:
 # Validate
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     Tries to validate each collection file using XML Schema.
+#   Desc:     Tries to validate each collection using the provided Schema.
 #   See also: XMLschemaURI
 
 # XMLschemaURI
 #   Type:     String
 #   Default:  /usr/share/miex/schemas/default.xsd
-#   Desc:     Path to a XML Schema used to validate XML inputs.
+#   Desc:     Path to a XML Schema used later to validate input files.
 #   See also: Validate
 
 # GrammarURI
 #   Type:     String
 #   Default:  /usr/share/miex/grammars/englishPCFG.ser.gz
-#   Desc:     Path to a grammar file, usually shipped with the S. Parser.
+#   Desc:     Path to a grammar file, usually shipped along with 
+#             the Stanford Parser.
 #   See also: -
 
 # Dump
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     Creates one file per category containing sentences.
+#   Desc:     Creates one file per category containing its respective 
+#             sentences.
 #   See also: DumpDir, SkipProcessing
 
 # DumpDir
@@ -71,30 +73,29 @@ Las opciones de configuración existentes hasta la fecha son las siguientes:
 # SkipProcessing
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     Stops the processing after create the per-category files and
-#             every SQL injection.
-#             This setting only makes sense whether Dump is set to Yes.
+#   Desc:     Stops the processing after create the per-category files.
+#             (This setting only would make sense whether Dump is set 
+#             to Yes).
 #   See also: Dump, DumpDir
 
 # CreateDB
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     Injects the template sql file into the database before 
-#             do any insert. USE CAREFULLY.
+#   Desc:     Creates the DB from scratch before start processing the 
+#             input. USE CAREFULLY.
 #   See also: SQLSkeleton
 
 # SQLSkeleton
 #   Type:     String
 #   Default:  /usr/share/miex/sql/skeleton.sql
-#   Desc:     Path to a SQL file containing the statements to create 
-#             a empty DB
+#   Desc:     Path to a text file containing the statements to create 
+#             an empty DB.
 #   See also: CreateDB
 
 # Normalize
 #   Type:     Yes/No (boolean)
 #   Default:  No
-#   Desc:     If 'Yes' MIEX uses Porter and inserts normalized 
-#             words as well.
+#   Desc:     Activates Porter support and saves normalized words as well.
 #   See also: -
 \end{Verbatim}
 
