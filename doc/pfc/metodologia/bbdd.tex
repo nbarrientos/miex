@@ -219,12 +219,12 @@ propproplist = (\underline{\textbf{list\_id}}$^{propertylist}$,
 \subsection{Normalización}
 
 Las tablas que sólo tienen dos atributos y uno de ellos es clave alcanzan
-FNBC\footnote{Forma Normal de Boyce-Codd} ya que, están en 3FN\footnote{Tercera
-Forma Normal} y en la única dependencia funcional existente el antecedente es
-clave primaria.
+FNBC\footnote{Forma Normal de Boyce-Codd} ya que, en la única dependencia
+funcional existente, el antecedente es clave primaria.
 
 Las tablas en las que todos sus atributos son clave primaria (doccat y
-propproplist) están en FNBC.
+propproplist) están en FNBC, puesto que las únicas dependencias que se cumplen
+son las dependencias triviales.
 
 Ya que no existe dependencia funcional entre los atributos no principales y
 todas las dependencias que se cumplen tienen como antecedente superclave, las
