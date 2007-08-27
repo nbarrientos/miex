@@ -1,0 +1,72 @@
+% Variables
+\newcommand{\TituloPFC}{Extracción de información de documentos XML mediante
+Stanford Parser}
+\newcommand{\TituloPFCWeb}{MIEX: Metadata and Information Extractor from small
+XML documents}
+\newcommand{\AutorPFC}{Ignacio Barrientos Arias}
+\newcommand{\DirectorPFC}{Susana Irene Díaz Rodríguez}
+\newcommand{\CoDirectorPFC}{Elena Montañés Roces}
+\newcommand{\Escuela}{Escuela Universitaria de Ingeniería Técnica Informática
+de Gijón}
+\newcommand{\Universidad}{Universidad de Oviedo}
+\newcommand{\Convocatoria}{SEPTIEMBRE 2007}
+
+% Cabeceras
+\headheight 15pt
+
+% Bibliografía al índice!
+\let\OLDthebibliography=\thebibliography
+\def\thebibliography#1{\OLDthebibliography{#1}
+	\addcontentsline{toc}{chapter}{\bibname}}
+	
+% Self-explaining
+\bibliographystyle{plain}
+
+%colores
+\definecolor{darkred}{rgb}{0.5, 0, 0}
+\definecolor{violet}{rgb}{1, 0, 1}
+\definecolor{green}{rgb}{0.3, 0.95, 0.3}
+\definecolor{listinggray}{gray}{0.97}
+
+%listings
+\lstset
+{
+	basewidth=0.50em,
+	backgroundcolor=\color{listinggray},
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bfseries,
+	stringstyle=\itshape,
+	commentstyle=\itshape,
+	showspaces=false,
+	showtabs=false,
+	showstringspaces=false,
+	frame=trbl,
+	extendedchars=true,
+	%aboveskip=0.5cm,
+	%belowskip=0.5cm,
+	xleftmargin=0cm,
+	xrightmargin=0cm,
+	tabsize=1,
+	numbers=left, 
+	numberstyle=\small,
+	stepnumber=9,
+	numbersep=5pt
+}
+
+\parskip   \medskipamount
+
+% Titlesec
+\titleformat{\chapter}[frame]
+  {\fontfamily{phv}}
+  {\filright\large\enspace \chaptertitlename \enspace \thechapter\enspace}
+  {8pt}
+  {\huge\bfseries\filcenter}
+\titleformat{\section}
+ {\normalfont\selectfont\large}
+ {\thesection}{1em}{\bfseries}[\titlerule]
+\titleformat{\section}
+  {\fontfamily{phv}\selectfont\Large}
+  {\thesection}{1em}{\bfseries}[\titlerule]
+\titleformat{\subsection}
+  {\fontfamily{phv}\selectfont\large}
+  {\thesubsection}{1em}{\bfseries}

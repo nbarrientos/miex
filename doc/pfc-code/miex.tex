@@ -1,0 +1,98 @@
+%\documentclass[spanish,a4paper,12pt,twosides]{book}
+\documentclass[spanish,a4paper,12pt,oneside]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{times}
+\usepackage{babel}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{array}
+\usepackage{fancyvrb}
+\usepackage{relsize}
+%\usepackage{eurosym}
+%\usepackage[strict]{chngpage}
+\usepackage{qtree}
+\usepackage{longtable}
+\usepackage{cite}
+\usepackage{titlesec}
+
+\pagestyle{headings}
+
+\input{config.tex}
+
+% Definición de macros para las portadas
+\input{portadas.tex}
+
+\title{\TituloPFC}
+\author{\AutorPFC}
+\date{Septiembre de 2007}
+
+\begin{document}
+
+% Arabic page numbers before the main content
+\frontmatter
+
+% Crear portadas
+\maketitle
+
+\chapter*{Aviso legal}
+
+Copyleft 2007\hspace{2px}\textendash\hspace{2px}\AutorPFC{}
+
+El código fuente de todo el software escrito por el autor de este proyecto, al
+que se hace referencia en numerosas ocasiones a lo largo de esta documentación,
+se encuentra bajo la licencia \emph{GNU General Public License (GPL)}, versión 2
+(apéndice \ref{sec:license.gpl}). Las fuentes necesarias para generar la
+documentación se liberan bajo la misma licencia que el código fuente del
+programa.
+
+\input{alcance.tex}
+
+\input{agradecimientos.tex}
+
+\input{prologo.tex}
+
+\cleardoublepage
+
+\input{dedicatoria.tex}
+
+\tableofcontents
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+\listoftables
+
+\newpage
+
+% Main stuff
+\mainmatter
+
+\input{introduccion.tex}
+
+\input{metodologia.tex}
+
+\input{experimentacion.tex}
+
+\input{manual.tex}
+
+\input{conclusiones.tex}
+
+\appendix
+
+\input{apendices.tex}
+
+\bibliography{bibliografia}
+
+\end{document}
