@@ -13,11 +13,13 @@ de Gijón}
 {/home/nacho/devel/pfc/svn/trunk/miex/src/es/uniovi/aic/miex/}
 \newcommand{\trunkpath}
 {/home/nacho/devel/pfc/svn/trunk/miex/}
+\newcommand{\pfctrunkpath}
+{/home/nacho/devel/pfc/svn/trunk/doc/pfc}
 \newcommand{\codeversion}
 {0.1.0}
 
 % Some colour definitions
-\definecolor{listinggray}{gray}{0.97}
+\definecolor{listinggray}{gray}{0.98}
 
 % Cabeceras
 \headheight 15pt
@@ -43,10 +45,11 @@ de Gijón}
 	tabsize=1,
 	numbers=left, 
 	numberstyle=\small,
-	stepnumber=9,
+	stepnumber=5,
 	numbersep=5pt
 }
 
+% Separation among paragraphs
 \parskip  \medskipamount
 
 % Titlesec
@@ -64,3 +67,15 @@ de Gijón}
 \titleformat{\subsection}
   {\fontfamily{phv}\selectfont\large}
   {\thesubsection}{1em}{\bfseries}
+
+% Tweak to dynamically change the margin using a faked environment
+\newenvironment{changemargin}[2]{
+  \begin{list}{}{
+    \setlength{\topsep}{0pt}
+    \setlength{\leftmargin}{#1}
+    \setlength{\rightmargin}{#2}
+    \setlength{\listparindent}{\parindent}
+    \setlength{\itemindent}{\parindent}
+    \setlength{\parsep}{\parskip}
+  }
+\item[]}{\end{list}}
