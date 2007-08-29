@@ -35,7 +35,8 @@ JAVADOCDOCTITLE = 'MIEX: Metadata and Information Extractor from small XML docum
 JAVADOCOPTIONS = -classpath $(CLASSPATH) -sourcepath $(JAVADOCSRCPATH) \
 								 -windowtitle "MIEX v$(MIEXVERSION) API Specification" \
 								 -doctitle "MIEX v$(MIEXVERSION) API Specification" \
-								 -link "http://java.sun.com/javase/6/docs/api"
+								 -link "http://java.sun.com/javase/6/docs/api" \
+								 -package
 
 # Jar options
 JAR = jar
