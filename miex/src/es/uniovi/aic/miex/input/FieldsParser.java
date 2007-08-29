@@ -24,7 +24,7 @@ public class FieldsParser
    * Runs the parser over a file 
    * 
    * @param targetFileURI The file to parse
-   * @return a MyCollection instace with the parsed information
+   * @return a MyCollection instace with the extracted information
    */
   public MyCollection run(File targetFileURI)
   {

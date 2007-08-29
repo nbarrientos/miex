@@ -45,7 +45,7 @@ public class ConfigCMDLine
    * 
    * @param arguments The line of arguments 
    * @return False If any argument is missing or a weird argument is found 
-   * @throws JSAPException If something weird happens with in the parse process 
+   * @throws JSAPException If something weird happens in the parse process 
    */
   private boolean parse(String[] arguments) throws JSAPException
   {

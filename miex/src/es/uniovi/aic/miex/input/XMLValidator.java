@@ -8,7 +8,7 @@ import javax.xml.validation.*;
 import javax.xml.XMLConstants;
 
 /** 
- * Determines whether a XML file matches a XML Schema 
+ * Determines whether a XML file matches a XML Schema or not 
  * 
  * @author Nacho Barrientos Arias <chipi@criptonita.com>
  * @version 0.1
@@ -52,7 +52,6 @@ public class XMLValidator
      */
     public boolean validate(File targetFileURI)
     {
-        // Parse the document you want to check.
         Source source = new StreamSource(targetFileURI);
 
         // Check the document

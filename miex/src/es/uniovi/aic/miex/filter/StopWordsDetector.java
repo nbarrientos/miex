@@ -128,7 +128,7 @@ class StopWordsDetector
    * Determines whether a dependency contains stop words or not 
    * 
    * @param dep The dependency to look inside for stop words
-   * @return true if it's clean (i.e.:does not contain stop words)
+   * @return true if it's clean (i.e. does not contain stop words)
    */
   public boolean isCleanDep(TypedDependency dep)
   {

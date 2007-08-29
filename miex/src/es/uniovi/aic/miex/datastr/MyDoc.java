@@ -40,7 +40,7 @@ public class MyDoc
   }
 
   /** 
-   * 
+   *  
    * 
    * @param rhs The string to set the body to
    */

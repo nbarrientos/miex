@@ -10,7 +10,7 @@ import java.util.Stack;
 
 
 /** 
- * Implements XML parser' behaviour 
+ * Implements parser' behaviour 
  * 
  * @author Nacho Barrientos Arias <chipi@criptonita.com>
  * @version 0.1

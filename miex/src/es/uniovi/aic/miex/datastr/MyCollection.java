@@ -13,7 +13,7 @@ public class MyCollection
 {
 
   /** 
-   * Creates and empty collection 
+   * Creates an empty collection 
    */
   public MyCollection()
   {
@@ -31,7 +31,7 @@ public class MyCollection
   }
 
   /** 
-   *  
+   * Iterator factory 
    * 
    * @return An iterator over the list containing the docs of the
    * collection

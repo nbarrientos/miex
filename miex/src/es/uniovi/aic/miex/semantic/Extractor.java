@@ -23,7 +23,7 @@ import edu.stanford.nlp.ling.Sentence;
 import es.uniovi.aic.miex.datastr.ExtendedTaggedWord;
 
 /** 
- * A handler for all sematic issues 
+ * A handler for all the sematic issues 
  * 
  * @author Nacho Barrientos Arias <chipi@criptonita.com>
  * @version 0.1
@@ -115,7 +115,7 @@ public class Extractor
   public ArrayList<ExtendedTaggedWord> getProperties(List sentence)
   throws Exception
   {
-    // IMPORTANT: Refreshing the parse with the current sentence
+    // WARNING: Refreshing the parse with the current sentence
     letsGetParseReady(sentence);
 
     return myTaggedYield();
@@ -123,7 +123,7 @@ public class Extractor
 
   /**
    * Gets a special TaggedYield with phrase and clause level tags in
-   * addiction to the word level tags from the CURRENT stored parse
+   * addition to the word level tags from the CURRENTLY stored parse
    * tree
    *
    * @param t The target object to store the captured information

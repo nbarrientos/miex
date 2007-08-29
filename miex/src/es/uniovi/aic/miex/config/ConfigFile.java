@@ -25,7 +25,7 @@ public class ConfigFile
 
   /** 
    * Creates the object, reads the configuration file and checks
-   * if it's in a good shape. 
+   * whether it is in a good shape. 
    * 
    * @param fileName Path to the configuration file to read 
    */
@@ -61,7 +61,7 @@ public class ConfigFile
         System.exit(-1);
       }
     
-    // Looking for wrong set boolean fields
+    // Looking for wrong boolean fields
     for(int i=0; i < configFileBooleanFields.length; i++)
       try
       {

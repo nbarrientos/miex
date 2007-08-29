@@ -11,7 +11,8 @@ package es.uniovi.aic.miex.datastr;
 import java.util.ArrayList;
 
 /** 
- * A model to represent a set of categories from a document 
+ * A model to represent a set of categories where a document 
+ * should be categorized into. 
  * 
  * @author Nacho Barrientos Arias <chipi@criptonita.com>
  * @version 0.1

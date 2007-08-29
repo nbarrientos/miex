@@ -36,7 +36,7 @@ public class SQLHandler
    * Creates a new handler and establishes the connection using a
    * config file
    * 
-   * @param cf A configfile storing database settings 
+   * @param cf A ConfigFile storing database settings 
    */
   public SQLHandler(ConfigFile cf)
   {
@@ -73,13 +73,13 @@ public class SQLHandler
 
   /** 
    * Injects a SQL script into the database (useful to fill
-   * the database with blank tables) 
+   * the database with empty tables) 
    *
    * @param path The path to the script.
    */
   public void executeSQLFile(String path)
   {
-    /* BE CAREFUL WITH SQL FILE FORMAT, ONE SQL STATEMENT PER LINE!! */
+    /* BE CAREFUL WITH THE FORMAT, ONE SQL STATEMENT PER LINE!! */
     Statement stmt;
     String line;
 
@@ -262,7 +262,7 @@ public class SQLHandler
   }
 
   /** 
-   * Adds a bunch of categories in a row and register that into document table 
+   * Adds a bunch of categories in a row and register that into the document table 
    * 
    * @param docNumber as usual 
    * @param collectionNumber as usual

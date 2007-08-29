@@ -37,7 +37,7 @@ class UselessTagsDetector
   /** 
    * The filter itself 
    * 
-   * @param wordAndProp a object containing the tag to check
+   * @param wordAndProp an object containing the tag to check
    * @return true if the tag is useful
    */
   public boolean isCleanProp(ExtendedTaggedWord wordAndProp)
