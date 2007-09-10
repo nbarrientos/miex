@@ -77,7 +77,7 @@
 % Introducción                                                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introducción}
+\section{Objetivos y estado del arte}
 
 \frame
 {
@@ -145,6 +145,7 @@
   \item Sintáctico + Semántico
   \item Stanford Natural Language Processing Group\footnote{http://nlp.stanford.edu/}
   \item Java (J2SE)
+  \item GPL
   \end{itemize}
 
   \begin{center}
@@ -243,7 +244,7 @@
 
     \begin{itemize}
       \item<1-> Pobre tratamiento de ficheros XML
-      \item<2-> Manejo tedioso y \textit{poco amigable}
+      \item<2-> Manejo tedioso y poco \textit{userfriendly}
       \item<3-> El almacenamiento no es \textbf{flexible}
     \end{itemize}
 }
@@ -319,16 +320,16 @@
 
   \begin{figure}[h]
     \begin{center}
-      \includegraphics[scale=0.175]{images/bdd-e-r.pdf}
+      \includegraphics[scale=0.170]{images/bdd-e-r.pdf}
     \end{center}
   \end{figure}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Recursos sobre el proyecto                                            %
+% Extras sobre el proyecto                                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Recursos}
+\section{Extras}
 
 \frame
 {
@@ -336,6 +337,78 @@
   \tableofcontents[currentsection]
 }
 
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Software adicional}
+
+  \begin{itemize}
+   \item<1-> Script de transformación (AWK + Bash)
+   \item<2-> Integración experimental con
+             FK\footnote{http://www.aic.uniovi.es/pir/Software-ENG.htm}
+   \item<3-> Sistema de consulta para depuración (PHP)
+  \end{itemize}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Licencia - GPLv2}
+  
+  \begin{exampleblock}{Libertades}
+    \begin{itemize}
+      \item<1-> Uso
+      \item<1-> Distribución
+      \item<1-> Modificación
+    \end{itemize}
+  \end{exampleblock}
+  
+  \begin{alertblock}{¡Precaución!}
+   \begin{center}
+    EFECTO VíRICO
+   \end{center}
+  \end{alertblock}
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Recursos}
+
+  \begin{exampleblock}{Página web}
+    \begin{center}
+    http://miex.sf.net
+     \end{center}
+   \end{exampleblock}
+   
+   \begin{exampleblock}{Repositorio Subversion}
+    \begin{itemize}
+    \item<1-> trunk/\{miex,doc/pfc,doc/talks,web\}
+    \item<1-> tags/
+    \item<1-> branches/
+     \end{itemize}
+   \end{exampleblock}
+}
+
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Líneas de futuro}
+  
+  \begin{itemize}
+    \item<1-> UI de consulta (AJAX+PHP)
+    \item<2-> Configuración parser XML (runtime)
+    \item<3-> i18n + l10n (Java Intl)
+    \item<4-> Nueva versión del SP (1.6/2007-{\bfseries08}-18)
+  \end{itemize}
+
+  
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Demo + Preguntas                                                      %
