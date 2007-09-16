@@ -4,9 +4,10 @@
 % Extracción de información de documentos XML mediante SP     %
 %                                                             %
 % Proyecto Fin de Carrera (EUITITG)                           %
-% nn de Septiembre de 2007 - Gijón                            %
+% 18 de Septiembre de 2007 - Gijón                            %
 %                                                             %
 % Licencia GNU GPL2                                           %
+% http://www.gnu.org/licenses/old-licenses/gpl-2.0.html       %
 %                                                             %
 % Ignacio Barrientos <nacho@criptonita.com>                   %
 %                                                             %
@@ -27,9 +28,10 @@
 \usepackage{qtree}
 
 % Look and feel
-\usetheme{Copenhagen}
-\usecolortheme{rose}
+%\usetheme{Copenhagen}
+%\usecolortheme{rose}
 %\usefonttheme{structurebold}
+\usetheme{Antibes}
 
 % Eliminar la botonera de navegación
 \setbeamertemplate{navigation symbols}{}
@@ -38,7 +40,7 @@
 % Información de autoría
 \title{MIEX} 
 \subtitle{Extracción de información de documentos XML mediante Stanford Parser}
-\date{nn de Septiembre de 2007}
+\date{18 de Septiembre de 2007}
 \institute
 {
   \bf
@@ -69,7 +71,7 @@
 {
   % Solo interesan las secciones para el índice
   \setcounter{tocdepth}{1}
-  % Creamos tabla de contenidos
+  % Tabla de contenidos
   \tableofcontents
 }
 
@@ -77,7 +79,7 @@
 % Introducción                                                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Objetivos y estado del arte}
+\section{Objetivos}
 
 \frame
 {
@@ -106,32 +108,17 @@
   \end{alertblock}
 }
 
-%-------------------------- SLIDE ---------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Funcionamiento                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]
+\section{Análisis del problema}
 
-  \setbeamercovered{transparent}
-
-  \frametitle{Ejemplo de fichero de entrada}
-
-\begin{small}
-\begin{semiverbatim}
-\uncover<1->{<collection>}
-\uncover<2->{\alert<2>{<doctrain>}}
-\uncover<3->{\alert<3>{<topic><d>c1</d><d>c2</d>...<d>cn</d></topic>}}
-\uncover<3->{\alert<3>{<title>Un título</title>}}
-\uncover<3->{\alert<3>{<body>Un cuerpo</body>}}
-\uncover<2->{\alert<2>{</doctrain>}}
-\uncover<2->{\alert<2>{...}}
-\uncover<2->{\alert<2>{<doctrain>}}
-\uncover<4->{<topic><d>c1</d><d>c2</d>...<d>cm</d></topic>}
-\uncover<4->{<title>Otro título</title>}
-\uncover<4->{<body>Otro cuerpo</body>}
-\uncover<2->{\alert<2>{</doctrain>}}
-\uncover<1->{</collection>}
-\end{semiverbatim}
-\end{small}
-\end{frame}
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
 
 %-------------------------- SLIDE ---------------------------%
 
@@ -142,20 +129,18 @@
 
   \begin{itemize}
   \item Analizador de lenguaje natural
-  \item Sintáctico + Semántico
   \item Stanford Natural Language Processing Group\footnote{http://nlp.stanford.edu/}
   \item Java (J2SE)
   \item GPL
   \end{itemize}
 
   \begin{center}
-  \begin{block}{Objetivo principal}<2->
-    \begin{large}
-      \begin{center}
-      Cubrir las carencias de usabilidad del programa para un problema
-      en concreto.
-      \end{center}
-    \end{large}
+  \begin{block}{Estudio}<2->
+    \begin{itemize}
+      \item<2-> Capacidades del analizador
+      \item<3- | alert@3> Posible ampliación
+      \item<4- | alert@4-> ¿Para éste uso en concreto?
+    \end{itemize}
   \end{block}
   \end{center}
 }
@@ -251,6 +236,33 @@
 
 %-------------------------- SLIDE ---------------------------%
 
+\begin{frame}[fragile]
+
+  \setbeamercovered{transparent}
+
+  \frametitle{Ejemplo de fichero de entrada}
+
+\begin{small}
+\begin{semiverbatim}
+\uncover<1->{<collection>}
+\uncover<2->{\alert<2>{<doctrain>}}
+\uncover<3->{\alert<3>{<topic><d>c1</d><d>c2</d>...<d>cn</d></topic>}}
+\uncover<3->{\alert<3>{<title>Un título</title>}}
+\uncover<3->{\alert<3>{<body>Un cuerpo</body>}}
+\uncover<2->{\alert<2>{</doctrain>}}
+\uncover<2->{\alert<2>{...}}
+\uncover<2->{\alert<2>{<doctrain>}}
+\uncover<4->{<topic><d>c1</d><d>c2</d>...<d>cm</d></topic>}
+\uncover<4->{<title>Otro título</title>}
+\uncover<4->{<body>Otro cuerpo</body>}
+\uncover<2->{\alert<2>{</doctrain>}}
+\uncover<1->{</collection>}
+\end{semiverbatim}
+\end{small}
+\end{frame}
+
+%-------------------------- SLIDE ---------------------------%
+
 \frame
 {
   \frametitle{Líneas de trabajo}
@@ -326,7 +338,7 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Extras sobre el proyecto                                              %
+% Otros aspectos                                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Otros aspectos}
@@ -365,10 +377,10 @@
     \end{itemize}
   \end{exampleblock}
   
-  \begin{alertblock}{¡Precaución!}
-   \begin{center}
-    EFECTO VíRICO
-   \end{center}
+  \begin{alertblock}{¿Problema?}<2->
+   \begin{itemize}
+     \item<2-> Viral effect
+   \end{itemize}
   \end{alertblock}
 }
 
@@ -378,7 +390,7 @@
 {
   \frametitle{Recursos}
 
-  \begin{exampleblock}{Página web}
+  \begin{exampleblock}{Sitio web + RSS}
     \begin{center}
     http://miex.sf.net
      \end{center}
@@ -393,10 +405,19 @@
    \end{exampleblock}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Líneas de futuro                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Líneas de futuro}
+
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
 
 %-------------------------- SLIDE ---------------------------%
-
-% PUNTO GORDO LINEAS DE FUTURO
 
 \frame
 {
@@ -404,16 +425,39 @@
   
   \begin{itemize}
     \item<1-> UI de consulta (AJAX+PHP)
-    \item<2-> Configuración parser XML (runtime)
-    \item<3-> i18n + l10n (Java Intl)
-    \item<4-> Persistencia de objetos (JDO, Hibernate...)
-    \item<5-> Nueva versión del SP (1.6/2007-{\bfseries08}-18)
+    \item<2-> Persistencia de objetos (JDO, Hibernate...)
+    \item<3-> Configuración parser XML (runtime)
+    \item<4-> i18n + l10n (Java Intl)
+    \item<5-> Extración de propiedades para el agrupamiento de palabras 
+    \item<6-> Nueva versión del SP (1.6/2007-{\bfseries08}-18)
   \end{itemize}
-
   
 }
 
-% CONCLUSIONES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conclusiones                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusiones}
+
+\frame
+{
+  \setcounter{tocdepth}{1}
+  \tableofcontents[currentsection]
+}
+
+%-------------------------- SLIDE ---------------------------%
+
+\frame
+{
+  \frametitle{Conclusiones}
+
+  \begin{itemize}
+    \item<1-> Blah
+    \item<1-> Bleh
+  \end{itemize}
+
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Demo + Preguntas                                                      %
