@@ -149,8 +149,14 @@
         <div class="noteContent">
           <div class="title"><a name="download">DOWNLOAD</a></div>
           <ul>
-            <li>No files yet, check <a href="http://sourceforge.net/svn/?group_id=187602">SVN main development branch instead</a>.</li>
+            <li>
+            <a href="http://sourceforge.net/project/showfiles.php?group_id=187602&package_id=219063&release_id=539835">MIEX 0.1</a>
+            </li>
           </ul>
+          <p>
+          In order to get the latest changes and features, it is recommended to grab a fresh snapshot from 
+          <a href="http://sourceforge.net/svn/?group_id=187602">the main development branch</a>.
+          </p>
         </div>
 
         <div class="noteContent">
