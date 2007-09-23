@@ -104,6 +104,12 @@
 
 					<div id="miexlogo"><img src="images/miex.png" alt="Miex structure"/></div>
 
+            <p>
+            It's also available a <a href="resources/flow.png">flow diagram</a> and the current
+            <a href="resources/bdd-e-r.png">DB entity-relationship diagram</a> to help non-spanish 
+            speakers figure out what happens inside the processing step.
+            </p>
+
 						<p>For more information, development and end-user tools (Documentation, Subversion, feature requests, 
 						project status...) look at <a href="http://sourceforge.net/projects/miex/">the project page at SourceForge</a>.</p>
 
