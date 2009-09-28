@@ -156,15 +156,15 @@
           <div class="title"><a name="download">DOWNLOAD</a></div>
           <ul>
             <li>
-            <a href="http://sourceforge.net/project/showfiles.php?group_id=187602&package_id=219063&release_id=539835">MIEX 0.1</a>
+            <a href="http://sourceforge.net/project/showfiles.php?group_id=187602&amp;package_id=219063&amp;release_id=539835">MIEX 0.1</a>
             </li>
           </ul>
           <p>
           In order to get the latest changes and features, it is recommended to grab a fresh snapshot from git repository:
-          <div class="code">
-            git clone git://miex.git.sourceforge.net/gitroot/miex/miex
-          </div> 
           </p>
+        <div class="code">
+          git clone git://miex.git.sourceforge.net/gitroot/miex/miex
+        </div> 
         </div>
 
         <div class="noteContent">
