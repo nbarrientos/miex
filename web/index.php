@@ -110,7 +110,7 @@
             speakers figure out what happens inside the processing step.
             </p>
 
-						<p>For more information, development and end-user tools (Documentation, Subversion, feature requests, 
+						<p>For more information, development and end-user tools (Documentation, Git, feature requests, 
 						project status...) look at <a href="http://sourceforge.net/projects/miex/">the project page at SourceForge</a>.</p>
 
         </div>
@@ -160,8 +160,10 @@
             </li>
           </ul>
           <p>
-          In order to get the latest changes and features, it is recommended to grab a fresh snapshot from 
-          <a href="http://sourceforge.net/svn/?group_id=187602">the main development branch</a>.
+          In order to get the latest changes and features, it is recommended to grab a fresh snapshot from git repository:
+          <div class="code">
+            git clone git://miex.git.sourceforge.net/gitroot/miex/miex
+          </div> 
           </p>
         </div>
 
