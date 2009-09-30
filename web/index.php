@@ -163,7 +163,7 @@
           In order to get the latest changes and features, it is recommended to grab a fresh snapshot from git repository:
           </p>
         <div class="code">
-          git clone git://miex.git.sourceforge.net/gitroot/miex/miex
+          git clone git://github.com/nbarrientos/miex.git
         </div> 
         </div>
 
