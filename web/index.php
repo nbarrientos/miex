@@ -164,7 +164,10 @@
           </p>
         <div class="code">
           git clone git://github.com/nbarrientos/miex.git
-        </div> 
+        </div>
+
+	<p>Please note that SF.net svn/git repositories are no longer being used.</p>
+ 
         </div>
 
         <div class="noteContent">
